@@ -1,0 +1,38 @@
+{
+  "updateTime": "2020-03-23T19:55:43.225589Z",
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/python-game-servers",
+        "sha": "63e0243caddd86916391638352d09e1a3e2042a5"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "0be7105dc52590fa9a24e784052298ae37ce53aa",
+        "internalRef": "302154871"
+      }
+    },
+    {
+      "template": {
+        "name": "python_library",
+        "origin": "synthtool.gcp",
+        "version": "2020.2.4"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "gameservices",
+        "apiVersion": "v1beta",
+        "language": "python",
+        "generator": "gapic-generator-python"
+      }
+    }
+  ]
+}
