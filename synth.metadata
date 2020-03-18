@@ -1,0 +1,37 @@
+{
+  "updateTime": "2020-03-18T20:35:43.383201Z",
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://devrel/cloud/libraries/python/python-game-servers"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "f2b18cec51d27c999ad30011dba17f3965677e9c",
+        "internalRef": "301636171"
+      }
+    },
+    {
+      "template": {
+        "name": "python_library",
+        "origin": "synthtool.gcp",
+        "version": "2020.2.4"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "gameservices",
+        "apiVersion": "v1beta",
+        "language": "python",
+        "generator": "gapic-generator-python"
+      }
+    }
+  ]
+}
