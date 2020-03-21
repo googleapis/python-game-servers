@@ -103,20 +103,20 @@ class GameServerDeploymentsServiceClient(
     from_service_account_json = from_service_account_file
 
     @staticmethod
-    def game_server_deployment_path(
-        project: str, location: str, deployment: str
-    ) -> str:
-        """Return a fully-qualified game_server_deployment string."""
-        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
-            project=project, location=location, deployment=deployment
-        )
-
-    @staticmethod
     def game_server_deployment_rollout_path(
         project: str, location: str, deployment: str
     ) -> str:
         """Return a fully-qualified game_server_deployment_rollout string."""
         return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(
+            project=project, location=location, deployment=deployment
+        )
+
+    @staticmethod
+    def game_server_deployment_path(
+        project: str, location: str, deployment: str
+    ) -> str:
+        """Return a fully-qualified game_server_deployment string."""
+        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
             project=project, location=location, deployment=deployment
         )
 
