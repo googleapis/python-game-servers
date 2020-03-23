@@ -28,7 +28,7 @@ with io.open(readme_filename, encoding="utf-8") as readme_file:
     readme = readme_file.read()
 
 setuptools.setup(
-    name="google-cloud-gaming",
+    name="google-cloud-game-servers",
     version=version,
     long_description=readme,
     author="Google LLC",
