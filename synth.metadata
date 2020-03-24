@@ -1,26 +1,20 @@
 {
-  "updateTime": "2020-03-23T19:55:43.225589Z",
+  "updateTime": "2020-03-24T12:13:52.719294Z",
   "sources": [
-    {
-      "git": {
-        "name": ".",
-        "remote": "git@github.com:googleapis/python-game-servers",
-        "sha": "63e0243caddd86916391638352d09e1a3e2042a5"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "0be7105dc52590fa9a24e784052298ae37ce53aa",
-        "internalRef": "302154871"
+        "sha": "36c0febd0fa7267ab66d14408eec2afd1b6bec4e",
+        "internalRef": "302639621",
+        "log": "36c0febd0fa7267ab66d14408eec2afd1b6bec4e\nUpdate GAPIC configurations to v2 .yaml.\n\nPiperOrigin-RevId: 302639621\n\n078f222366ed344509a48f2f084944ef61476613\nFix containeranalysis v1beta1 assembly target name\n\nPiperOrigin-RevId: 302529186\n\n"
       }
     },
     {
-      "template": {
-        "name": "python_library",
-        "origin": "synthtool.gcp",
-        "version": "2020.2.4"
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "6a17abc7652e2fe563e1288c6e8c23fc260dda97"
       }
     }
   ],
