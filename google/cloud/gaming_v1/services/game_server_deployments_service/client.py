@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2019  Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -103,20 +103,20 @@ class GameServerDeploymentsServiceClient(
     from_service_account_json = from_service_account_file
 
     @staticmethod
-    def game_server_deployment_rollout_path(
-        project: str, location: str, deployment: str
-    ) -> str:
-        """Return a fully-qualified game_server_deployment_rollout string."""
-        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(
-            project=project, location=location, deployment=deployment
-        )
-
-    @staticmethod
     def game_server_deployment_path(
         project: str, location: str, deployment: str
     ) -> str:
         """Return a fully-qualified game_server_deployment string."""
         return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
+            project=project, location=location, deployment=deployment
+        )
+
+    @staticmethod
+    def game_server_deployment_rollout_path(
+        project: str, location: str, deployment: str
+    ) -> str:
+        """Return a fully-qualified game_server_deployment_rollout string."""
+        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(
             project=project, location=location, deployment=deployment
         )
 
@@ -211,6 +211,7 @@ class GameServerDeploymentsServiceClient(
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if parent is not None:
             request.parent = parent
 
@@ -287,6 +288,7 @@ class GameServerDeploymentsServiceClient(
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if name is not None:
             request.name = name
 
@@ -368,10 +370,9 @@ class GameServerDeploymentsServiceClient(
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if parent is not None:
             request.parent = parent
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
         if game_server_deployment is not None:
             request.game_server_deployment = game_server_deployment
 
@@ -449,6 +450,7 @@ class GameServerDeploymentsServiceClient(
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if name is not None:
             request.name = name
 
@@ -536,10 +538,9 @@ class GameServerDeploymentsServiceClient(
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if game_server_deployment is not None:
             request.game_server_deployment = game_server_deployment
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
         if update_mask is not None:
             request.update_mask = update_mask
 
@@ -615,6 +616,7 @@ class GameServerDeploymentsServiceClient(
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if name is not None:
             request.name = name
 
@@ -708,10 +710,9 @@ class GameServerDeploymentsServiceClient(
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if rollout is not None:
             request.rollout = rollout
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
         if update_mask is not None:
             request.update_mask = update_mask
 

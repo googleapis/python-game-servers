@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2019  Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -193,6 +193,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if parent is not None:
             request.parent = parent
 
@@ -266,6 +267,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if name is not None:
             request.name = name
 
@@ -350,14 +352,11 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if parent is not None:
             request.parent = parent
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
         if realm is not None:
             request.realm = realm
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
         if realm_id is not None:
             request.realm_id = realm_id
 
@@ -431,6 +430,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if name is not None:
             request.name = name
 
@@ -513,10 +513,9 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if realm is not None:
             request.realm = realm
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
         if update_mask is not None:
             request.update_mask = update_mask
 
