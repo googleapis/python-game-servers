@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2019  Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -934,20 +934,6 @@ def test_game_server_deployments_service_grpc_lro_client():
     assert transport.operations_client is transport.operations_client
 
 
-def test_game_server_deployment_rollout_path():
-    project = "squid"
-    location = "clam"
-    deployment = "whelk"
-
-    expected = "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(
-        project=project, location=location, deployment=deployment
-    )
-    actual = GameServerDeploymentsServiceClient.game_server_deployment_rollout_path(
-        project, location, deployment
-    )
-    assert expected == actual
-
-
 def test_game_server_deployment_path():
     project = "squid"
     location = "clam"
@@ -957,6 +943,20 @@ def test_game_server_deployment_path():
         project=project, location=location, deployment=deployment
     )
     actual = GameServerDeploymentsServiceClient.game_server_deployment_path(
+        project, location, deployment
+    )
+    assert expected == actual
+
+
+def test_game_server_deployment_rollout_path():
+    project = "squid"
+    location = "clam"
+    deployment = "whelk"
+
+    expected = "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(
+        project=project, location=location, deployment=deployment
+    )
+    actual = GameServerDeploymentsServiceClient.game_server_deployment_rollout_path(
         project, location, deployment
     )
     assert expected == actual

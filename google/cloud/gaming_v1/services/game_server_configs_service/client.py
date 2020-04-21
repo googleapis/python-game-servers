@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2019  Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -200,6 +200,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if parent is not None:
             request.parent = parent
 
@@ -276,6 +277,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if name is not None:
             request.name = name
 
@@ -361,10 +363,9 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if parent is not None:
             request.parent = parent
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
         if game_server_config is not None:
             request.game_server_config = game_server_config
 
@@ -444,6 +445,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
+
         if name is not None:
             request.name = name
 
