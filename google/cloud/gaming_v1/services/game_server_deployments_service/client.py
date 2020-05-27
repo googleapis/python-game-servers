@@ -134,24 +134,6 @@ class GameServerDeploymentsServiceClient(
     from_service_account_json = from_service_account_file
 
     @staticmethod
-    def game_server_deployment_path(
-        project: str, location: str, deployment: str
-    ) -> str:
-        """Return a fully-qualified game_server_deployment string."""
-        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
-            project=project, location=location, deployment=deployment
-        )
-
-    @staticmethod
-    def parse_game_server_deployment_path(path: str) -> Dict[str, str]:
-        """Parse a game_server_deployment path into its component segments."""
-        m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)$",
-            path,
-        )
-        return m.groupdict() if m else {}
-
-    @staticmethod
     def game_server_deployment_rollout_path(
         project: str, location: str, deployment: str
     ) -> str:
@@ -165,6 +147,24 @@ class GameServerDeploymentsServiceClient(
         """Parse a game_server_deployment_rollout path into its component segments."""
         m = re.match(
             r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)/rollout$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def game_server_deployment_path(
+        project: str, location: str, deployment: str
+    ) -> str:
+        """Return a fully-qualified game_server_deployment string."""
+        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
+            project=project, location=location, deployment=deployment
+        )
+
+    @staticmethod
+    def parse_game_server_deployment_path(path: str) -> Dict[str, str]:
+        """Parse a game_server_deployment path into its component segments."""
+        m = re.match(
+            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)$",
             path,
         )
         return m.groupdict() if m else {}
