@@ -15,25 +15,25 @@
 # limitations under the License.
 #
 
-from typing import Callable, Dict, Optional, Sequence, Tuple
+from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers  # type: ignore
+from google.api_core import grpc_helpers_async  # type: ignore
 from google.api_core import operations_v1  # type: ignore
-from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
-
 import grpc  # type: ignore
+from grpc.experimental import aio  # type: ignore
 
 from google.cloud.gaming_v1.types import game_server_clusters
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 from .base import GameServerClustersServiceTransport
+from .grpc import GameServerClustersServiceGrpcTransport
 
 
-class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport):
-    """gRPC backend transport for GameServerClustersService.
+class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTransport):
+    """gRPC AsyncIO backend transport for GameServerClustersService.
 
     The game server cluster maps to Kubernetes clusters running
     Agones and is used to manage fleets within clusters.
@@ -46,14 +46,44 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
     top of HTTP/2); the ``grpcio`` package must be installed.
     """
 
-    _stubs: Dict[str, Callable]
+    _grpc_channel: aio.Channel
+    _stubs: Dict[str, Callable] = {}
+
+    @classmethod
+    def create_channel(
+        cls,
+        host: str = "gameservices.googleapis.com",
+        credentials: credentials.Credentials = None,
+        scopes: Optional[Sequence[str]] = None,
+        **kwargs
+    ) -> aio.Channel:
+        """Create and return a gRPC AsyncIO channel object.
+        Args:
+            address (Optional[str]): The host for the channel to use.
+            credentials (Optional[~.Credentials]): The
+                authorization credentials to attach to requests. These
+                credentials identify this application to the service. If
+                none are specified, the client will attempt to ascertain
+                the credentials from the environment.
+            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
+                service. These are only used when credentials are not specified and
+                are passed to :func:`google.auth.default`.
+            kwargs (Optional[dict]): Keyword arguments, which are passed to the
+                channel creation.
+        Returns:
+            aio.Channel: A gRPC AsyncIO channel object.
+        """
+        scopes = scopes or cls.AUTH_SCOPES
+        return grpc_helpers_async.create_channel(
+            host, credentials=credentials, scopes=scopes, **kwargs
+        )
 
     def __init__(
         self,
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
-        channel: grpc.Channel = None,
+        channel: aio.Channel = None,
         api_mtls_endpoint: str = None,
         client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
     ) -> None:
@@ -67,7 +97,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
                 This argument is ignored if ``channel`` is provided.
-            channel (Optional[grpc.Channel]): A ``Channel`` instance through
+            channel (Optional[aio.Channel]): A ``Channel`` instance through
                 which to make calls.
             api_mtls_endpoint (Optional[str]): The mutual TLS endpoint. If
                 provided, it overrides the ``host`` argument and tries to create
@@ -79,8 +109,8 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
                 is None.
 
         Raises:
-            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
-                creation failed for any reason.
+          google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
+              creation failed for any reason.
         """
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
@@ -95,9 +125,6 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
                 if ":" in api_mtls_endpoint
                 else api_mtls_endpoint + ":443"
             )
-
-            if credentials is None:
-                credentials, _ = auth.default(scopes=self.AUTH_SCOPES)
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -119,39 +146,10 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         # Run the base constructor.
         super().__init__(host=host, credentials=credentials)
-        self._stubs = {}  # type: Dict[str, Callable]
-
-    @classmethod
-    def create_channel(
-        cls,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        scopes: Optional[Sequence[str]] = None,
-        **kwargs
-    ) -> grpc.Channel:
-        """Create and return a gRPC channel object.
-        Args:
-            address (Optionsl[str]): The host for the channel to use.
-            credentials (Optional[~.Credentials]): The
-                authorization credentials to attach to requests. These
-                credentials identify this application to the service. If
-                none are specified, the client will attempt to ascertain
-                the credentials from the environment.
-            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
-                service. These are only used when credentials are not specified and
-                are passed to :func:`google.auth.default`.
-            kwargs (Optional[dict]): Keyword arguments, which are passed to the
-                channel creation.
-        Returns:
-            grpc.Channel: A gRPC channel object.
-        """
-        scopes = scopes or cls.AUTH_SCOPES
-        return grpc_helpers.create_channel(
-            host, credentials=credentials, scopes=scopes, **kwargs
-        )
+        self._stubs = {}
 
     @property
-    def grpc_channel(self) -> grpc.Channel:
+    def grpc_channel(self) -> aio.Channel:
         """Create the channel designed to connect to this service.
 
         This property caches on the instance; repeated calls return
@@ -168,7 +166,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
         return self._grpc_channel
 
     @property
-    def operations_client(self) -> operations_v1.OperationsClient:
+    def operations_client(self) -> operations_v1.OperationsAsyncClient:
         """Create the client designed to process long-running operations.
 
         This property caches on the instance; repeated calls return the same
@@ -176,7 +174,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
         """
         # Sanity check: Only create a new client if we do not already have one.
         if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsClient(
+            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
@@ -188,7 +186,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
         self
     ) -> Callable[
         [game_server_clusters.ListGameServerClustersRequest],
-        game_server_clusters.ListGameServerClustersResponse,
+        Awaitable[game_server_clusters.ListGameServerClustersResponse],
     ]:
         r"""Return a callable for the list game server clusters method over gRPC.
 
@@ -197,7 +195,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         Returns:
             Callable[[~.ListGameServerClustersRequest],
-                    ~.ListGameServerClustersResponse]:
+                    Awaitable[~.ListGameServerClustersResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -218,7 +216,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
         self
     ) -> Callable[
         [game_server_clusters.GetGameServerClusterRequest],
-        game_server_clusters.GameServerCluster,
+        Awaitable[game_server_clusters.GameServerCluster],
     ]:
         r"""Return a callable for the get game server cluster method over gRPC.
 
@@ -226,7 +224,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         Returns:
             Callable[[~.GetGameServerClusterRequest],
-                    ~.GameServerCluster]:
+                    Awaitable[~.GameServerCluster]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -246,7 +244,8 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
     def create_game_server_cluster(
         self
     ) -> Callable[
-        [game_server_clusters.CreateGameServerClusterRequest], operations.Operation
+        [game_server_clusters.CreateGameServerClusterRequest],
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the create game server cluster method over gRPC.
 
@@ -255,7 +254,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         Returns:
             Callable[[~.CreateGameServerClusterRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -276,7 +275,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
         self
     ) -> Callable[
         [game_server_clusters.PreviewCreateGameServerClusterRequest],
-        game_server_clusters.PreviewCreateGameServerClusterResponse,
+        Awaitable[game_server_clusters.PreviewCreateGameServerClusterResponse],
     ]:
         r"""Return a callable for the preview create game server
         cluster method over gRPC.
@@ -286,7 +285,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         Returns:
             Callable[[~.PreviewCreateGameServerClusterRequest],
-                    ~.PreviewCreateGameServerClusterResponse]:
+                    Awaitable[~.PreviewCreateGameServerClusterResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -308,7 +307,8 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
     def delete_game_server_cluster(
         self
     ) -> Callable[
-        [game_server_clusters.DeleteGameServerClusterRequest], operations.Operation
+        [game_server_clusters.DeleteGameServerClusterRequest],
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the delete game server cluster method over gRPC.
 
@@ -316,7 +316,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         Returns:
             Callable[[~.DeleteGameServerClusterRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -337,7 +337,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
         self
     ) -> Callable[
         [game_server_clusters.PreviewDeleteGameServerClusterRequest],
-        game_server_clusters.PreviewDeleteGameServerClusterResponse,
+        Awaitable[game_server_clusters.PreviewDeleteGameServerClusterResponse],
     ]:
         r"""Return a callable for the preview delete game server
         cluster method over gRPC.
@@ -346,7 +346,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         Returns:
             Callable[[~.PreviewDeleteGameServerClusterRequest],
-                    ~.PreviewDeleteGameServerClusterResponse]:
+                    Awaitable[~.PreviewDeleteGameServerClusterResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -368,7 +368,8 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
     def update_game_server_cluster(
         self
     ) -> Callable[
-        [game_server_clusters.UpdateGameServerClusterRequest], operations.Operation
+        [game_server_clusters.UpdateGameServerClusterRequest],
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the update game server cluster method over gRPC.
 
@@ -376,7 +377,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         Returns:
             Callable[[~.UpdateGameServerClusterRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -397,7 +398,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
         self
     ) -> Callable[
         [game_server_clusters.PreviewUpdateGameServerClusterRequest],
-        game_server_clusters.PreviewUpdateGameServerClusterResponse,
+        Awaitable[game_server_clusters.PreviewUpdateGameServerClusterResponse],
     ]:
         r"""Return a callable for the preview update game server
         cluster method over gRPC.
@@ -406,7 +407,7 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
 
         Returns:
             Callable[[~.PreviewUpdateGameServerClusterRequest],
-                    ~.PreviewUpdateGameServerClusterResponse]:
+                    Awaitable[~.PreviewUpdateGameServerClusterResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -425,4 +426,4 @@ class GameServerClustersServiceGrpcTransport(GameServerClustersServiceTransport)
         return self._stubs["preview_update_game_server_cluster"]
 
 
-__all__ = ("GameServerClustersServiceGrpcTransport",)
+__all__ = ("GameServerClustersServiceGrpcAsyncIOTransport",)

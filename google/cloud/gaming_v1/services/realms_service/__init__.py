@@ -16,5 +16,6 @@
 #
 
 from .client import RealmsServiceClient
+from .async_client import RealmsServiceAsyncClient
 
-__all__ = ("RealmsServiceClient",)
+__all__ = ("RealmsServiceClient", "RealmsServiceAsyncClient")

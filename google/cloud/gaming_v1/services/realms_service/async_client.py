@@ -16,9 +16,9 @@
 #
 
 from collections import OrderedDict
-import os
+import functools
 import re
-from typing import Callable, Dict, Sequence, Tuple, Type, Union
+from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
@@ -26,8 +26,6 @@ from google.api_core import exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
 from google.auth import credentials  # type: ignore
-from google.auth.transport import mtls  # type: ignore
-from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
@@ -39,121 +37,34 @@ from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 from .transports.base import RealmsServiceTransport
-from .transports.grpc import RealmsServiceGrpcTransport
 from .transports.grpc_asyncio import RealmsServiceGrpcAsyncIOTransport
+from .client import RealmsServiceClient
 
 
-class RealmsServiceClientMeta(type):
-    """Metaclass for the RealmsService client.
-
-    This provides class-level methods for building and retrieving
-    support objects (e.g. transport) without polluting the client instance
-    objects.
-    """
-
-    _transport_registry = OrderedDict()  # type: Dict[str, Type[RealmsServiceTransport]]
-    _transport_registry["grpc"] = RealmsServiceGrpcTransport
-    _transport_registry["grpc_asyncio"] = RealmsServiceGrpcAsyncIOTransport
-
-    def get_transport_class(cls, label: str = None) -> Type[RealmsServiceTransport]:
-        """Return an appropriate transport class.
-
-        Args:
-            label: The name of the desired transport. If none is
-                provided, then the first transport in the registry is used.
-
-        Returns:
-            The transport class to use.
-        """
-        # If a specific transport is requested, return that one.
-        if label:
-            return cls._transport_registry[label]
-
-        # No transport is requested; return the default (that is, the first one
-        # in the dictionary).
-        return next(iter(cls._transport_registry.values()))
-
-
-class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
+class RealmsServiceAsyncClient:
     """A Realm is a grouping of Game Server Clusters that are
     considered interchangeable.
     """
 
-    @staticmethod
-    def _get_default_mtls_endpoint(api_endpoint):
-        """Convert api endpoint to mTLS endpoint.
-        Convert "*.sandbox.googleapis.com" and "*.googleapis.com" to
-        "*.mtls.sandbox.googleapis.com" and "*.mtls.googleapis.com" respectively.
-        Args:
-            api_endpoint (Optional[str]): the api endpoint to convert.
-        Returns:
-            str: converted mTLS api endpoint.
-        """
-        if not api_endpoint:
-            return api_endpoint
+    _client: RealmsServiceClient
 
-        mtls_endpoint_re = re.compile(
-            r"(?P<name>[^.]+)(?P<mtls>\.mtls)?(?P<sandbox>\.sandbox)?(?P<googledomain>\.googleapis\.com)?"
-        )
+    DEFAULT_ENDPOINT = RealmsServiceClient.DEFAULT_ENDPOINT
+    DEFAULT_MTLS_ENDPOINT = RealmsServiceClient.DEFAULT_MTLS_ENDPOINT
 
-        m = mtls_endpoint_re.match(api_endpoint)
-        name, mtls, sandbox, googledomain = m.groups()
-        if mtls or not googledomain:
-            return api_endpoint
+    realm_path = staticmethod(RealmsServiceClient.realm_path)
 
-        if sandbox:
-            return api_endpoint.replace(
-                "sandbox.googleapis.com", "mtls.sandbox.googleapis.com"
-            )
-
-        return api_endpoint.replace(".googleapis.com", ".mtls.googleapis.com")
-
-    DEFAULT_ENDPOINT = "gameservices.googleapis.com"
-    DEFAULT_MTLS_ENDPOINT = _get_default_mtls_endpoint.__func__(  # type: ignore
-        DEFAULT_ENDPOINT
-    )
-
-    @classmethod
-    def from_service_account_file(cls, filename: str, *args, **kwargs):
-        """Creates an instance of this client using the provided credentials
-        file.
-
-        Args:
-            filename (str): The path to the service account private key json
-                file.
-            args: Additional arguments to pass to the constructor.
-            kwargs: Additional arguments to pass to the constructor.
-
-        Returns:
-            {@api.name}: The constructed client.
-        """
-        credentials = service_account.Credentials.from_service_account_file(filename)
-        kwargs["credentials"] = credentials
-        return cls(*args, **kwargs)
-
+    from_service_account_file = RealmsServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
-    @staticmethod
-    def realm_path(project: str, location: str, realm: str) -> str:
-        """Return a fully-qualified realm string."""
-        return "projects/{project}/locations/{location}/realms/{realm}".format(
-            project=project, location=location, realm=realm
-        )
-
-    @staticmethod
-    def parse_realm_path(path: str) -> Dict[str, str]:
-        """Parse a realm path into its component segments."""
-        m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/realms/(?P<realm>.+?)$",
-            path,
-        )
-        return m.groupdict() if m else {}
+    get_transport_class = functools.partial(
+        type(RealmsServiceClient).get_transport_class, type(RealmsServiceClient)
+    )
 
     def __init__(
         self,
         *,
         credentials: credentials.Credentials = None,
-        transport: Union[str, RealmsServiceTransport] = None,
+        transport: Union[str, RealmsServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
     ) -> None:
         """Instantiate the realms service client.
@@ -182,56 +93,15 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 default SSL credentials will be used if present.
 
         Raises:
-            google.auth.exceptions.MutualTLSChannelError: If mutual TLS transport
+            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-        if isinstance(client_options, dict):
-            client_options = ClientOptions.from_dict(client_options)
-        if client_options is None:
-            client_options = ClientOptions.ClientOptions()
 
-        if client_options.api_endpoint is None:
-            use_mtls_env = os.getenv("GOOGLE_API_USE_MTLS", "never")
-            if use_mtls_env == "never":
-                client_options.api_endpoint = self.DEFAULT_ENDPOINT
-            elif use_mtls_env == "always":
-                client_options.api_endpoint = self.DEFAULT_MTLS_ENDPOINT
-            elif use_mtls_env == "auto":
-                has_client_cert_source = (
-                    client_options.client_cert_source is not None
-                    or mtls.has_default_client_cert_source()
-                )
-                client_options.api_endpoint = (
-                    self.DEFAULT_MTLS_ENDPOINT
-                    if has_client_cert_source
-                    else self.DEFAULT_ENDPOINT
-                )
-            else:
-                raise MutualTLSChannelError(
-                    "Unsupported GOOGLE_API_USE_MTLS value. Accepted values: never, auto, always"
-                )
+        self._client = RealmsServiceClient(
+            credentials=credentials, transport=transport, client_options=client_options
+        )
 
-        # Save or instantiate the transport.
-        # Ordinarily, we provide the transport, but allowing a custom transport
-        # instance provides an extensibility point for unusual situations.
-        if isinstance(transport, RealmsServiceTransport):
-            # transport is a RealmsServiceTransport instance.
-            if credentials:
-                raise ValueError(
-                    "When providing a transport instance, "
-                    "provide its credentials directly."
-                )
-            self._transport = transport
-        else:
-            Transport = type(self).get_transport_class(transport)
-            self._transport = Transport(
-                credentials=credentials,
-                host=client_options.api_endpoint,
-                api_mtls_endpoint=client_options.api_endpoint,
-                client_cert_source=client_options.client_cert_source,
-            )
-
-    def list_realms(
+    async def list_realms(
         self,
         request: realms.ListRealmsRequest = None,
         *,
@@ -239,7 +109,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> pagers.ListRealmsPager:
+    ) -> pagers.ListRealmsAsyncPager:
         r"""Lists Realms in a given project and Location.
 
         Args:
@@ -260,7 +130,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListRealmsPager:
+            ~.pagers.ListRealmsAsyncPager:
                 Response message for
                 RealmsService.ListRealms.
                 Iterating over this object will yield
@@ -287,8 +157,10 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.list_realms, default_timeout=None, client_info=_client_info
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.list_realms,
+            default_timeout=None,
+            client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -298,18 +170,18 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # This method is paged; wrap the response in a pager, which provides
-        # an `__iter__` convenience method.
-        response = pagers.ListRealmsPager(
+        # an `__aiter__` convenience method.
+        response = pagers.ListRealmsAsyncPager(
             method=rpc, request=request, response=response
         )
 
         # Done; return the response.
         return response
 
-    def get_realm(
+    async def get_realm(
         self,
         request: realms.GetRealmRequest = None,
         *,
@@ -361,8 +233,10 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.get_realm, default_timeout=None, client_info=_client_info
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.get_realm,
+            default_timeout=None,
+            client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -372,12 +246,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Done; return the response.
         return response
 
-    def create_realm(
+    async def create_realm(
         self,
         request: realms.CreateRealmRequest = None,
         *,
@@ -387,7 +261,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    ) -> operation_async.AsyncOperation:
         r"""Creates a new Realm in a given project and Location.
 
         Args:
@@ -420,7 +294,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
@@ -450,8 +324,10 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.create_realm, default_timeout=None, client_info=_client_info
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.create_realm,
+            default_timeout=None,
+            client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -461,12 +337,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
+            self._client._transport.operations_client,
             realms.Realm,
             metadata_type=common.OperationMetadata,
         )
@@ -474,7 +350,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Done; return the response.
         return response
 
-    def delete_realm(
+    async def delete_realm(
         self,
         request: realms.DeleteRealmRequest = None,
         *,
@@ -482,7 +358,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    ) -> operation_async.AsyncOperation:
         r"""Deletes a single Realm.
 
         Args:
@@ -504,7 +380,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
@@ -530,8 +406,10 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.delete_realm, default_timeout=None, client_info=_client_info
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.delete_realm,
+            default_timeout=None,
+            client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -541,12 +419,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
+            self._client._transport.operations_client,
             realms.Realm,
             metadata_type=common.OperationMetadata,
         )
@@ -554,7 +432,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Done; return the response.
         return response
 
-    def update_realm(
+    async def update_realm(
         self,
         request: realms.UpdateRealmRequest = None,
         *,
@@ -563,7 +441,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    ) -> operation_async.AsyncOperation:
         r"""Patches a single Realm.
 
         Args:
@@ -593,7 +471,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
@@ -621,8 +499,10 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.update_realm, default_timeout=None, client_info=_client_info
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.update_realm,
+            default_timeout=None,
+            client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -634,12 +514,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
+            self._client._transport.operations_client,
             realms.Realm,
             metadata_type=common.OperationMetadata,
         )
@@ -647,7 +527,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Done; return the response.
         return response
 
-    def preview_realm_update(
+    async def preview_realm_update(
         self,
         request: realms.PreviewRealmUpdateRequest = None,
         *,
@@ -680,8 +560,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_realm_update,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.preview_realm_update,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -695,7 +575,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Done; return the response.
         return response
@@ -711,4 +591,4 @@ except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = ("RealmsServiceClient",)
+__all__ = ("RealmsServiceAsyncClient",)

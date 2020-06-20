@@ -15,25 +15,27 @@
 # limitations under the License.
 #
 
-from typing import Callable, Dict, Optional, Sequence, Tuple
+from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers  # type: ignore
+from google.api_core import grpc_helpers_async  # type: ignore
 from google.api_core import operations_v1  # type: ignore
-from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
-
 import grpc  # type: ignore
+from grpc.experimental import aio  # type: ignore
 
 from google.cloud.gaming_v1.types import game_server_deployments
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 from .base import GameServerDeploymentsServiceTransport
+from .grpc import GameServerDeploymentsServiceGrpcTransport
 
 
-class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTransport):
-    """gRPC backend transport for GameServerDeploymentsService.
+class GameServerDeploymentsServiceGrpcAsyncIOTransport(
+    GameServerDeploymentsServiceTransport
+):
+    """gRPC AsyncIO backend transport for GameServerDeploymentsService.
 
     The Game Server Deployment is used to control the deployment
     of Agones fleets.
@@ -46,14 +48,44 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
     top of HTTP/2); the ``grpcio`` package must be installed.
     """
 
-    _stubs: Dict[str, Callable]
+    _grpc_channel: aio.Channel
+    _stubs: Dict[str, Callable] = {}
+
+    @classmethod
+    def create_channel(
+        cls,
+        host: str = "gameservices.googleapis.com",
+        credentials: credentials.Credentials = None,
+        scopes: Optional[Sequence[str]] = None,
+        **kwargs
+    ) -> aio.Channel:
+        """Create and return a gRPC AsyncIO channel object.
+        Args:
+            address (Optional[str]): The host for the channel to use.
+            credentials (Optional[~.Credentials]): The
+                authorization credentials to attach to requests. These
+                credentials identify this application to the service. If
+                none are specified, the client will attempt to ascertain
+                the credentials from the environment.
+            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
+                service. These are only used when credentials are not specified and
+                are passed to :func:`google.auth.default`.
+            kwargs (Optional[dict]): Keyword arguments, which are passed to the
+                channel creation.
+        Returns:
+            aio.Channel: A gRPC AsyncIO channel object.
+        """
+        scopes = scopes or cls.AUTH_SCOPES
+        return grpc_helpers_async.create_channel(
+            host, credentials=credentials, scopes=scopes, **kwargs
+        )
 
     def __init__(
         self,
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
-        channel: grpc.Channel = None,
+        channel: aio.Channel = None,
         api_mtls_endpoint: str = None,
         client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
     ) -> None:
@@ -67,7 +99,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
                 This argument is ignored if ``channel`` is provided.
-            channel (Optional[grpc.Channel]): A ``Channel`` instance through
+            channel (Optional[aio.Channel]): A ``Channel`` instance through
                 which to make calls.
             api_mtls_endpoint (Optional[str]): The mutual TLS endpoint. If
                 provided, it overrides the ``host`` argument and tries to create
@@ -79,8 +111,8 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
                 is None.
 
         Raises:
-            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
-                creation failed for any reason.
+          google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
+              creation failed for any reason.
         """
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
@@ -95,9 +127,6 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
                 if ":" in api_mtls_endpoint
                 else api_mtls_endpoint + ":443"
             )
-
-            if credentials is None:
-                credentials, _ = auth.default(scopes=self.AUTH_SCOPES)
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -119,39 +148,10 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         # Run the base constructor.
         super().__init__(host=host, credentials=credentials)
-        self._stubs = {}  # type: Dict[str, Callable]
-
-    @classmethod
-    def create_channel(
-        cls,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        scopes: Optional[Sequence[str]] = None,
-        **kwargs
-    ) -> grpc.Channel:
-        """Create and return a gRPC channel object.
-        Args:
-            address (Optionsl[str]): The host for the channel to use.
-            credentials (Optional[~.Credentials]): The
-                authorization credentials to attach to requests. These
-                credentials identify this application to the service. If
-                none are specified, the client will attempt to ascertain
-                the credentials from the environment.
-            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
-                service. These are only used when credentials are not specified and
-                are passed to :func:`google.auth.default`.
-            kwargs (Optional[dict]): Keyword arguments, which are passed to the
-                channel creation.
-        Returns:
-            grpc.Channel: A gRPC channel object.
-        """
-        scopes = scopes or cls.AUTH_SCOPES
-        return grpc_helpers.create_channel(
-            host, credentials=credentials, scopes=scopes, **kwargs
-        )
+        self._stubs = {}
 
     @property
-    def grpc_channel(self) -> grpc.Channel:
+    def grpc_channel(self) -> aio.Channel:
         """Create the channel designed to connect to this service.
 
         This property caches on the instance; repeated calls return
@@ -168,7 +168,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         return self._grpc_channel
 
     @property
-    def operations_client(self) -> operations_v1.OperationsClient:
+    def operations_client(self) -> operations_v1.OperationsAsyncClient:
         """Create the client designed to process long-running operations.
 
         This property caches on the instance; repeated calls return the same
@@ -176,7 +176,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         """
         # Sanity check: Only create a new client if we do not already have one.
         if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsClient(
+            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
@@ -188,7 +188,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.ListGameServerDeploymentsRequest],
-        game_server_deployments.ListGameServerDeploymentsResponse,
+        Awaitable[game_server_deployments.ListGameServerDeploymentsResponse],
     ]:
         r"""Return a callable for the list game server deployments method over gRPC.
 
@@ -197,7 +197,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.ListGameServerDeploymentsRequest],
-                    ~.ListGameServerDeploymentsResponse]:
+                    Awaitable[~.ListGameServerDeploymentsResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -218,7 +218,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.GetGameServerDeploymentRequest],
-        game_server_deployments.GameServerDeployment,
+        Awaitable[game_server_deployments.GameServerDeployment],
     ]:
         r"""Return a callable for the get game server deployment method over gRPC.
 
@@ -226,7 +226,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.GetGameServerDeploymentRequest],
-                    ~.GameServerDeployment]:
+                    Awaitable[~.GameServerDeployment]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -247,7 +247,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.CreateGameServerDeploymentRequest],
-        operations.Operation,
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the create game server deployment method over gRPC.
 
@@ -256,7 +256,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.CreateGameServerDeploymentRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -279,7 +279,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.DeleteGameServerDeploymentRequest],
-        operations.Operation,
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the delete game server deployment method over gRPC.
 
@@ -287,7 +287,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.DeleteGameServerDeploymentRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -310,7 +310,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.UpdateGameServerDeploymentRequest],
-        operations.Operation,
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the update game server deployment method over gRPC.
 
@@ -318,7 +318,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.UpdateGameServerDeploymentRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -341,7 +341,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.GetGameServerDeploymentRolloutRequest],
-        game_server_deployments.GameServerDeploymentRollout,
+        Awaitable[game_server_deployments.GameServerDeploymentRollout],
     ]:
         r"""Return a callable for the get game server deployment
         rollout method over gRPC.
@@ -350,7 +350,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.GetGameServerDeploymentRolloutRequest],
-                    ~.GameServerDeploymentRollout]:
+                    Awaitable[~.GameServerDeploymentRollout]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -373,7 +373,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.UpdateGameServerDeploymentRolloutRequest],
-        operations.Operation,
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the update game server deployment
         rollout method over gRPC.
@@ -388,7 +388,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.UpdateGameServerDeploymentRolloutRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -411,7 +411,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.PreviewGameServerDeploymentRolloutRequest],
-        game_server_deployments.PreviewGameServerDeploymentRolloutResponse,
+        Awaitable[game_server_deployments.PreviewGameServerDeploymentRolloutResponse],
     ]:
         r"""Return a callable for the preview game server deployment
         rollout method over gRPC.
@@ -421,7 +421,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.PreviewGameServerDeploymentRolloutRequest],
-                    ~.PreviewGameServerDeploymentRolloutResponse]:
+                    Awaitable[~.PreviewGameServerDeploymentRolloutResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -444,7 +444,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         self
     ) -> Callable[
         [game_server_deployments.FetchDeploymentStateRequest],
-        game_server_deployments.FetchDeploymentStateResponse,
+        Awaitable[game_server_deployments.FetchDeploymentStateResponse],
     ]:
         r"""Return a callable for the fetch deployment state method over gRPC.
 
@@ -455,7 +455,7 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
 
         Returns:
             Callable[[~.FetchDeploymentStateRequest],
-                    ~.FetchDeploymentStateResponse]:
+                    Awaitable[~.FetchDeploymentStateResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -472,4 +472,4 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         return self._stubs["fetch_deployment_state"]
 
 
-__all__ = ("GameServerDeploymentsServiceGrpcTransport",)
+__all__ = ("GameServerDeploymentsServiceGrpcAsyncIOTransport",)

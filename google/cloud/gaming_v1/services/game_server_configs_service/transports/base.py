@@ -26,7 +26,7 @@ from google.cloud.gaming_v1.types import game_server_configs
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 
-class GameServerConfigsServiceTransport(metaclass=abc.ABCMeta):
+class GameServerConfigsServiceTransport(abc.ABC):
     """Abstract transport class for GameServerConfigsService."""
 
     AUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
@@ -36,6 +36,7 @@ class GameServerConfigsServiceTransport(metaclass=abc.ABCMeta):
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        **kwargs,
     ) -> None:
         """Instantiate the transport.
 
@@ -63,41 +64,49 @@ class GameServerConfigsServiceTransport(metaclass=abc.ABCMeta):
     @property
     def operations_client(self) -> operations_v1.OperationsClient:
         """Return the client designed to process long-running operations."""
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def list_game_server_configs(
         self
     ) -> typing.Callable[
         [game_server_configs.ListGameServerConfigsRequest],
-        game_server_configs.ListGameServerConfigsResponse,
+        typing.Union[
+            game_server_configs.ListGameServerConfigsResponse,
+            typing.Awaitable[game_server_configs.ListGameServerConfigsResponse],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def get_game_server_config(
         self
     ) -> typing.Callable[
         [game_server_configs.GetGameServerConfigRequest],
-        game_server_configs.GameServerConfig,
+        typing.Union[
+            game_server_configs.GameServerConfig,
+            typing.Awaitable[game_server_configs.GameServerConfig],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def create_game_server_config(
         self
     ) -> typing.Callable[
-        [game_server_configs.CreateGameServerConfigRequest], operations.Operation
+        [game_server_configs.CreateGameServerConfigRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def delete_game_server_config(
         self
     ) -> typing.Callable[
-        [game_server_configs.DeleteGameServerConfigRequest], operations.Operation
+        [game_server_configs.DeleteGameServerConfigRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 __all__ = ("GameServerConfigsServiceTransport",)

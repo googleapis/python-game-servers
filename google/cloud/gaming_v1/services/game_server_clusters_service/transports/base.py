@@ -26,7 +26,7 @@ from google.cloud.gaming_v1.types import game_server_clusters
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 
-class GameServerClustersServiceTransport(metaclass=abc.ABCMeta):
+class GameServerClustersServiceTransport(abc.ABC):
     """Abstract transport class for GameServerClustersService."""
 
     AUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
@@ -36,6 +36,7 @@ class GameServerClustersServiceTransport(metaclass=abc.ABCMeta):
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        **kwargs,
     ) -> None:
         """Instantiate the transport.
 
@@ -63,76 +64,100 @@ class GameServerClustersServiceTransport(metaclass=abc.ABCMeta):
     @property
     def operations_client(self) -> operations_v1.OperationsClient:
         """Return the client designed to process long-running operations."""
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def list_game_server_clusters(
         self
     ) -> typing.Callable[
         [game_server_clusters.ListGameServerClustersRequest],
-        game_server_clusters.ListGameServerClustersResponse,
+        typing.Union[
+            game_server_clusters.ListGameServerClustersResponse,
+            typing.Awaitable[game_server_clusters.ListGameServerClustersResponse],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def get_game_server_cluster(
         self
     ) -> typing.Callable[
         [game_server_clusters.GetGameServerClusterRequest],
-        game_server_clusters.GameServerCluster,
+        typing.Union[
+            game_server_clusters.GameServerCluster,
+            typing.Awaitable[game_server_clusters.GameServerCluster],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def create_game_server_cluster(
         self
     ) -> typing.Callable[
-        [game_server_clusters.CreateGameServerClusterRequest], operations.Operation
+        [game_server_clusters.CreateGameServerClusterRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def preview_create_game_server_cluster(
         self
     ) -> typing.Callable[
         [game_server_clusters.PreviewCreateGameServerClusterRequest],
-        game_server_clusters.PreviewCreateGameServerClusterResponse,
+        typing.Union[
+            game_server_clusters.PreviewCreateGameServerClusterResponse,
+            typing.Awaitable[
+                game_server_clusters.PreviewCreateGameServerClusterResponse
+            ],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def delete_game_server_cluster(
         self
     ) -> typing.Callable[
-        [game_server_clusters.DeleteGameServerClusterRequest], operations.Operation
+        [game_server_clusters.DeleteGameServerClusterRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def preview_delete_game_server_cluster(
         self
     ) -> typing.Callable[
         [game_server_clusters.PreviewDeleteGameServerClusterRequest],
-        game_server_clusters.PreviewDeleteGameServerClusterResponse,
+        typing.Union[
+            game_server_clusters.PreviewDeleteGameServerClusterResponse,
+            typing.Awaitable[
+                game_server_clusters.PreviewDeleteGameServerClusterResponse
+            ],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def update_game_server_cluster(
         self
     ) -> typing.Callable[
-        [game_server_clusters.UpdateGameServerClusterRequest], operations.Operation
+        [game_server_clusters.UpdateGameServerClusterRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def preview_update_game_server_cluster(
         self
     ) -> typing.Callable[
         [game_server_clusters.PreviewUpdateGameServerClusterRequest],
-        game_server_clusters.PreviewUpdateGameServerClusterResponse,
+        typing.Union[
+            game_server_clusters.PreviewUpdateGameServerClusterResponse,
+            typing.Awaitable[
+                game_server_clusters.PreviewUpdateGameServerClusterResponse
+            ],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 __all__ = ("GameServerClustersServiceTransport",)
