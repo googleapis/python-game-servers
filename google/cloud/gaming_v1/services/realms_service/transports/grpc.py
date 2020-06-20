@@ -35,7 +35,7 @@ from .base import RealmsServiceTransport
 class RealmsServiceGrpcTransport(RealmsServiceTransport):
     """gRPC backend transport for RealmsService.
 
-    A Realm is a grouping of Game Server Clusters that are
+    A realm is a grouping of game server clusters that are
     considered interchangeable.
 
     This class defines the same methods as the primary client, so the
@@ -189,7 +189,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     ) -> Callable[[realms.ListRealmsRequest], realms.ListRealmsResponse]:
         r"""Return a callable for the list realms method over gRPC.
 
-        Lists Realms in a given project and Location.
+        Lists realms in a given project and location.
 
         Returns:
             Callable[[~.ListRealmsRequest],
@@ -213,7 +213,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     def get_realm(self) -> Callable[[realms.GetRealmRequest], realms.Realm]:
         r"""Return a callable for the get realm method over gRPC.
 
-        Gets details of a single Realm.
+        Gets details of a single realm.
 
         Returns:
             Callable[[~.GetRealmRequest],
@@ -239,7 +239,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     ) -> Callable[[realms.CreateRealmRequest], operations.Operation]:
         r"""Return a callable for the create realm method over gRPC.
 
-        Creates a new Realm in a given project and Location.
+        Creates a new realm in a given project and location.
 
         Returns:
             Callable[[~.CreateRealmRequest],
@@ -265,7 +265,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     ) -> Callable[[realms.DeleteRealmRequest], operations.Operation]:
         r"""Return a callable for the delete realm method over gRPC.
 
-        Deletes a single Realm.
+        Deletes a single realm.
 
         Returns:
             Callable[[~.DeleteRealmRequest],
@@ -291,7 +291,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     ) -> Callable[[realms.UpdateRealmRequest], operations.Operation]:
         r"""Return a callable for the update realm method over gRPC.
 
-        Patches a single Realm.
+        Patches a single realm.
 
         Returns:
             Callable[[~.UpdateRealmRequest],
@@ -319,7 +319,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     ]:
         r"""Return a callable for the preview realm update method over gRPC.
 
-        Previews patches to a single Realm.
+        Previews patches to a single realm.
 
         Returns:
             Callable[[~.PreviewRealmUpdateRequest],

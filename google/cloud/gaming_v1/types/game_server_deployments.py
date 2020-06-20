@@ -55,9 +55,9 @@ class ListGameServerDeploymentsRequest(proto.Message):
             ``projects/{project}/locations/{location}``.
         page_size (int):
             Optional. The maximum number of items to return. If
-            unspecified, server will pick an appropriate default. Server
-            may return fewer items than requested. A caller should only
-            rely on response's
+            unspecified, the server will pick an appropriate default.
+            The server may return fewer items than requested. A caller
+            should only rely on response's
             [next_page_token][google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token]
             to determine if there are more GameServerDeployments left to
             be queried.
@@ -86,13 +86,13 @@ class ListGameServerDeploymentsResponse(proto.Message):
 
     Attributes:
         game_server_deployments (Sequence[~.gcgv_game_server_deployments.GameServerDeployment]):
-            The list of Game Server Delpoyments.
+            The list of game server deployments.
         next_page_token (str):
             Token to retrieve the next page of results,
             or empty if there are no more results in the
             list.
         unreachable (Sequence[str]):
-            List of Locations that could not be reached.
+            List of locations that could not be reached.
     """
 
     @property
@@ -112,7 +112,7 @@ class GetGameServerDeploymentRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Deployment to
+            Required. The name of the game server delpoyment to
             retrieve. Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
@@ -127,7 +127,7 @@ class GetGameServerDeploymentRolloutRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Deployment to
+            Required. The name of the game server delpoyment to
             retrieve. Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
@@ -145,10 +145,10 @@ class CreateGameServerDeploymentRequest(proto.Message):
             Required. The parent resource name. Uses the form:
             ``projects/{project}/locations/{location}``.
         deployment_id (str):
-            Required. The ID of the Game Server
-            Deployment resource to be created.
+            Required. The ID of the game server
+            delpoyment resource to be created.
         game_server_deployment (~.gcgv_game_server_deployments.GameServerDeployment):
-            Required. The Game Server Deployment resource
+            Required. The game server delpoyment resource
             to be created.
     """
 
@@ -165,7 +165,7 @@ class DeleteGameServerDeploymentRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Deployment to delete.
+            Required. The name of the game server delpoyment to delete.
             Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
@@ -181,7 +181,7 @@ class UpdateGameServerDeploymentRequest(proto.Message):
 
     Attributes:
         game_server_deployment (~.gcgv_game_server_deployments.GameServerDeployment):
-            Required. The Game Server Deployment to be updated. Only
+            Required. The game server delpoyment to be updated. Only
             fields specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Required. Mask of fields to update. At least one path must
@@ -204,7 +204,7 @@ class UpdateGameServerDeploymentRolloutRequest(proto.Message):
 
     Attributes:
         rollout (~.gcgv_game_server_deployments.GameServerDeploymentRollout):
-            Required. The Game Server Deployment Rollout to be updated.
+            Required. The game server delpoyment rollout to be updated.
             Only fields specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Required. Mask of fields to update. At least one path must
@@ -227,7 +227,7 @@ class FetchDeploymentStateRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Deployment. Uses the
+            Required. The name of the game server delpoyment. Uses the
             form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
@@ -242,22 +242,22 @@ class FetchDeploymentStateResponse(proto.Message):
 
     Attributes:
         cluster_state (Sequence[~.gcgv_game_server_deployments.FetchDeploymentStateResponse.DeployedClusterState]):
-            The state of the Game Server Deployment in
-            each Game Server Cluster.
+            The state of the game server deployment in
+            each game server cluster.
         unavailable (Sequence[str]):
-            List of Locations that could not be reached.
+            List of locations that could not be reached.
     """
 
     class DeployedClusterState(proto.Message):
-        r"""The Game Server Cluster changes made by the Game Server
-        Deployment.
+        r"""The game server cluster changes made by the game server
+        deployment.
 
         Attributes:
             cluster (str):
                 The name of the cluster.
             fleet_details (Sequence[~.common.DeployedFleetDetails]):
                 The details about the Agones fleets and
-                autoscalers created in the Game Server Cluster.
+                autoscalers created in the game server cluster.
         """
 
         cluster = proto.Field(proto.STRING, number=1)
@@ -272,11 +272,11 @@ class FetchDeploymentStateResponse(proto.Message):
 
 
 class GameServerDeployment(proto.Message):
-    r"""A Game Server Deployment resource.
+    r"""A game server deployment resource.
 
     Attributes:
         name (str):
-            The resource name of the Game Server Deployment. Uses the
+            The resource name of the game server deployment. Uses the
             form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
@@ -288,13 +288,13 @@ class GameServerDeployment(proto.Message):
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
         labels (Sequence[~.gcgv_game_server_deployments.GameServerDeployment.LabelsEntry]):
-            The labels associated with this Game Server
-            Deployment. Each label is a key-value pair.
+            The labels associated with this game server
+            deployment. Each label is a key-value pair.
         etag (str):
             ETag of the resource.
         description (str):
-            Human readable description of the Game Server
-            Deployment.
+            Human readable description of the game server
+            delpoyment.
     """
 
     name = proto.Field(proto.STRING, number=1)
@@ -306,7 +306,7 @@ class GameServerDeployment(proto.Message):
 
 
 class GameServerConfigOverride(proto.Message):
-    r"""A Game Server Config override.
+    r"""A game server config override.
 
     Attributes:
         realms_selector (~.common.RealmSelector):
@@ -320,12 +320,12 @@ class GameServerConfigOverride(proto.Message):
 
 
 class GameServerDeploymentRollout(proto.Message):
-    r"""The Game Server Deployment Rollout which represents the
+    r"""The game server deployment rollout which represents the
     desired rollout state.
 
     Attributes:
         name (str):
-            The resource name of the Game Server Deployment Rollout.
+            The resource name of the game server deployment rollout.
             Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
@@ -337,15 +337,15 @@ class GameServerDeploymentRollout(proto.Message):
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
         default_game_server_config (str):
-            The default Game Server Config is applied to all Realms
-            unless overridden in the Rollout. For example,
+            The default game server config is applied to all realms
+            unless overridden in the rollout. For example,
 
             ``projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config``.
         game_server_config_overrides (Sequence[~.gcgv_game_server_deployments.GameServerConfigOverride]):
-            Contains the Game Server Config Rollout
+            Contains the game server config rollout
             overrides. Overrides are processed in the order
             they are listed. Once a match is found for a
-            Realm, the rest of the list is not processed.
+            realm, the rest of the list is not processed.
         etag (str):
             ETag of the resource.
     """
@@ -365,7 +365,7 @@ class PreviewGameServerDeploymentRolloutRequest(proto.Message):
 
     Attributes:
         rollout (~.gcgv_game_server_deployments.GameServerDeploymentRollout):
-            Required. The Game Server Deployment Rollout to be updated.
+            Required. The game server deployment rollout to be updated.
             Only fields specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Optional. Mask of fields to update. At least one path must
@@ -377,7 +377,7 @@ class PreviewGameServerDeploymentRolloutRequest(proto.Message):
         preview_time (~.timestamp.Timestamp):
             Optional. The target timestamp to compute the
             preview. Defaults to the immediately after the
-            proposed Rollout completes.
+            proposed rollout completes.
     """
 
     rollout = proto.Field(proto.MESSAGE, number=1, message=GameServerDeploymentRollout)
@@ -395,7 +395,7 @@ class PreviewGameServerDeploymentRolloutResponse(proto.Message):
             Locations that could not be reached on this
             request.
         etag (str):
-            ETag of the Game Server Deployment.
+            ETag of the game server deployment.
         target_state (~.common.TargetState):
             The target state.
     """

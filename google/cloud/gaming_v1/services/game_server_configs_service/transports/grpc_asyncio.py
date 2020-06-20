@@ -35,7 +35,7 @@ from .grpc import GameServerConfigsServiceGrpcTransport
 class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTransport):
     """gRPC AsyncIO backend transport for GameServerConfigsService.
 
-    The Game Server Config configures the game servers in an
+    The game server config configures the game servers in an
     Agones fleet.
 
     This class defines the same methods as the primary client, so the
@@ -190,8 +190,8 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
     ]:
         r"""Return a callable for the list game server configs method over gRPC.
 
-        Lists Game Server Configs in a given project,
-        Location, and Game Server Deployment.
+        Lists game server configs in a given project,
+        location, and game server deployment.
 
         Returns:
             Callable[[~.ListGameServerConfigsRequest],
@@ -220,7 +220,7 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
     ]:
         r"""Return a callable for the get game server config method over gRPC.
 
-        Gets details of a single Game Server Config.
+        Gets details of a single game server config.
 
         Returns:
             Callable[[~.GetGameServerConfigRequest],
@@ -249,10 +249,10 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
     ]:
         r"""Return a callable for the create game server config method over gRPC.
 
-        Creates a new Game Server Config in a given project,
-        Location, and Game Server Deployment. Game Server
-        Configs are immutable, and are not applied until
-        referenced in the Game Server Deployment Rollout
+        Creates a new game server config in a given project,
+        location, and game server deployment. Game server
+        configs are immutable, and are not applied until
+        referenced in the game server deployment rollout
         resource.
 
         Returns:
@@ -282,9 +282,9 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
     ]:
         r"""Return a callable for the delete game server config method over gRPC.
 
-        Deletes a single Game Server Config. The deletion
-        will fail if the Game Server Config is referenced in a
-        Game Server Deployment Rollout.
+        Deletes a single game server config. The deletion
+        will fail if the game server config is referenced in a
+        game server deployment rollout.
 
         Returns:
             Callable[[~.DeleteGameServerConfigRequest],

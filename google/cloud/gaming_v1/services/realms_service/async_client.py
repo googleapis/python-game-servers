@@ -42,7 +42,7 @@ from .client import RealmsServiceClient
 
 
 class RealmsServiceAsyncClient:
-    """A Realm is a grouping of Game Server Clusters that are
+    """A realm is a grouping of game server clusters that are
     considered interchangeable.
     """
 
@@ -110,7 +110,7 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListRealmsAsyncPager:
-        r"""Lists Realms in a given project and Location.
+        r"""Lists realms in a given project and location.
 
         Args:
             request (:class:`~.realms.ListRealmsRequest`):
@@ -190,14 +190,14 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.Realm:
-        r"""Gets details of a single Realm.
+        r"""Gets details of a single realm.
 
         Args:
             request (:class:`~.realms.GetRealmRequest`):
                 The request object. Request message for
                 RealmsService.GetRealm.
             name (:class:`str`):
-                Required. The name of the Realm to retrieve. Uses the
+                Required. The name of the realm to retrieve. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
                 This corresponds to the ``name`` field
@@ -212,7 +212,7 @@ class RealmsServiceAsyncClient:
 
         Returns:
             ~.realms.Realm:
-                A Realm resource.
+                A realm resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -262,7 +262,7 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Creates a new Realm in a given project and Location.
+        r"""Creates a new realm in a given project and location.
 
         Args:
             request (:class:`~.realms.CreateRealmRequest`):
@@ -275,13 +275,13 @@ class RealmsServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             realm (:class:`~.realms.Realm`):
-                Required. The Realm resource to be
+                Required. The realm resource to be
                 created.
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             realm_id (:class:`str`):
-                Required. The ID of the Realm
+                Required. The ID of the realm
                 resource to be created.
                 This corresponds to the ``realm_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -298,7 +298,7 @@ class RealmsServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -359,14 +359,14 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Deletes a single Realm.
+        r"""Deletes a single realm.
 
         Args:
             request (:class:`~.realms.DeleteRealmRequest`):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
             name (:class:`str`):
-                Required. The name of the Realm to delete. Uses the
+                Required. The name of the realm to delete. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
                 This corresponds to the ``name`` field
@@ -384,7 +384,7 @@ class RealmsServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -442,14 +442,14 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Patches a single Realm.
+        r"""Patches a single realm.
 
         Args:
             request (:class:`~.realms.UpdateRealmRequest`):
                 The request object. Request message for
                 RealmsService.UpdateRealm.
             realm (:class:`~.realms.Realm`):
-                Required. The Realm to be updated. Only fields specified
+                Required. The realm to be updated. Only fields specified
                 in update_mask are updated.
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -475,7 +475,7 @@ class RealmsServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -535,7 +535,7 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.PreviewRealmUpdateResponse:
-        r"""Previews patches to a single Realm.
+        r"""Previews patches to a single realm.
 
         Args:
             request (:class:`~.realms.PreviewRealmUpdateRequest`):

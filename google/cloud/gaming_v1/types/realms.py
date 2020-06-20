@@ -52,7 +52,7 @@ class ListRealmsRequest(proto.Message):
             may return fewer items than requested. A caller should only
             rely on response's
             [next_page_token][google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token]
-            to determine if there are more Realms left to be queried.
+            to determine if there are more realms left to be queried.
         page_token (str):
             Optional. The next_page_token value returned from a previous
             List request, if any.
@@ -77,13 +77,13 @@ class ListRealmsResponse(proto.Message):
 
     Attributes:
         realms (Sequence[~.gcgv_realms.Realm]):
-            The list of Realms.
+            The list of realms.
         next_page_token (str):
             Token to retrieve the next page of results,
             or empty if there are no more results in the
             list.
         unreachable (Sequence[str]):
-            List of Locations that could not be reached.
+            List of locations that could not be reached.
     """
 
     @property
@@ -100,7 +100,7 @@ class GetRealmRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Realm to retrieve. Uses the form:
+            Required. The name of the realm to retrieve. Uses the form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
     """
 
@@ -115,10 +115,10 @@ class CreateRealmRequest(proto.Message):
             Required. The parent resource name. Uses the form:
             ``projects/{project}/locations/{location}``.
         realm_id (str):
-            Required. The ID of the Realm resource to be
+            Required. The ID of the realm resource to be
             created.
         realm (~.gcgv_realms.Realm):
-            Required. The Realm resource to be created.
+            Required. The realm resource to be created.
     """
 
     parent = proto.Field(proto.STRING, number=1)
@@ -131,7 +131,7 @@ class DeleteRealmRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Realm to delete. Uses the form:
+            Required. The name of the realm to delete. Uses the form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
     """
 
@@ -143,7 +143,7 @@ class UpdateRealmRequest(proto.Message):
 
     Attributes:
         realm (~.gcgv_realms.Realm):
-            Required. The Realm to be updated. Only fields specified in
+            Required. The realm to be updated. Only fields specified in
             update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Required. The update mask applies to the resource. For the
@@ -162,7 +162,7 @@ class PreviewRealmUpdateRequest(proto.Message):
 
     Attributes:
         realm (~.gcgv_realms.Realm):
-            Required. The Realm to be updated. Only fields specified in
+            Required. The realm to be updated. Only fields specified in
             update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Required. The update mask applies to the resource. For the
@@ -195,11 +195,11 @@ class PreviewRealmUpdateResponse(proto.Message):
 
 
 class Realm(proto.Message):
-    r"""A Realm resource.
+    r"""A realm resource.
 
     Attributes:
         name (str):
-            The resource name of the Realm. Uses the form:
+            The resource name of the realm. Uses the form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
             For example,
             ``projects/my-project/locations/{location}/realms/my-realm``.
@@ -208,17 +208,17 @@ class Realm(proto.Message):
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
         labels (Sequence[~.gcgv_realms.Realm.LabelsEntry]):
-            The labels associated with this Realm. Each
+            The labels associated with this realm. Each
             label is a key-value pair.
         time_zone (str):
             Required. Time zone where all policies
-            targeting this Realm are evaluated. The value of
+            targeting this realm are evaluated. The value of
             this field must be from the IANA time zone
             database: https://www.iana.org/time-zones.
         etag (str):
             ETag of the resource.
         description (str):
-            Human readable description of the Realm.
+            Human readable description of the realm.
     """
 
     name = proto.Field(proto.STRING, number=1)

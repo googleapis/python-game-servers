@@ -115,7 +115,7 @@ class GameServerClustersServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerClustersAsyncPager:
-        r"""Lists Game Server Clusters in a given project and
+        r"""Lists game server clusters in a given project and
         location.
 
         Args:
@@ -204,7 +204,7 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.GetGameServerCluster.
             name (:class:`str`):
-                Required. The name of the Game Server Cluster to
+                Required. The name of the game server cluster to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
@@ -220,7 +220,7 @@ class GameServerClustersServiceAsyncClient:
 
         Returns:
             ~.game_server_clusters.GameServerCluster:
-                A Game Server Cluster resource.
+                A game server cluster resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -284,14 +284,14 @@ class GameServerClustersServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             game_server_cluster (:class:`~.game_server_clusters.GameServerCluster`):
-                Required. The Game Server Cluster
+                Required. The game server cluster
                 resource to be created.
                 This corresponds to the ``game_server_cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             game_server_cluster_id (:class:`str`):
-                Required. The ID of the Game Server
-                Cluster resource to be created.
+                Required. The ID of the game server
+                cluster resource to be created.
                 This corresponds to the ``game_server_cluster_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -308,7 +308,7 @@ class GameServerClustersServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                game server cluster resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -430,7 +430,7 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.DeleteGameServerCluster.
             name (:class:`str`):
-                Required. The name of the Game Server Cluster to delete.
+                Required. The name of the game server cluster to delete.
                 Uses the form:
                 ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
                 This corresponds to the ``name`` field
@@ -449,7 +449,7 @@ class GameServerClustersServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                game server cluster resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -565,7 +565,7 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.UpdateGameServerCluster.
             game_server_cluster (:class:`~.game_server_clusters.GameServerCluster`):
-                Required. The Game Server Cluster to be updated. Only
+                Required. The game server cluster to be updated. Only
                 fields specified in update_mask are updated.
                 This corresponds to the ``game_server_cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -593,7 +593,7 @@ class GameServerClustersServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                game server cluster resource.
 
         """
         # Create or coerce a protobuf request object.

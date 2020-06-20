@@ -37,7 +37,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
 ):
     """gRPC AsyncIO backend transport for GameServerDeploymentsService.
 
-    The Game Server Deployment is used to control the deployment
+    The game server deployment is used to control the deployment
     of Agones fleets.
 
     This class defines the same methods as the primary client, so the
@@ -192,8 +192,8 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
     ]:
         r"""Return a callable for the list game server deployments method over gRPC.
 
-        Lists Game Server Deployments in a given project and
-        Location.
+        Lists game server deployments in a given project and
+        location.
 
         Returns:
             Callable[[~.ListGameServerDeploymentsRequest],
@@ -222,7 +222,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
     ]:
         r"""Return a callable for the get game server deployment method over gRPC.
 
-        Gets details of a single Game Server Deployment.
+        Gets details of a single game server deployment.
 
         Returns:
             Callable[[~.GetGameServerDeploymentRequest],
@@ -251,8 +251,8 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
     ]:
         r"""Return a callable for the create game server deployment method over gRPC.
 
-        Creates a new Game Server Deployment in a given
-        project and Location.
+        Creates a new game server deployment in a given
+        project and location.
 
         Returns:
             Callable[[~.CreateGameServerDeploymentRequest],
@@ -283,7 +283,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
     ]:
         r"""Return a callable for the delete game server deployment method over gRPC.
 
-        Deletes a single Game Server Deployment.
+        Deletes a single game server deployment.
 
         Returns:
             Callable[[~.DeleteGameServerDeploymentRequest],
@@ -314,7 +314,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
     ]:
         r"""Return a callable for the update game server deployment method over gRPC.
 
-        Patches a Game Server Deployment.
+        Patches a game server deployment.
 
         Returns:
             Callable[[~.UpdateGameServerDeploymentRequest],
@@ -346,7 +346,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         r"""Return a callable for the get game server deployment
         rollout method over gRPC.
 
-        Gets details a single Game Server Deployment Rollout.
+        Gets details a single game server deployment rollout.
 
         Returns:
             Callable[[~.GetGameServerDeploymentRolloutRequest],
@@ -378,7 +378,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         r"""Return a callable for the update game server deployment
         rollout method over gRPC.
 
-        Patches a single Game Server Deployment Rollout. The method will
+        Patches a single game server deployment rollout. The method will
         not return an error if the update does not affect any existing
         realms. For example - if the default_game_server_config is
         changed but all existing realms use the override, that is valid.
@@ -416,8 +416,8 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         r"""Return a callable for the preview game server deployment
         rollout method over gRPC.
 
-        Previews the Game Server Deployment Rollout. This API
-        does not mutate the Rollout resource.
+        Previews the game server deployment rollout. This API
+        does not mutate the rollout resource.
 
         Returns:
             Callable[[~.PreviewGameServerDeploymentRolloutRequest],
@@ -449,9 +449,9 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         r"""Return a callable for the fetch deployment state method over gRPC.
 
         Retrieves information about the current state of the
-        Game Server Ddeployment. Gathers all the Agones fleets
+        game server deployment. Gathers all the Agones fleets
         and Agones autoscalers, including fleets running an
-        older version of the Game Server Deployment.
+        older version of the game server deployment.
 
         Returns:
             Callable[[~.FetchDeploymentStateRequest],

@@ -56,9 +56,9 @@ class ListGameServerClustersRequest(proto.Message):
             "projects/{project}/locations/{location}/realms/{realm}".
         page_size (int):
             Optional. The maximum number of items to return. If
-            unspecified, server will pick an appropriate default. Server
-            may return fewer items than requested. A caller should only
-            rely on response's
+            unspecified, the server will pick an appropriate default.
+            The server may return fewer items than requested. A caller
+            should only rely on response's
             [next_page_token][google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token]
             to determine if there are more GameServerClusters left to be
             queried.
@@ -87,13 +87,13 @@ class ListGameServerClustersResponse(proto.Message):
 
     Attributes:
         game_server_clusters (Sequence[~.gcgv_game_server_clusters.GameServerCluster]):
-            The list of Game Server Clusters.
+            The list of game server clusters.
         next_page_token (str):
             Token to retrieve the next page of results,
             or empty if there are no more results in the
             list.
         unreachable (Sequence[str]):
-            List of Locations that could not be reached.
+            List of locations that could not be reached.
     """
 
     @property
@@ -113,7 +113,7 @@ class GetGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Cluster to retrieve.
+            Required. The name of the game server cluster to retrieve.
             Uses the form:
 
             ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
@@ -131,10 +131,10 @@ class CreateGameServerClusterRequest(proto.Message):
             Required. The parent resource name. Uses the form:
             ``projects/{project}/locations/{location}/realms/{realm-id}``.
         game_server_cluster_id (str):
-            Required. The ID of the Game Server Cluster
+            Required. The ID of the game server cluster
             resource to be created.
         game_server_cluster (~.gcgv_game_server_clusters.GameServerCluster):
-            Required. The Game Server Cluster resource to
+            Required. The game server cluster resource to
             be created.
     """
 
@@ -154,10 +154,10 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
             Required. The parent resource name. Uses the form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
         game_server_cluster_id (str):
-            Required. The ID of the Game Server Cluster
+            Required. The ID of the game server cluster
             resource to be created.
         game_server_cluster (~.gcgv_game_server_clusters.GameServerCluster):
-            Required. The Game Server Cluster resource to
+            Required. The game server cluster resource to
             be created.
         preview_time (~.timestamp.Timestamp):
             Optional. The target timestamp to compute the
@@ -193,7 +193,7 @@ class DeleteGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Cluster to delete.
+            Required. The name of the game server cluster to delete.
             Uses the form:
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
     """
@@ -207,7 +207,7 @@ class PreviewDeleteGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Cluster to delete.
+            Required. The name of the game server cluster to delete.
             Uses the form:
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
         preview_time (~.timestamp.Timestamp):
@@ -240,7 +240,7 @@ class UpdateGameServerClusterRequest(proto.Message):
 
     Attributes:
         game_server_cluster (~.gcgv_game_server_clusters.GameServerCluster):
-            Required. The Game Server Cluster to be updated. Only fields
+            Required. The game server cluster to be updated. Only fields
             specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Required. Mask of fields to update. At least one path must
@@ -263,7 +263,7 @@ class PreviewUpdateGameServerClusterRequest(proto.Message):
 
     Attributes:
         game_server_cluster (~.gcgv_game_server_clusters.GameServerCluster):
-            Required. The Game Server Cluster to be updated. Only fields
+            Required. The game server cluster to be updated. Only fields
             specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Required. Mask of fields to update. At least one path must
@@ -300,15 +300,15 @@ class PreviewUpdateGameServerClusterResponse(proto.Message):
 
 
 class GameServerClusterConnectionInfo(proto.Message):
-    r"""The Game Server Cluster connection information.
+    r"""The game server cluster connection information.
 
     Attributes:
         gke_cluster_reference (~.gcgv_game_server_clusters.GkeClusterReference):
             Reference to the GKE cluster where the game
             servers are installed.
         namespace (str):
-            Namespace designated on the Game Server
-            Cluster where the Agones game server instances
+            Namespace designated on the game server
+            cluster where the Agones game server instances
             will be created. Existence of the namespace will
             be validated during creation.
     """
@@ -339,11 +339,11 @@ class GkeClusterReference(proto.Message):
 
 
 class GameServerCluster(proto.Message):
-    r"""A Game Server Cluster resource.
+    r"""A game server cluster resource.
 
     Attributes:
         name (str):
-            Required. The resource name of the Game Server Cluster. Uses
+            Required. The resource name of the game server cluster. Uses
             the form:
 
             ``projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}``.
@@ -355,12 +355,12 @@ class GameServerCluster(proto.Message):
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
         labels (Sequence[~.gcgv_game_server_clusters.GameServerCluster.LabelsEntry]):
-            The labels associated with this Game Server
-            Cluster. Each label is a key-value pair.
+            The labels associated with this game server
+            cluster. Each label is a key-value pair.
         connection_info (~.gcgv_game_server_clusters.GameServerClusterConnectionInfo):
-            Game Server Cluster connection information.
-            This information is used to manage Game Server
-            Clusters.
+            The game server cluster connection
+            information. This information is used to manage
+            game server clusters.
         etag (str):
             ETag of the resource.
         description (str):

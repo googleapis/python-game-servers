@@ -78,7 +78,7 @@ class GameServerConfigsServiceClientMeta(type):
 
 
 class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMeta):
-    """The Game Server Config configures the game servers in an
+    """The game server config configures the game servers in an
     Agones fleet.
     """
 
@@ -245,8 +245,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerConfigsPager:
-        r"""Lists Game Server Configs in a given project,
-        Location, and Game Server Deployment.
+        r"""Lists game server configs in a given project,
+        location, and game server deployment.
 
         Args:
             request (:class:`~.game_server_configs.ListGameServerConfigsRequest`):
@@ -327,14 +327,14 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_configs.GameServerConfig:
-        r"""Gets details of a single Game Server Config.
+        r"""Gets details of a single game server config.
 
         Args:
             request (:class:`~.game_server_configs.GetGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.GetGameServerConfig.
             name (:class:`str`):
-                Required. The name of the Game Server Config to
+                Required. The name of the game server config to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
@@ -350,7 +350,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
         Returns:
             ~.game_server_configs.GameServerConfig:
-                A Game Server Config resource.
+                A game server config resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -399,10 +399,10 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Creates a new Game Server Config in a given project,
-        Location, and Game Server Deployment. Game Server
-        Configs are immutable, and are not applied until
-        referenced in the Game Server Deployment Rollout
+        r"""Creates a new game server config in a given project,
+        location, and game server deployment. Game server
+        configs are immutable, and are not applied until
+        referenced in the game server deployment rollout
         resource.
 
         Args:
@@ -417,7 +417,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             game_server_config (:class:`~.game_server_configs.GameServerConfig`):
-                Required. The Game Server Config
+                Required. The game server config
                 resource to be created.
                 This corresponds to the ``game_server_config`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -435,7 +435,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
                 The result type for the operation will be
                 :class:``~.game_server_configs.GameServerConfig``: A
-                Game Server Config resource.
+                game server config resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -494,16 +494,16 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Deletes a single Game Server Config. The deletion
-        will fail if the Game Server Config is referenced in a
-        Game Server Deployment Rollout.
+        r"""Deletes a single game server config. The deletion
+        will fail if the game server config is referenced in a
+        game server deployment rollout.
 
         Args:
             request (:class:`~.game_server_configs.DeleteGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
             name (:class:`str`):
-                Required. The name of the Game Server Config to delete.
+                Required. The name of the game server config to delete.
                 Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
@@ -523,7 +523,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
                 The result type for the operation will be
                 :class:``~.game_server_configs.GameServerConfig``: A
-                Game Server Config resource.
+                game server config resource.
 
         """
         # Create or coerce a protobuf request object.

@@ -35,7 +35,7 @@ from .grpc import RealmsServiceGrpcTransport
 class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
     """gRPC AsyncIO backend transport for RealmsService.
 
-    A Realm is a grouping of Game Server Clusters that are
+    A realm is a grouping of game server clusters that are
     considered interchangeable.
 
     This class defines the same methods as the primary client, so the
@@ -187,7 +187,7 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
     ) -> Callable[[realms.ListRealmsRequest], Awaitable[realms.ListRealmsResponse]]:
         r"""Return a callable for the list realms method over gRPC.
 
-        Lists Realms in a given project and Location.
+        Lists realms in a given project and location.
 
         Returns:
             Callable[[~.ListRealmsRequest],
@@ -211,7 +211,7 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
     def get_realm(self) -> Callable[[realms.GetRealmRequest], Awaitable[realms.Realm]]:
         r"""Return a callable for the get realm method over gRPC.
 
-        Gets details of a single Realm.
+        Gets details of a single realm.
 
         Returns:
             Callable[[~.GetRealmRequest],
@@ -237,7 +237,7 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
     ) -> Callable[[realms.CreateRealmRequest], Awaitable[operations.Operation]]:
         r"""Return a callable for the create realm method over gRPC.
 
-        Creates a new Realm in a given project and Location.
+        Creates a new realm in a given project and location.
 
         Returns:
             Callable[[~.CreateRealmRequest],
@@ -263,7 +263,7 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
     ) -> Callable[[realms.DeleteRealmRequest], Awaitable[operations.Operation]]:
         r"""Return a callable for the delete realm method over gRPC.
 
-        Deletes a single Realm.
+        Deletes a single realm.
 
         Returns:
             Callable[[~.DeleteRealmRequest],
@@ -289,7 +289,7 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
     ) -> Callable[[realms.UpdateRealmRequest], Awaitable[operations.Operation]]:
         r"""Return a callable for the update realm method over gRPC.
 
-        Patches a single Realm.
+        Patches a single realm.
 
         Returns:
             Callable[[~.UpdateRealmRequest],
@@ -317,7 +317,7 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
     ]:
         r"""Return a callable for the preview realm update method over gRPC.
 
-        Previews patches to a single Realm.
+        Previews patches to a single realm.
 
         Returns:
             Callable[[~.PreviewRealmUpdateRequest],

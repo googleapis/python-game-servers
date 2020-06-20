@@ -70,9 +70,9 @@ class OperationMetadata(proto.Message):
             Output only. List of Locations that could not
             be reached.
         operation_status (Sequence[~.common.OperationMetadata.OperationStatusEntry]):
-            Output only. Operation status for
-            gameservices API operations. Operation status is
-            in the form of key-value pairs where keys are
+            Output only. Operation status for Game
+            Services API operations. Operation status is in
+            the form of key-value pairs where keys are
             resource IDs and the values show the status of
             the operation. In case of failures, the value
             includes an error code and error message.
@@ -128,11 +128,11 @@ class LabelSelector(proto.Message):
 
 
 class RealmSelector(proto.Message):
-    r"""The Realm selector, used to match Realm resources.
+    r"""The realm selector, used to match realm resources.
 
     Attributes:
         realms (Sequence[str]):
-            List of Realms to match.
+            List of realms to match.
     """
 
     realms = proto.RepeatedField(proto.STRING, number=1)
@@ -165,7 +165,7 @@ class Schedule(proto.Message):
             The cron definition of the scheduled event.
             See https://en.wikipedia.org/wiki/Cron. Cron
             spec specifies the local time as defined by the
-            Realm.
+            realm.
     """
 
     start_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp)
@@ -180,7 +180,7 @@ class SpecSource(proto.Message):
 
     Attributes:
         game_server_config_name (str):
-            The Game Server Config resource. Uses the form:
+            The game server config resource. Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}/configs/{config_id}``.
         name (str):
@@ -198,16 +198,16 @@ class TargetDetails(proto.Message):
 
     Attributes:
         game_server_cluster_name (str):
-            The Game Server Cluster name. Uses the form:
+            The game server cluster name. Uses the form:
 
             ``projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}``.
         game_server_deployment_name (str):
-            The Game Server Deployment name. Uses the form:
+            The game server deployment name. Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}``.
         fleet_details (Sequence[~.common.TargetDetails.TargetFleetDetails]):
-            Agones fleet details for Game Server Clusters
-            and Game Server Deployments.
+            Agones fleet details for game server clusters
+            and game server deployments.
     """
 
     class TargetFleetDetails(proto.Message):

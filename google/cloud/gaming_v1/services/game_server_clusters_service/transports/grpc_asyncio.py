@@ -190,7 +190,7 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
     ]:
         r"""Return a callable for the list game server clusters method over gRPC.
 
-        Lists Game Server Clusters in a given project and
+        Lists game server clusters in a given project and
         location.
 
         Returns:
