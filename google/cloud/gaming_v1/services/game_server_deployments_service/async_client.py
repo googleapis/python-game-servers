@@ -51,12 +51,12 @@ class GameServerDeploymentsServiceAsyncClient:
     DEFAULT_ENDPOINT = GameServerDeploymentsServiceClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = GameServerDeploymentsServiceClient.DEFAULT_MTLS_ENDPOINT
 
-    game_server_deployment_rollout_path = staticmethod(
-        GameServerDeploymentsServiceClient.game_server_deployment_rollout_path
-    )
-
     game_server_deployment_path = staticmethod(
         GameServerDeploymentsServiceClient.game_server_deployment_path
+    )
+
+    game_server_deployment_rollout_path = staticmethod(
+        GameServerDeploymentsServiceClient.game_server_deployment_rollout_path
     )
 
     from_service_account_file = (
