@@ -26,7 +26,7 @@ from google.cloud.gaming_v1.types import realms
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 
-class RealmsServiceTransport(metaclass=abc.ABCMeta):
+class RealmsServiceTransport(abc.ABC):
     """Abstract transport class for RealmsService."""
 
     AUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
@@ -36,6 +36,7 @@ class RealmsServiceTransport(metaclass=abc.ABCMeta):
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        **kwargs,
     ) -> None:
         """Instantiate the transport.
 
@@ -63,43 +64,66 @@ class RealmsServiceTransport(metaclass=abc.ABCMeta):
     @property
     def operations_client(self) -> operations_v1.OperationsClient:
         """Return the client designed to process long-running operations."""
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def list_realms(
         self
-    ) -> typing.Callable[[realms.ListRealmsRequest], realms.ListRealmsResponse]:
-        raise NotImplementedError
+    ) -> typing.Callable[
+        [realms.ListRealmsRequest],
+        typing.Union[
+            realms.ListRealmsResponse, typing.Awaitable[realms.ListRealmsResponse]
+        ],
+    ]:
+        raise NotImplementedError()
 
     @property
-    def get_realm(self) -> typing.Callable[[realms.GetRealmRequest], realms.Realm]:
-        raise NotImplementedError
+    def get_realm(
+        self
+    ) -> typing.Callable[
+        [realms.GetRealmRequest],
+        typing.Union[realms.Realm, typing.Awaitable[realms.Realm]],
+    ]:
+        raise NotImplementedError()
 
     @property
     def create_realm(
         self
-    ) -> typing.Callable[[realms.CreateRealmRequest], operations.Operation]:
-        raise NotImplementedError
+    ) -> typing.Callable[
+        [realms.CreateRealmRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
+        raise NotImplementedError()
 
     @property
     def delete_realm(
         self
-    ) -> typing.Callable[[realms.DeleteRealmRequest], operations.Operation]:
-        raise NotImplementedError
+    ) -> typing.Callable[
+        [realms.DeleteRealmRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
+        raise NotImplementedError()
 
     @property
     def update_realm(
         self
-    ) -> typing.Callable[[realms.UpdateRealmRequest], operations.Operation]:
-        raise NotImplementedError
+    ) -> typing.Callable[
+        [realms.UpdateRealmRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
+        raise NotImplementedError()
 
     @property
     def preview_realm_update(
         self
     ) -> typing.Callable[
-        [realms.PreviewRealmUpdateRequest], realms.PreviewRealmUpdateResponse
+        [realms.PreviewRealmUpdateRequest],
+        typing.Union[
+            realms.PreviewRealmUpdateResponse,
+            typing.Awaitable[realms.PreviewRealmUpdateResponse],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 __all__ = ("RealmsServiceTransport",)

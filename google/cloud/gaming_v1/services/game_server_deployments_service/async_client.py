@@ -16,9 +16,9 @@
 #
 
 from collections import OrderedDict
-import os
+import functools
 import re
-from typing import Callable, Dict, Sequence, Tuple, Type, Union
+from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
@@ -26,143 +26,57 @@ from google.api_core import exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
 from google.auth import credentials  # type: ignore
-from google.auth.transport import mtls  # type: ignore
-from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
 from google.api_core import operation_async
-from google.cloud.gaming_v1.services.game_server_clusters_service import pagers
+from google.cloud.gaming_v1.services.game_server_deployments_service import pagers
 from google.cloud.gaming_v1.types import common
-from google.cloud.gaming_v1.types import game_server_clusters
+from google.cloud.gaming_v1.types import game_server_deployments
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
-from .transports.base import GameServerClustersServiceTransport
-from .transports.grpc import GameServerClustersServiceGrpcTransport
-from .transports.grpc_asyncio import GameServerClustersServiceGrpcAsyncIOTransport
+from .transports.base import GameServerDeploymentsServiceTransport
+from .transports.grpc_asyncio import GameServerDeploymentsServiceGrpcAsyncIOTransport
+from .client import GameServerDeploymentsServiceClient
 
 
-class GameServerClustersServiceClientMeta(type):
-    """Metaclass for the GameServerClustersService client.
-
-    This provides class-level methods for building and retrieving
-    support objects (e.g. transport) without polluting the client instance
-    objects.
+class GameServerDeploymentsServiceAsyncClient:
+    """The Game Server Deployment is used to control the deployment
+    of Agones fleets.
     """
 
-    _transport_registry = (
-        OrderedDict()
-    )  # type: Dict[str, Type[GameServerClustersServiceTransport]]
-    _transport_registry["grpc"] = GameServerClustersServiceGrpcTransport
-    _transport_registry["grpc_asyncio"] = GameServerClustersServiceGrpcAsyncIOTransport
+    _client: GameServerDeploymentsServiceClient
 
-    def get_transport_class(
-        cls, label: str = None
-    ) -> Type[GameServerClustersServiceTransport]:
-        """Return an appropriate transport class.
+    DEFAULT_ENDPOINT = GameServerDeploymentsServiceClient.DEFAULT_ENDPOINT
+    DEFAULT_MTLS_ENDPOINT = GameServerDeploymentsServiceClient.DEFAULT_MTLS_ENDPOINT
 
-        Args:
-            label: The name of the desired transport. If none is
-                provided, then the first transport in the registry is used.
-
-        Returns:
-            The transport class to use.
-        """
-        # If a specific transport is requested, return that one.
-        if label:
-            return cls._transport_registry[label]
-
-        # No transport is requested; return the default (that is, the first one
-        # in the dictionary).
-        return next(iter(cls._transport_registry.values()))
-
-
-class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientMeta):
-    """The game server cluster maps to Kubernetes clusters running
-    Agones and is used to manage fleets within clusters.
-    """
-
-    @staticmethod
-    def _get_default_mtls_endpoint(api_endpoint):
-        """Convert api endpoint to mTLS endpoint.
-        Convert "*.sandbox.googleapis.com" and "*.googleapis.com" to
-        "*.mtls.sandbox.googleapis.com" and "*.mtls.googleapis.com" respectively.
-        Args:
-            api_endpoint (Optional[str]): the api endpoint to convert.
-        Returns:
-            str: converted mTLS api endpoint.
-        """
-        if not api_endpoint:
-            return api_endpoint
-
-        mtls_endpoint_re = re.compile(
-            r"(?P<name>[^.]+)(?P<mtls>\.mtls)?(?P<sandbox>\.sandbox)?(?P<googledomain>\.googleapis\.com)?"
-        )
-
-        m = mtls_endpoint_re.match(api_endpoint)
-        name, mtls, sandbox, googledomain = m.groups()
-        if mtls or not googledomain:
-            return api_endpoint
-
-        if sandbox:
-            return api_endpoint.replace(
-                "sandbox.googleapis.com", "mtls.sandbox.googleapis.com"
-            )
-
-        return api_endpoint.replace(".googleapis.com", ".mtls.googleapis.com")
-
-    DEFAULT_ENDPOINT = "gameservices.googleapis.com"
-    DEFAULT_MTLS_ENDPOINT = _get_default_mtls_endpoint.__func__(  # type: ignore
-        DEFAULT_ENDPOINT
+    game_server_deployment_path = staticmethod(
+        GameServerDeploymentsServiceClient.game_server_deployment_path
     )
 
-    @classmethod
-    def from_service_account_file(cls, filename: str, *args, **kwargs):
-        """Creates an instance of this client using the provided credentials
-        file.
+    game_server_deployment_rollout_path = staticmethod(
+        GameServerDeploymentsServiceClient.game_server_deployment_rollout_path
+    )
 
-        Args:
-            filename (str): The path to the service account private key json
-                file.
-            args: Additional arguments to pass to the constructor.
-            kwargs: Additional arguments to pass to the constructor.
-
-        Returns:
-            {@api.name}: The constructed client.
-        """
-        credentials = service_account.Credentials.from_service_account_file(filename)
-        kwargs["credentials"] = credentials
-        return cls(*args, **kwargs)
-
+    from_service_account_file = (
+        GameServerDeploymentsServiceClient.from_service_account_file
+    )
     from_service_account_json = from_service_account_file
 
-    @staticmethod
-    def game_server_cluster_path(
-        project: str, location: str, realm: str, cluster: str
-    ) -> str:
-        """Return a fully-qualified game_server_cluster string."""
-        return "projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}".format(
-            project=project, location=location, realm=realm, cluster=cluster
-        )
-
-    @staticmethod
-    def parse_game_server_cluster_path(path: str) -> Dict[str, str]:
-        """Parse a game_server_cluster path into its component segments."""
-        m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/realms/(?P<realm>.+?)/gameServerClusters/(?P<cluster>.+?)$",
-            path,
-        )
-        return m.groupdict() if m else {}
+    get_transport_class = functools.partial(
+        type(GameServerDeploymentsServiceClient).get_transport_class,
+        type(GameServerDeploymentsServiceClient),
+    )
 
     def __init__(
         self,
         *,
         credentials: credentials.Credentials = None,
-        transport: Union[str, GameServerClustersServiceTransport] = None,
+        transport: Union[str, GameServerDeploymentsServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
     ) -> None:
-        """Instantiate the game server clusters service client.
+        """Instantiate the game server deployments service client.
 
         Args:
             credentials (Optional[google.auth.credentials.Credentials]): The
@@ -170,7 +84,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.GameServerClustersServiceTransport]): The
+            transport (Union[str, ~.GameServerDeploymentsServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
             client_options (ClientOptions): Custom options for the client. It
@@ -188,75 +102,33 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 default SSL credentials will be used if present.
 
         Raises:
-            google.auth.exceptions.MutualTLSChannelError: If mutual TLS transport
+            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-        if isinstance(client_options, dict):
-            client_options = ClientOptions.from_dict(client_options)
-        if client_options is None:
-            client_options = ClientOptions.ClientOptions()
 
-        if client_options.api_endpoint is None:
-            use_mtls_env = os.getenv("GOOGLE_API_USE_MTLS", "never")
-            if use_mtls_env == "never":
-                client_options.api_endpoint = self.DEFAULT_ENDPOINT
-            elif use_mtls_env == "always":
-                client_options.api_endpoint = self.DEFAULT_MTLS_ENDPOINT
-            elif use_mtls_env == "auto":
-                has_client_cert_source = (
-                    client_options.client_cert_source is not None
-                    or mtls.has_default_client_cert_source()
-                )
-                client_options.api_endpoint = (
-                    self.DEFAULT_MTLS_ENDPOINT
-                    if has_client_cert_source
-                    else self.DEFAULT_ENDPOINT
-                )
-            else:
-                raise MutualTLSChannelError(
-                    "Unsupported GOOGLE_API_USE_MTLS value. Accepted values: never, auto, always"
-                )
+        self._client = GameServerDeploymentsServiceClient(
+            credentials=credentials, transport=transport, client_options=client_options
+        )
 
-        # Save or instantiate the transport.
-        # Ordinarily, we provide the transport, but allowing a custom transport
-        # instance provides an extensibility point for unusual situations.
-        if isinstance(transport, GameServerClustersServiceTransport):
-            # transport is a GameServerClustersServiceTransport instance.
-            if credentials:
-                raise ValueError(
-                    "When providing a transport instance, "
-                    "provide its credentials directly."
-                )
-            self._transport = transport
-        else:
-            Transport = type(self).get_transport_class(transport)
-            self._transport = Transport(
-                credentials=credentials,
-                host=client_options.api_endpoint,
-                api_mtls_endpoint=client_options.api_endpoint,
-                client_cert_source=client_options.client_cert_source,
-            )
-
-    def list_game_server_clusters(
+    async def list_game_server_deployments(
         self,
-        request: game_server_clusters.ListGameServerClustersRequest = None,
+        request: game_server_deployments.ListGameServerDeploymentsRequest = None,
         *,
         parent: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> pagers.ListGameServerClustersPager:
-        r"""Lists Game Server Clusters in a given project and
-        location.
+    ) -> pagers.ListGameServerDeploymentsAsyncPager:
+        r"""Lists Game Server Deployments in a given project and
+        Location.
 
         Args:
-            request (:class:`~.game_server_clusters.ListGameServerClustersRequest`):
+            request (:class:`~.game_server_deployments.ListGameServerDeploymentsRequest`):
                 The request object. Request message for
-                GameServerClustersService.ListGameServerClusters.
+                GameServerDeploymentsService.ListGameServerDeployments.
             parent (:class:`str`):
-                Required. The parent resource name.
-                Uses the form:
-                "projects/{project}/locations/{location}/realms/{realm}".
+                Required. The parent resource name. Uses the form:
+                ``projects/{project}/locations/{location}``.
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -268,9 +140,9 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListGameServerClustersPager:
+            ~.pagers.ListGameServerDeploymentsAsyncPager:
                 Response message for
-                GameServerClustersService.ListGameServerClusters.
+                GameServerDeploymentsService.ListGameServerDeployments.
                 Iterating over this object will yield
                 results and resolve additional pages
                 automatically.
@@ -285,7 +157,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.ListGameServerClustersRequest(request)
+        request = game_server_deployments.ListGameServerDeploymentsRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
@@ -295,8 +167,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.list_game_server_clusters,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.list_game_server_deployments,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -308,37 +180,37 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # This method is paged; wrap the response in a pager, which provides
-        # an `__iter__` convenience method.
-        response = pagers.ListGameServerClustersPager(
+        # an `__aiter__` convenience method.
+        response = pagers.ListGameServerDeploymentsAsyncPager(
             method=rpc, request=request, response=response
         )
 
         # Done; return the response.
         return response
 
-    def get_game_server_cluster(
+    async def get_game_server_deployment(
         self,
-        request: game_server_clusters.GetGameServerClusterRequest = None,
+        request: game_server_deployments.GetGameServerDeploymentRequest = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> game_server_clusters.GameServerCluster:
-        r"""Gets details of a single game server cluster.
+    ) -> game_server_deployments.GameServerDeployment:
+        r"""Gets details of a single Game Server Deployment.
 
         Args:
-            request (:class:`~.game_server_clusters.GetGameServerClusterRequest`):
+            request (:class:`~.game_server_deployments.GetGameServerDeploymentRequest`):
                 The request object. Request message for
-                GameServerClustersService.GetGameServerCluster.
+                GameServerDeploymentsService.GetGameServerDeployment.
             name (:class:`str`):
-                Required. The name of the Game Server Cluster to
+                Required. The name of the Game Server Deployment to
                 retrieve. Uses the form:
 
-                ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
+                ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -350,8 +222,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_clusters.GameServerCluster:
-                A Game Server Cluster resource.
+            ~.game_server_deployments.GameServerDeployment:
+                A Game Server Deployment resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -362,7 +234,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.GetGameServerClusterRequest(request)
+        request = game_server_deployments.GetGameServerDeploymentRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
@@ -372,8 +244,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.get_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.get_game_server_deployment,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -385,45 +257,38 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Done; return the response.
         return response
 
-    def create_game_server_cluster(
+    async def create_game_server_deployment(
         self,
-        request: game_server_clusters.CreateGameServerClusterRequest = None,
+        request: game_server_deployments.CreateGameServerDeploymentRequest = None,
         *,
         parent: str = None,
-        game_server_cluster: game_server_clusters.GameServerCluster = None,
-        game_server_cluster_id: str = None,
+        game_server_deployment: game_server_deployments.GameServerDeployment = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
-        r"""Creates a new game server cluster in a given project
-        and location.
+    ) -> operation_async.AsyncOperation:
+        r"""Creates a new Game Server Deployment in a given
+        project and Location.
 
         Args:
-            request (:class:`~.game_server_clusters.CreateGameServerClusterRequest`):
+            request (:class:`~.game_server_deployments.CreateGameServerDeploymentRequest`):
                 The request object. Request message for
-                GameServerClustersService.CreateGameServerCluster.
+                GameServerDeploymentsService.CreateGameServerDeployment.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
-                ``projects/{project}/locations/{location}/realms/{realm-id}``.
+                ``projects/{project}/locations/{location}``.
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            game_server_cluster (:class:`~.game_server_clusters.GameServerCluster`):
-                Required. The Game Server Cluster
+            game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
+                Required. The Game Server Deployment
                 resource to be created.
-                This corresponds to the ``game_server_cluster`` field
-                on the ``request`` instance; if ``request`` is provided, this
-                should not be set.
-            game_server_cluster_id (:class:`str`):
-                Required. The ID of the Game Server
-                Cluster resource to be created.
-                This corresponds to the ``game_server_cluster_id`` field
+                This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
 
@@ -434,41 +299,37 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                :class:``~.game_server_deployments.GameServerDeployment``:
+                A Game Server Deployment resource.
 
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any(
-            [parent, game_server_cluster, game_server_cluster_id]
-        ):
+        if request is not None and any([parent, game_server_deployment]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.CreateGameServerClusterRequest(request)
+        request = game_server_deployments.CreateGameServerDeploymentRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
 
         if parent is not None:
             request.parent = parent
-        if game_server_cluster is not None:
-            request.game_server_cluster = game_server_cluster
-        if game_server_cluster_id is not None:
-            request.game_server_cluster_id = game_server_cluster_id
+        if game_server_deployment is not None:
+            request.game_server_deployment = game_server_deployment
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.create_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.create_game_server_deployment,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -480,90 +341,39 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
-            game_server_clusters.GameServerCluster,
+            self._client._transport.operations_client,
+            game_server_deployments.GameServerDeployment,
             metadata_type=common.OperationMetadata,
         )
 
         # Done; return the response.
         return response
 
-    def preview_create_game_server_cluster(
+    async def delete_game_server_deployment(
         self,
-        request: game_server_clusters.PreviewCreateGameServerClusterRequest = None,
-        *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> game_server_clusters.PreviewCreateGameServerClusterResponse:
-        r"""Previews creation of a new game server cluster in a
-        given project and location.
-
-        Args:
-            request (:class:`~.game_server_clusters.PreviewCreateGameServerClusterRequest`):
-                The request object. Request message for
-                GameServerClustersService.PreviewCreateGameServerCluster.
-
-            retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                should be retried.
-            timeout (float): The timeout for this request.
-            metadata (Sequence[Tuple[str, str]]): Strings which should be
-                sent along with the request as metadata.
-
-        Returns:
-            ~.game_server_clusters.PreviewCreateGameServerClusterResponse:
-                Response message for
-                GameServerClustersService.PreviewCreateGameServerCluster.
-
-        """
-        # Create or coerce a protobuf request object.
-
-        request = game_server_clusters.PreviewCreateGameServerClusterRequest(request)
-
-        # Wrap the RPC method; this adds retry and timeout information,
-        # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_create_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
-
-        # Certain fields should be provided within the metadata header;
-        # add these here.
-        metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
-        )
-
-        # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
-
-        # Done; return the response.
-        return response
-
-    def delete_game_server_cluster(
-        self,
-        request: game_server_clusters.DeleteGameServerClusterRequest = None,
+        request: game_server_deployments.DeleteGameServerDeploymentRequest = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
-        r"""Deletes a single game server cluster.
+    ) -> operation_async.AsyncOperation:
+        r"""Deletes a single Game Server Deployment.
 
         Args:
-            request (:class:`~.game_server_clusters.DeleteGameServerClusterRequest`):
+            request (:class:`~.game_server_deployments.DeleteGameServerDeploymentRequest`):
                 The request object. Request message for
-                GameServerClustersService.DeleteGameServerCluster.
+                GameServerDeploymentsService.DeleteGameServerDeployment.
             name (:class:`str`):
-                Required. The name of the Game Server Cluster to delete.
-                Uses the form:
-                ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
+                Required. The name of the Game Server Deployment to
+                delete. Uses the form:
+
+                ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -575,12 +385,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                :class:``~.game_server_deployments.GameServerDeployment``:
+                A Game Server Deployment resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -592,7 +402,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.DeleteGameServerClusterRequest(request)
+        request = game_server_deployments.DeleteGameServerDeploymentRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
@@ -602,8 +412,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.delete_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.delete_game_server_deployment,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -615,90 +425,40 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
-            game_server_clusters.GameServerCluster,
+            self._client._transport.operations_client,
+            game_server_deployments.GameServerDeployment,
             metadata_type=common.OperationMetadata,
         )
 
         # Done; return the response.
         return response
 
-    def preview_delete_game_server_cluster(
+    async def update_game_server_deployment(
         self,
-        request: game_server_clusters.PreviewDeleteGameServerClusterRequest = None,
+        request: game_server_deployments.UpdateGameServerDeploymentRequest = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> game_server_clusters.PreviewDeleteGameServerClusterResponse:
-        r"""Previews deletion of a single game server cluster.
-
-        Args:
-            request (:class:`~.game_server_clusters.PreviewDeleteGameServerClusterRequest`):
-                The request object. Request message for
-                GameServerClustersService.PreviewDeleteGameServerCluster.
-
-            retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                should be retried.
-            timeout (float): The timeout for this request.
-            metadata (Sequence[Tuple[str, str]]): Strings which should be
-                sent along with the request as metadata.
-
-        Returns:
-            ~.game_server_clusters.PreviewDeleteGameServerClusterResponse:
-                Response message for
-                GameServerClustersService.PreviewDeleteGameServerCluster.
-
-        """
-        # Create or coerce a protobuf request object.
-
-        request = game_server_clusters.PreviewDeleteGameServerClusterRequest(request)
-
-        # Wrap the RPC method; this adds retry and timeout information,
-        # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_delete_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
-
-        # Certain fields should be provided within the metadata header;
-        # add these here.
-        metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
-        )
-
-        # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
-
-        # Done; return the response.
-        return response
-
-    def update_game_server_cluster(
-        self,
-        request: game_server_clusters.UpdateGameServerClusterRequest = None,
-        *,
-        game_server_cluster: game_server_clusters.GameServerCluster = None,
+        game_server_deployment: game_server_deployments.GameServerDeployment = None,
         update_mask: field_mask.FieldMask = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
-        r"""Patches a single game server cluster.
+    ) -> operation_async.AsyncOperation:
+        r"""Patches a Game Server Deployment.
 
         Args:
-            request (:class:`~.game_server_clusters.UpdateGameServerClusterRequest`):
+            request (:class:`~.game_server_deployments.UpdateGameServerDeploymentRequest`):
                 The request object. Request message for
-                GameServerClustersService.UpdateGameServerCluster.
-            game_server_cluster (:class:`~.game_server_clusters.GameServerCluster`):
-                Required. The Game Server Cluster to be updated. Only
+                GameServerDeploymentsService.UpdateGameServerDeployment.
+                Only allows updates for labels.
+            game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
+                Required. The Game Server Deployment to be updated. Only
                 fields specified in update_mask are updated.
-                This corresponds to the ``game_server_cluster`` field
+                This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             update_mask (:class:`~.field_mask.FieldMask`):
@@ -719,37 +479,37 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                :class:``~.game_server_deployments.GameServerDeployment``:
+                A Game Server Deployment resource.
 
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([game_server_cluster, update_mask]):
+        if request is not None and any([game_server_deployment, update_mask]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.UpdateGameServerClusterRequest(request)
+        request = game_server_deployments.UpdateGameServerDeploymentRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
 
-        if game_server_cluster is not None:
-            request.game_server_cluster = game_server_cluster
+        if game_server_deployment is not None:
+            request.game_server_deployment = game_server_deployment
         if update_mask is not None:
             request.update_mask = update_mask
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.update_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.update_game_server_deployment,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -758,38 +518,47 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # add these here.
         metadata = tuple(metadata) + (
             gapic_v1.routing_header.to_grpc_metadata(
-                (("game_server_cluster.name", request.game_server_cluster.name),)
+                (("game_server_deployment.name", request.game_server_deployment.name),)
             ),
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
-            game_server_clusters.GameServerCluster,
+            self._client._transport.operations_client,
+            game_server_deployments.GameServerDeployment,
             metadata_type=common.OperationMetadata,
         )
 
         # Done; return the response.
         return response
 
-    def preview_update_game_server_cluster(
+    async def get_game_server_deployment_rollout(
         self,
-        request: game_server_clusters.PreviewUpdateGameServerClusterRequest = None,
+        request: game_server_deployments.GetGameServerDeploymentRolloutRequest = None,
         *,
+        name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> game_server_clusters.PreviewUpdateGameServerClusterResponse:
-        r"""Previews updating a GameServerCluster.
+    ) -> game_server_deployments.GameServerDeploymentRollout:
+        r"""Gets details a single Game Server Deployment Rollout.
 
         Args:
-            request (:class:`~.game_server_clusters.PreviewUpdateGameServerClusterRequest`):
+            request (:class:`~.game_server_deployments.GetGameServerDeploymentRolloutRequest`):
                 The request object. Request message for
-                GameServerClustersService.UpdateGameServerCluster.
+                GameServerDeploymentsService.GetGameServerDeploymentRollout.
+            name (:class:`str`):
+                Required. The name of the Game Server Deployment to
+                retrieve. Uses the form:
+
+                ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
+                This corresponds to the ``name`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
 
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -798,19 +567,129 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_clusters.PreviewUpdateGameServerClusterResponse:
-                Response message for
-                GameServerClustersService.PreviewUpdateGameServerCluster
+            ~.game_server_deployments.GameServerDeploymentRollout:
+                The Game Server Deployment Rollout
+                which represents the desired rollout
+                state.
 
         """
         # Create or coerce a protobuf request object.
+        # Sanity check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        if request is not None and any([name]):
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
-        request = game_server_clusters.PreviewUpdateGameServerClusterRequest(request)
+        request = game_server_deployments.GetGameServerDeploymentRolloutRequest(request)
+
+        # If we have keyword arguments corresponding to fields on the
+        # request, apply these.
+
+        if name is not None:
+            request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_update_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.get_game_server_deployment_rollout,
+            default_timeout=None,
+            client_info=_client_info,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
+        )
+
+        # Send the request.
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+
+        # Done; return the response.
+        return response
+
+    async def update_game_server_deployment_rollout(
+        self,
+        request: game_server_deployments.UpdateGameServerDeploymentRolloutRequest = None,
+        *,
+        rollout: game_server_deployments.GameServerDeploymentRollout = None,
+        update_mask: field_mask.FieldMask = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
+        r"""Patches a single Game Server Deployment Rollout. The method will
+        not return an error if the update does not affect any existing
+        realms. For example - if the default_game_server_config is
+        changed but all existing realms use the override, that is valid.
+        Similarly, if a non existing realm is explicitly called out in
+        game_server_config_overrides field, that will also not result in
+        an error.
+
+        Args:
+            request (:class:`~.game_server_deployments.UpdateGameServerDeploymentRolloutRequest`):
+                The request object. Request message for
+                GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
+            rollout (:class:`~.game_server_deployments.GameServerDeploymentRollout`):
+                Required. The Game Server Deployment Rollout to be
+                updated. Only fields specified in update_mask are
+                updated.
+                This corresponds to the ``rollout`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            update_mask (:class:`~.field_mask.FieldMask`):
+                Required. Mask of fields to update. At least one path
+                must be supplied in this field. For the ``FieldMask``
+                definition, see
+
+                https: //developers.google.com/protocol-buffers //
+                /docs/reference/google.protobuf#fieldmask
+                This corresponds to the ``update_mask`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.operation_async.AsyncOperation:
+                An object representing a long-running operation.
+
+                The result type for the operation will be
+                :class:``~.game_server_deployments.GameServerDeployment``:
+                A Game Server Deployment resource.
+
+        """
+        # Create or coerce a protobuf request object.
+        # Sanity check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        if request is not None and any([rollout, update_mask]):
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest(
+            request
+        )
+
+        # If we have keyword arguments corresponding to fields on the
+        # request, apply these.
+
+        if rollout is not None:
+            request.rollout = rollout
+        if update_mask is not None:
+            request.update_mask = update_mask
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.update_game_server_deployment_rollout,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -819,12 +698,132 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # add these here.
         metadata = tuple(metadata) + (
             gapic_v1.routing_header.to_grpc_metadata(
-                (("game_server_cluster.name", request.game_server_cluster.name),)
+                (("rollout.name", request.rollout.name),)
             ),
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+
+        # Wrap the response in an operation future.
+        response = operation_async.from_gapic(
+            response,
+            self._client._transport.operations_client,
+            game_server_deployments.GameServerDeployment,
+            metadata_type=common.OperationMetadata,
+        )
+
+        # Done; return the response.
+        return response
+
+    async def preview_game_server_deployment_rollout(
+        self,
+        request: game_server_deployments.PreviewGameServerDeploymentRolloutRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
+        r"""Previews the Game Server Deployment Rollout. This API
+        does not mutate the Rollout resource.
+
+        Args:
+            request (:class:`~.game_server_deployments.PreviewGameServerDeploymentRolloutRequest`):
+                The request object. Request message for
+                PreviewGameServerDeploymentRollout.
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
+                Response message for
+                PreviewGameServerDeploymentRollout. This
+                has details about the Agones fleet and
+                autoscaler to be actuated.
+
+        """
+        # Create or coerce a protobuf request object.
+
+        request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest(
+            request
+        )
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.preview_game_server_deployment_rollout,
+            default_timeout=None,
+            client_info=_client_info,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("rollout.name", request.rollout.name),)
+            ),
+        )
+
+        # Send the request.
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+
+        # Done; return the response.
+        return response
+
+    async def fetch_deployment_state(
+        self,
+        request: game_server_deployments.FetchDeploymentStateRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.FetchDeploymentStateResponse:
+        r"""Retrieves information about the current state of the
+        Game Server Ddeployment. Gathers all the Agones fleets
+        and Agones autoscalers, including fleets running an
+        older version of the Game Server Deployment.
+
+        Args:
+            request (:class:`~.game_server_deployments.FetchDeploymentStateRequest`):
+                The request object. Request message for
+                GameServerDeploymentsService.FetchDeploymentState.
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.game_server_deployments.FetchDeploymentStateResponse:
+                Response message for
+                GameServerDeploymentsService.FetchDeploymentState.
+
+        """
+        # Create or coerce a protobuf request object.
+
+        request = game_server_deployments.FetchDeploymentStateRequest(request)
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.fetch_deployment_state,
+            default_timeout=None,
+            client_info=_client_info,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
+        )
+
+        # Send the request.
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Done; return the response.
         return response
@@ -840,4 +839,4 @@ except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = ("GameServerClustersServiceClient",)
+__all__ = ("GameServerDeploymentsServiceAsyncClient",)

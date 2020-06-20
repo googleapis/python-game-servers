@@ -15,7 +15,6 @@
 # limitations under the License.
 #
 
-
 from .services.game_server_clusters_service import GameServerClustersServiceClient
 from .services.game_server_configs_service import GameServerConfigsServiceClient
 from .services.game_server_deployments_service import GameServerDeploymentsServiceClient

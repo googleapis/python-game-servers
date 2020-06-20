@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-from typing import Any, Callable, Iterable
+from typing import Any, AsyncIterable, Awaitable, Callable, Iterable
 
 from google.cloud.gaming_v1.types import realms
 
@@ -72,6 +72,69 @@ class ListRealmsPager:
     def __iter__(self) -> Iterable[realms.Realm]:
         for page in self.pages:
             yield from page.realms
+
+    def __repr__(self) -> str:
+        return "{0}<{1!r}>".format(self.__class__.__name__, self._response)
+
+
+class ListRealmsAsyncPager:
+    """A pager for iterating through ``list_realms`` requests.
+
+    This class thinly wraps an initial
+    :class:`~.realms.ListRealmsResponse` object, and
+    provides an ``__aiter__`` method to iterate through its
+    ``realms`` field.
+
+    If there are more pages, the ``__aiter__`` method will make additional
+    ``ListRealms`` requests and continue to iterate
+    through the ``realms`` field on the
+    corresponding responses.
+
+    All the usual :class:`~.realms.ListRealmsResponse`
+    attributes are available on the pager. If multiple requests are made, only
+    the most recent response is retained, and thus used for attribute lookup.
+    """
+
+    def __init__(
+        self,
+        method: Callable[
+            [realms.ListRealmsRequest], Awaitable[realms.ListRealmsResponse]
+        ],
+        request: realms.ListRealmsRequest,
+        response: realms.ListRealmsResponse,
+    ):
+        """Instantiate the pager.
+
+        Args:
+            method (Callable): The method that was originally called, and
+                which instantiated this pager.
+            request (:class:`~.realms.ListRealmsRequest`):
+                The initial request object.
+            response (:class:`~.realms.ListRealmsResponse`):
+                The initial response object.
+        """
+        self._method = method
+        self._request = realms.ListRealmsRequest(request)
+        self._response = response
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._response, name)
+
+    @property
+    async def pages(self) -> AsyncIterable[realms.ListRealmsResponse]:
+        yield self._response
+        while self._response.next_page_token:
+            self._request.page_token = self._response.next_page_token
+            self._response = await self._method(self._request)
+            yield self._response
+
+    def __aiter__(self) -> AsyncIterable[realms.Realm]:
+        async def async_generator():
+            async for page in self.pages:
+                for response in page.realms:
+                    yield response
+
+        return async_generator()
 
     def __repr__(self) -> str:
         return "{0}<{1!r}>".format(self.__class__.__name__, self._response)
