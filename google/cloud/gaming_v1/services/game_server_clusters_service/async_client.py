@@ -16,9 +16,9 @@
 #
 
 from collections import OrderedDict
-import os
+import functools
 import re
-from typing import Callable, Dict, Sequence, Tuple, Type, Union
+from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
@@ -26,8 +26,6 @@ from google.api_core import exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
 from google.auth import credentials  # type: ignore
-from google.auth.transport import mtls  # type: ignore
-from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
@@ -39,127 +37,39 @@ from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 from .transports.base import GameServerClustersServiceTransport
-from .transports.grpc import GameServerClustersServiceGrpcTransport
 from .transports.grpc_asyncio import GameServerClustersServiceGrpcAsyncIOTransport
+from .client import GameServerClustersServiceClient
 
 
-class GameServerClustersServiceClientMeta(type):
-    """Metaclass for the GameServerClustersService client.
-
-    This provides class-level methods for building and retrieving
-    support objects (e.g. transport) without polluting the client instance
-    objects.
-    """
-
-    _transport_registry = (
-        OrderedDict()
-    )  # type: Dict[str, Type[GameServerClustersServiceTransport]]
-    _transport_registry["grpc"] = GameServerClustersServiceGrpcTransport
-    _transport_registry["grpc_asyncio"] = GameServerClustersServiceGrpcAsyncIOTransport
-
-    def get_transport_class(
-        cls, label: str = None
-    ) -> Type[GameServerClustersServiceTransport]:
-        """Return an appropriate transport class.
-
-        Args:
-            label: The name of the desired transport. If none is
-                provided, then the first transport in the registry is used.
-
-        Returns:
-            The transport class to use.
-        """
-        # If a specific transport is requested, return that one.
-        if label:
-            return cls._transport_registry[label]
-
-        # No transport is requested; return the default (that is, the first one
-        # in the dictionary).
-        return next(iter(cls._transport_registry.values()))
-
-
-class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientMeta):
+class GameServerClustersServiceAsyncClient:
     """The game server cluster maps to Kubernetes clusters running
     Agones and is used to manage fleets within clusters.
     """
 
-    @staticmethod
-    def _get_default_mtls_endpoint(api_endpoint):
-        """Convert api endpoint to mTLS endpoint.
-        Convert "*.sandbox.googleapis.com" and "*.googleapis.com" to
-        "*.mtls.sandbox.googleapis.com" and "*.mtls.googleapis.com" respectively.
-        Args:
-            api_endpoint (Optional[str]): the api endpoint to convert.
-        Returns:
-            str: converted mTLS api endpoint.
-        """
-        if not api_endpoint:
-            return api_endpoint
+    _client: GameServerClustersServiceClient
 
-        mtls_endpoint_re = re.compile(
-            r"(?P<name>[^.]+)(?P<mtls>\.mtls)?(?P<sandbox>\.sandbox)?(?P<googledomain>\.googleapis\.com)?"
-        )
+    DEFAULT_ENDPOINT = GameServerClustersServiceClient.DEFAULT_ENDPOINT
+    DEFAULT_MTLS_ENDPOINT = GameServerClustersServiceClient.DEFAULT_MTLS_ENDPOINT
 
-        m = mtls_endpoint_re.match(api_endpoint)
-        name, mtls, sandbox, googledomain = m.groups()
-        if mtls or not googledomain:
-            return api_endpoint
-
-        if sandbox:
-            return api_endpoint.replace(
-                "sandbox.googleapis.com", "mtls.sandbox.googleapis.com"
-            )
-
-        return api_endpoint.replace(".googleapis.com", ".mtls.googleapis.com")
-
-    DEFAULT_ENDPOINT = "gameservices.googleapis.com"
-    DEFAULT_MTLS_ENDPOINT = _get_default_mtls_endpoint.__func__(  # type: ignore
-        DEFAULT_ENDPOINT
+    game_server_cluster_path = staticmethod(
+        GameServerClustersServiceClient.game_server_cluster_path
     )
 
-    @classmethod
-    def from_service_account_file(cls, filename: str, *args, **kwargs):
-        """Creates an instance of this client using the provided credentials
-        file.
-
-        Args:
-            filename (str): The path to the service account private key json
-                file.
-            args: Additional arguments to pass to the constructor.
-            kwargs: Additional arguments to pass to the constructor.
-
-        Returns:
-            {@api.name}: The constructed client.
-        """
-        credentials = service_account.Credentials.from_service_account_file(filename)
-        kwargs["credentials"] = credentials
-        return cls(*args, **kwargs)
-
+    from_service_account_file = (
+        GameServerClustersServiceClient.from_service_account_file
+    )
     from_service_account_json = from_service_account_file
 
-    @staticmethod
-    def game_server_cluster_path(
-        project: str, location: str, realm: str, cluster: str
-    ) -> str:
-        """Return a fully-qualified game_server_cluster string."""
-        return "projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}".format(
-            project=project, location=location, realm=realm, cluster=cluster
-        )
-
-    @staticmethod
-    def parse_game_server_cluster_path(path: str) -> Dict[str, str]:
-        """Parse a game_server_cluster path into its component segments."""
-        m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/realms/(?P<realm>.+?)/gameServerClusters/(?P<cluster>.+?)$",
-            path,
-        )
-        return m.groupdict() if m else {}
+    get_transport_class = functools.partial(
+        type(GameServerClustersServiceClient).get_transport_class,
+        type(GameServerClustersServiceClient),
+    )
 
     def __init__(
         self,
         *,
         credentials: credentials.Credentials = None,
-        transport: Union[str, GameServerClustersServiceTransport] = None,
+        transport: Union[str, GameServerClustersServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
     ) -> None:
         """Instantiate the game server clusters service client.
@@ -188,56 +98,15 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 default SSL credentials will be used if present.
 
         Raises:
-            google.auth.exceptions.MutualTLSChannelError: If mutual TLS transport
+            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-        if isinstance(client_options, dict):
-            client_options = ClientOptions.from_dict(client_options)
-        if client_options is None:
-            client_options = ClientOptions.ClientOptions()
 
-        if client_options.api_endpoint is None:
-            use_mtls_env = os.getenv("GOOGLE_API_USE_MTLS", "never")
-            if use_mtls_env == "never":
-                client_options.api_endpoint = self.DEFAULT_ENDPOINT
-            elif use_mtls_env == "always":
-                client_options.api_endpoint = self.DEFAULT_MTLS_ENDPOINT
-            elif use_mtls_env == "auto":
-                has_client_cert_source = (
-                    client_options.client_cert_source is not None
-                    or mtls.has_default_client_cert_source()
-                )
-                client_options.api_endpoint = (
-                    self.DEFAULT_MTLS_ENDPOINT
-                    if has_client_cert_source
-                    else self.DEFAULT_ENDPOINT
-                )
-            else:
-                raise MutualTLSChannelError(
-                    "Unsupported GOOGLE_API_USE_MTLS value. Accepted values: never, auto, always"
-                )
+        self._client = GameServerClustersServiceClient(
+            credentials=credentials, transport=transport, client_options=client_options
+        )
 
-        # Save or instantiate the transport.
-        # Ordinarily, we provide the transport, but allowing a custom transport
-        # instance provides an extensibility point for unusual situations.
-        if isinstance(transport, GameServerClustersServiceTransport):
-            # transport is a GameServerClustersServiceTransport instance.
-            if credentials:
-                raise ValueError(
-                    "When providing a transport instance, "
-                    "provide its credentials directly."
-                )
-            self._transport = transport
-        else:
-            Transport = type(self).get_transport_class(transport)
-            self._transport = Transport(
-                credentials=credentials,
-                host=client_options.api_endpoint,
-                api_mtls_endpoint=client_options.api_endpoint,
-                client_cert_source=client_options.client_cert_source,
-            )
-
-    def list_game_server_clusters(
+    async def list_game_server_clusters(
         self,
         request: game_server_clusters.ListGameServerClustersRequest = None,
         *,
@@ -245,7 +114,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> pagers.ListGameServerClustersPager:
+    ) -> pagers.ListGameServerClustersAsyncPager:
         r"""Lists Game Server Clusters in a given project and
         location.
 
@@ -268,7 +137,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListGameServerClustersPager:
+            ~.pagers.ListGameServerClustersAsyncPager:
                 Response message for
                 GameServerClustersService.ListGameServerClusters.
                 Iterating over this object will yield
@@ -295,8 +164,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.list_game_server_clusters,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.list_game_server_clusters,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -308,18 +177,18 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # This method is paged; wrap the response in a pager, which provides
-        # an `__iter__` convenience method.
-        response = pagers.ListGameServerClustersPager(
+        # an `__aiter__` convenience method.
+        response = pagers.ListGameServerClustersAsyncPager(
             method=rpc, request=request, response=response
         )
 
         # Done; return the response.
         return response
 
-    def get_game_server_cluster(
+    async def get_game_server_cluster(
         self,
         request: game_server_clusters.GetGameServerClusterRequest = None,
         *,
@@ -372,8 +241,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.get_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.get_game_server_cluster,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -385,12 +254,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Done; return the response.
         return response
 
-    def create_game_server_cluster(
+    async def create_game_server_cluster(
         self,
         request: game_server_clusters.CreateGameServerClusterRequest = None,
         *,
@@ -400,7 +269,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    ) -> operation_async.AsyncOperation:
         r"""Creates a new game server cluster in a given project
         and location.
 
@@ -434,7 +303,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
@@ -467,8 +336,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.create_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.create_game_server_cluster,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -480,12 +349,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
+            self._client._transport.operations_client,
             game_server_clusters.GameServerCluster,
             metadata_type=common.OperationMetadata,
         )
@@ -493,7 +362,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Done; return the response.
         return response
 
-    def preview_create_game_server_cluster(
+    async def preview_create_game_server_cluster(
         self,
         request: game_server_clusters.PreviewCreateGameServerClusterRequest = None,
         *,
@@ -527,8 +396,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_create_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.preview_create_game_server_cluster,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -540,12 +409,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Done; return the response.
         return response
 
-    def delete_game_server_cluster(
+    async def delete_game_server_cluster(
         self,
         request: game_server_clusters.DeleteGameServerClusterRequest = None,
         *,
@@ -553,7 +422,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    ) -> operation_async.AsyncOperation:
         r"""Deletes a single game server cluster.
 
         Args:
@@ -575,7 +444,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
@@ -602,8 +471,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.delete_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.delete_game_server_cluster,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -615,12 +484,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
+            self._client._transport.operations_client,
             game_server_clusters.GameServerCluster,
             metadata_type=common.OperationMetadata,
         )
@@ -628,7 +497,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Done; return the response.
         return response
 
-    def preview_delete_game_server_cluster(
+    async def preview_delete_game_server_cluster(
         self,
         request: game_server_clusters.PreviewDeleteGameServerClusterRequest = None,
         *,
@@ -661,8 +530,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_delete_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.preview_delete_game_server_cluster,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -674,12 +543,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Done; return the response.
         return response
 
-    def update_game_server_cluster(
+    async def update_game_server_cluster(
         self,
         request: game_server_clusters.UpdateGameServerClusterRequest = None,
         *,
@@ -688,7 +557,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    ) -> operation_async.AsyncOperation:
         r"""Patches a single game server cluster.
 
         Args:
@@ -719,7 +588,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
@@ -748,8 +617,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.update_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.update_game_server_cluster,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -763,12 +632,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Wrap the response in an operation future.
-        response = operation.from_gapic(
+        response = operation_async.from_gapic(
             response,
-            self._transport.operations_client,
+            self._client._transport.operations_client,
             game_server_clusters.GameServerCluster,
             metadata_type=common.OperationMetadata,
         )
@@ -776,7 +645,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Done; return the response.
         return response
 
-    def preview_update_game_server_cluster(
+    async def preview_update_game_server_cluster(
         self,
         request: game_server_clusters.PreviewUpdateGameServerClusterRequest = None,
         *,
@@ -809,8 +678,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_update_game_server_cluster,
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.preview_update_game_server_cluster,
             default_timeout=None,
             client_info=_client_info,
         )
@@ -824,7 +693,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
 
         # Done; return the response.
         return response
@@ -840,4 +709,4 @@ except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = ("GameServerClustersServiceClient",)
+__all__ = ("GameServerClustersServiceAsyncClient",)

@@ -15,25 +15,25 @@
 # limitations under the License.
 #
 
-from typing import Callable, Dict, Optional, Sequence, Tuple
+from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers  # type: ignore
+from google.api_core import grpc_helpers_async  # type: ignore
 from google.api_core import operations_v1  # type: ignore
-from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
-
 import grpc  # type: ignore
+from grpc.experimental import aio  # type: ignore
 
 from google.cloud.gaming_v1.types import game_server_configs
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 from .base import GameServerConfigsServiceTransport
+from .grpc import GameServerConfigsServiceGrpcTransport
 
 
-class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
-    """gRPC backend transport for GameServerConfigsService.
+class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTransport):
+    """gRPC AsyncIO backend transport for GameServerConfigsService.
 
     The Game Server Config configures the game servers in an
     Agones fleet.
@@ -46,14 +46,44 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
     top of HTTP/2); the ``grpcio`` package must be installed.
     """
 
-    _stubs: Dict[str, Callable]
+    _grpc_channel: aio.Channel
+    _stubs: Dict[str, Callable] = {}
+
+    @classmethod
+    def create_channel(
+        cls,
+        host: str = "gameservices.googleapis.com",
+        credentials: credentials.Credentials = None,
+        scopes: Optional[Sequence[str]] = None,
+        **kwargs
+    ) -> aio.Channel:
+        """Create and return a gRPC AsyncIO channel object.
+        Args:
+            address (Optional[str]): The host for the channel to use.
+            credentials (Optional[~.Credentials]): The
+                authorization credentials to attach to requests. These
+                credentials identify this application to the service. If
+                none are specified, the client will attempt to ascertain
+                the credentials from the environment.
+            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
+                service. These are only used when credentials are not specified and
+                are passed to :func:`google.auth.default`.
+            kwargs (Optional[dict]): Keyword arguments, which are passed to the
+                channel creation.
+        Returns:
+            aio.Channel: A gRPC AsyncIO channel object.
+        """
+        scopes = scopes or cls.AUTH_SCOPES
+        return grpc_helpers_async.create_channel(
+            host, credentials=credentials, scopes=scopes, **kwargs
+        )
 
     def __init__(
         self,
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
-        channel: grpc.Channel = None,
+        channel: aio.Channel = None,
         api_mtls_endpoint: str = None,
         client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
     ) -> None:
@@ -67,7 +97,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
                 This argument is ignored if ``channel`` is provided.
-            channel (Optional[grpc.Channel]): A ``Channel`` instance through
+            channel (Optional[aio.Channel]): A ``Channel`` instance through
                 which to make calls.
             api_mtls_endpoint (Optional[str]): The mutual TLS endpoint. If
                 provided, it overrides the ``host`` argument and tries to create
@@ -79,8 +109,8 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
                 is None.
 
         Raises:
-            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
-                creation failed for any reason.
+          google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
+              creation failed for any reason.
         """
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
@@ -95,9 +125,6 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
                 if ":" in api_mtls_endpoint
                 else api_mtls_endpoint + ":443"
             )
-
-            if credentials is None:
-                credentials, _ = auth.default(scopes=self.AUTH_SCOPES)
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -119,39 +146,10 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
 
         # Run the base constructor.
         super().__init__(host=host, credentials=credentials)
-        self._stubs = {}  # type: Dict[str, Callable]
-
-    @classmethod
-    def create_channel(
-        cls,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        scopes: Optional[Sequence[str]] = None,
-        **kwargs
-    ) -> grpc.Channel:
-        """Create and return a gRPC channel object.
-        Args:
-            address (Optionsl[str]): The host for the channel to use.
-            credentials (Optional[~.Credentials]): The
-                authorization credentials to attach to requests. These
-                credentials identify this application to the service. If
-                none are specified, the client will attempt to ascertain
-                the credentials from the environment.
-            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
-                service. These are only used when credentials are not specified and
-                are passed to :func:`google.auth.default`.
-            kwargs (Optional[dict]): Keyword arguments, which are passed to the
-                channel creation.
-        Returns:
-            grpc.Channel: A gRPC channel object.
-        """
-        scopes = scopes or cls.AUTH_SCOPES
-        return grpc_helpers.create_channel(
-            host, credentials=credentials, scopes=scopes, **kwargs
-        )
+        self._stubs = {}
 
     @property
-    def grpc_channel(self) -> grpc.Channel:
+    def grpc_channel(self) -> aio.Channel:
         """Create the channel designed to connect to this service.
 
         This property caches on the instance; repeated calls return
@@ -168,7 +166,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         return self._grpc_channel
 
     @property
-    def operations_client(self) -> operations_v1.OperationsClient:
+    def operations_client(self) -> operations_v1.OperationsAsyncClient:
         """Create the client designed to process long-running operations.
 
         This property caches on the instance; repeated calls return the same
@@ -176,7 +174,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         """
         # Sanity check: Only create a new client if we do not already have one.
         if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsClient(
+            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
@@ -188,7 +186,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         self
     ) -> Callable[
         [game_server_configs.ListGameServerConfigsRequest],
-        game_server_configs.ListGameServerConfigsResponse,
+        Awaitable[game_server_configs.ListGameServerConfigsResponse],
     ]:
         r"""Return a callable for the list game server configs method over gRPC.
 
@@ -197,7 +195,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
 
         Returns:
             Callable[[~.ListGameServerConfigsRequest],
-                    ~.ListGameServerConfigsResponse]:
+                    Awaitable[~.ListGameServerConfigsResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -218,7 +216,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         self
     ) -> Callable[
         [game_server_configs.GetGameServerConfigRequest],
-        game_server_configs.GameServerConfig,
+        Awaitable[game_server_configs.GameServerConfig],
     ]:
         r"""Return a callable for the get game server config method over gRPC.
 
@@ -226,7 +224,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
 
         Returns:
             Callable[[~.GetGameServerConfigRequest],
-                    ~.GameServerConfig]:
+                    Awaitable[~.GameServerConfig]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -246,7 +244,8 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
     def create_game_server_config(
         self
     ) -> Callable[
-        [game_server_configs.CreateGameServerConfigRequest], operations.Operation
+        [game_server_configs.CreateGameServerConfigRequest],
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the create game server config method over gRPC.
 
@@ -258,7 +257,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
 
         Returns:
             Callable[[~.CreateGameServerConfigRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -278,7 +277,8 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
     def delete_game_server_config(
         self
     ) -> Callable[
-        [game_server_configs.DeleteGameServerConfigRequest], operations.Operation
+        [game_server_configs.DeleteGameServerConfigRequest],
+        Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the delete game server config method over gRPC.
 
@@ -288,7 +288,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
 
         Returns:
             Callable[[~.DeleteGameServerConfigRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -305,4 +305,4 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         return self._stubs["delete_game_server_config"]
 
 
-__all__ = ("GameServerConfigsServiceGrpcTransport",)
+__all__ = ("GameServerConfigsServiceGrpcAsyncIOTransport",)

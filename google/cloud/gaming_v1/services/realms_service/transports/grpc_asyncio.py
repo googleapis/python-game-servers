@@ -15,25 +15,25 @@
 # limitations under the License.
 #
 
-from typing import Callable, Dict, Optional, Sequence, Tuple
+from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers  # type: ignore
+from google.api_core import grpc_helpers_async  # type: ignore
 from google.api_core import operations_v1  # type: ignore
-from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
-
 import grpc  # type: ignore
+from grpc.experimental import aio  # type: ignore
 
 from google.cloud.gaming_v1.types import realms
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 from .base import RealmsServiceTransport
+from .grpc import RealmsServiceGrpcTransport
 
 
-class RealmsServiceGrpcTransport(RealmsServiceTransport):
-    """gRPC backend transport for RealmsService.
+class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
+    """gRPC AsyncIO backend transport for RealmsService.
 
     A Realm is a grouping of Game Server Clusters that are
     considered interchangeable.
@@ -46,14 +46,44 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     top of HTTP/2); the ``grpcio`` package must be installed.
     """
 
-    _stubs: Dict[str, Callable]
+    _grpc_channel: aio.Channel
+    _stubs: Dict[str, Callable] = {}
+
+    @classmethod
+    def create_channel(
+        cls,
+        host: str = "gameservices.googleapis.com",
+        credentials: credentials.Credentials = None,
+        scopes: Optional[Sequence[str]] = None,
+        **kwargs
+    ) -> aio.Channel:
+        """Create and return a gRPC AsyncIO channel object.
+        Args:
+            address (Optional[str]): The host for the channel to use.
+            credentials (Optional[~.Credentials]): The
+                authorization credentials to attach to requests. These
+                credentials identify this application to the service. If
+                none are specified, the client will attempt to ascertain
+                the credentials from the environment.
+            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
+                service. These are only used when credentials are not specified and
+                are passed to :func:`google.auth.default`.
+            kwargs (Optional[dict]): Keyword arguments, which are passed to the
+                channel creation.
+        Returns:
+            aio.Channel: A gRPC AsyncIO channel object.
+        """
+        scopes = scopes or cls.AUTH_SCOPES
+        return grpc_helpers_async.create_channel(
+            host, credentials=credentials, scopes=scopes, **kwargs
+        )
 
     def __init__(
         self,
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
-        channel: grpc.Channel = None,
+        channel: aio.Channel = None,
         api_mtls_endpoint: str = None,
         client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
     ) -> None:
@@ -67,7 +97,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
                 This argument is ignored if ``channel`` is provided.
-            channel (Optional[grpc.Channel]): A ``Channel`` instance through
+            channel (Optional[aio.Channel]): A ``Channel`` instance through
                 which to make calls.
             api_mtls_endpoint (Optional[str]): The mutual TLS endpoint. If
                 provided, it overrides the ``host`` argument and tries to create
@@ -79,8 +109,8 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
                 is None.
 
         Raises:
-            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
-                creation failed for any reason.
+          google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
+              creation failed for any reason.
         """
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
@@ -95,9 +125,6 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
                 if ":" in api_mtls_endpoint
                 else api_mtls_endpoint + ":443"
             )
-
-            if credentials is None:
-                credentials, _ = auth.default(scopes=self.AUTH_SCOPES)
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -119,39 +146,10 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
 
         # Run the base constructor.
         super().__init__(host=host, credentials=credentials)
-        self._stubs = {}  # type: Dict[str, Callable]
-
-    @classmethod
-    def create_channel(
-        cls,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        scopes: Optional[Sequence[str]] = None,
-        **kwargs
-    ) -> grpc.Channel:
-        """Create and return a gRPC channel object.
-        Args:
-            address (Optionsl[str]): The host for the channel to use.
-            credentials (Optional[~.Credentials]): The
-                authorization credentials to attach to requests. These
-                credentials identify this application to the service. If
-                none are specified, the client will attempt to ascertain
-                the credentials from the environment.
-            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
-                service. These are only used when credentials are not specified and
-                are passed to :func:`google.auth.default`.
-            kwargs (Optional[dict]): Keyword arguments, which are passed to the
-                channel creation.
-        Returns:
-            grpc.Channel: A gRPC channel object.
-        """
-        scopes = scopes or cls.AUTH_SCOPES
-        return grpc_helpers.create_channel(
-            host, credentials=credentials, scopes=scopes, **kwargs
-        )
+        self._stubs = {}
 
     @property
-    def grpc_channel(self) -> grpc.Channel:
+    def grpc_channel(self) -> aio.Channel:
         """Create the channel designed to connect to this service.
 
         This property caches on the instance; repeated calls return
@@ -168,7 +166,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         return self._grpc_channel
 
     @property
-    def operations_client(self) -> operations_v1.OperationsClient:
+    def operations_client(self) -> operations_v1.OperationsAsyncClient:
         """Create the client designed to process long-running operations.
 
         This property caches on the instance; repeated calls return the same
@@ -176,7 +174,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         """
         # Sanity check: Only create a new client if we do not already have one.
         if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsClient(
+            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
@@ -186,14 +184,14 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     @property
     def list_realms(
         self
-    ) -> Callable[[realms.ListRealmsRequest], realms.ListRealmsResponse]:
+    ) -> Callable[[realms.ListRealmsRequest], Awaitable[realms.ListRealmsResponse]]:
         r"""Return a callable for the list realms method over gRPC.
 
         Lists Realms in a given project and Location.
 
         Returns:
             Callable[[~.ListRealmsRequest],
-                    ~.ListRealmsResponse]:
+                    Awaitable[~.ListRealmsResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -210,14 +208,14 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         return self._stubs["list_realms"]
 
     @property
-    def get_realm(self) -> Callable[[realms.GetRealmRequest], realms.Realm]:
+    def get_realm(self) -> Callable[[realms.GetRealmRequest], Awaitable[realms.Realm]]:
         r"""Return a callable for the get realm method over gRPC.
 
         Gets details of a single Realm.
 
         Returns:
             Callable[[~.GetRealmRequest],
-                    ~.Realm]:
+                    Awaitable[~.Realm]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -236,14 +234,14 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     @property
     def create_realm(
         self
-    ) -> Callable[[realms.CreateRealmRequest], operations.Operation]:
+    ) -> Callable[[realms.CreateRealmRequest], Awaitable[operations.Operation]]:
         r"""Return a callable for the create realm method over gRPC.
 
         Creates a new Realm in a given project and Location.
 
         Returns:
             Callable[[~.CreateRealmRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -262,14 +260,14 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     @property
     def delete_realm(
         self
-    ) -> Callable[[realms.DeleteRealmRequest], operations.Operation]:
+    ) -> Callable[[realms.DeleteRealmRequest], Awaitable[operations.Operation]]:
         r"""Return a callable for the delete realm method over gRPC.
 
         Deletes a single Realm.
 
         Returns:
             Callable[[~.DeleteRealmRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -288,14 +286,14 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     @property
     def update_realm(
         self
-    ) -> Callable[[realms.UpdateRealmRequest], operations.Operation]:
+    ) -> Callable[[realms.UpdateRealmRequest], Awaitable[operations.Operation]]:
         r"""Return a callable for the update realm method over gRPC.
 
         Patches a single Realm.
 
         Returns:
             Callable[[~.UpdateRealmRequest],
-                    ~.Operation]:
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -315,7 +313,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     def preview_realm_update(
         self
     ) -> Callable[
-        [realms.PreviewRealmUpdateRequest], realms.PreviewRealmUpdateResponse
+        [realms.PreviewRealmUpdateRequest], Awaitable[realms.PreviewRealmUpdateResponse]
     ]:
         r"""Return a callable for the preview realm update method over gRPC.
 
@@ -323,7 +321,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
 
         Returns:
             Callable[[~.PreviewRealmUpdateRequest],
-                    ~.PreviewRealmUpdateResponse]:
+                    Awaitable[~.PreviewRealmUpdateResponse]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -340,4 +338,4 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         return self._stubs["preview_realm_update"]
 
 
-__all__ = ("RealmsServiceGrpcTransport",)
+__all__ = ("RealmsServiceGrpcAsyncIOTransport",)
