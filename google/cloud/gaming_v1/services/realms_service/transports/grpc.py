@@ -35,7 +35,7 @@ from .base import RealmsServiceTransport
 class RealmsServiceGrpcTransport(RealmsServiceTransport):
     """gRPC backend transport for RealmsService.
 
-    A Realm is a grouping of Game Server Clusters that are
+    A realm is a grouping of game server clusters that are
     considered interchangeable.
 
     This class defines the same methods as the primary client, so the
@@ -53,6 +53,8 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
         channel: grpc.Channel = None,
         api_mtls_endpoint: str = None,
         client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
@@ -67,6 +69,11 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
                 This argument is ignored if ``channel`` is provided.
+            credentials_file (Optional[str]): A file with credentials that can
+                be loaded with :func:`google.auth.load_credentials_from_file`.
+                This argument is ignored if ``channel`` is provided.
+            scopes (Optional(Sequence[str])): A list of scopes. This argument is
+                ignored if ``channel`` is provided.
             channel (Optional[grpc.Channel]): A ``Channel`` instance through
                 which to make calls.
             api_mtls_endpoint (Optional[str]): The mutual TLS endpoint. If
@@ -79,8 +86,10 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
                 is None.
 
         Raises:
-            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
-                creation failed for any reason.
+          google.auth.exceptions.MutualTLSChannelError: If mutual TLS transport
+              creation failed for any reason.
+          google.api_core.exceptions.DuplicateCredentialArgs: If both ``credentials``
+              and ``credentials_file`` are passed.
         """
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
@@ -113,12 +122,19 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
             self._grpc_channel = type(self).create_channel(
                 host,
                 credentials=credentials,
+                credentials_file=credentials_file,
                 ssl_credentials=ssl_credentials,
-                scopes=self.AUTH_SCOPES,
+                scopes=scopes or self.AUTH_SCOPES,
             )
 
         # Run the base constructor.
-        super().__init__(host=host, credentials=credentials)
+        super().__init__(
+            host=host,
+            credentials=credentials,
+            credentials_file=credentials_file,
+            scopes=scopes or self.AUTH_SCOPES,
+        )
+
         self._stubs = {}  # type: Dict[str, Callable]
 
     @classmethod
@@ -126,6 +142,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         cls,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        credentials_file: str = None,
         scopes: Optional[Sequence[str]] = None,
         **kwargs
     ) -> grpc.Channel:
@@ -137,6 +154,9 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
                 credentials identify this application to the service. If
                 none are specified, the client will attempt to ascertain
                 the credentials from the environment.
+            credentials_file (Optional[str]): A file with credentials that can
+                be loaded with :func:`google.auth.load_credentials_from_file`.
+                This argument is mutually exclusive with credentials.
             scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
                 service. These are only used when credentials are not specified and
                 are passed to :func:`google.auth.default`.
@@ -144,10 +164,18 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
                 channel creation.
         Returns:
             grpc.Channel: A gRPC channel object.
+
+        Raises:
+            google.api_core.exceptions.DuplicateCredentialArgs: If both ``credentials``
+              and ``credentials_file`` are passed.
         """
         scopes = scopes or cls.AUTH_SCOPES
         return grpc_helpers.create_channel(
-            host, credentials=credentials, scopes=scopes, **kwargs
+            host,
+            credentials=credentials,
+            credentials_file=credentials_file,
+            scopes=scopes,
+            **kwargs
         )
 
     @property
@@ -161,7 +189,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         # have one.
         if not hasattr(self, "_grpc_channel"):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials
+                self._host, credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -185,11 +213,11 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
 
     @property
     def list_realms(
-        self
+        self,
     ) -> Callable[[realms.ListRealmsRequest], realms.ListRealmsResponse]:
         r"""Return a callable for the list realms method over gRPC.
 
-        Lists Realms in a given project and Location.
+        Lists realms in a given project and location.
 
         Returns:
             Callable[[~.ListRealmsRequest],
@@ -213,7 +241,7 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     def get_realm(self) -> Callable[[realms.GetRealmRequest], realms.Realm]:
         r"""Return a callable for the get realm method over gRPC.
 
-        Gets details of a single Realm.
+        Gets details of a single realm.
 
         Returns:
             Callable[[~.GetRealmRequest],
@@ -235,11 +263,11 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
 
     @property
     def create_realm(
-        self
+        self,
     ) -> Callable[[realms.CreateRealmRequest], operations.Operation]:
         r"""Return a callable for the create realm method over gRPC.
 
-        Creates a new Realm in a given project and Location.
+        Creates a new realm in a given project and location.
 
         Returns:
             Callable[[~.CreateRealmRequest],
@@ -261,11 +289,11 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
 
     @property
     def delete_realm(
-        self
+        self,
     ) -> Callable[[realms.DeleteRealmRequest], operations.Operation]:
         r"""Return a callable for the delete realm method over gRPC.
 
-        Deletes a single Realm.
+        Deletes a single realm.
 
         Returns:
             Callable[[~.DeleteRealmRequest],
@@ -287,11 +315,11 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
 
     @property
     def update_realm(
-        self
+        self,
     ) -> Callable[[realms.UpdateRealmRequest], operations.Operation]:
         r"""Return a callable for the update realm method over gRPC.
 
-        Patches a single Realm.
+        Patches a single realm.
 
         Returns:
             Callable[[~.UpdateRealmRequest],
@@ -313,13 +341,13 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
 
     @property
     def preview_realm_update(
-        self
+        self,
     ) -> Callable[
         [realms.PreviewRealmUpdateRequest], realms.PreviewRealmUpdateResponse
     ]:
         r"""Return a callable for the preview realm update method over gRPC.
 
-        Previews patches to a single Realm.
+        Previews patches to a single realm.
 
         Returns:
             Callable[[~.PreviewRealmUpdateRequest],

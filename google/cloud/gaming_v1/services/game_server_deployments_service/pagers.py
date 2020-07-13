@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-from typing import Any, AsyncIterable, Awaitable, Callable, Iterable
+from typing import Any, AsyncIterable, Awaitable, Callable, Iterable, Sequence, Tuple
 
 from google.cloud.gaming_v1.types import game_server_deployments
 
@@ -41,11 +41,12 @@ class ListGameServerDeploymentsPager:
     def __init__(
         self,
         method: Callable[
-            [game_server_deployments.ListGameServerDeploymentsRequest],
-            game_server_deployments.ListGameServerDeploymentsResponse,
+            ..., game_server_deployments.ListGameServerDeploymentsResponse
         ],
         request: game_server_deployments.ListGameServerDeploymentsRequest,
         response: game_server_deployments.ListGameServerDeploymentsResponse,
+        *,
+        metadata: Sequence[Tuple[str, str]] = ()
     ):
         """Instantiate the pager.
 
@@ -56,24 +57,27 @@ class ListGameServerDeploymentsPager:
                 The initial request object.
             response (:class:`~.game_server_deployments.ListGameServerDeploymentsResponse`):
                 The initial response object.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
         """
         self._method = method
         self._request = game_server_deployments.ListGameServerDeploymentsRequest(
             request
         )
         self._response = response
+        self._metadata = metadata
 
     def __getattr__(self, name: str) -> Any:
         return getattr(self._response, name)
 
     @property
     def pages(
-        self
+        self,
     ) -> Iterable[game_server_deployments.ListGameServerDeploymentsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
-            self._response = self._method(self._request)
+            self._response = self._method(self._request, metadata=self._metadata)
             yield self._response
 
     def __iter__(self) -> Iterable[game_server_deployments.GameServerDeployment]:
@@ -105,11 +109,12 @@ class ListGameServerDeploymentsAsyncPager:
     def __init__(
         self,
         method: Callable[
-            [game_server_deployments.ListGameServerDeploymentsRequest],
-            Awaitable[game_server_deployments.ListGameServerDeploymentsResponse],
+            ..., Awaitable[game_server_deployments.ListGameServerDeploymentsResponse]
         ],
         request: game_server_deployments.ListGameServerDeploymentsRequest,
         response: game_server_deployments.ListGameServerDeploymentsResponse,
+        *,
+        metadata: Sequence[Tuple[str, str]] = ()
     ):
         """Instantiate the pager.
 
@@ -120,24 +125,27 @@ class ListGameServerDeploymentsAsyncPager:
                 The initial request object.
             response (:class:`~.game_server_deployments.ListGameServerDeploymentsResponse`):
                 The initial response object.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
         """
         self._method = method
         self._request = game_server_deployments.ListGameServerDeploymentsRequest(
             request
         )
         self._response = response
+        self._metadata = metadata
 
     def __getattr__(self, name: str) -> Any:
         return getattr(self._response, name)
 
     @property
     async def pages(
-        self
+        self,
     ) -> AsyncIterable[game_server_deployments.ListGameServerDeploymentsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
-            self._response = await self._method(self._request)
+            self._response = await self._method(self._request, metadata=self._metadata)
             yield self._response
 
     def __aiter__(self) -> AsyncIterable[game_server_deployments.GameServerDeployment]:

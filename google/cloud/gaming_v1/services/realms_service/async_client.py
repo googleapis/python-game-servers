@@ -33,6 +33,7 @@ from google.api_core import operation_async
 from google.cloud.gaming_v1.services.realms_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import realms
+from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
@@ -42,7 +43,7 @@ from .client import RealmsServiceClient
 
 
 class RealmsServiceAsyncClient:
-    """A Realm is a grouping of Game Server Clusters that are
+    """A realm is a grouping of game server clusters that are
     considered interchangeable.
     """
 
@@ -98,7 +99,7 @@ class RealmsServiceAsyncClient:
         """
 
         self._client = RealmsServiceClient(
-            credentials=credentials, transport=transport, client_options=client_options
+            credentials=credentials, transport=transport, client_options=client_options,
         )
 
     async def list_realms(
@@ -110,7 +111,7 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListRealmsAsyncPager:
-        r"""Lists Realms in a given project and Location.
+        r"""Lists realms in a given project and location.
 
         Args:
             request (:class:`~.realms.ListRealmsRequest`):
@@ -170,12 +171,12 @@ class RealmsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__aiter__` convenience method.
         response = pagers.ListRealmsAsyncPager(
-            method=rpc, request=request, response=response
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
@@ -190,14 +191,14 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.Realm:
-        r"""Gets details of a single Realm.
+        r"""Gets details of a single realm.
 
         Args:
             request (:class:`~.realms.GetRealmRequest`):
                 The request object. Request message for
                 RealmsService.GetRealm.
             name (:class:`str`):
-                Required. The name of the Realm to retrieve. Uses the
+                Required. The name of the realm to retrieve. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
                 This corresponds to the ``name`` field
@@ -212,7 +213,7 @@ class RealmsServiceAsyncClient:
 
         Returns:
             ~.realms.Realm:
-                A Realm resource.
+                A realm resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -246,7 +247,7 @@ class RealmsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -262,7 +263,7 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Creates a new Realm in a given project and Location.
+        r"""Creates a new realm in a given project and location.
 
         Args:
             request (:class:`~.realms.CreateRealmRequest`):
@@ -275,13 +276,13 @@ class RealmsServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             realm (:class:`~.realms.Realm`):
-                Required. The Realm resource to be
+                Required. The realm resource to be
                 created.
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             realm_id (:class:`str`):
-                Required. The ID of the Realm
+                Required. The ID of the realm
                 resource to be created.
                 This corresponds to the ``realm_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -298,7 +299,7 @@ class RealmsServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -337,7 +338,7 @@ class RealmsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -359,14 +360,14 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Deletes a single Realm.
+        r"""Deletes a single realm.
 
         Args:
             request (:class:`~.realms.DeleteRealmRequest`):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
             name (:class:`str`):
-                Required. The name of the Realm to delete. Uses the
+                Required. The name of the realm to delete. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
                 This corresponds to the ``name`` field
@@ -384,7 +385,20 @@ class RealmsServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.empty.Empty``: A generic empty message that
+                you can re-use to avoid defining duplicated empty
+                messages in your APIs. A typical example is to use it as
+                the request or the response type of an API method. For
+                instance:
+
+                ::
+
+                    service Foo {
+                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+                    }
+
+                The JSON representation for ``Empty`` is empty JSON
+                object ``{}``.
 
         """
         # Create or coerce a protobuf request object.
@@ -419,13 +433,13 @@ class RealmsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
             response,
             self._client._transport.operations_client,
-            realms.Realm,
+            empty.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -442,14 +456,14 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Patches a single Realm.
+        r"""Patches a single realm.
 
         Args:
             request (:class:`~.realms.UpdateRealmRequest`):
                 The request object. Request message for
                 RealmsService.UpdateRealm.
             realm (:class:`~.realms.Realm`):
-                Required. The Realm to be updated. Only fields specified
+                Required. The realm to be updated. Only fields specified
                 in update_mask are updated.
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -475,7 +489,7 @@ class RealmsServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -514,7 +528,7 @@ class RealmsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -535,7 +549,7 @@ class RealmsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.PreviewRealmUpdateResponse:
-        r"""Previews patches to a single Realm.
+        r"""Previews patches to a single realm.
 
         Args:
             request (:class:`~.realms.PreviewRealmUpdateRequest`):
@@ -575,7 +589,7 @@ class RealmsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -584,8 +598,8 @@ class RealmsServiceAsyncClient:
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            "google-cloud-game-servers"
-        ).version
+            "google-cloud-game-servers",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()

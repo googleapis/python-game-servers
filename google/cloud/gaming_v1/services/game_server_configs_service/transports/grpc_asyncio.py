@@ -35,7 +35,7 @@ from .grpc import GameServerConfigsServiceGrpcTransport
 class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTransport):
     """gRPC AsyncIO backend transport for GameServerConfigsService.
 
-    The Game Server Config configures the game servers in an
+    The game server config configures the game servers in an
     Agones fleet.
 
     This class defines the same methods as the primary client, so the
@@ -54,6 +54,7 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
         cls,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        credentials_file: Optional[str] = None,
         scopes: Optional[Sequence[str]] = None,
         **kwargs
     ) -> aio.Channel:
@@ -65,6 +66,9 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
                 credentials identify this application to the service. If
                 none are specified, the client will attempt to ascertain
                 the credentials from the environment.
+            credentials_file (Optional[str]): A file with credentials that can
+                be loaded with :func:`google.auth.load_credentials_from_file`.
+                This argument is ignored if ``channel`` is provided.
             scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
                 service. These are only used when credentials are not specified and
                 are passed to :func:`google.auth.default`.
@@ -75,7 +79,11 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
         """
         scopes = scopes or cls.AUTH_SCOPES
         return grpc_helpers_async.create_channel(
-            host, credentials=credentials, scopes=scopes, **kwargs
+            host,
+            credentials=credentials,
+            credentials_file=credentials_file,
+            scopes=scopes,
+            **kwargs
         )
 
     def __init__(
@@ -83,6 +91,8 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
         channel: aio.Channel = None,
         api_mtls_endpoint: str = None,
         client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
@@ -97,6 +107,12 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
                 This argument is ignored if ``channel`` is provided.
+            credentials_file (Optional[str]): A file with credentials that can
+                be loaded with :func:`google.auth.load_credentials_from_file`.
+                This argument is ignored if ``channel`` is provided.
+            scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
+                service. These are only used when credentials are not specified and
+                are passed to :func:`google.auth.default`.
             channel (Optional[aio.Channel]): A ``Channel`` instance through
                 which to make calls.
             api_mtls_endpoint (Optional[str]): The mutual TLS endpoint. If
@@ -109,8 +125,10 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
                 is None.
 
         Raises:
-          google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
+            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
               creation failed for any reason.
+          google.api_core.exceptions.DuplicateCredentialArgs: If both ``credentials``
+              and ``credentials_file`` are passed.
         """
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
@@ -140,12 +158,19 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
             self._grpc_channel = type(self).create_channel(
                 host,
                 credentials=credentials,
+                credentials_file=credentials_file,
                 ssl_credentials=ssl_credentials,
-                scopes=self.AUTH_SCOPES,
+                scopes=scopes or self.AUTH_SCOPES,
             )
 
         # Run the base constructor.
-        super().__init__(host=host, credentials=credentials)
+        super().__init__(
+            host=host,
+            credentials=credentials,
+            credentials_file=credentials_file,
+            scopes=scopes or self.AUTH_SCOPES,
+        )
+
         self._stubs = {}
 
     @property
@@ -159,7 +184,7 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
         # have one.
         if not hasattr(self, "_grpc_channel"):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials
+                self._host, credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -183,15 +208,15 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
 
     @property
     def list_game_server_configs(
-        self
+        self,
     ) -> Callable[
         [game_server_configs.ListGameServerConfigsRequest],
         Awaitable[game_server_configs.ListGameServerConfigsResponse],
     ]:
         r"""Return a callable for the list game server configs method over gRPC.
 
-        Lists Game Server Configs in a given project,
-        Location, and Game Server Deployment.
+        Lists game server configs in a given project,
+        location, and game server deployment.
 
         Returns:
             Callable[[~.ListGameServerConfigsRequest],
@@ -213,14 +238,14 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
 
     @property
     def get_game_server_config(
-        self
+        self,
     ) -> Callable[
         [game_server_configs.GetGameServerConfigRequest],
         Awaitable[game_server_configs.GameServerConfig],
     ]:
         r"""Return a callable for the get game server config method over gRPC.
 
-        Gets details of a single Game Server Config.
+        Gets details of a single game server config.
 
         Returns:
             Callable[[~.GetGameServerConfigRequest],
@@ -242,17 +267,17 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
 
     @property
     def create_game_server_config(
-        self
+        self,
     ) -> Callable[
         [game_server_configs.CreateGameServerConfigRequest],
         Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the create game server config method over gRPC.
 
-        Creates a new Game Server Config in a given project,
-        Location, and Game Server Deployment. Game Server
-        Configs are immutable, and are not applied until
-        referenced in the Game Server Deployment Rollout
+        Creates a new game server config in a given project,
+        location, and game server deployment. Game server
+        configs are immutable, and are not applied until
+        referenced in the game server deployment rollout
         resource.
 
         Returns:
@@ -275,16 +300,16 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
 
     @property
     def delete_game_server_config(
-        self
+        self,
     ) -> Callable[
         [game_server_configs.DeleteGameServerConfigRequest],
         Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the delete game server config method over gRPC.
 
-        Deletes a single Game Server Config. The deletion
-        will fail if the Game Server Config is referenced in a
-        Game Server Deployment Rollout.
+        Deletes a single game server config. The deletion
+        will fail if the game server config is referenced in a
+        game server deployment rollout.
 
         Returns:
             Callable[[~.DeleteGameServerConfigRequest],

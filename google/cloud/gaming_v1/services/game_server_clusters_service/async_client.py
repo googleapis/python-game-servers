@@ -33,6 +33,7 @@ from google.api_core import operation_async
 from google.cloud.gaming_v1.services.game_server_clusters_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import game_server_clusters
+from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
@@ -103,7 +104,7 @@ class GameServerClustersServiceAsyncClient:
         """
 
         self._client = GameServerClustersServiceClient(
-            credentials=credentials, transport=transport, client_options=client_options
+            credentials=credentials, transport=transport, client_options=client_options,
         )
 
     async def list_game_server_clusters(
@@ -115,7 +116,7 @@ class GameServerClustersServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerClustersAsyncPager:
-        r"""Lists Game Server Clusters in a given project and
+        r"""Lists game server clusters in a given project and
         location.
 
         Args:
@@ -177,12 +178,12 @@ class GameServerClustersServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__aiter__` convenience method.
         response = pagers.ListGameServerClustersAsyncPager(
-            method=rpc, request=request, response=response
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
@@ -204,7 +205,7 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.GetGameServerCluster.
             name (:class:`str`):
-                Required. The name of the Game Server Cluster to
+                Required. The name of the game server cluster to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
@@ -220,7 +221,7 @@ class GameServerClustersServiceAsyncClient:
 
         Returns:
             ~.game_server_clusters.GameServerCluster:
-                A Game Server Cluster resource.
+                A game server cluster resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -254,7 +255,7 @@ class GameServerClustersServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -284,14 +285,14 @@ class GameServerClustersServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             game_server_cluster (:class:`~.game_server_clusters.GameServerCluster`):
-                Required. The Game Server Cluster
+                Required. The game server cluster
                 resource to be created.
                 This corresponds to the ``game_server_cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             game_server_cluster_id (:class:`str`):
-                Required. The ID of the Game Server
-                Cluster resource to be created.
+                Required. The ID of the game server
+                cluster resource to be created.
                 This corresponds to the ``game_server_cluster_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -308,7 +309,7 @@ class GameServerClustersServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                game server cluster resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -349,7 +350,7 @@ class GameServerClustersServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -409,7 +410,7 @@ class GameServerClustersServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -430,7 +431,7 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.DeleteGameServerCluster.
             name (:class:`str`):
-                Required. The name of the Game Server Cluster to delete.
+                Required. The name of the game server cluster to delete.
                 Uses the form:
                 ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
                 This corresponds to the ``name`` field
@@ -448,8 +449,20 @@ class GameServerClustersServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                :class:``~.empty.Empty``: A generic empty message that
+                you can re-use to avoid defining duplicated empty
+                messages in your APIs. A typical example is to use it as
+                the request or the response type of an API method. For
+                instance:
+
+                ::
+
+                    service Foo {
+                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+                    }
+
+                The JSON representation for ``Empty`` is empty JSON
+                object ``{}``.
 
         """
         # Create or coerce a protobuf request object.
@@ -484,13 +497,13 @@ class GameServerClustersServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
             response,
             self._client._transport.operations_client,
-            game_server_clusters.GameServerCluster,
+            empty.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -543,7 +556,7 @@ class GameServerClustersServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -565,7 +578,7 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.UpdateGameServerCluster.
             game_server_cluster (:class:`~.game_server_clusters.GameServerCluster`):
-                Required. The Game Server Cluster to be updated. Only
+                Required. The game server cluster to be updated. Only
                 fields specified in update_mask are updated.
                 This corresponds to the ``game_server_cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -593,7 +606,7 @@ class GameServerClustersServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_clusters.GameServerCluster``: A
-                Game Server Cluster resource.
+                game server cluster resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -632,7 +645,7 @@ class GameServerClustersServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -693,7 +706,7 @@ class GameServerClustersServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -702,8 +715,8 @@ class GameServerClustersServiceAsyncClient:
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            "google-cloud-game-servers"
-        ).version
+            "google-cloud-game-servers",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()

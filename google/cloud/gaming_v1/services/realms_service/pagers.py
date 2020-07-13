@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-from typing import Any, AsyncIterable, Awaitable, Callable, Iterable
+from typing import Any, AsyncIterable, Awaitable, Callable, Iterable, Sequence, Tuple
 
 from google.cloud.gaming_v1.types import realms
 
@@ -40,9 +40,11 @@ class ListRealmsPager:
 
     def __init__(
         self,
-        method: Callable[[realms.ListRealmsRequest], realms.ListRealmsResponse],
+        method: Callable[..., realms.ListRealmsResponse],
         request: realms.ListRealmsRequest,
         response: realms.ListRealmsResponse,
+        *,
+        metadata: Sequence[Tuple[str, str]] = ()
     ):
         """Instantiate the pager.
 
@@ -53,10 +55,13 @@ class ListRealmsPager:
                 The initial request object.
             response (:class:`~.realms.ListRealmsResponse`):
                 The initial response object.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
         """
         self._method = method
         self._request = realms.ListRealmsRequest(request)
         self._response = response
+        self._metadata = metadata
 
     def __getattr__(self, name: str) -> Any:
         return getattr(self._response, name)
@@ -66,7 +71,7 @@ class ListRealmsPager:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
-            self._response = self._method(self._request)
+            self._response = self._method(self._request, metadata=self._metadata)
             yield self._response
 
     def __iter__(self) -> Iterable[realms.Realm]:
@@ -97,11 +102,11 @@ class ListRealmsAsyncPager:
 
     def __init__(
         self,
-        method: Callable[
-            [realms.ListRealmsRequest], Awaitable[realms.ListRealmsResponse]
-        ],
+        method: Callable[..., Awaitable[realms.ListRealmsResponse]],
         request: realms.ListRealmsRequest,
         response: realms.ListRealmsResponse,
+        *,
+        metadata: Sequence[Tuple[str, str]] = ()
     ):
         """Instantiate the pager.
 
@@ -112,10 +117,13 @@ class ListRealmsAsyncPager:
                 The initial request object.
             response (:class:`~.realms.ListRealmsResponse`):
                 The initial response object.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
         """
         self._method = method
         self._request = realms.ListRealmsRequest(request)
         self._response = response
+        self._metadata = metadata
 
     def __getattr__(self, name: str) -> Any:
         return getattr(self._response, name)
@@ -125,7 +133,7 @@ class ListRealmsAsyncPager:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
-            self._response = await self._method(self._request)
+            self._response = await self._method(self._request, metadata=self._metadata)
             yield self._response
 
     def __aiter__(self) -> AsyncIterable[realms.Realm]:

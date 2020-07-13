@@ -18,4 +18,7 @@
 from .client import GameServerConfigsServiceClient
 from .async_client import GameServerConfigsServiceAsyncClient
 
-__all__ = ("GameServerConfigsServiceClient", "GameServerConfigsServiceAsyncClient")
+__all__ = (
+    "GameServerConfigsServiceClient",
+    "GameServerConfigsServiceAsyncClient",
+)

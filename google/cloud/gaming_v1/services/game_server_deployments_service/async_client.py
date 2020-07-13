@@ -33,6 +33,7 @@ from google.api_core import operation_async
 from google.cloud.gaming_v1.services.game_server_deployments_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import game_server_deployments
+from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
@@ -42,7 +43,7 @@ from .client import GameServerDeploymentsServiceClient
 
 
 class GameServerDeploymentsServiceAsyncClient:
-    """The Game Server Deployment is used to control the deployment
+    """The game server deployment is used to control the deployment
     of Agones fleets.
     """
 
@@ -51,12 +52,12 @@ class GameServerDeploymentsServiceAsyncClient:
     DEFAULT_ENDPOINT = GameServerDeploymentsServiceClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = GameServerDeploymentsServiceClient.DEFAULT_MTLS_ENDPOINT
 
-    game_server_deployment_rollout_path = staticmethod(
-        GameServerDeploymentsServiceClient.game_server_deployment_rollout_path
-    )
-
     game_server_deployment_path = staticmethod(
         GameServerDeploymentsServiceClient.game_server_deployment_path
+    )
+
+    game_server_deployment_rollout_path = staticmethod(
+        GameServerDeploymentsServiceClient.game_server_deployment_rollout_path
     )
 
     from_service_account_file = (
@@ -107,7 +108,7 @@ class GameServerDeploymentsServiceAsyncClient:
         """
 
         self._client = GameServerDeploymentsServiceClient(
-            credentials=credentials, transport=transport, client_options=client_options
+            credentials=credentials, transport=transport, client_options=client_options,
         )
 
     async def list_game_server_deployments(
@@ -119,8 +120,8 @@ class GameServerDeploymentsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerDeploymentsAsyncPager:
-        r"""Lists Game Server Deployments in a given project and
-        Location.
+        r"""Lists game server deployments in a given project and
+        location.
 
         Args:
             request (:class:`~.game_server_deployments.ListGameServerDeploymentsRequest`):
@@ -180,12 +181,12 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__aiter__` convenience method.
         response = pagers.ListGameServerDeploymentsAsyncPager(
-            method=rpc, request=request, response=response
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
@@ -200,14 +201,14 @@ class GameServerDeploymentsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.GameServerDeployment:
-        r"""Gets details of a single Game Server Deployment.
+        r"""Gets details of a single game server deployment.
 
         Args:
             request (:class:`~.game_server_deployments.GetGameServerDeploymentRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeployment.
             name (:class:`str`):
-                Required. The name of the Game Server Deployment to
+                Required. The name of the game server delpoyment to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
@@ -223,7 +224,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
         Returns:
             ~.game_server_deployments.GameServerDeployment:
-                A Game Server Deployment resource.
+                A game server deployment resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -257,7 +258,7 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -272,8 +273,8 @@ class GameServerDeploymentsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Creates a new Game Server Deployment in a given
-        project and Location.
+        r"""Creates a new game server deployment in a given
+        project and location.
 
         Args:
             request (:class:`~.game_server_deployments.CreateGameServerDeploymentRequest`):
@@ -286,7 +287,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
-                Required. The Game Server Deployment
+                Required. The game server delpoyment
                 resource to be created.
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -304,7 +305,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_deployments.GameServerDeployment``:
-                A Game Server Deployment resource.
+                A game server deployment resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -341,7 +342,7 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -363,14 +364,14 @@ class GameServerDeploymentsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Deletes a single Game Server Deployment.
+        r"""Deletes a single game server deployment.
 
         Args:
             request (:class:`~.game_server_deployments.DeleteGameServerDeploymentRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.DeleteGameServerDeployment.
             name (:class:`str`):
-                Required. The name of the Game Server Deployment to
+                Required. The name of the game server delpoyment to
                 delete. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
@@ -389,8 +390,20 @@ class GameServerDeploymentsServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_deployments.GameServerDeployment``:
-                A Game Server Deployment resource.
+                :class:``~.empty.Empty``: A generic empty message that
+                you can re-use to avoid defining duplicated empty
+                messages in your APIs. A typical example is to use it as
+                the request or the response type of an API method. For
+                instance:
+
+                ::
+
+                    service Foo {
+                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+                    }
+
+                The JSON representation for ``Empty`` is empty JSON
+                object ``{}``.
 
         """
         # Create or coerce a protobuf request object.
@@ -425,13 +438,13 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
             response,
             self._client._transport.operations_client,
-            game_server_deployments.GameServerDeployment,
+            empty.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -448,7 +461,7 @@ class GameServerDeploymentsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Patches a Game Server Deployment.
+        r"""Patches a game server deployment.
 
         Args:
             request (:class:`~.game_server_deployments.UpdateGameServerDeploymentRequest`):
@@ -456,7 +469,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 GameServerDeploymentsService.UpdateGameServerDeployment.
                 Only allows updates for labels.
             game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
-                Required. The Game Server Deployment to be updated. Only
+                Required. The game server delpoyment to be updated. Only
                 fields specified in update_mask are updated.
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -484,7 +497,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_deployments.GameServerDeployment``:
-                A Game Server Deployment resource.
+                A game server deployment resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -523,7 +536,7 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -545,14 +558,14 @@ class GameServerDeploymentsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.GameServerDeploymentRollout:
-        r"""Gets details a single Game Server Deployment Rollout.
+        r"""Gets details a single game server deployment rollout.
 
         Args:
             request (:class:`~.game_server_deployments.GetGameServerDeploymentRolloutRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeploymentRollout.
             name (:class:`str`):
-                Required. The name of the Game Server Deployment to
+                Required. The name of the game server delpoyment to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
@@ -568,7 +581,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
         Returns:
             ~.game_server_deployments.GameServerDeploymentRollout:
-                The Game Server Deployment Rollout
+                The game server deployment rollout
                 which represents the desired rollout
                 state.
 
@@ -605,7 +618,7 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -620,7 +633,7 @@ class GameServerDeploymentsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Patches a single Game Server Deployment Rollout. The method will
+        r"""Patches a single game server deployment rollout. The method will
         not return an error if the update does not affect any existing
         realms. For example - if the default_game_server_config is
         changed but all existing realms use the override, that is valid.
@@ -633,7 +646,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 The request object. Request message for
                 GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
             rollout (:class:`~.game_server_deployments.GameServerDeploymentRollout`):
-                Required. The Game Server Deployment Rollout to be
+                Required. The game server delpoyment rollout to be
                 updated. Only fields specified in update_mask are
                 updated.
                 This corresponds to the ``rollout`` field
@@ -662,7 +675,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_deployments.GameServerDeployment``:
-                A Game Server Deployment resource.
+                A game server deployment resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -703,7 +716,7 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -724,8 +737,8 @@ class GameServerDeploymentsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
-        r"""Previews the Game Server Deployment Rollout. This API
-        does not mutate the Rollout resource.
+        r"""Previews the game server deployment rollout. This API
+        does not mutate the rollout resource.
 
         Args:
             request (:class:`~.game_server_deployments.PreviewGameServerDeploymentRolloutRequest`):
@@ -769,7 +782,7 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -783,9 +796,9 @@ class GameServerDeploymentsServiceAsyncClient:
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.FetchDeploymentStateResponse:
         r"""Retrieves information about the current state of the
-        Game Server Ddeployment. Gathers all the Agones fleets
+        game server deployment. Gathers all the Agones fleets
         and Agones autoscalers, including fleets running an
-        older version of the Game Server Deployment.
+        older version of the game server deployment.
 
         Args:
             request (:class:`~.game_server_deployments.FetchDeploymentStateRequest`):
@@ -823,7 +836,7 @@ class GameServerDeploymentsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -832,8 +845,8 @@ class GameServerDeploymentsServiceAsyncClient:
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            "google-cloud-game-servers"
-        ).version
+            "google-cloud-game-servers",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()

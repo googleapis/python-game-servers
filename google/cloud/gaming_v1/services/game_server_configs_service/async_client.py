@@ -33,6 +33,7 @@ from google.api_core import operation_async
 from google.cloud.gaming_v1.services.game_server_configs_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import game_server_configs
+from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 from .transports.base import GameServerConfigsServiceTransport
@@ -41,7 +42,7 @@ from .client import GameServerConfigsServiceClient
 
 
 class GameServerConfigsServiceAsyncClient:
-    """The Game Server Config configures the game servers in an
+    """The game server config configures the game servers in an
     Agones fleet.
     """
 
@@ -100,7 +101,7 @@ class GameServerConfigsServiceAsyncClient:
         """
 
         self._client = GameServerConfigsServiceClient(
-            credentials=credentials, transport=transport, client_options=client_options
+            credentials=credentials, transport=transport, client_options=client_options,
         )
 
     async def list_game_server_configs(
@@ -112,8 +113,8 @@ class GameServerConfigsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerConfigsAsyncPager:
-        r"""Lists Game Server Configs in a given project,
-        Location, and Game Server Deployment.
+        r"""Lists game server configs in a given project,
+        location, and game server deployment.
 
         Args:
             request (:class:`~.game_server_configs.ListGameServerConfigsRequest`):
@@ -174,12 +175,12 @@ class GameServerConfigsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__aiter__` convenience method.
         response = pagers.ListGameServerConfigsAsyncPager(
-            method=rpc, request=request, response=response
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
@@ -194,14 +195,14 @@ class GameServerConfigsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_configs.GameServerConfig:
-        r"""Gets details of a single Game Server Config.
+        r"""Gets details of a single game server config.
 
         Args:
             request (:class:`~.game_server_configs.GetGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.GetGameServerConfig.
             name (:class:`str`):
-                Required. The name of the Game Server Config to
+                Required. The name of the game server config to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
@@ -217,7 +218,7 @@ class GameServerConfigsServiceAsyncClient:
 
         Returns:
             ~.game_server_configs.GameServerConfig:
-                A Game Server Config resource.
+                A game server config resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -251,7 +252,7 @@ class GameServerConfigsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -266,10 +267,10 @@ class GameServerConfigsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Creates a new Game Server Config in a given project,
-        Location, and Game Server Deployment. Game Server
-        Configs are immutable, and are not applied until
-        referenced in the Game Server Deployment Rollout
+        r"""Creates a new game server config in a given project,
+        location, and game server deployment. Game server
+        configs are immutable, and are not applied until
+        referenced in the game server deployment rollout
         resource.
 
         Args:
@@ -284,7 +285,7 @@ class GameServerConfigsServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             game_server_config (:class:`~.game_server_configs.GameServerConfig`):
-                Required. The Game Server Config
+                Required. The game server config
                 resource to be created.
                 This corresponds to the ``game_server_config`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -302,7 +303,7 @@ class GameServerConfigsServiceAsyncClient:
 
                 The result type for the operation will be
                 :class:``~.game_server_configs.GameServerConfig``: A
-                Game Server Config resource.
+                game server config resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -339,7 +340,7 @@ class GameServerConfigsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -361,16 +362,16 @@ class GameServerConfigsServiceAsyncClient:
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
-        r"""Deletes a single Game Server Config. The deletion
-        will fail if the Game Server Config is referenced in a
-        Game Server Deployment Rollout.
+        r"""Deletes a single game server config. The deletion
+        will fail if the game server config is referenced in a
+        game server deployment rollout.
 
         Args:
             request (:class:`~.game_server_configs.DeleteGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
             name (:class:`str`):
-                Required. The name of the Game Server Config to delete.
+                Required. The name of the game server config to delete.
                 Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
@@ -389,8 +390,20 @@ class GameServerConfigsServiceAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_configs.GameServerConfig``: A
-                Game Server Config resource.
+                :class:``~.empty.Empty``: A generic empty message that
+                you can re-use to avoid defining duplicated empty
+                messages in your APIs. A typical example is to use it as
+                the request or the response type of an API method. For
+                instance:
+
+                ::
+
+                    service Foo {
+                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+                    }
+
+                The JSON representation for ``Empty`` is empty JSON
+                object ``{}``.
 
         """
         # Create or coerce a protobuf request object.
@@ -425,13 +438,13 @@ class GameServerConfigsServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
             response,
             self._client._transport.operations_client,
-            game_server_configs.GameServerConfig,
+            empty.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -442,8 +455,8 @@ class GameServerConfigsServiceAsyncClient:
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            "google-cloud-game-servers"
-        ).version
+            "google-cloud-game-servers",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()

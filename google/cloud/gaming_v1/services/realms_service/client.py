@@ -35,6 +35,7 @@ from google.api_core import operation_async
 from google.cloud.gaming_v1.services.realms_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import realms
+from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
@@ -55,7 +56,7 @@ class RealmsServiceClientMeta(type):
     _transport_registry["grpc"] = RealmsServiceGrpcTransport
     _transport_registry["grpc_asyncio"] = RealmsServiceGrpcAsyncIOTransport
 
-    def get_transport_class(cls, label: str = None) -> Type[RealmsServiceTransport]:
+    def get_transport_class(cls, label: str = None,) -> Type[RealmsServiceTransport]:
         """Return an appropriate transport class.
 
         Args:
@@ -75,7 +76,7 @@ class RealmsServiceClientMeta(type):
 
 
 class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
-    """A Realm is a grouping of Game Server Clusters that are
+    """A realm is a grouping of game server clusters that are
     considered interchangeable.
     """
 
@@ -134,10 +135,10 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     from_service_account_json = from_service_account_file
 
     @staticmethod
-    def realm_path(project: str, location: str, realm: str) -> str:
+    def realm_path(project: str, location: str, realm: str,) -> str:
         """Return a fully-qualified realm string."""
         return "projects/{project}/locations/{location}/realms/{realm}".format(
-            project=project, location=location, realm=realm
+            project=project, location=location, realm=realm,
         )
 
     @staticmethod
@@ -216,17 +217,24 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # instance provides an extensibility point for unusual situations.
         if isinstance(transport, RealmsServiceTransport):
             # transport is a RealmsServiceTransport instance.
-            if credentials:
+            if credentials or client_options.credentials_file:
                 raise ValueError(
                     "When providing a transport instance, "
                     "provide its credentials directly."
+                )
+            if client_options.scopes:
+                raise ValueError(
+                    "When providing a transport instance, "
+                    "provide its scopes directly."
                 )
             self._transport = transport
         else:
             Transport = type(self).get_transport_class(transport)
             self._transport = Transport(
                 credentials=credentials,
+                credentials_file=client_options.credentials_file,
                 host=client_options.api_endpoint,
+                scopes=client_options.scopes,
                 api_mtls_endpoint=client_options.api_endpoint,
                 client_cert_source=client_options.client_cert_source,
             )
@@ -240,7 +248,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListRealmsPager:
-        r"""Lists Realms in a given project and Location.
+        r"""Lists realms in a given project and location.
 
         Args:
             request (:class:`~.realms.ListRealmsRequest`):
@@ -288,7 +296,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = gapic_v1.method.wrap_method(
-            self._transport.list_realms, default_timeout=None, client_info=_client_info
+            self._transport.list_realms, default_timeout=None, client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -298,12 +306,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.ListRealmsPager(
-            method=rpc, request=request, response=response
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
@@ -318,14 +326,14 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.Realm:
-        r"""Gets details of a single Realm.
+        r"""Gets details of a single realm.
 
         Args:
             request (:class:`~.realms.GetRealmRequest`):
                 The request object. Request message for
                 RealmsService.GetRealm.
             name (:class:`str`):
-                Required. The name of the Realm to retrieve. Uses the
+                Required. The name of the realm to retrieve. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
                 This corresponds to the ``name`` field
@@ -340,7 +348,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         Returns:
             ~.realms.Realm:
-                A Realm resource.
+                A realm resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -362,7 +370,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = gapic_v1.method.wrap_method(
-            self._transport.get_realm, default_timeout=None, client_info=_client_info
+            self._transport.get_realm, default_timeout=None, client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -372,7 +380,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -388,7 +396,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Creates a new Realm in a given project and Location.
+        r"""Creates a new realm in a given project and location.
 
         Args:
             request (:class:`~.realms.CreateRealmRequest`):
@@ -401,13 +409,13 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             realm (:class:`~.realms.Realm`):
-                Required. The Realm resource to be
+                Required. The realm resource to be
                 created.
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             realm_id (:class:`str`):
-                Required. The ID of the Realm
+                Required. The ID of the realm
                 resource to be created.
                 This corresponds to the ``realm_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -424,7 +432,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -451,7 +459,9 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = gapic_v1.method.wrap_method(
-            self._transport.create_realm, default_timeout=None, client_info=_client_info
+            self._transport.create_realm,
+            default_timeout=None,
+            client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -461,7 +471,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -483,14 +493,14 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Deletes a single Realm.
+        r"""Deletes a single realm.
 
         Args:
             request (:class:`~.realms.DeleteRealmRequest`):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
             name (:class:`str`):
-                Required. The name of the Realm to delete. Uses the
+                Required. The name of the realm to delete. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
                 This corresponds to the ``name`` field
@@ -508,7 +518,20 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.empty.Empty``: A generic empty message that
+                you can re-use to avoid defining duplicated empty
+                messages in your APIs. A typical example is to use it as
+                the request or the response type of an API method. For
+                instance:
+
+                ::
+
+                    service Foo {
+                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+                    }
+
+                The JSON representation for ``Empty`` is empty JSON
+                object ``{}``.
 
         """
         # Create or coerce a protobuf request object.
@@ -531,7 +554,9 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = gapic_v1.method.wrap_method(
-            self._transport.delete_realm, default_timeout=None, client_info=_client_info
+            self._transport.delete_realm,
+            default_timeout=None,
+            client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -541,13 +566,13 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
             response,
             self._transport.operations_client,
-            realms.Realm,
+            empty.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -564,14 +589,14 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Patches a single Realm.
+        r"""Patches a single realm.
 
         Args:
             request (:class:`~.realms.UpdateRealmRequest`):
                 The request object. Request message for
                 RealmsService.UpdateRealm.
             realm (:class:`~.realms.Realm`):
-                Required. The Realm to be updated. Only fields specified
+                Required. The realm to be updated. Only fields specified
                 in update_mask are updated.
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -597,7 +622,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A Realm resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -622,7 +647,9 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = gapic_v1.method.wrap_method(
-            self._transport.update_realm, default_timeout=None, client_info=_client_info
+            self._transport.update_realm,
+            default_timeout=None,
+            client_info=_client_info,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -634,7 +661,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -655,7 +682,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.PreviewRealmUpdateResponse:
-        r"""Previews patches to a single Realm.
+        r"""Previews patches to a single realm.
 
         Args:
             request (:class:`~.realms.PreviewRealmUpdateRequest`):
@@ -695,7 +722,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -704,8 +731,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            "google-cloud-game-servers"
-        ).version
+            "google-cloud-game-servers",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
