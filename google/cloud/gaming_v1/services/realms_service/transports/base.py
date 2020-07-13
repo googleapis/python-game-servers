@@ -19,6 +19,7 @@ import abc
 import typing
 
 from google import auth
+from google.api_core import exceptions  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.auth import credentials  # type: ignore
 
@@ -26,7 +27,7 @@ from google.cloud.gaming_v1.types import realms
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 
-class RealmsServiceTransport(metaclass=abc.ABCMeta):
+class RealmsServiceTransport(abc.ABC):
     """Abstract transport class for RealmsService."""
 
     AUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
@@ -36,6 +37,9 @@ class RealmsServiceTransport(metaclass=abc.ABCMeta):
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        credentials_file: typing.Optional[str] = None,
+        scopes: typing.Optional[typing.Sequence[str]] = AUTH_SCOPES,
+        **kwargs,
     ) -> None:
         """Instantiate the transport.
 
@@ -46,6 +50,10 @@ class RealmsServiceTransport(metaclass=abc.ABCMeta):
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
+            credentials_file (Optional[str]): A file with credentials that can
+                be loaded with :func:`google.auth.load_credentials_from_file`.
+                This argument is mutually exclusive with credentials.
+            scope (Optional[Sequence[str]]): A list of scopes.
         """
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
         if ":" not in host:
@@ -54,8 +62,17 @@ class RealmsServiceTransport(metaclass=abc.ABCMeta):
 
         # If no credentials are provided, then determine the appropriate
         # defaults.
-        if credentials is None:
-            credentials, _ = auth.default(scopes=self.AUTH_SCOPES)
+        if credentials and credentials_file:
+            raise exceptions.DuplicateCredentialArgs(
+                "'credentials_file' and 'credentials' are mutually exclusive"
+            )
+
+        if credentials_file is not None:
+            credentials, _ = auth.load_credentials_from_file(
+                credentials_file, scopes=scopes
+            )
+        elif credentials is None:
+            credentials, _ = auth.default(scopes=scopes)
 
         # Save the credentials.
         self._credentials = credentials
@@ -63,43 +80,66 @@ class RealmsServiceTransport(metaclass=abc.ABCMeta):
     @property
     def operations_client(self) -> operations_v1.OperationsClient:
         """Return the client designed to process long-running operations."""
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def list_realms(
-        self
-    ) -> typing.Callable[[realms.ListRealmsRequest], realms.ListRealmsResponse]:
-        raise NotImplementedError
+        self,
+    ) -> typing.Callable[
+        [realms.ListRealmsRequest],
+        typing.Union[
+            realms.ListRealmsResponse, typing.Awaitable[realms.ListRealmsResponse]
+        ],
+    ]:
+        raise NotImplementedError()
 
     @property
-    def get_realm(self) -> typing.Callable[[realms.GetRealmRequest], realms.Realm]:
-        raise NotImplementedError
+    def get_realm(
+        self,
+    ) -> typing.Callable[
+        [realms.GetRealmRequest],
+        typing.Union[realms.Realm, typing.Awaitable[realms.Realm]],
+    ]:
+        raise NotImplementedError()
 
     @property
     def create_realm(
-        self
-    ) -> typing.Callable[[realms.CreateRealmRequest], operations.Operation]:
-        raise NotImplementedError
+        self,
+    ) -> typing.Callable[
+        [realms.CreateRealmRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
+        raise NotImplementedError()
 
     @property
     def delete_realm(
-        self
-    ) -> typing.Callable[[realms.DeleteRealmRequest], operations.Operation]:
-        raise NotImplementedError
+        self,
+    ) -> typing.Callable[
+        [realms.DeleteRealmRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
+        raise NotImplementedError()
 
     @property
     def update_realm(
-        self
-    ) -> typing.Callable[[realms.UpdateRealmRequest], operations.Operation]:
-        raise NotImplementedError
+        self,
+    ) -> typing.Callable[
+        [realms.UpdateRealmRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
+        raise NotImplementedError()
 
     @property
     def preview_realm_update(
-        self
+        self,
     ) -> typing.Callable[
-        [realms.PreviewRealmUpdateRequest], realms.PreviewRealmUpdateResponse
+        [realms.PreviewRealmUpdateRequest],
+        typing.Union[
+            realms.PreviewRealmUpdateResponse,
+            typing.Awaitable[realms.PreviewRealmUpdateResponse],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 __all__ = ("RealmsServiceTransport",)

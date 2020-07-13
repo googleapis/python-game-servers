@@ -56,7 +56,7 @@ class ListGameServerConfigsRequest(proto.Message):
             queried.
         page_token (str):
             Optional. The next_page_token value returned from a previous
-            List request, if any.
+            list request, if any.
         filter (str):
             Optional. The filter to apply to list
             results.
@@ -67,9 +67,13 @@ class ListGameServerConfigsRequest(proto.Message):
     """
 
     parent = proto.Field(proto.STRING, number=1)
+
     page_size = proto.Field(proto.INT32, number=2)
+
     page_token = proto.Field(proto.STRING, number=3)
+
     filter = proto.Field(proto.STRING, number=4)
+
     order_by = proto.Field(proto.STRING, number=5)
 
 
@@ -79,13 +83,13 @@ class ListGameServerConfigsResponse(proto.Message):
 
     Attributes:
         game_server_configs (Sequence[~.gcgv_game_server_configs.GameServerConfig]):
-            The list of Game Server Configs.
+            The list of game server configs.
         next_page_token (str):
             Token to retrieve the next page of results,
             or empty if there are no more results in the
             list.
         unreachable (Sequence[str]):
-            List of Locations that could not be reached.
+            List of locations that could not be reached.
     """
 
     @property
@@ -93,9 +97,11 @@ class ListGameServerConfigsResponse(proto.Message):
         return self
 
     game_server_configs = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GameServerConfig"
+        proto.MESSAGE, number=1, message="GameServerConfig",
     )
+
     next_page_token = proto.Field(proto.STRING, number=2)
+
     unreachable = proto.RepeatedField(proto.STRING, number=4)
 
 
@@ -105,7 +111,7 @@ class GetGameServerConfigRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Config to retrieve.
+            Required. The name of the game server config to retrieve.
             Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
@@ -124,17 +130,19 @@ class CreateGameServerConfigRequest(proto.Message):
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/``.
         config_id (str):
-            Required. The ID of the Game Server Config
+            Required. The ID of the game server config
             resource to be created.
         game_server_config (~.gcgv_game_server_configs.GameServerConfig):
-            Required. The Game Server Config resource to
+            Required. The game server config resource to
             be created.
     """
 
     parent = proto.Field(proto.STRING, number=1)
+
     config_id = proto.Field(proto.STRING, number=2)
+
     game_server_config = proto.Field(
-        proto.MESSAGE, number=3, message="GameServerConfig"
+        proto.MESSAGE, number=3, message="GameServerConfig",
     )
 
 
@@ -144,7 +152,7 @@ class DeleteGameServerConfigRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Config to delete. Uses
+            Required. The name of the game server config to delete. Uses
             the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
@@ -164,9 +172,9 @@ class ScalingConfig(proto.Message):
             Example spec:
             https://agones.dev/site/docs/reference/fleetautoscaler/
         selectors (Sequence[~.common.LabelSelector]):
-            Labels used to identify the Game Server
-            Clusters to which this Agones scaling config
-            applies. A Game Server Cluster is subject to
+            Labels used to identify the game server
+            clusters to which this Agones scaling config
+            applies. A game server cluster is subject to
             this Agones scaling config if its labels match
             any of the selector entries.
         schedules (Sequence[~.common.Schedule]):
@@ -175,11 +183,14 @@ class ScalingConfig(proto.Message):
     """
 
     name = proto.Field(proto.STRING, number=1)
+
     fleet_autoscaler_spec = proto.Field(proto.STRING, number=2)
+
     selectors = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=common.LabelSelector
+        proto.MESSAGE, number=4, message=common.LabelSelector,
     )
-    schedules = proto.RepeatedField(proto.MESSAGE, number=5, message=common.Schedule)
+
+    schedules = proto.RepeatedField(proto.MESSAGE, number=5, message=common.Schedule,)
 
 
 class FleetConfig(proto.Message):
@@ -194,15 +205,16 @@ class FleetConfig(proto.Message):
     """
 
     fleet_spec = proto.Field(proto.STRING, number=1)
+
     name = proto.Field(proto.STRING, number=2)
 
 
 class GameServerConfig(proto.Message):
-    r"""A Game Server Config resource.
+    r"""A game server config resource.
 
     Attributes:
         name (str):
-            The resource name of the Game Server Config. Uses the form:
+            The resource name of the game server config. Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
             For example,
@@ -213,25 +225,31 @@ class GameServerConfig(proto.Message):
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
         labels (Sequence[~.gcgv_game_server_configs.GameServerConfig.LabelsEntry]):
-            The labels associated with this Game Server
-            Config. Each label is a key-value pair.
+            The labels associated with this game server
+            config. Each label is a key-value pair.
         fleet_configs (Sequence[~.gcgv_game_server_configs.FleetConfig]):
             FleetConfig contains a list of Agones fleet
             specs. Only one FleetConfig is allowed.
         scaling_configs (Sequence[~.gcgv_game_server_configs.ScalingConfig]):
             The autoscaling settings.
         description (str):
-            The description of the Game Server Config.
+            The description of the game server config.
     """
 
     name = proto.Field(proto.STRING, number=1)
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp)
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp)
+
+    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+
+    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+
     labels = proto.MapField(proto.STRING, proto.STRING, number=4)
-    fleet_configs = proto.RepeatedField(proto.MESSAGE, number=5, message=FleetConfig)
+
+    fleet_configs = proto.RepeatedField(proto.MESSAGE, number=5, message=FleetConfig,)
+
     scaling_configs = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=ScalingConfig
+        proto.MESSAGE, number=6, message=ScalingConfig,
     )
+
     description = proto.Field(proto.STRING, number=7)
 
 

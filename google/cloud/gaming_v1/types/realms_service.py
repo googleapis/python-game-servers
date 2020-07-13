@@ -16,7 +16,7 @@
 #
 
 
-__protobuf__ = proto.module(package="google.cloud.gaming.v1beta", manifest={})
+__protobuf__ = proto.module(package="google.cloud.gaming.v1beta", manifest={},)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

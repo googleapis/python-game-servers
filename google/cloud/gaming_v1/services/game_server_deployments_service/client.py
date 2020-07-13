@@ -16,6 +16,7 @@
 #
 
 from collections import OrderedDict
+import os
 import re
 from typing import Callable, Dict, Sequence, Tuple, Type, Union
 import pkg_resources
@@ -25,17 +26,22 @@ from google.api_core import exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
 from google.auth import credentials  # type: ignore
+from google.auth.transport import mtls  # type: ignore
+from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
+from google.api_core import operation_async
 from google.cloud.gaming_v1.services.game_server_deployments_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import game_server_deployments
+from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 from .transports.base import GameServerDeploymentsServiceTransport
 from .transports.grpc import GameServerDeploymentsServiceGrpcTransport
+from .transports.grpc_asyncio import GameServerDeploymentsServiceGrpcAsyncIOTransport
 
 
 class GameServerDeploymentsServiceClientMeta(type):
@@ -50,9 +56,12 @@ class GameServerDeploymentsServiceClientMeta(type):
         OrderedDict()
     )  # type: Dict[str, Type[GameServerDeploymentsServiceTransport]]
     _transport_registry["grpc"] = GameServerDeploymentsServiceGrpcTransport
+    _transport_registry[
+        "grpc_asyncio"
+    ] = GameServerDeploymentsServiceGrpcAsyncIOTransport
 
     def get_transport_class(
-        cls, label: str = None
+        cls, label: str = None,
     ) -> Type[GameServerDeploymentsServiceTransport]:
         """Return an appropriate transport class.
 
@@ -75,7 +84,7 @@ class GameServerDeploymentsServiceClientMeta(type):
 class GameServerDeploymentsServiceClient(
     metaclass=GameServerDeploymentsServiceClientMeta
 ):
-    """The Game Server Deployment is used to control the deployment
+    """The game server deployment is used to control the deployment
     of Agones fleets.
     """
 
@@ -134,30 +143,12 @@ class GameServerDeploymentsServiceClient(
     from_service_account_json = from_service_account_file
 
     @staticmethod
-    def game_server_deployment_rollout_path(
-        project: str, location: str, deployment: str
-    ) -> str:
-        """Return a fully-qualified game_server_deployment_rollout string."""
-        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(
-            project=project, location=location, deployment=deployment
-        )
-
-    @staticmethod
-    def parse_game_server_deployment_rollout_path(path: str) -> Dict[str, str]:
-        """Parse a game_server_deployment_rollout path into its component segments."""
-        m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)/rollout$",
-            path,
-        )
-        return m.groupdict() if m else {}
-
-    @staticmethod
     def game_server_deployment_path(
-        project: str, location: str, deployment: str
+        project: str, location: str, deployment: str,
     ) -> str:
         """Return a fully-qualified game_server_deployment string."""
         return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
-            project=project, location=location, deployment=deployment
+            project=project, location=location, deployment=deployment,
         )
 
     @staticmethod
@@ -165,6 +156,24 @@ class GameServerDeploymentsServiceClient(
         """Parse a game_server_deployment path into its component segments."""
         m = re.match(
             r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def game_server_deployment_rollout_path(
+        project: str, location: str, deployment: str,
+    ) -> str:
+        """Return a fully-qualified game_server_deployment_rollout string."""
+        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(
+            project=project, location=location, deployment=deployment,
+        )
+
+    @staticmethod
+    def parse_game_server_deployment_rollout_path(path: str) -> Dict[str, str]:
+        """Parse a game_server_deployment_rollout path into its component segments."""
+        m = re.match(
+            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)/rollout$",
             path,
         )
         return m.groupdict() if m else {}
@@ -187,65 +196,74 @@ class GameServerDeploymentsServiceClient(
             transport (Union[str, ~.GameServerDeploymentsServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (ClientOptions): Custom options for the client.
+            client_options (ClientOptions): Custom options for the client. It
+                won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
-                default endpoint provided by the client.
-                (2) If ``transport`` argument is None, ``client_options`` can be
-                used to create a mutual TLS transport. If ``client_cert_source``
-                is provided, mutual TLS transport will be created with the given
-                ``api_endpoint`` or the default mTLS endpoint, and the client
-                SSL credentials obtained from ``client_cert_source``.
+                default endpoint provided by the client. GOOGLE_API_USE_MTLS
+                environment variable can also be used to override the endpoint:
+                "always" (always use the default mTLS endpoint), "never" (always
+                use the default regular endpoint, this is the default value for
+                the environment variable) and "auto" (auto switch to the default
+                mTLS endpoint if client SSL credentials is present). However,
+                the ``api_endpoint`` property takes precedence if provided.
+                (2) The ``client_cert_source`` property is used to provide client
+                SSL credentials for mutual TLS transport. If not provided, the
+                default SSL credentials will be used if present.
 
         Raises:
-            google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
+            google.auth.exceptions.MutualTLSChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
         if isinstance(client_options, dict):
             client_options = ClientOptions.from_dict(client_options)
+        if client_options is None:
+            client_options = ClientOptions.ClientOptions()
+
+        if client_options.api_endpoint is None:
+            use_mtls_env = os.getenv("GOOGLE_API_USE_MTLS", "never")
+            if use_mtls_env == "never":
+                client_options.api_endpoint = self.DEFAULT_ENDPOINT
+            elif use_mtls_env == "always":
+                client_options.api_endpoint = self.DEFAULT_MTLS_ENDPOINT
+            elif use_mtls_env == "auto":
+                has_client_cert_source = (
+                    client_options.client_cert_source is not None
+                    or mtls.has_default_client_cert_source()
+                )
+                client_options.api_endpoint = (
+                    self.DEFAULT_MTLS_ENDPOINT
+                    if has_client_cert_source
+                    else self.DEFAULT_ENDPOINT
+                )
+            else:
+                raise MutualTLSChannelError(
+                    "Unsupported GOOGLE_API_USE_MTLS value. Accepted values: never, auto, always"
+                )
 
         # Save or instantiate the transport.
         # Ordinarily, we provide the transport, but allowing a custom transport
         # instance provides an extensibility point for unusual situations.
         if isinstance(transport, GameServerDeploymentsServiceTransport):
             # transport is a GameServerDeploymentsServiceTransport instance.
-            if credentials:
+            if credentials or client_options.credentials_file:
                 raise ValueError(
                     "When providing a transport instance, "
                     "provide its credentials directly."
                 )
+            if client_options.scopes:
+                raise ValueError(
+                    "When providing a transport instance, "
+                    "provide its scopes directly."
+                )
             self._transport = transport
-        elif client_options is None or (
-            client_options.api_endpoint is None
-            and client_options.client_cert_source is None
-        ):
-            # Don't trigger mTLS if we get an empty ClientOptions.
+        else:
             Transport = type(self).get_transport_class(transport)
             self._transport = Transport(
-                credentials=credentials, host=self.DEFAULT_ENDPOINT
-            )
-        else:
-            # We have a non-empty ClientOptions. If client_cert_source is
-            # provided, trigger mTLS with user provided endpoint or the default
-            # mTLS endpoint.
-            if client_options.client_cert_source:
-                api_mtls_endpoint = (
-                    client_options.api_endpoint
-                    if client_options.api_endpoint
-                    else self.DEFAULT_MTLS_ENDPOINT
-                )
-            else:
-                api_mtls_endpoint = None
-
-            api_endpoint = (
-                client_options.api_endpoint
-                if client_options.api_endpoint
-                else self.DEFAULT_ENDPOINT
-            )
-
-            self._transport = GameServerDeploymentsServiceGrpcTransport(
                 credentials=credentials,
-                host=api_endpoint,
-                api_mtls_endpoint=api_mtls_endpoint,
+                credentials_file=client_options.credentials_file,
+                host=client_options.api_endpoint,
+                scopes=client_options.scopes,
+                api_mtls_endpoint=client_options.api_endpoint,
                 client_cert_source=client_options.client_cert_source,
             )
 
@@ -258,8 +276,8 @@ class GameServerDeploymentsServiceClient(
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerDeploymentsPager:
-        r"""Lists Game Server Deployments in a given project and
-        Location.
+        r"""Lists game server deployments in a given project and
+        location.
 
         Args:
             request (:class:`~.game_server_deployments.ListGameServerDeploymentsRequest`):
@@ -319,12 +337,12 @@ class GameServerDeploymentsServiceClient(
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.ListGameServerDeploymentsPager(
-            method=rpc, request=request, response=response
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
@@ -339,14 +357,14 @@ class GameServerDeploymentsServiceClient(
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.GameServerDeployment:
-        r"""Gets details of a single Game Server Deployment.
+        r"""Gets details of a single game server deployment.
 
         Args:
             request (:class:`~.game_server_deployments.GetGameServerDeploymentRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeployment.
             name (:class:`str`):
-                Required. The name of the Game Server Deployment to
+                Required. The name of the game server delpoyment to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
@@ -362,7 +380,7 @@ class GameServerDeploymentsServiceClient(
 
         Returns:
             ~.game_server_deployments.GameServerDeployment:
-                A Game Server Deployment resource.
+                A game server deployment resource.
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
@@ -396,7 +414,7 @@ class GameServerDeploymentsServiceClient(
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -411,8 +429,8 @@ class GameServerDeploymentsServiceClient(
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Creates a new Game Server Deployment in a given
-        project and Location.
+        r"""Creates a new game server deployment in a given
+        project and location.
 
         Args:
             request (:class:`~.game_server_deployments.CreateGameServerDeploymentRequest`):
@@ -425,7 +443,7 @@ class GameServerDeploymentsServiceClient(
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
-                Required. The Game Server Deployment
+                Required. The game server delpoyment
                 resource to be created.
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -443,7 +461,7 @@ class GameServerDeploymentsServiceClient(
 
                 The result type for the operation will be
                 :class:``~.game_server_deployments.GameServerDeployment``:
-                A Game Server Deployment resource.
+                A game server deployment resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -473,8 +491,14 @@ class GameServerDeploymentsServiceClient(
             client_info=_client_info,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
+        )
+
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -496,14 +520,14 @@ class GameServerDeploymentsServiceClient(
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Deletes a single Game Server Deployment.
+        r"""Deletes a single game server deployment.
 
         Args:
             request (:class:`~.game_server_deployments.DeleteGameServerDeploymentRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.DeleteGameServerDeployment.
             name (:class:`str`):
-                Required. The name of the Game Server Deployment to
+                Required. The name of the game server delpoyment to
                 delete. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
@@ -522,8 +546,20 @@ class GameServerDeploymentsServiceClient(
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_deployments.GameServerDeployment``:
-                A Game Server Deployment resource.
+                :class:``~.empty.Empty``: A generic empty message that
+                you can re-use to avoid defining duplicated empty
+                messages in your APIs. A typical example is to use it as
+                the request or the response type of an API method. For
+                instance:
+
+                ::
+
+                    service Foo {
+                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+                    }
+
+                The JSON representation for ``Empty`` is empty JSON
+                object ``{}``.
 
         """
         # Create or coerce a protobuf request object.
@@ -551,14 +587,20 @@ class GameServerDeploymentsServiceClient(
             client_info=_client_info,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
+        )
+
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
             response,
             self._transport.operations_client,
-            game_server_deployments.GameServerDeployment,
+            empty.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -575,7 +617,7 @@ class GameServerDeploymentsServiceClient(
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Patches a Game Server Deployment.
+        r"""Patches a game server deployment.
 
         Args:
             request (:class:`~.game_server_deployments.UpdateGameServerDeploymentRequest`):
@@ -583,7 +625,7 @@ class GameServerDeploymentsServiceClient(
                 GameServerDeploymentsService.UpdateGameServerDeployment.
                 Only allows updates for labels.
             game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
-                Required. The Game Server Deployment to be updated. Only
+                Required. The game server delpoyment to be updated. Only
                 fields specified in update_mask are updated.
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -611,7 +653,7 @@ class GameServerDeploymentsServiceClient(
 
                 The result type for the operation will be
                 :class:``~.game_server_deployments.GameServerDeployment``:
-                A Game Server Deployment resource.
+                A game server deployment resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -641,8 +683,16 @@ class GameServerDeploymentsServiceClient(
             client_info=_client_info,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("game_server_deployment.name", request.game_server_deployment.name),)
+            ),
+        )
+
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -664,14 +714,14 @@ class GameServerDeploymentsServiceClient(
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.GameServerDeploymentRollout:
-        r"""Gets details a single Game Server Deployment Rollout.
+        r"""Gets details a single game server deployment rollout.
 
         Args:
             request (:class:`~.game_server_deployments.GetGameServerDeploymentRolloutRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeploymentRollout.
             name (:class:`str`):
-                Required. The name of the Game Server Deployment to
+                Required. The name of the game server delpoyment to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
@@ -687,7 +737,7 @@ class GameServerDeploymentsServiceClient(
 
         Returns:
             ~.game_server_deployments.GameServerDeploymentRollout:
-                The Game Server Deployment Rollout
+                The game server deployment rollout
                 which represents the desired rollout
                 state.
 
@@ -724,7 +774,7 @@ class GameServerDeploymentsServiceClient(
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -739,7 +789,7 @@ class GameServerDeploymentsServiceClient(
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Patches a single Game Server Deployment Rollout. The method will
+        r"""Patches a single game server deployment rollout. The method will
         not return an error if the update does not affect any existing
         realms. For example - if the default_game_server_config is
         changed but all existing realms use the override, that is valid.
@@ -752,7 +802,7 @@ class GameServerDeploymentsServiceClient(
                 The request object. Request message for
                 GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
             rollout (:class:`~.game_server_deployments.GameServerDeploymentRollout`):
-                Required. The Game Server Deployment Rollout to be
+                Required. The game server delpoyment rollout to be
                 updated. Only fields specified in update_mask are
                 updated.
                 This corresponds to the ``rollout`` field
@@ -781,7 +831,7 @@ class GameServerDeploymentsServiceClient(
 
                 The result type for the operation will be
                 :class:``~.game_server_deployments.GameServerDeployment``:
-                A Game Server Deployment resource.
+                A game server deployment resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -813,8 +863,16 @@ class GameServerDeploymentsServiceClient(
             client_info=_client_info,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("rollout.name", request.rollout.name),)
+            ),
+        )
+
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -835,8 +893,8 @@ class GameServerDeploymentsServiceClient(
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
-        r"""Previews the Game Server Deployment Rollout. This API
-        does not mutate the Rollout resource.
+        r"""Previews the game server deployment rollout. This API
+        does not mutate the rollout resource.
 
         Args:
             request (:class:`~.game_server_deployments.PreviewGameServerDeploymentRolloutRequest`):
@@ -871,8 +929,16 @@ class GameServerDeploymentsServiceClient(
             client_info=_client_info,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("rollout.name", request.rollout.name),)
+            ),
+        )
+
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -886,9 +952,9 @@ class GameServerDeploymentsServiceClient(
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.FetchDeploymentStateResponse:
         r"""Retrieves information about the current state of the
-        Game Server Ddeployment. Gathers all the Agones fleets
+        game server deployment. Gathers all the Agones fleets
         and Agones autoscalers, including fleets running an
-        older version of the Game Server Deployment.
+        older version of the game server deployment.
 
         Args:
             request (:class:`~.game_server_deployments.FetchDeploymentStateRequest`):
@@ -919,8 +985,14 @@ class GameServerDeploymentsServiceClient(
             client_info=_client_info,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
+        )
+
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -929,8 +1001,8 @@ class GameServerDeploymentsServiceClient(
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            "google-cloud-game-servers"
-        ).version
+            "google-cloud-game-servers",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()

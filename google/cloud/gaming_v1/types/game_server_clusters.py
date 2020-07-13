@@ -56,9 +56,9 @@ class ListGameServerClustersRequest(proto.Message):
             "projects/{project}/locations/{location}/realms/{realm}".
         page_size (int):
             Optional. The maximum number of items to return. If
-            unspecified, server will pick an appropriate default. Server
-            may return fewer items than requested. A caller should only
-            rely on response's
+            unspecified, the server will pick an appropriate default.
+            The server may return fewer items than requested. A caller
+            should only rely on response's
             [next_page_token][google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token]
             to determine if there are more GameServerClusters left to be
             queried.
@@ -75,9 +75,13 @@ class ListGameServerClustersRequest(proto.Message):
     """
 
     parent = proto.Field(proto.STRING, number=1)
+
     page_size = proto.Field(proto.INT32, number=2)
+
     page_token = proto.Field(proto.STRING, number=3)
+
     filter = proto.Field(proto.STRING, number=4)
+
     order_by = proto.Field(proto.STRING, number=5)
 
 
@@ -87,13 +91,13 @@ class ListGameServerClustersResponse(proto.Message):
 
     Attributes:
         game_server_clusters (Sequence[~.gcgv_game_server_clusters.GameServerCluster]):
-            The list of Game Server Clusters.
+            The list of game server clusters.
         next_page_token (str):
             Token to retrieve the next page of results,
             or empty if there are no more results in the
             list.
         unreachable (Sequence[str]):
-            List of Locations that could not be reached.
+            List of locations that could not be reached.
     """
 
     @property
@@ -101,9 +105,11 @@ class ListGameServerClustersResponse(proto.Message):
         return self
 
     game_server_clusters = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GameServerCluster"
+        proto.MESSAGE, number=1, message="GameServerCluster",
     )
+
     next_page_token = proto.Field(proto.STRING, number=2)
+
     unreachable = proto.RepeatedField(proto.STRING, number=4)
 
 
@@ -113,7 +119,7 @@ class GetGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Cluster to retrieve.
+            Required. The name of the game server cluster to retrieve.
             Uses the form:
 
             ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
@@ -131,17 +137,19 @@ class CreateGameServerClusterRequest(proto.Message):
             Required. The parent resource name. Uses the form:
             ``projects/{project}/locations/{location}/realms/{realm-id}``.
         game_server_cluster_id (str):
-            Required. The ID of the Game Server Cluster
+            Required. The ID of the game server cluster
             resource to be created.
         game_server_cluster (~.gcgv_game_server_clusters.GameServerCluster):
-            Required. The Game Server Cluster resource to
+            Required. The game server cluster resource to
             be created.
     """
 
     parent = proto.Field(proto.STRING, number=1)
+
     game_server_cluster_id = proto.Field(proto.STRING, number=2)
+
     game_server_cluster = proto.Field(
-        proto.MESSAGE, number=3, message="GameServerCluster"
+        proto.MESSAGE, number=3, message="GameServerCluster",
     )
 
 
@@ -154,10 +162,10 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
             Required. The parent resource name. Uses the form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
         game_server_cluster_id (str):
-            Required. The ID of the Game Server Cluster
+            Required. The ID of the game server cluster
             resource to be created.
         game_server_cluster (~.gcgv_game_server_clusters.GameServerCluster):
-            Required. The Game Server Cluster resource to
+            Required. The game server cluster resource to
             be created.
         preview_time (~.timestamp.Timestamp):
             Optional. The target timestamp to compute the
@@ -165,11 +173,14 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
     """
 
     parent = proto.Field(proto.STRING, number=1)
+
     game_server_cluster_id = proto.Field(proto.STRING, number=2)
+
     game_server_cluster = proto.Field(
-        proto.MESSAGE, number=3, message="GameServerCluster"
+        proto.MESSAGE, number=3, message="GameServerCluster",
     )
-    preview_time = proto.Field(proto.MESSAGE, number=4, message=timestamp.Timestamp)
+
+    preview_time = proto.Field(proto.MESSAGE, number=4, message=timestamp.Timestamp,)
 
 
 class PreviewCreateGameServerClusterResponse(proto.Message):
@@ -184,7 +195,8 @@ class PreviewCreateGameServerClusterResponse(proto.Message):
     """
 
     etag = proto.Field(proto.STRING, number=2)
-    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState)
+
+    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
 
 
 class DeleteGameServerClusterRequest(proto.Message):
@@ -193,7 +205,7 @@ class DeleteGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Cluster to delete.
+            Required. The name of the game server cluster to delete.
             Uses the form:
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
     """
@@ -207,7 +219,7 @@ class PreviewDeleteGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the Game Server Cluster to delete.
+            Required. The name of the game server cluster to delete.
             Uses the form:
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
         preview_time (~.timestamp.Timestamp):
@@ -216,7 +228,8 @@ class PreviewDeleteGameServerClusterRequest(proto.Message):
     """
 
     name = proto.Field(proto.STRING, number=1)
-    preview_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp)
+
+    preview_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
 
 
 class PreviewDeleteGameServerClusterResponse(proto.Message):
@@ -231,7 +244,8 @@ class PreviewDeleteGameServerClusterResponse(proto.Message):
     """
 
     etag = proto.Field(proto.STRING, number=2)
-    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState)
+
+    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
 
 
 class UpdateGameServerClusterRequest(proto.Message):
@@ -240,7 +254,7 @@ class UpdateGameServerClusterRequest(proto.Message):
 
     Attributes:
         game_server_cluster (~.gcgv_game_server_clusters.GameServerCluster):
-            Required. The Game Server Cluster to be updated. Only fields
+            Required. The game server cluster to be updated. Only fields
             specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Required. Mask of fields to update. At least one path must
@@ -252,9 +266,10 @@ class UpdateGameServerClusterRequest(proto.Message):
     """
 
     game_server_cluster = proto.Field(
-        proto.MESSAGE, number=1, message="GameServerCluster"
+        proto.MESSAGE, number=1, message="GameServerCluster",
     )
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask)
+
+    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
 
 
 class PreviewUpdateGameServerClusterRequest(proto.Message):
@@ -263,7 +278,7 @@ class PreviewUpdateGameServerClusterRequest(proto.Message):
 
     Attributes:
         game_server_cluster (~.gcgv_game_server_clusters.GameServerCluster):
-            Required. The Game Server Cluster to be updated. Only fields
+            Required. The game server cluster to be updated. Only fields
             specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
             Required. Mask of fields to update. At least one path must
@@ -278,10 +293,12 @@ class PreviewUpdateGameServerClusterRequest(proto.Message):
     """
 
     game_server_cluster = proto.Field(
-        proto.MESSAGE, number=1, message="GameServerCluster"
+        proto.MESSAGE, number=1, message="GameServerCluster",
     )
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask)
-    preview_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp)
+
+    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
+
+    preview_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
 
 
 class PreviewUpdateGameServerClusterResponse(proto.Message):
@@ -296,26 +313,31 @@ class PreviewUpdateGameServerClusterResponse(proto.Message):
     """
 
     etag = proto.Field(proto.STRING, number=2)
-    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState)
+
+    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
 
 
 class GameServerClusterConnectionInfo(proto.Message):
-    r"""The Game Server Cluster connection information.
+    r"""The game server cluster connection information.
 
     Attributes:
         gke_cluster_reference (~.gcgv_game_server_clusters.GkeClusterReference):
             Reference to the GKE cluster where the game
             servers are installed.
         namespace (str):
-            Namespace designated on the Game Server
-            Cluster where the Agones game server instances
+            Namespace designated on the game server
+            cluster where the Agones game server instances
             will be created. Existence of the namespace will
             be validated during creation.
     """
 
     gke_cluster_reference = proto.Field(
-        proto.MESSAGE, number=7, message="GkeClusterReference"
+        proto.MESSAGE,
+        number=7,
+        oneof="cluster_reference",
+        message="GkeClusterReference",
     )
+
     namespace = proto.Field(proto.STRING, number=5)
 
 
@@ -339,11 +361,11 @@ class GkeClusterReference(proto.Message):
 
 
 class GameServerCluster(proto.Message):
-    r"""A Game Server Cluster resource.
+    r"""A game server cluster resource.
 
     Attributes:
         name (str):
-            Required. The resource name of the Game Server Cluster. Uses
+            Required. The resource name of the game server cluster. Uses
             the form:
 
             ``projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}``.
@@ -355,12 +377,12 @@ class GameServerCluster(proto.Message):
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
         labels (Sequence[~.gcgv_game_server_clusters.GameServerCluster.LabelsEntry]):
-            The labels associated with this Game Server
-            Cluster. Each label is a key-value pair.
+            The labels associated with this game server
+            cluster. Each label is a key-value pair.
         connection_info (~.gcgv_game_server_clusters.GameServerClusterConnectionInfo):
-            Game Server Cluster connection information.
-            This information is used to manage Game Server
-            Clusters.
+            The game server cluster connection
+            information. This information is used to manage
+            game server clusters.
         etag (str):
             ETag of the resource.
         description (str):
@@ -368,13 +390,19 @@ class GameServerCluster(proto.Message):
     """
 
     name = proto.Field(proto.STRING, number=1)
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp)
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp)
+
+    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+
+    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+
     labels = proto.MapField(proto.STRING, proto.STRING, number=4)
+
     connection_info = proto.Field(
-        proto.MESSAGE, number=5, message=GameServerClusterConnectionInfo
+        proto.MESSAGE, number=5, message=GameServerClusterConnectionInfo,
     )
+
     etag = proto.Field(proto.STRING, number=6)
+
     description = proto.Field(proto.STRING, number=7)
 
 

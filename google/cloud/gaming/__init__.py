@@ -15,15 +15,26 @@
 # limitations under the License.
 #
 
-
+from google.cloud.gaming_v1.services.game_server_clusters_service.async_client import (
+    GameServerClustersServiceAsyncClient,
+)
 from google.cloud.gaming_v1.services.game_server_clusters_service.client import (
     GameServerClustersServiceClient,
+)
+from google.cloud.gaming_v1.services.game_server_configs_service.async_client import (
+    GameServerConfigsServiceAsyncClient,
 )
 from google.cloud.gaming_v1.services.game_server_configs_service.client import (
     GameServerConfigsServiceClient,
 )
+from google.cloud.gaming_v1.services.game_server_deployments_service.async_client import (
+    GameServerDeploymentsServiceAsyncClient,
+)
 from google.cloud.gaming_v1.services.game_server_deployments_service.client import (
     GameServerDeploymentsServiceClient,
+)
+from google.cloud.gaming_v1.services.realms_service.async_client import (
+    RealmsServiceAsyncClient,
 )
 from google.cloud.gaming_v1.services.realms_service.client import RealmsServiceClient
 from google.cloud.gaming_v1.types.common import DeployedFleetDetails
@@ -160,12 +171,15 @@ __all__ = (
     "FleetConfig",
     "GameServerCluster",
     "GameServerClusterConnectionInfo",
+    "GameServerClustersServiceAsyncClient",
     "GameServerClustersServiceClient",
     "GameServerConfig",
     "GameServerConfigOverride",
+    "GameServerConfigsServiceAsyncClient",
     "GameServerConfigsServiceClient",
     "GameServerDeployment",
     "GameServerDeploymentRollout",
+    "GameServerDeploymentsServiceAsyncClient",
     "GameServerDeploymentsServiceClient",
     "GetGameServerClusterRequest",
     "GetGameServerConfigRequest",
@@ -196,6 +210,7 @@ __all__ = (
     "PreviewUpdateGameServerClusterResponse",
     "Realm",
     "RealmSelector",
+    "RealmsServiceAsyncClient",
     "RealmsServiceClient",
     "ScalingConfig",
     "Schedule",

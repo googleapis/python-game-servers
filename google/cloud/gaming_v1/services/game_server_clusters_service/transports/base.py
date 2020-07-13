@@ -19,6 +19,7 @@ import abc
 import typing
 
 from google import auth
+from google.api_core import exceptions  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.auth import credentials  # type: ignore
 
@@ -26,7 +27,7 @@ from google.cloud.gaming_v1.types import game_server_clusters
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 
-class GameServerClustersServiceTransport(metaclass=abc.ABCMeta):
+class GameServerClustersServiceTransport(abc.ABC):
     """Abstract transport class for GameServerClustersService."""
 
     AUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
@@ -36,6 +37,9 @@ class GameServerClustersServiceTransport(metaclass=abc.ABCMeta):
         *,
         host: str = "gameservices.googleapis.com",
         credentials: credentials.Credentials = None,
+        credentials_file: typing.Optional[str] = None,
+        scopes: typing.Optional[typing.Sequence[str]] = AUTH_SCOPES,
+        **kwargs,
     ) -> None:
         """Instantiate the transport.
 
@@ -46,6 +50,10 @@ class GameServerClustersServiceTransport(metaclass=abc.ABCMeta):
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
+            credentials_file (Optional[str]): A file with credentials that can
+                be loaded with :func:`google.auth.load_credentials_from_file`.
+                This argument is mutually exclusive with credentials.
+            scope (Optional[Sequence[str]]): A list of scopes.
         """
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
         if ":" not in host:
@@ -54,8 +62,17 @@ class GameServerClustersServiceTransport(metaclass=abc.ABCMeta):
 
         # If no credentials are provided, then determine the appropriate
         # defaults.
-        if credentials is None:
-            credentials, _ = auth.default(scopes=self.AUTH_SCOPES)
+        if credentials and credentials_file:
+            raise exceptions.DuplicateCredentialArgs(
+                "'credentials_file' and 'credentials' are mutually exclusive"
+            )
+
+        if credentials_file is not None:
+            credentials, _ = auth.load_credentials_from_file(
+                credentials_file, scopes=scopes
+            )
+        elif credentials is None:
+            credentials, _ = auth.default(scopes=scopes)
 
         # Save the credentials.
         self._credentials = credentials
@@ -63,76 +80,100 @@ class GameServerClustersServiceTransport(metaclass=abc.ABCMeta):
     @property
     def operations_client(self) -> operations_v1.OperationsClient:
         """Return the client designed to process long-running operations."""
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def list_game_server_clusters(
-        self
+        self,
     ) -> typing.Callable[
         [game_server_clusters.ListGameServerClustersRequest],
-        game_server_clusters.ListGameServerClustersResponse,
+        typing.Union[
+            game_server_clusters.ListGameServerClustersResponse,
+            typing.Awaitable[game_server_clusters.ListGameServerClustersResponse],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def get_game_server_cluster(
-        self
+        self,
     ) -> typing.Callable[
         [game_server_clusters.GetGameServerClusterRequest],
-        game_server_clusters.GameServerCluster,
+        typing.Union[
+            game_server_clusters.GameServerCluster,
+            typing.Awaitable[game_server_clusters.GameServerCluster],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def create_game_server_cluster(
-        self
+        self,
     ) -> typing.Callable[
-        [game_server_clusters.CreateGameServerClusterRequest], operations.Operation
+        [game_server_clusters.CreateGameServerClusterRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def preview_create_game_server_cluster(
-        self
+        self,
     ) -> typing.Callable[
         [game_server_clusters.PreviewCreateGameServerClusterRequest],
-        game_server_clusters.PreviewCreateGameServerClusterResponse,
+        typing.Union[
+            game_server_clusters.PreviewCreateGameServerClusterResponse,
+            typing.Awaitable[
+                game_server_clusters.PreviewCreateGameServerClusterResponse
+            ],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def delete_game_server_cluster(
-        self
+        self,
     ) -> typing.Callable[
-        [game_server_clusters.DeleteGameServerClusterRequest], operations.Operation
+        [game_server_clusters.DeleteGameServerClusterRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def preview_delete_game_server_cluster(
-        self
+        self,
     ) -> typing.Callable[
         [game_server_clusters.PreviewDeleteGameServerClusterRequest],
-        game_server_clusters.PreviewDeleteGameServerClusterResponse,
+        typing.Union[
+            game_server_clusters.PreviewDeleteGameServerClusterResponse,
+            typing.Awaitable[
+                game_server_clusters.PreviewDeleteGameServerClusterResponse
+            ],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def update_game_server_cluster(
-        self
+        self,
     ) -> typing.Callable[
-        [game_server_clusters.UpdateGameServerClusterRequest], operations.Operation
+        [game_server_clusters.UpdateGameServerClusterRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def preview_update_game_server_cluster(
-        self
+        self,
     ) -> typing.Callable[
         [game_server_clusters.PreviewUpdateGameServerClusterRequest],
-        game_server_clusters.PreviewUpdateGameServerClusterResponse,
+        typing.Union[
+            game_server_clusters.PreviewUpdateGameServerClusterResponse,
+            typing.Awaitable[
+                game_server_clusters.PreviewUpdateGameServerClusterResponse
+            ],
+        ],
     ]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 __all__ = ("GameServerClustersServiceTransport",)

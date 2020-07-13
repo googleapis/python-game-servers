@@ -70,24 +70,32 @@ class OperationMetadata(proto.Message):
             Output only. List of Locations that could not
             be reached.
         operation_status (Sequence[~.common.OperationMetadata.OperationStatusEntry]):
-            Output only. Operation status for
-            gameservices API operations. Operation status is
-            in the form of key-value pairs where keys are
+            Output only. Operation status for Game
+            Services API operations. Operation status is in
+            the form of key-value pairs where keys are
             resource IDs and the values show the status of
             the operation. In case of failures, the value
             includes an error code and error message.
     """
 
-    create_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp)
-    end_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp)
+    create_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
+
+    end_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+
     target = proto.Field(proto.STRING, number=3)
+
     verb = proto.Field(proto.STRING, number=4)
+
     status_message = proto.Field(proto.STRING, number=5)
+
     requested_cancellation = proto.Field(proto.BOOL, number=6)
+
     api_version = proto.Field(proto.STRING, number=7)
+
     unreachable = proto.RepeatedField(proto.STRING, number=8)
+
     operation_status = proto.MapField(
-        proto.STRING, proto.MESSAGE, number=9, message="OperationStatus"
+        proto.STRING, proto.MESSAGE, number=9, message="OperationStatus",
     )
 
 
@@ -112,7 +120,9 @@ class OperationStatus(proto.Message):
         CLUSTER_CONNECTION = 3
 
     done = proto.Field(proto.BOOL, number=1)
-    error_code = proto.Field(proto.ENUM, number=2, enum=ErrorCode)
+
+    error_code = proto.Field(proto.ENUM, number=2, enum=ErrorCode,)
+
     error_message = proto.Field(proto.STRING, number=3)
 
 
@@ -128,11 +138,11 @@ class LabelSelector(proto.Message):
 
 
 class RealmSelector(proto.Message):
-    r"""The Realm selector, used to match Realm resources.
+    r"""The realm selector, used to match realm resources.
 
     Attributes:
         realms (Sequence[str]):
-            List of Realms to match.
+            List of realms to match.
     """
 
     realms = proto.RepeatedField(proto.STRING, number=1)
@@ -165,12 +175,15 @@ class Schedule(proto.Message):
             The cron definition of the scheduled event.
             See https://en.wikipedia.org/wiki/Cron. Cron
             spec specifies the local time as defined by the
-            Realm.
+            realm.
     """
 
-    start_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp)
-    end_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp)
-    cron_job_duration = proto.Field(proto.MESSAGE, number=3, message=duration.Duration)
+    start_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
+
+    end_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+
+    cron_job_duration = proto.Field(proto.MESSAGE, number=3, message=duration.Duration,)
+
     cron_spec = proto.Field(proto.STRING, number=4)
 
 
@@ -180,7 +193,7 @@ class SpecSource(proto.Message):
 
     Attributes:
         game_server_config_name (str):
-            The Game Server Config resource. Uses the form:
+            The game server config resource. Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}/configs/{config_id}``.
         name (str):
@@ -190,6 +203,7 @@ class SpecSource(proto.Message):
     """
 
     game_server_config_name = proto.Field(proto.STRING, number=1)
+
     name = proto.Field(proto.STRING, number=2)
 
 
@@ -198,16 +212,16 @@ class TargetDetails(proto.Message):
 
     Attributes:
         game_server_cluster_name (str):
-            The Game Server Cluster name. Uses the form:
+            The game server cluster name. Uses the form:
 
             ``projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}``.
         game_server_deployment_name (str):
-            The Game Server Deployment name. Uses the form:
+            The game server deployment name. Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}``.
         fleet_details (Sequence[~.common.TargetDetails.TargetFleetDetails]):
-            Agones fleet details for Game Server Clusters
-            and Game Server Deployments.
+            Agones fleet details for game server clusters
+            and game server deployments.
     """
 
     class TargetFleetDetails(proto.Message):
@@ -233,7 +247,8 @@ class TargetDetails(proto.Message):
             """
 
             name = proto.Field(proto.STRING, number=1)
-            spec_source = proto.Field(proto.MESSAGE, number=2, message=SpecSource)
+
+            spec_source = proto.Field(proto.MESSAGE, number=2, message=SpecSource,)
 
         class TargetFleetAutoscaler(proto.Message):
             r"""Target Agones autoscaler policy reference.
@@ -247,13 +262,15 @@ class TargetDetails(proto.Message):
             """
 
             name = proto.Field(proto.STRING, number=1)
-            spec_source = proto.Field(proto.MESSAGE, number=2, message=SpecSource)
+
+            spec_source = proto.Field(proto.MESSAGE, number=2, message=SpecSource,)
 
         fleet = proto.Field(
             proto.MESSAGE,
             number=1,
             message="TargetDetails.TargetFleetDetails.TargetFleet",
         )
+
         autoscaler = proto.Field(
             proto.MESSAGE,
             number=2,
@@ -261,9 +278,11 @@ class TargetDetails(proto.Message):
         )
 
     game_server_cluster_name = proto.Field(proto.STRING, number=1)
+
     game_server_deployment_name = proto.Field(proto.STRING, number=2)
+
     fleet_details = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=TargetFleetDetails
+        proto.MESSAGE, number=3, message=TargetFleetDetails,
     )
 
 
@@ -275,7 +294,7 @@ class TargetState(proto.Message):
             Details about Agones fleets.
     """
 
-    details = proto.RepeatedField(proto.MESSAGE, number=1, message=TargetDetails)
+    details = proto.RepeatedField(proto.MESSAGE, number=1, message=TargetDetails,)
 
 
 class DeployedFleetDetails(proto.Message):
@@ -330,13 +349,19 @@ class DeployedFleetDetails(proto.Message):
             """
 
             ready_replicas = proto.Field(proto.INT64, number=1)
+
             allocated_replicas = proto.Field(proto.INT64, number=2)
+
             reserved_replicas = proto.Field(proto.INT64, number=3)
+
             replicas = proto.Field(proto.INT64, number=4)
 
         fleet = proto.Field(proto.STRING, number=1)
+
         fleet_spec = proto.Field(proto.STRING, number=2)
-        spec_source = proto.Field(proto.MESSAGE, number=3, message=SpecSource)
+
+        spec_source = proto.Field(proto.MESSAGE, number=3, message=SpecSource,)
+
         status = proto.Field(
             proto.MESSAGE,
             number=5,
@@ -358,12 +383,15 @@ class DeployedFleetDetails(proto.Message):
         """
 
         autoscaler = proto.Field(proto.STRING, number=1)
-        spec_source = proto.Field(proto.MESSAGE, number=4, message=SpecSource)
+
+        spec_source = proto.Field(proto.MESSAGE, number=4, message=SpecSource,)
+
         fleet_autoscaler_spec = proto.Field(proto.STRING, number=3)
 
-    deployed_fleet = proto.Field(proto.MESSAGE, number=1, message=DeployedFleet)
+    deployed_fleet = proto.Field(proto.MESSAGE, number=1, message=DeployedFleet,)
+
     deployed_autoscaler = proto.Field(
-        proto.MESSAGE, number=2, message=DeployedFleetAutoscaler
+        proto.MESSAGE, number=2, message=DeployedFleetAutoscaler,
     )
 
 

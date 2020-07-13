@@ -15,7 +15,6 @@
 # limitations under the License.
 #
 
-
 from .services.game_server_clusters_service import GameServerClustersServiceClient
 from .services.game_server_configs_service import GameServerConfigsServiceClient
 from .services.game_server_deployments_service import GameServerDeploymentsServiceClient
@@ -93,12 +92,12 @@ __all__ = (
     "FleetConfig",
     "GameServerCluster",
     "GameServerClusterConnectionInfo",
-    "GameServerClustersServiceClient",
     "GameServerConfig",
     "GameServerConfigOverride",
     "GameServerConfigsServiceClient",
     "GameServerDeployment",
     "GameServerDeploymentRollout",
+    "GameServerDeploymentsServiceClient",
     "GetGameServerClusterRequest",
     "GetGameServerConfigRequest",
     "GetGameServerDeploymentRequest",
@@ -138,5 +137,5 @@ __all__ = (
     "UpdateGameServerDeploymentRequest",
     "UpdateGameServerDeploymentRolloutRequest",
     "UpdateRealmRequest",
-    "GameServerDeploymentsServiceClient",
+    "GameServerClustersServiceClient",
 )
