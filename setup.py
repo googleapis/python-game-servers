@@ -40,7 +40,7 @@ setuptools.setup(
     platforms="Posix; MacOS X; Windows",
     include_package_data=True,
     install_requires=(
-        "google-api-core >= 1.21.0, < 2.0.0dev",
+        "google-api-core[grpc] >= 1.21.0, < 2.0.0dev",
         "googleapis-common-protos >= 1.5.8",
         "proto-plus >= 0.4.0",
     ),
