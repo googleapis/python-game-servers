@@ -37,9 +37,9 @@ def update_rollout_remove_default(project_id, deployment_id):
 
     client = gaming.GameServerDeploymentsServiceClient()
 
-    # Location is hard coded as global, as Game Server Deployments can only be
-    # created in global.  This is done for all operations on Game Server
-    # Deployments, as well as for its child resource types.
+    # Location is hard coded as global, as Game Server Deployments can
+    # only be created in global.  This is done for all operations on
+    # Game Server Deployments, as well as for its child resource types.
     request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
     request.rollout.name = f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}"
     request.rollout.default_game_server_config = ""

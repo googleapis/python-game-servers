@@ -32,9 +32,9 @@ def list_deployments(project_id):
 
     client = gaming.GameServerDeploymentsServiceClient()
 
-    # Location is hard coded as global, as Game Server Deployments can only be
-    # created in global.  This is done for all operations on Game Server
-    # Deployments, as well as for its child resource types.
+    # Location is hard coded as global, as Game Server Deployments can
+    # only be created in global.  This is done for all operations on
+    # Game Server Deployments, as well as for its child resource types.
     deployments = client.list_game_server_deployments(
         parent=f"projects/{project_id}/locations/global"
     )
