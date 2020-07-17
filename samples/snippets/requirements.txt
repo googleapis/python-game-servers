@@ -1,0 +1,2 @@
+# future==0.18.2
+google-cloud-game-servers==0.2.0

@@ -1,0 +1,36 @@
+# This file is used to generate README.rst
+
+product:
+  name: Google Cloud Game Servers
+  short_name: Game Servers
+  url: https://cloud.google.com/game-servers/docs/
+  description: >
+    The `Google Cloud Game Servers`_ is a managed service that enables game
+    developers to deploy and manage their dedicated game servers across
+    multiple Agones clusters around the world through a single interface.
+
+setup:
+- auth
+- install_deps
+
+samples:
+- name: Create deployment
+  file: create_deployment.py
+  show_help: True
+- name: Delete deployment
+  file: delete_deployment.py
+  show_help: True
+- name: Get deployment
+  file: get_deployment.py
+  show_help: True
+- name: Get rollout
+  file: get_rollout.py
+  show_help: True
+- name: List deployments
+  file: list_deployments.py
+  show_help: True
+- name: Update rollout by removing default config
+  file: update_rollout_remove_default.py
+  show_help: True
+
+cloud_client_library: true
