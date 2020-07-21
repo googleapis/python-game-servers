@@ -25,11 +25,8 @@ import argparse
 from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
 
-import wait_for_operation
 
 # [START cloud_game_servers_delete_deployment]
-
-
 def delete_deployment(project_id, deployment_id):
     """Deletes a game server deployment."""
 
@@ -42,9 +39,9 @@ def delete_deployment(project_id, deployment_id):
         name=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}",
     )
 
-    response = client.delete_game_server_deployment(request)
-    print(f"Delete deployment operation: {response.operation.name}")
-    wait_for_operation.wait_for_operation(client._transport.operations_client, response.operation.name)
+    operation = client.delete_game_server_deployment(request)
+    print(f"Delete deployment operation: {operation.operation.name}")
+    operation.result(timeout=120)
 # [END cloud_game_servers_delete_deployment]
 
 

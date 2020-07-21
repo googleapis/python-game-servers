@@ -24,9 +24,8 @@ import argparse
 
 from google.cloud import gaming
 
+
 # [START cloud_game_servers_list_deployments]
-
-
 def list_deployments(project_id):
     """Lists the existing game server deployments."""
 
@@ -43,7 +42,6 @@ def list_deployments(project_id):
         print(f"Name: {deployment.name}")
 
     return deployments.game_server_deployments
-
 # [END cloud_game_servers_list_deployments]
 
 

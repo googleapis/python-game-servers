@@ -25,9 +25,8 @@ import argparse
 from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
 
+
 # [START cloud_game_servers_get_rollout]
-
-
 def get_rollout(project_id, deployment_id):
     """Gets the rollout of a game server deployment."""
 

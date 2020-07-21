@@ -25,11 +25,8 @@ import argparse
 from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
 
-import wait_for_operation
 
 # [START cloud_game_servers_create_deployment]
-
-
 def create_deployment(project_id, deployment_id):
     """Creates a game server deployment."""
 
@@ -46,9 +43,9 @@ def create_deployment(project_id, deployment_id):
         ),
     )
 
-    response = client.create_game_server_deployment(request)
-    print(f"Create deployment operation: {response.operation.name}")
-    wait_for_operation.wait_for_operation(client._transport.operations_client, response.operation.name)
+    operation = client.create_game_server_deployment(request)
+    print(f"Create deployment operation: {operation.operation.name}")
+    operation.result(timeout=120)
 # [END cloud_game_servers_create_deployment]
 
 
