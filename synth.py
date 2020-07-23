@@ -19,14 +19,16 @@ import synthtool as s
 import synthtool.gcp as gcp
 from synthtool.languages import python
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 common = gcp.CommonTemplates()
 
 # ----------------------------------------------------------------------------
 # Generate Game Servers GAPIC layer
 # ----------------------------------------------------------------------------
 library = gapic.py_library(
-    "gameservices", "v1beta", proto_path="google/cloud/gaming/v1beta"
+    service="gameservices",
+    version="v1beta",
+    bazel_target="//google/cloud/gaming/v1beta:gaming-v1beta-py"
 )
 
 s.move(library, excludes=["nox.py", "setup.py", "README.rst", "docs/index.rst"])
