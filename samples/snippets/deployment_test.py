@@ -24,50 +24,73 @@ import get_rollout
 import list_deployments
 import update_rollout_remove_default
 
-PROJECT_ID = "gcgs-client-lib-samples-python"
-DEPLOYMENT_ID_1 = "deployment-{}".format(uuid.uuid4())
+PROJECT_ID = "python-docs-samples-tests"
 
 
-@pytest.fixture(scope="function", autouse=True)
-def teardown():
+@pytest.fixture(scope="function")
+def test_deployment():
+    deployment_id = "deployment-{}".format(uuid.uuid4())
 
-    yield DEPLOYMENT_ID_1
+    print(f"Creating deployment {deployment_id} in project {PROJECT_ID}")
+    create_deployment.create_deployment(PROJECT_ID, deployment_id)
 
-    print("Cleaning up resources in teardown")
-    clean_up_resources(DEPLOYMENT_ID_1)
+    yield deployment_id
+
+    print(f"Cleaning up deployment {deployment_id} in teardown")
+    clean_up_deployment(deployment_id)
 
 
-def clean_up_resources(deployment_id):
+def clean_up_deployment(deployment_id):
     # Delete the deployment if it still exists.
     try:
         get_deployment.get_deployment(PROJECT_ID, deployment_id)
     except exceptions.NotFound:  # Ignore the non-existent deployment
         return
 
-    print(f"Deleting Game Server Deployment: {deployment_id}")
-    update_rollout_remove_default.update_rollout_remove_default(PROJECT_ID, deployment_id)
+    try:
+        update_rollout_remove_default.update_rollout_remove_default(PROJECT_ID, deployment_id)
+    except exceptions.NotFound:  # Ignore the non-existent deployment
+        return
+
+    print(f"Deleting deployment: {deployment_id}")
     try:
         delete_deployment.delete_deployment(PROJECT_ID, deployment_id)
     except exceptions.NotFound:  # Ignore the non-existent deployment
         return
 
 
-def test_deployments():
-    create_deployment.create_deployment(PROJECT_ID, DEPLOYMENT_ID_1)
-    deployment1 = get_deployment.get_deployment(PROJECT_ID, DEPLOYMENT_ID_1)
-    assert deployment1.name == f"projects/{PROJECT_ID}/locations/global/gameServerDeployments/{DEPLOYMENT_ID_1}"
+def test_create_deployment(test_deployment):
+    print(f"Created deployment {test_deployment} in project {PROJECT_ID}")
 
+
+def test_get_deployment(test_deployment):
+    deployment = get_deployment.get_deployment(PROJECT_ID, test_deployment)
+    assert deployment.name == f"projects/{PROJECT_ID}/locations/global/gameServerDeployments/{test_deployment}"
+
+
+def test_list_deployments(test_deployment):
     deployments = list_deployments.list_deployments(PROJECT_ID)
-    assert len(deployments) > 0
 
-    rollout1 = get_rollout.get_rollout(PROJECT_ID, DEPLOYMENT_ID_1)
-    assert rollout1.name == f"projects/{PROJECT_ID}/locations/global/gameServerDeployments/{DEPLOYMENT_ID_1}/rollout"
+    deployment_name_list = []
+    for deployment in deployments:
+        deployment_name_list.append(deployment.name)
 
-    update_rollout_remove_default.update_rollout_remove_default(PROJECT_ID, DEPLOYMENT_ID_1)
-    rollout1 = get_rollout.get_rollout(PROJECT_ID, DEPLOYMENT_ID_1)
-    assert rollout1.default_game_server_config == ""
+    deployment_name = f"projects/{PROJECT_ID}/locations/global/gameServerDeployments/{test_deployment}"
+    assert deployment_name in deployment_name_list
 
-    delete_deployment.delete_deployment(PROJECT_ID, DEPLOYMENT_ID_1)
 
+def test_delete_deployment(test_deployment):
+    delete_deployment.delete_deployment(PROJECT_ID, test_deployment)
     with pytest.raises(exceptions.NotFound):
-        get_deployment.get_deployment(PROJECT_ID, DEPLOYMENT_ID_1)
+        get_deployment.get_deployment(PROJECT_ID, test_deployment)
+
+
+def test_get_rollout(test_deployment):
+    rollout = get_rollout.get_rollout(PROJECT_ID, test_deployment)
+    assert rollout.name == f"projects/{PROJECT_ID}/locations/global/gameServerDeployments/{test_deployment}/rollout"
+
+
+def test_update_rollout_remove_default(test_deployment):
+    update_rollout_remove_default.update_rollout_remove_default(PROJECT_ID, test_deployment)
+    rollout = get_rollout.get_rollout(PROJECT_ID, test_deployment)
+    assert rollout.default_game_server_config == ""
