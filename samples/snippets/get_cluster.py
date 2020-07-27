@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for getting a realm.
+"""Google Cloud Game Servers sample for getting a game server cluster.
 
 Example usage:
     python get_cluster.py --project-id <project-id> --location <location> --realm-id <realm-id> --cluster-id <cluster-id>

@@ -128,7 +128,7 @@ def clean_up_realm(realm_id):
     print(f"Deleting realm: {realm_id}")
     try:
         delete_realm.delete_realm(PROJECT_ID, REALM_LOCATION, realm_id)
-    except exceptions.NotFound:  # Ignore the non-existent deployment
+    except exceptions.NotFound:  # Ignore the non-existent realm
         return
 
 

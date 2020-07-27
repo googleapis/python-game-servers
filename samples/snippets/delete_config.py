@@ -17,7 +17,7 @@
 """Google Cloud Game Servers sample for deleting a game server config.
 
 Example usage:
-    python delete_deployment.py --project-id <project-id> --deployment-id <deployment-id> --config-id <config-id>
+    python delete_config.py --project-id <project-id> --deployment-id <deployment-id> --config-id <config-id>
 """
 
 import argparse

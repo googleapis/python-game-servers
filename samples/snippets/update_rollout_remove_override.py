@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for updating the rollout of a game server
-deployment to remove the override config.
+"""Google Cloud Game Servers sample for updating the rollout of a game
+server deployment to remove the override config.
 
 Example usage:
     python update_rollout_remove_override.py --project-id <project-id> --deployment-id <deployment-id>

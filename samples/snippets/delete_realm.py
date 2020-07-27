@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for deleting a deployment.
+"""Google Cloud Game Servers sample for deleting a realm.
 
 Example usage:
-    python delete_realm.py --project-id <project-id> --location --realm-id <deployment-id>
+    python delete_realm.py --project-id <project-id> --location --realm-id <realm-id>
 """
 
 import argparse

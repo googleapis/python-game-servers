@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for updating the rollout of a game server
-deployment to set the default config.
+"""Google Cloud Game Servers sample for updating the rollout of a game
+server deployment to set the default config.
 
 Example usage:
     python update_rollout_default.py --project-id <project-id> --deployment-id <deployment-id> --config-id <config-id>

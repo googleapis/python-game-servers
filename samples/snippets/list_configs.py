@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for listing Game Server Deployments.
+"""Google Cloud Game Servers sample for listing game server configs.
 
 Example usage:
     python list_configs.py --project-id <project-id>  --deployment-id <deployment-id>

@@ -17,7 +17,7 @@
 """Google Cloud Game Servers sample for deleting a game server cluster.
 
 Example usage:
-    python delete_cluster.py --project-id <project-id> --location --realm-id <deployment-id> --cluster-id <cluster-id>
+    python delete_cluster.py --project-id <project-id> --location --realm-id <realm-id> --cluster-id <cluster-id>
 """
 
 import argparse
