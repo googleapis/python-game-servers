@@ -14,41 +14,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for listing game server deployments.
+"""Google Cloud Game Servers sample for deleting a deployment.
 
 Example usage:
-    python list_deployments.py --project-id <project-id>
+    python delete_realm.py --project-id <project-id> --location --realm-id <deployment-id>
 """
 
 import argparse
 
 from google.cloud import gaming
+from google.cloud.gaming_v1.types import realms
 
 
-# [START cloud_game_servers_list_deployments]
-def list_deployments(project_id):
-    """Lists the existing game server deployments."""
+# [START cloud_game_servers_delete_realm]
+def delete_realm(project_id, location, realm_id):
+    """Deletes a realm."""
 
-    client = gaming.GameServerDeploymentsServiceClient()
+    client = gaming.RealmsServiceClient()
 
-    # Location is hard coded as global, as game server deployments can
-    # only be created in global.  This is done for all operations on
-    # game server deployments, as well as for its child resource types.
-    response = client.list_game_server_deployments(
-        parent=f"projects/{project_id}/locations/global"
+    request = realms.DeleteRealmRequest(
+        name=f"projects/{project_id}/locations/{location}/realms/{realm_id}",
     )
 
-    for deployment in response.game_server_deployments:
-        print(f"Name: {deployment.name}")
-
-    return response.game_server_deployments
-# [END cloud_game_servers_list_deployments]
+    operation = client.delete_realm(request)
+    print(f"Delete realm operation: {operation.operation.name}")
+    operation.result(timeout=120)
+# [END cloud_game_servers_delete_realm]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
+    parser.add_argument('--location', help='Your realm location.', required=True)
+    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
 
     args = parser.parse_args()
 
-    list_deployments(args.project_id)
+    delete_realm(args.project_id, args.location, args.realm_id)

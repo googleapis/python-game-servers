@@ -14,41 +14,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for listing game server deployments.
+"""Google Cloud Game Servers sample for listing realms.
 
 Example usage:
-    python list_deployments.py --project-id <project-id>
+    python list_realms.py --project-id <project-id> --location <location>
 """
 
 import argparse
 
 from google.cloud import gaming
 
+# [START cloud_game_servers_list_realms]
 
-# [START cloud_game_servers_list_deployments]
-def list_deployments(project_id):
-    """Lists the existing game server deployments."""
 
-    client = gaming.GameServerDeploymentsServiceClient()
+def list_realms(project_id, location):
+    """Lists the existing realms."""
 
-    # Location is hard coded as global, as game server deployments can
-    # only be created in global.  This is done for all operations on
-    # game server deployments, as well as for its child resource types.
-    response = client.list_game_server_deployments(
-        parent=f"projects/{project_id}/locations/global"
+    client = gaming.RealmsServiceClient()
+
+    response = client.list_realms(
+        parent=f"projects/{project_id}/locations/{location}"
     )
 
-    for deployment in response.game_server_deployments:
-        print(f"Name: {deployment.name}")
+    for realm in response.realms:
+        print(f"Name: {realm.name}")
 
-    return response.game_server_deployments
-# [END cloud_game_servers_list_deployments]
+    return response.realms
+# [END cloud_game_servers_list_realms]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
+    parser.add_argument('--location', help='Your realm location.', required=True)
 
     args = parser.parse_args()
 
-    list_deployments(args.project_id)
+    list_realms(args.project_id, args.location)

@@ -14,35 +14,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for getting a game server deployment.
+"""Google Cloud Game Servers sample for listing Game Server Deployments.
 
 Example usage:
-    python get_deployment.py --project-id <project-id> --deployment-id <deployment-id>
+    python list_configs.py --project-id <project-id>  --deployment-id <deployment-id>
 """
 
 import argparse
 
 from google.cloud import gaming
-from google.cloud.gaming_v1.types import game_server_deployments
 
 
-# [START cloud_game_servers_get_deployment]
-def get_deployment(project_id, deployment_id):
-    """Gets a game server deployment."""
+# [START cloud_game_servers_list_configs]
+def list_configs(project_id, deployment_id):
+    """Lists the existing game server deployments."""
 
-    client = gaming.GameServerDeploymentsServiceClient()
+    client = gaming.GameServerConfigsServiceClient()
 
-    # Location is hard coded as global, as game server deployments can
+    # Location is hard coded as global, as game server configs can
     # only be created in global.  This is done for all operations on
-    # game server deployments, as well as for its child resource types.
-    request = game_server_deployments.GetGameServerDeploymentRequest(
-        name=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}",
+    # game server configs.
+    response = client.list_game_server_configs(
+        parent=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}"
     )
 
-    response = client.get_game_server_deployment(request)
-    print(f"Get deployment response:\n{response}")
-    return response
-# [END cloud_game_servers_get_deployment]
+    for config in response.game_server_configs:
+        print(f"Name: {config.name}")
+
+    return response.game_server_configs
+# [END cloud_game_servers_list_configs]
 
 
 if __name__ == "__main__":
@@ -52,4 +52,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    get_deployment(args.project_id, args.deployment_id)
+    list_configs(args.project_id, args.deployment_id)

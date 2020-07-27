@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for getting the rollout of a Game Server Deployment.
+"""Google Cloud Game Servers sample for getting the rollout of a game server deployment.
 
 Example usage:
     python get_rollout.py --project-id <project-id> --deployment-id <deployment-id>
@@ -32,9 +32,9 @@ def get_rollout(project_id, deployment_id):
 
     client = gaming.GameServerDeploymentsServiceClient()
 
-    # Location is hard coded as global, as Game Server Deployments can
+    # Location is hard coded as global, as game server deployments can
     # only be created in global.  This is done for all operations on
-    # Game Server Deployments, as well as for its child resource types.
+    # game server deployments, as well as for its child resource types.
     request = game_server_deployments.GetGameServerDeploymentRolloutRequest(
         name=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}",
     )
