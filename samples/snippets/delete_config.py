@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_configs
 
 
-# [START cloud_game_servers_delete_config]
+# [START cloud_game_servers_config_delete]
 def delete_config(project_id, deployment_id, config_id):
     """Deletes a game server config."""
 
@@ -42,7 +42,7 @@ def delete_config(project_id, deployment_id, config_id):
     operation = client.delete_game_server_config(request)
     print(f"Delete config operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_delete_config]
+# [END cloud_game_servers_config_delete]
 
 
 if __name__ == "__main__":

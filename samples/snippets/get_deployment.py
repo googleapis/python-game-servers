@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
 
 
-# [START cloud_game_servers_get_deployment]
+# [START cloud_game_servers_deployment_get]
 def get_deployment(project_id, deployment_id):
     """Gets a game server deployment."""
 
@@ -42,7 +42,7 @@ def get_deployment(project_id, deployment_id):
     response = client.get_game_server_deployment(request)
     print(f"Get deployment response:\n{response}")
     return response
-# [END cloud_game_servers_get_deployment]
+# [END cloud_game_servers_deployment_get]
 
 
 if __name__ == "__main__":

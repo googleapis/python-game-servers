@@ -25,7 +25,7 @@ import argparse
 from google.cloud import gaming
 
 
-# [START cloud_game_servers_list_clusters]
+# [START cloud_game_servers_cluster_list]
 def list_clusters(project_id, location, realm_id):
     """Lists the existing game server clusters."""
 
@@ -39,7 +39,7 @@ def list_clusters(project_id, location, realm_id):
         print(f"Name: {cluster.name}")
 
     return response.game_server_clusters
-# [END cloud_game_servers_list_clusters]
+# [END cloud_game_servers_cluster_list]
 
 
 if __name__ == "__main__":

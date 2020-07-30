@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_clusters
 
 
-# [START cloud_game_servers_delete_cluster]
+# [START cloud_game_servers_cluster_delete]
 def delete_cluster(project_id, location, realm_id, cluster_id):
     """Deletes a game server cluster."""
 
@@ -39,7 +39,7 @@ def delete_cluster(project_id, location, realm_id, cluster_id):
     operation = client.delete_game_server_cluster(request)
     print(f"Delete cluster operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_delete_cluster]
+# [END cloud_game_servers_cluster_delete]
 
 
 if __name__ == "__main__":

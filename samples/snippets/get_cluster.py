@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_clusters
 
 
-# [START cloud_game_servers_get_cluster]
+# [START cloud_game_servers_cluster_get]
 def get_cluster(project_id, location, realm_id, cluster_id):
     """Gets a game server cluster."""
 
@@ -39,7 +39,7 @@ def get_cluster(project_id, location, realm_id, cluster_id):
     response = client.get_game_server_cluster(request)
     print(f"Get cluster response:\n{response}")
     return response
-# [END cloud_game_servers_get_cluster]
+# [END cloud_game_servers_cluster_get]
 
 
 if __name__ == "__main__":

@@ -29,7 +29,7 @@ from google.cloud.gaming_v1.types import game_server_deployments
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 
 
-# [START gaming_update_rollout_override]
+# [START cloud_game_servers_deployment_rollout_override]
 def update_rollout_override(project_id, deployment_id, config_id, realm_location, realm_id):
     """Update the rollout of a game server deployment to set the override config."""
 
@@ -41,17 +41,17 @@ def update_rollout_override(project_id, deployment_id, config_id, realm_location
     request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
     request.rollout.name = f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}"
     realm_name = f"projects/{project_id}/locations/{realm_location}/realms/{realm_id}"
-    config_overrid = game_server_deployments.GameServerConfigOverride(
+    config_override = game_server_deployments.GameServerConfigOverride(
         realms_selector=common.RealmSelector(realms=[realm_name]),
         config_version=config_id,
     )
-    request.rollout.game_server_config_overrides = [config_overrid]
+    request.rollout.game_server_config_overrides = [config_override]
     request.update_mask = field_mask.FieldMask(paths=["game_server_config_overrides"])
 
     operation = client.update_game_server_deployment_rollout(request)
     print(f"Update deployment rollout operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END gaming_update_rollout_override]
+# [END cloud_game_servers_deployment_rollout_override]
 
 
 if __name__ == "__main__":

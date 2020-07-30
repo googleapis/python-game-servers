@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
 
 
-# [START cloud_game_servers_delete_deployment]
+# [START cloud_game_servers_deployment_delete]
 def delete_deployment(project_id, deployment_id):
     """Deletes a game server deployment."""
 
@@ -42,7 +42,7 @@ def delete_deployment(project_id, deployment_id):
     operation = client.delete_game_server_deployment(request)
     print(f"Delete deployment operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_delete_deployment]
+# [END cloud_game_servers_deployment_delete]
 
 
 if __name__ == "__main__":

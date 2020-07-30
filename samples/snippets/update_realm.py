@@ -27,7 +27,7 @@ from google.cloud.gaming_v1.types import realms
 from google.protobuf import field_mask_pb2 as field_mask
 
 
-# [START cloud_game_servers_update_realm]
+# [START cloud_game_servers_realm_update]
 def update_realm(project_id, location, realm_id):
     """Updates a realm."""
 
@@ -44,7 +44,7 @@ def update_realm(project_id, location, realm_id):
     operation = client.update_realm(request)
     print(f"Update realm operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_update_realm]
+# [END cloud_game_servers_realm_update]
 
 
 if __name__ == "__main__":

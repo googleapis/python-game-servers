@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import realms
 
 
-# [START cloud_game_servers_create_realm]
+# [START cloud_game_servers_realm_create]
 def create_realm(project_id, location, realm_id):
     """Creates a realm."""
 
@@ -44,7 +44,7 @@ def create_realm(project_id, location, realm_id):
     operation = client.create_realm(request)
     print(f"Create realm operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_create_realm]
+# [END cloud_game_servers_realm_create]
 
 
 if __name__ == "__main__":

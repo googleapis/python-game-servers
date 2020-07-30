@@ -25,7 +25,7 @@ import argparse
 from google.cloud import gaming
 
 
-# [START cloud_game_servers_list_configs]
+# [START cloud_game_servers_config_list]
 def list_configs(project_id, deployment_id):
     """Lists the existing game server deployments."""
 
@@ -42,7 +42,7 @@ def list_configs(project_id, deployment_id):
         print(f"Name: {config.name}")
 
     return response.game_server_configs
-# [END cloud_game_servers_list_configs]
+# [END cloud_game_servers_config_list]
 
 
 if __name__ == "__main__":

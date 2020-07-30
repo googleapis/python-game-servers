@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
 
 
-# [START cloud_game_servers_create_deployment]
+# [START cloud_game_servers_deployment_create]
 def create_deployment(project_id, deployment_id):
     """Creates a game server deployment."""
 
@@ -46,7 +46,7 @@ def create_deployment(project_id, deployment_id):
     operation = client.create_game_server_deployment(request)
     print(f"Create deployment operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_create_deployment]
+# [END cloud_game_servers_deployment_create]
 
 
 if __name__ == "__main__":

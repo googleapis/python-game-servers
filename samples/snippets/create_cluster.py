@@ -27,7 +27,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_clusters
 
 
-# [START cloud_game_servers_create_cluster]
+# [START cloud_game_servers_cluster_create]
 def create_cluster(project_id, location, realm_id, cluster_id, gke_cluster_name):
     """Creates a game server cluster."""
 
@@ -51,7 +51,7 @@ def create_cluster(project_id, location, realm_id, cluster_id, gke_cluster_name)
     operation = client.create_game_server_cluster(request)
     print(f"Create cluster operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_create_cluster]
+# [END cloud_game_servers_cluster_create]
 
 
 if __name__ == "__main__":

@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import realms
 
 
-# [START cloud_game_servers_delete_realm]
+# [START cloud_game_servers_realm_delete]
 def delete_realm(project_id, location, realm_id):
     """Deletes a realm."""
 
@@ -39,7 +39,7 @@ def delete_realm(project_id, location, realm_id):
     operation = client.delete_realm(request)
     print(f"Delete realm operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_delete_realm]
+# [END cloud_game_servers_realm_delete]
 
 
 if __name__ == "__main__":

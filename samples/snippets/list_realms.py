@@ -24,7 +24,7 @@ import argparse
 
 from google.cloud import gaming
 
-# [START cloud_game_servers_list_realms]
+# [START cloud_game_servers_realm_list]
 
 
 def list_realms(project_id, location):
@@ -40,7 +40,7 @@ def list_realms(project_id, location):
         print(f"Name: {realm.name}")
 
     return response.realms
-# [END cloud_game_servers_list_realms]
+# [END cloud_game_servers_realm_list]
 
 
 if __name__ == "__main__":

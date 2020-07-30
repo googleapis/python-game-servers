@@ -28,7 +28,7 @@ from google.cloud.gaming_v1.types import game_server_deployments
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 
 
-# [START gaming_update_rollout_default]
+# [START cloud_game_servers_deployment_rollout_default]
 def update_rollout_default(project_id, deployment_id, config_id):
     """Update the rollout of a game server deployment to set the default config."""
 
@@ -45,7 +45,7 @@ def update_rollout_default(project_id, deployment_id, config_id):
     operation = client.update_game_server_deployment_rollout(request)
     print(f"Update deployment rollout operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END gaming_update_rollout_default]
+# [END cloud_game_servers_deployment_rollout_default]
 
 
 if __name__ == "__main__":

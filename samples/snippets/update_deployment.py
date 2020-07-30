@@ -27,7 +27,7 @@ from google.cloud.gaming_v1.types import game_server_deployments
 from google.protobuf import field_mask_pb2 as field_mask
 
 
-# [START cloud_game_servers_update_deployment]
+# [START cloud_game_servers_deployment_update]
 def update_deployment(project_id, deployment_id):
     """Updates a game server deployment."""
 
@@ -47,7 +47,7 @@ def update_deployment(project_id, deployment_id):
     operation = client.update_game_server_deployment(request)
     print(f"Update deployment operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_update_deployment]
+# [END cloud_game_servers_deployment_update]
 
 
 if __name__ == "__main__":

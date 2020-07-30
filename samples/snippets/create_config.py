@@ -25,6 +25,8 @@ import argparse
 from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_configs
 
+# FLEET_SPEC is the spec portion of an agones Fleet.  It must be in JSON format.
+# See https://agones.dev/site/docs/reference/fleet/ for more on fleets.
 FLEET_SPEC = """
 {
    "replicas": 10,
@@ -87,7 +89,7 @@ FLEET_SPEC = """
 """
 
 
-# [START cloud_game_servers_create_config]
+# [START cloud_game_servers_config_create]
 def create_config(project_id, deployment_id, config_id):
     """Creates a game server config."""
 
@@ -113,8 +115,7 @@ def create_config(project_id, deployment_id, config_id):
     operation = client.create_game_server_config(request)
     print(f"Create config operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_create_config]
-
+# [END cloud_game_servers_config_create]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

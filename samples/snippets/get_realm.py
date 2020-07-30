@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import realms
 
 
-# [START cloud_game_servers_get_realm]
+# [START cloud_game_servers_realm_get]
 def get_realm(project_id, location, realm_id):
     """Gets a realm."""
 
@@ -39,7 +39,7 @@ def get_realm(project_id, location, realm_id):
     response = client.get_realm(request)
     print(f"Get realm response:\n{response}")
     return response
-# [END cloud_game_servers_get_realm]
+# [END cloud_game_servers_realm_get]
 
 
 if __name__ == "__main__":

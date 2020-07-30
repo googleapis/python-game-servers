@@ -26,7 +26,7 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_configs
 
 
-# [START cloud_game_servers_get_config]
+# [START cloud_game_servers_config_get]
 def get_config(project_id, deployment_id, config_id):
     """Gets a game server config."""
 
@@ -42,7 +42,7 @@ def get_config(project_id, deployment_id, config_id):
     response = client.get_game_server_config(request)
     print(f"Get config response:\n{response}")
     return response
-# [END cloud_game_servers_get_config]
+# [END cloud_game_servers_config_get]
 
 
 if __name__ == "__main__":

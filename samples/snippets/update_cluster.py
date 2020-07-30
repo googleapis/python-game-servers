@@ -27,7 +27,7 @@ from google.cloud.gaming_v1.types import game_server_clusters
 from google.protobuf import field_mask_pb2 as field_mask
 
 
-# [START cloud_game_servers_update_cluster]
+# [START cloud_game_servers_cluster_update]
 def update_cluster(project_id, location, realm_id, cluster_id):
     """Updates a game server cluster."""
 
@@ -44,7 +44,7 @@ def update_cluster(project_id, location, realm_id, cluster_id):
     operation = client.update_game_server_cluster(request)
     print(f"Update cluster operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_update_cluster]
+# [END cloud_game_servers_cluster_update]
 
 
 if __name__ == "__main__":
