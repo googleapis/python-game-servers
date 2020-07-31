@@ -14,35 +14,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for getting a game server deployment.
+"""Google Cloud Game Servers sample for updating a game server deployment.
 
 Example usage:
-    python get_deployment.py --project-id <project-id> --deployment-id <deployment-id>
+    python update_deployment.py --project-id <project-id> --deployment-id <deployment-id>
 """
 
 import argparse
 
 from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
+from google.protobuf import field_mask_pb2 as field_mask
 
 
-# [START cloud_game_servers_deployment_get]
-def get_deployment(project_id, deployment_id):
-    """Gets a game server deployment."""
+# [START cloud_game_servers_deployment_update]
+def update_deployment(project_id, deployment_id):
+    """Updates a game server deployment."""
 
     client = gaming.GameServerDeploymentsServiceClient()
 
     # Location is hard coded as global, as game server deployments can
     # only be created in global.  This is done for all operations on
     # game server deployments, as well as for its child resource types.
-    request = game_server_deployments.GetGameServerDeploymentRequest(
-        name=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}",
+    request = game_server_deployments.UpdateGameServerDeploymentRequest(
+        game_server_deployment=game_server_deployments.GameServerDeployment(
+            name=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}",
+            labels={"label-key-1": "label-value-1", "label-key-2": "label-value-2"},
+        ),
+        update_mask=field_mask.FieldMask(paths=["labels"]),
     )
 
-    response = client.get_game_server_deployment(request)
-    print(f"Get deployment response:\n{response}")
-    return response
-# [END cloud_game_servers_deployment_get]
+    operation = client.update_game_server_deployment(request)
+    print(f"Update deployment operation: {operation.operation.name}")
+    operation.result(timeout=120)
+# [END cloud_game_servers_deployment_update]
 
 
 if __name__ == "__main__":
@@ -52,4 +57,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    get_deployment(args.project_id, args.deployment_id)
+    update_deployment(args.project_id, args.deployment_id)

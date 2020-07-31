@@ -14,35 +14,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for getting a game server deployment.
+"""Google Cloud Game Servers sample for updating the rollout of a game
+server deployment to remove the override config.
 
 Example usage:
-    python get_deployment.py --project-id <project-id> --deployment-id <deployment-id>
+    python update_rollout_remove_override.py --project-id <project-id> --deployment-id <deployment-id>
 """
 
 import argparse
 
 from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
+from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 
 
-# [START cloud_game_servers_deployment_get]
-def get_deployment(project_id, deployment_id):
-    """Gets a game server deployment."""
+# [START cloud_game_servers_deployment_rollout_remove_override]
+def update_rollout_remove_override(project_id, deployment_id):
+    """Update the rollout of a game server deployment to remove the override config."""
 
     client = gaming.GameServerDeploymentsServiceClient()
 
     # Location is hard coded as global, as game server deployments can
     # only be created in global.  This is done for all operations on
-    # game server deployments, as well as for its child resource types.
-    request = game_server_deployments.GetGameServerDeploymentRequest(
-        name=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}",
-    )
+    # game Server deployments, as well as for its child resource types.
+    request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
+    request.rollout.name = f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}"
+    request.rollout.game_server_config_overrides = []
+    request.update_mask = field_mask.FieldMask(paths=["game_server_config_overrides"])
 
-    response = client.get_game_server_deployment(request)
-    print(f"Get deployment response:\n{response}")
-    return response
-# [END cloud_game_servers_deployment_get]
+    operation = client.update_game_server_deployment_rollout(request)
+    print(f"Update deployment rollout operation: {operation.operation.name}")
+    operation.result(timeout=120)
+# [END cloud_game_servers_deployment_rollout_remove_override]
 
 
 if __name__ == "__main__":
@@ -52,4 +55,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    get_deployment(args.project_id, args.deployment_id)
+    update_rollout_remove_override(args.project_id, args.deployment_id)
