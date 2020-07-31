@@ -21,14 +21,14 @@ import re
 from typing import Callable, Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions # type: ignore
-from google.api_core import exceptions                 # type: ignore
-from google.api_core import gapic_v1                   # type: ignore
-from google.api_core import retry as retries           # type: ignore
-from google.auth import credentials                    # type: ignore
-from google.auth.transport import mtls                 # type: ignore
+import google.api_core.client_options as ClientOptions  # type: ignore
+from google.api_core import exceptions  # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.api_core import retry as retries  # type: ignore
+from google.auth import credentials  # type: ignore
+from google.auth.transport import mtls  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
-from google.oauth2 import service_account              # type: ignore
+from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
 from google.api_core import operation_async
@@ -51,13 +51,16 @@ class GameServerClustersServiceClientMeta(type):
     support objects (e.g. transport) without polluting the client instance
     objects.
     """
-    _transport_registry = OrderedDict()  # type: Dict[str, Type[GameServerClustersServiceTransport]]
-    _transport_registry['grpc'] = GameServerClustersServiceGrpcTransport
-    _transport_registry['grpc_asyncio'] = GameServerClustersServiceGrpcAsyncIOTransport
 
-    def get_transport_class(cls,
-            label: str = None,
-        ) -> Type[GameServerClustersServiceTransport]:
+    _transport_registry = (
+        OrderedDict()
+    )  # type: Dict[str, Type[GameServerClustersServiceTransport]]
+    _transport_registry["grpc"] = GameServerClustersServiceGrpcTransport
+    _transport_registry["grpc_asyncio"] = GameServerClustersServiceGrpcAsyncIOTransport
+
+    def get_transport_class(
+        cls, label: str = None,
+    ) -> Type[GameServerClustersServiceTransport]:
         """Return an appropriate transport class.
 
         Args:
@@ -110,7 +113,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         return api_endpoint.replace(".googleapis.com", ".mtls.googleapis.com")
 
-    DEFAULT_ENDPOINT = 'gameservices.googleapis.com'
+    DEFAULT_ENDPOINT = "gameservices.googleapis.com"
     DEFAULT_MTLS_ENDPOINT = _get_default_mtls_endpoint.__func__(  # type: ignore
         DEFAULT_ENDPOINT
     )
@@ -129,29 +132,37 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         Returns:
             {@api.name}: The constructed client.
         """
-        credentials = service_account.Credentials.from_service_account_file(
-            filename)
-        kwargs['credentials'] = credentials
+        credentials = service_account.Credentials.from_service_account_file(filename)
+        kwargs["credentials"] = credentials
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
 
     @staticmethod
-    def game_server_cluster_path(project: str,location: str,realm: str,cluster: str,) -> str:
+    def game_server_cluster_path(
+        project: str, location: str, realm: str, cluster: str,
+    ) -> str:
         """Return a fully-qualified game_server_cluster string."""
-        return "projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}".format(project=project, location=location, realm=realm, cluster=cluster, )
+        return "projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}".format(
+            project=project, location=location, realm=realm, cluster=cluster,
+        )
 
     @staticmethod
-    def parse_game_server_cluster_path(path: str) -> Dict[str,str]:
+    def parse_game_server_cluster_path(path: str) -> Dict[str, str]:
         """Parse a game_server_cluster path into its component segments."""
-        m = re.match(r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/realms/(?P<realm>.+?)/gameServerClusters/(?P<cluster>.+?)$", path)
+        m = re.match(
+            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/realms/(?P<realm>.+?)/gameServerClusters/(?P<cluster>.+?)$",
+            path,
+        )
         return m.groupdict() if m else {}
 
-    def __init__(self, *,
-            credentials: credentials.Credentials = None,
-            transport: Union[str, GameServerClustersServiceTransport] = None,
-            client_options: ClientOptions = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        credentials: credentials.Credentials = None,
+        transport: Union[str, GameServerClustersServiceTransport] = None,
+        client_options: ClientOptions = None,
+    ) -> None:
         """Instantiate the game server clusters service client.
 
         Args:
@@ -198,7 +209,9 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                     or mtls.has_default_client_cert_source()
                 )
                 client_options.api_endpoint = (
-                    self.DEFAULT_MTLS_ENDPOINT if has_client_cert_source else self.DEFAULT_ENDPOINT
+                    self.DEFAULT_MTLS_ENDPOINT
+                    if has_client_cert_source
+                    else self.DEFAULT_ENDPOINT
                 )
             else:
                 raise MutualTLSChannelError(
@@ -211,8 +224,10 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         if isinstance(transport, GameServerClustersServiceTransport):
             # transport is a GameServerClustersServiceTransport instance.
             if credentials or client_options.credentials_file:
-                raise ValueError('When providing a transport instance, '
-                                 'provide its credentials directly.')
+                raise ValueError(
+                    "When providing a transport instance, "
+                    "provide its credentials directly."
+                )
             if client_options.scopes:
                 raise ValueError(
                     "When providing a transport instance, "
@@ -231,14 +246,15 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 quota_project_id=client_options.quota_project_id,
             )
 
-    def list_game_server_clusters(self,
-            request: game_server_clusters.ListGameServerClustersRequest = None,
-            *,
-            parent: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> pagers.ListGameServerClustersPager:
+    def list_game_server_clusters(
+        self,
+        request: game_server_clusters.ListGameServerClustersRequest = None,
+        *,
+        parent: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> pagers.ListGameServerClustersPager:
         r"""Lists game server clusters in a given project and
         location.
 
@@ -274,8 +290,10 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_clusters.ListGameServerClustersRequest.
@@ -292,44 +310,37 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.list_game_server_clusters]
+        rpc = self._transport._wrapped_methods[
+            self._transport.list_game_server_clusters
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.ListGameServerClustersPager(
-            method=rpc,
-            request=request,
-            response=response,
-            metadata=metadata,
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
         return response
 
-    def get_game_server_cluster(self,
-            request: game_server_clusters.GetGameServerClusterRequest = None,
-            *,
-            name: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_clusters.GameServerCluster:
+    def get_game_server_cluster(
+        self,
+        request: game_server_clusters.GetGameServerClusterRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_clusters.GameServerCluster:
         r"""Gets details of a single game server cluster.
 
         Args:
@@ -360,8 +371,10 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_clusters.GetGameServerClusterRequest.
@@ -383,32 +396,26 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    def create_game_server_cluster(self,
-            request: game_server_clusters.CreateGameServerClusterRequest = None,
-            *,
-            parent: str = None,
-            game_server_cluster: game_server_clusters.GameServerCluster = None,
-            game_server_cluster_id: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation.Operation:
+    def create_game_server_cluster(
+        self,
+        request: game_server_clusters.CreateGameServerClusterRequest = None,
+        *,
+        parent: str = None,
+        game_server_cluster: game_server_clusters.GameServerCluster = None,
+        game_server_cluster_id: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
         r"""Creates a new game server cluster in a given project
         and location.
 
@@ -453,10 +460,14 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, game_server_cluster, game_server_cluster_id])
+        has_flattened_params = any(
+            [parent, game_server_cluster, game_server_cluster_id]
+        )
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_clusters.CreateGameServerClusterRequest.
@@ -477,23 +488,18 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.create_game_server_cluster]
+        rpc = self._transport._wrapped_methods[
+            self._transport.create_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -506,13 +512,14 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Done; return the response.
         return response
 
-    def preview_create_game_server_cluster(self,
-            request: game_server_clusters.PreviewCreateGameServerClusterRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_clusters.PreviewCreateGameServerClusterResponse:
+    def preview_create_game_server_cluster(
+        self,
+        request: game_server_clusters.PreviewCreateGameServerClusterRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_clusters.PreviewCreateGameServerClusterResponse:
         r"""Previews creation of a new game server cluster in a
         given project and location.
 
@@ -539,40 +546,40 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # in a game_server_clusters.PreviewCreateGameServerClusterRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_clusters.PreviewCreateGameServerClusterRequest):
-            request = game_server_clusters.PreviewCreateGameServerClusterRequest(request)
+        if not isinstance(
+            request, game_server_clusters.PreviewCreateGameServerClusterRequest
+        ):
+            request = game_server_clusters.PreviewCreateGameServerClusterRequest(
+                request
+            )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.preview_create_game_server_cluster]
+        rpc = self._transport._wrapped_methods[
+            self._transport.preview_create_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    def delete_game_server_cluster(self,
-            request: game_server_clusters.DeleteGameServerClusterRequest = None,
-            *,
-            name: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation.Operation:
+    def delete_game_server_cluster(
+        self,
+        request: game_server_clusters.DeleteGameServerClusterRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
         r"""Deletes a single game server cluster.
 
         Args:
@@ -619,8 +626,10 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_clusters.DeleteGameServerClusterRequest.
@@ -637,23 +646,18 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.delete_game_server_cluster]
+        rpc = self._transport._wrapped_methods[
+            self._transport.delete_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -666,13 +670,14 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Done; return the response.
         return response
 
-    def preview_delete_game_server_cluster(self,
-            request: game_server_clusters.PreviewDeleteGameServerClusterRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_clusters.PreviewDeleteGameServerClusterResponse:
+    def preview_delete_game_server_cluster(
+        self,
+        request: game_server_clusters.PreviewDeleteGameServerClusterRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_clusters.PreviewDeleteGameServerClusterResponse:
         r"""Previews deletion of a single game server cluster.
 
         Args:
@@ -698,41 +703,41 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # in a game_server_clusters.PreviewDeleteGameServerClusterRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_clusters.PreviewDeleteGameServerClusterRequest):
-            request = game_server_clusters.PreviewDeleteGameServerClusterRequest(request)
+        if not isinstance(
+            request, game_server_clusters.PreviewDeleteGameServerClusterRequest
+        ):
+            request = game_server_clusters.PreviewDeleteGameServerClusterRequest(
+                request
+            )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.preview_delete_game_server_cluster]
+        rpc = self._transport._wrapped_methods[
+            self._transport.preview_delete_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    def update_game_server_cluster(self,
-            request: game_server_clusters.UpdateGameServerClusterRequest = None,
-            *,
-            game_server_cluster: game_server_clusters.GameServerCluster = None,
-            update_mask: field_mask.FieldMask = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation.Operation:
+    def update_game_server_cluster(
+        self,
+        request: game_server_clusters.UpdateGameServerClusterRequest = None,
+        *,
+        game_server_cluster: game_server_clusters.GameServerCluster = None,
+        update_mask: field_mask.FieldMask = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
         r"""Patches a single game server cluster.
 
         Args:
@@ -776,8 +781,10 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([game_server_cluster, update_mask])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_clusters.UpdateGameServerClusterRequest.
@@ -796,23 +803,20 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.update_game_server_cluster]
+        rpc = self._transport._wrapped_methods[
+            self._transport.update_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('game_server_cluster.name', request.game_server_cluster.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("game_server_cluster.name", request.game_server_cluster.name),)
+            ),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -825,13 +829,14 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Done; return the response.
         return response
 
-    def preview_update_game_server_cluster(self,
-            request: game_server_clusters.PreviewUpdateGameServerClusterRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_clusters.PreviewUpdateGameServerClusterResponse:
+    def preview_update_game_server_cluster(
+        self,
+        request: game_server_clusters.PreviewUpdateGameServerClusterRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_clusters.PreviewUpdateGameServerClusterResponse:
         r"""Previews updating a GameServerCluster.
 
         Args:
@@ -857,48 +862,42 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # in a game_server_clusters.PreviewUpdateGameServerClusterRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_clusters.PreviewUpdateGameServerClusterRequest):
-            request = game_server_clusters.PreviewUpdateGameServerClusterRequest(request)
+        if not isinstance(
+            request, game_server_clusters.PreviewUpdateGameServerClusterRequest
+        ):
+            request = game_server_clusters.PreviewUpdateGameServerClusterRequest(
+                request
+            )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.preview_update_game_server_cluster]
+        rpc = self._transport._wrapped_methods[
+            self._transport.preview_update_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('game_server_cluster.name', request.game_server_cluster.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("game_server_cluster.name", request.game_server_cluster.name),)
+            ),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
 
-
-
-
-
-
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            'google-cloud-game-servers',
+            "google-cloud-game-servers",
         ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = (
-    'GameServerClustersServiceClient',
-)
+__all__ = ("GameServerClustersServiceClient",)

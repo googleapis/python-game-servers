@@ -19,6 +19,6 @@ from .client import GameServerClustersServiceClient
 from .async_client import GameServerClustersServiceAsyncClient
 
 __all__ = (
-    'GameServerClustersServiceClient',
-    'GameServerClustersServiceAsyncClient',
+    "GameServerClustersServiceClient",
+    "GameServerClustersServiceAsyncClient",
 )

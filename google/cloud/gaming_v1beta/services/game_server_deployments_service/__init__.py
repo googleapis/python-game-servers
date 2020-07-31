@@ -19,6 +19,6 @@ from .client import GameServerDeploymentsServiceClient
 from .async_client import GameServerDeploymentsServiceAsyncClient
 
 __all__ = (
-    'GameServerDeploymentsServiceClient',
-    'GameServerDeploymentsServiceAsyncClient',
+    "GameServerDeploymentsServiceClient",
+    "GameServerDeploymentsServiceAsyncClient",
 )

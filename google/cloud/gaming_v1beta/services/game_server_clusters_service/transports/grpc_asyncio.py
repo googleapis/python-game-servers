@@ -17,12 +17,12 @@
 
 from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers_async         # type: ignore
-from google.api_core import operations_v1              # type: ignore
-from google.auth import credentials                    # type: ignore
+from google.api_core import grpc_helpers_async  # type: ignore
+from google.api_core import operations_v1  # type: ignore
+from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
-import grpc                        # type: ignore
+import grpc  # type: ignore
 from grpc.experimental import aio  # type: ignore
 
 from google.cloud.gaming_v1beta.types import game_server_clusters
@@ -50,13 +50,15 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
     _stubs: Dict[str, Callable] = {}
 
     @classmethod
-    def create_channel(cls,
-                       host: str = 'gameservices.googleapis.com',
-                       credentials: credentials.Credentials = None,
-                       credentials_file: Optional[str] = None,
-                       scopes: Optional[Sequence[str]] = None,
-                       quota_project_id: Optional[str] = None,
-                       **kwargs) -> aio.Channel:
+    def create_channel(
+        cls,
+        host: str = "gameservices.googleapis.com",
+        credentials: credentials.Credentials = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        quota_project_id: Optional[str] = None,
+        **kwargs,
+    ) -> aio.Channel:
         """Create and return a gRPC AsyncIO channel object.
         Args:
             address (Optional[str]): The host for the channel to use.
@@ -85,19 +87,21 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
             credentials_file=credentials_file,
             scopes=scopes,
             quota_project_id=quota_project_id,
-            **kwargs
+            **kwargs,
         )
 
-    def __init__(self, *,
-            host: str = 'gameservices.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: Optional[str] = None,
-            scopes: Optional[Sequence[str]] = None,
-            channel: aio.Channel = None,
-            api_mtls_endpoint: str = None,
-            client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id=None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        host: str = "gameservices.googleapis.com",
+        credentials: credentials.Credentials = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        channel: aio.Channel = None,
+        api_mtls_endpoint: str = None,
+        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id=None,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -141,7 +145,11 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
         elif api_mtls_endpoint:
-            host = api_mtls_endpoint if ":" in api_mtls_endpoint else api_mtls_endpoint + ":443"
+            host = (
+                api_mtls_endpoint
+                if ":" in api_mtls_endpoint
+                else api_mtls_endpoint + ":443"
+            )
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -183,10 +191,9 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         """
         # Sanity check: Only create a new channel if we do not already
         # have one.
-        if not hasattr(self, '_grpc_channel'):
+        if not hasattr(self, "_grpc_channel"):
             self._grpc_channel = self.create_channel(
-                self._host,
-                credentials=self._credentials,
+                self._host, credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -200,18 +207,21 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         client.
         """
         # Sanity check: Only create a new client if we do not already have one.
-        if 'operations_client' not in self.__dict__:
-            self.__dict__['operations_client'] = operations_v1.OperationsAsyncClient(
+        if "operations_client" not in self.__dict__:
+            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
         # Return the client from cache.
-        return self.__dict__['operations_client']
+        return self.__dict__["operations_client"]
 
     @property
-    def list_game_server_clusters(self) -> Callable[
-            [game_server_clusters.ListGameServerClustersRequest],
-            Awaitable[game_server_clusters.ListGameServerClustersResponse]]:
+    def list_game_server_clusters(
+        self,
+    ) -> Callable[
+        [game_server_clusters.ListGameServerClustersRequest],
+        Awaitable[game_server_clusters.ListGameServerClustersResponse],
+    ]:
         r"""Return a callable for the list game server clusters method over gRPC.
 
         Lists game server clusters in a given project and
@@ -227,18 +237,21 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if 'list_game_server_clusters' not in self._stubs:
-            self._stubs['list_game_server_clusters'] = self.grpc_channel.unary_unary(
-                '/google.cloud.gaming.v1beta.GameServerClustersService/ListGameServerClusters',
+        if "list_game_server_clusters" not in self._stubs:
+            self._stubs["list_game_server_clusters"] = self.grpc_channel.unary_unary(
+                "/google.cloud.gaming.v1beta.GameServerClustersService/ListGameServerClusters",
                 request_serializer=game_server_clusters.ListGameServerClustersRequest.serialize,
                 response_deserializer=game_server_clusters.ListGameServerClustersResponse.deserialize,
             )
-        return self._stubs['list_game_server_clusters']
+        return self._stubs["list_game_server_clusters"]
 
     @property
-    def get_game_server_cluster(self) -> Callable[
-            [game_server_clusters.GetGameServerClusterRequest],
-            Awaitable[game_server_clusters.GameServerCluster]]:
+    def get_game_server_cluster(
+        self,
+    ) -> Callable[
+        [game_server_clusters.GetGameServerClusterRequest],
+        Awaitable[game_server_clusters.GameServerCluster],
+    ]:
         r"""Return a callable for the get game server cluster method over gRPC.
 
         Gets details of a single game server cluster.
@@ -253,18 +266,21 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if 'get_game_server_cluster' not in self._stubs:
-            self._stubs['get_game_server_cluster'] = self.grpc_channel.unary_unary(
-                '/google.cloud.gaming.v1beta.GameServerClustersService/GetGameServerCluster',
+        if "get_game_server_cluster" not in self._stubs:
+            self._stubs["get_game_server_cluster"] = self.grpc_channel.unary_unary(
+                "/google.cloud.gaming.v1beta.GameServerClustersService/GetGameServerCluster",
                 request_serializer=game_server_clusters.GetGameServerClusterRequest.serialize,
                 response_deserializer=game_server_clusters.GameServerCluster.deserialize,
             )
-        return self._stubs['get_game_server_cluster']
+        return self._stubs["get_game_server_cluster"]
 
     @property
-    def create_game_server_cluster(self) -> Callable[
-            [game_server_clusters.CreateGameServerClusterRequest],
-            Awaitable[operations.Operation]]:
+    def create_game_server_cluster(
+        self,
+    ) -> Callable[
+        [game_server_clusters.CreateGameServerClusterRequest],
+        Awaitable[operations.Operation],
+    ]:
         r"""Return a callable for the create game server cluster method over gRPC.
 
         Creates a new game server cluster in a given project
@@ -280,18 +296,21 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if 'create_game_server_cluster' not in self._stubs:
-            self._stubs['create_game_server_cluster'] = self.grpc_channel.unary_unary(
-                '/google.cloud.gaming.v1beta.GameServerClustersService/CreateGameServerCluster',
+        if "create_game_server_cluster" not in self._stubs:
+            self._stubs["create_game_server_cluster"] = self.grpc_channel.unary_unary(
+                "/google.cloud.gaming.v1beta.GameServerClustersService/CreateGameServerCluster",
                 request_serializer=game_server_clusters.CreateGameServerClusterRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs['create_game_server_cluster']
+        return self._stubs["create_game_server_cluster"]
 
     @property
-    def preview_create_game_server_cluster(self) -> Callable[
-            [game_server_clusters.PreviewCreateGameServerClusterRequest],
-            Awaitable[game_server_clusters.PreviewCreateGameServerClusterResponse]]:
+    def preview_create_game_server_cluster(
+        self,
+    ) -> Callable[
+        [game_server_clusters.PreviewCreateGameServerClusterRequest],
+        Awaitable[game_server_clusters.PreviewCreateGameServerClusterResponse],
+    ]:
         r"""Return a callable for the preview create game server
         cluster method over gRPC.
 
@@ -308,18 +327,23 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if 'preview_create_game_server_cluster' not in self._stubs:
-            self._stubs['preview_create_game_server_cluster'] = self.grpc_channel.unary_unary(
-                '/google.cloud.gaming.v1beta.GameServerClustersService/PreviewCreateGameServerCluster',
+        if "preview_create_game_server_cluster" not in self._stubs:
+            self._stubs[
+                "preview_create_game_server_cluster"
+            ] = self.grpc_channel.unary_unary(
+                "/google.cloud.gaming.v1beta.GameServerClustersService/PreviewCreateGameServerCluster",
                 request_serializer=game_server_clusters.PreviewCreateGameServerClusterRequest.serialize,
                 response_deserializer=game_server_clusters.PreviewCreateGameServerClusterResponse.deserialize,
             )
-        return self._stubs['preview_create_game_server_cluster']
+        return self._stubs["preview_create_game_server_cluster"]
 
     @property
-    def delete_game_server_cluster(self) -> Callable[
-            [game_server_clusters.DeleteGameServerClusterRequest],
-            Awaitable[operations.Operation]]:
+    def delete_game_server_cluster(
+        self,
+    ) -> Callable[
+        [game_server_clusters.DeleteGameServerClusterRequest],
+        Awaitable[operations.Operation],
+    ]:
         r"""Return a callable for the delete game server cluster method over gRPC.
 
         Deletes a single game server cluster.
@@ -334,18 +358,21 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if 'delete_game_server_cluster' not in self._stubs:
-            self._stubs['delete_game_server_cluster'] = self.grpc_channel.unary_unary(
-                '/google.cloud.gaming.v1beta.GameServerClustersService/DeleteGameServerCluster',
+        if "delete_game_server_cluster" not in self._stubs:
+            self._stubs["delete_game_server_cluster"] = self.grpc_channel.unary_unary(
+                "/google.cloud.gaming.v1beta.GameServerClustersService/DeleteGameServerCluster",
                 request_serializer=game_server_clusters.DeleteGameServerClusterRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs['delete_game_server_cluster']
+        return self._stubs["delete_game_server_cluster"]
 
     @property
-    def preview_delete_game_server_cluster(self) -> Callable[
-            [game_server_clusters.PreviewDeleteGameServerClusterRequest],
-            Awaitable[game_server_clusters.PreviewDeleteGameServerClusterResponse]]:
+    def preview_delete_game_server_cluster(
+        self,
+    ) -> Callable[
+        [game_server_clusters.PreviewDeleteGameServerClusterRequest],
+        Awaitable[game_server_clusters.PreviewDeleteGameServerClusterResponse],
+    ]:
         r"""Return a callable for the preview delete game server
         cluster method over gRPC.
 
@@ -361,18 +388,23 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if 'preview_delete_game_server_cluster' not in self._stubs:
-            self._stubs['preview_delete_game_server_cluster'] = self.grpc_channel.unary_unary(
-                '/google.cloud.gaming.v1beta.GameServerClustersService/PreviewDeleteGameServerCluster',
+        if "preview_delete_game_server_cluster" not in self._stubs:
+            self._stubs[
+                "preview_delete_game_server_cluster"
+            ] = self.grpc_channel.unary_unary(
+                "/google.cloud.gaming.v1beta.GameServerClustersService/PreviewDeleteGameServerCluster",
                 request_serializer=game_server_clusters.PreviewDeleteGameServerClusterRequest.serialize,
                 response_deserializer=game_server_clusters.PreviewDeleteGameServerClusterResponse.deserialize,
             )
-        return self._stubs['preview_delete_game_server_cluster']
+        return self._stubs["preview_delete_game_server_cluster"]
 
     @property
-    def update_game_server_cluster(self) -> Callable[
-            [game_server_clusters.UpdateGameServerClusterRequest],
-            Awaitable[operations.Operation]]:
+    def update_game_server_cluster(
+        self,
+    ) -> Callable[
+        [game_server_clusters.UpdateGameServerClusterRequest],
+        Awaitable[operations.Operation],
+    ]:
         r"""Return a callable for the update game server cluster method over gRPC.
 
         Patches a single game server cluster.
@@ -387,18 +419,21 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if 'update_game_server_cluster' not in self._stubs:
-            self._stubs['update_game_server_cluster'] = self.grpc_channel.unary_unary(
-                '/google.cloud.gaming.v1beta.GameServerClustersService/UpdateGameServerCluster',
+        if "update_game_server_cluster" not in self._stubs:
+            self._stubs["update_game_server_cluster"] = self.grpc_channel.unary_unary(
+                "/google.cloud.gaming.v1beta.GameServerClustersService/UpdateGameServerCluster",
                 request_serializer=game_server_clusters.UpdateGameServerClusterRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs['update_game_server_cluster']
+        return self._stubs["update_game_server_cluster"]
 
     @property
-    def preview_update_game_server_cluster(self) -> Callable[
-            [game_server_clusters.PreviewUpdateGameServerClusterRequest],
-            Awaitable[game_server_clusters.PreviewUpdateGameServerClusterResponse]]:
+    def preview_update_game_server_cluster(
+        self,
+    ) -> Callable[
+        [game_server_clusters.PreviewUpdateGameServerClusterRequest],
+        Awaitable[game_server_clusters.PreviewUpdateGameServerClusterResponse],
+    ]:
         r"""Return a callable for the preview update game server
         cluster method over gRPC.
 
@@ -414,15 +449,15 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if 'preview_update_game_server_cluster' not in self._stubs:
-            self._stubs['preview_update_game_server_cluster'] = self.grpc_channel.unary_unary(
-                '/google.cloud.gaming.v1beta.GameServerClustersService/PreviewUpdateGameServerCluster',
+        if "preview_update_game_server_cluster" not in self._stubs:
+            self._stubs[
+                "preview_update_game_server_cluster"
+            ] = self.grpc_channel.unary_unary(
+                "/google.cloud.gaming.v1beta.GameServerClustersService/PreviewUpdateGameServerCluster",
                 request_serializer=game_server_clusters.PreviewUpdateGameServerClusterRequest.serialize,
                 response_deserializer=game_server_clusters.PreviewUpdateGameServerClusterResponse.deserialize,
             )
-        return self._stubs['preview_update_game_server_cluster']
+        return self._stubs["preview_update_game_server_cluster"]
 
 
-__all__ = (
-    'GameServerClustersServiceGrpcAsyncIOTransport',
-)
+__all__ = ("GameServerClustersServiceGrpcAsyncIOTransport",)

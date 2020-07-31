@@ -25,12 +25,12 @@ from .grpc_asyncio import RealmsServiceGrpcAsyncIOTransport
 
 # Compile a registry of transports.
 _transport_registry = OrderedDict()  # type: Dict[str, Type[RealmsServiceTransport]]
-_transport_registry['grpc'] = RealmsServiceGrpcTransport
-_transport_registry['grpc_asyncio'] = RealmsServiceGrpcAsyncIOTransport
+_transport_registry["grpc"] = RealmsServiceGrpcTransport
+_transport_registry["grpc_asyncio"] = RealmsServiceGrpcAsyncIOTransport
 
 
 __all__ = (
-    'RealmsServiceTransport',
-    'RealmsServiceGrpcTransport',
-    'RealmsServiceGrpcAsyncIOTransport',
+    "RealmsServiceTransport",
+    "RealmsServiceGrpcTransport",
+    "RealmsServiceGrpcAsyncIOTransport",
 )

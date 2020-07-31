@@ -23,16 +23,16 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package='google.cloud.gaming.v1beta',
+    package="google.cloud.gaming.v1beta",
     manifest={
-        'ListGameServerConfigsRequest',
-        'ListGameServerConfigsResponse',
-        'GetGameServerConfigRequest',
-        'CreateGameServerConfigRequest',
-        'DeleteGameServerConfigRequest',
-        'ScalingConfig',
-        'FleetConfig',
-        'GameServerConfig',
+        "ListGameServerConfigsRequest",
+        "ListGameServerConfigsResponse",
+        "GetGameServerConfigRequest",
+        "CreateGameServerConfigRequest",
+        "DeleteGameServerConfigRequest",
+        "ScalingConfig",
+        "FleetConfig",
+        "GameServerConfig",
     },
 )
 
@@ -96,8 +96,8 @@ class ListGameServerConfigsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    game_server_configs = proto.RepeatedField(proto.MESSAGE, number=1,
-        message='GameServerConfig',
+    game_server_configs = proto.RepeatedField(
+        proto.MESSAGE, number=1, message="GameServerConfig",
     )
 
     next_page_token = proto.Field(proto.STRING, number=2)
@@ -141,8 +141,8 @@ class CreateGameServerConfigRequest(proto.Message):
 
     config_id = proto.Field(proto.STRING, number=2)
 
-    game_server_config = proto.Field(proto.MESSAGE, number=3,
-        message='GameServerConfig',
+    game_server_config = proto.Field(
+        proto.MESSAGE, number=3, message="GameServerConfig",
     )
 
 
@@ -186,13 +186,11 @@ class ScalingConfig(proto.Message):
 
     fleet_autoscaler_spec = proto.Field(proto.STRING, number=2)
 
-    selectors = proto.RepeatedField(proto.MESSAGE, number=4,
-        message=common.LabelSelector,
+    selectors = proto.RepeatedField(
+        proto.MESSAGE, number=4, message=common.LabelSelector,
     )
 
-    schedules = proto.RepeatedField(proto.MESSAGE, number=5,
-        message=common.Schedule,
-    )
+    schedules = proto.RepeatedField(proto.MESSAGE, number=5, message=common.Schedule,)
 
 
 class FleetConfig(proto.Message):
@@ -240,22 +238,16 @@ class GameServerConfig(proto.Message):
 
     name = proto.Field(proto.STRING, number=1)
 
-    create_time = proto.Field(proto.MESSAGE, number=2,
-        message=timestamp.Timestamp,
-    )
+    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
 
-    update_time = proto.Field(proto.MESSAGE, number=3,
-        message=timestamp.Timestamp,
-    )
+    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
 
     labels = proto.MapField(proto.STRING, proto.STRING, number=4)
 
-    fleet_configs = proto.RepeatedField(proto.MESSAGE, number=5,
-        message=FleetConfig,
-    )
+    fleet_configs = proto.RepeatedField(proto.MESSAGE, number=5, message=FleetConfig,)
 
-    scaling_configs = proto.RepeatedField(proto.MESSAGE, number=6,
-        message=ScalingConfig,
+    scaling_configs = proto.RepeatedField(
+        proto.MESSAGE, number=6, message=ScalingConfig,
     )
 
     description = proto.Field(proto.STRING, number=7)

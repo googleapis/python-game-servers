@@ -24,17 +24,17 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package='google.cloud.gaming.v1beta',
+    package="google.cloud.gaming.v1beta",
     manifest={
-        'ListRealmsRequest',
-        'ListRealmsResponse',
-        'GetRealmRequest',
-        'CreateRealmRequest',
-        'DeleteRealmRequest',
-        'UpdateRealmRequest',
-        'PreviewRealmUpdateRequest',
-        'PreviewRealmUpdateResponse',
-        'Realm',
+        "ListRealmsRequest",
+        "ListRealmsResponse",
+        "GetRealmRequest",
+        "CreateRealmRequest",
+        "DeleteRealmRequest",
+        "UpdateRealmRequest",
+        "PreviewRealmUpdateRequest",
+        "PreviewRealmUpdateResponse",
+        "Realm",
     },
 )
 
@@ -94,9 +94,7 @@ class ListRealmsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    realms = proto.RepeatedField(proto.MESSAGE, number=1,
-        message='Realm',
-    )
+    realms = proto.RepeatedField(proto.MESSAGE, number=1, message="Realm",)
 
     next_page_token = proto.Field(proto.STRING, number=2)
 
@@ -133,9 +131,7 @@ class CreateRealmRequest(proto.Message):
 
     realm_id = proto.Field(proto.STRING, number=2)
 
-    realm = proto.Field(proto.MESSAGE, number=3,
-        message='Realm',
-    )
+    realm = proto.Field(proto.MESSAGE, number=3, message="Realm",)
 
 
 class DeleteRealmRequest(proto.Message):
@@ -165,13 +161,9 @@ class UpdateRealmRequest(proto.Message):
             /docs/reference/google.protobuf#fieldmask
     """
 
-    realm = proto.Field(proto.MESSAGE, number=1,
-        message='Realm',
-    )
+    realm = proto.Field(proto.MESSAGE, number=1, message="Realm",)
 
-    update_mask = proto.Field(proto.MESSAGE, number=2,
-        message=field_mask.FieldMask,
-    )
+    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
 
 
 class PreviewRealmUpdateRequest(proto.Message):
@@ -192,17 +184,11 @@ class PreviewRealmUpdateRequest(proto.Message):
             preview.
     """
 
-    realm = proto.Field(proto.MESSAGE, number=1,
-        message='Realm',
-    )
+    realm = proto.Field(proto.MESSAGE, number=1, message="Realm",)
 
-    update_mask = proto.Field(proto.MESSAGE, number=2,
-        message=field_mask.FieldMask,
-    )
+    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
 
-    preview_time = proto.Field(proto.MESSAGE, number=3,
-        message=timestamp.Timestamp,
-    )
+    preview_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
 
 
 class PreviewRealmUpdateResponse(proto.Message):
@@ -217,9 +203,7 @@ class PreviewRealmUpdateResponse(proto.Message):
 
     etag = proto.Field(proto.STRING, number=2)
 
-    target_state = proto.Field(proto.MESSAGE, number=3,
-        message=common.TargetState,
-    )
+    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
 
 
 class Realm(proto.Message):
@@ -251,13 +235,9 @@ class Realm(proto.Message):
 
     name = proto.Field(proto.STRING, number=1)
 
-    create_time = proto.Field(proto.MESSAGE, number=2,
-        message=timestamp.Timestamp,
-    )
+    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
 
-    update_time = proto.Field(proto.MESSAGE, number=3,
-        message=timestamp.Timestamp,
-    )
+    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
 
     labels = proto.MapField(proto.STRING, proto.STRING, number=4)
 

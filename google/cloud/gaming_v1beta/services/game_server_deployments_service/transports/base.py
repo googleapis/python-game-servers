@@ -21,7 +21,7 @@ import pkg_resources
 
 from google import auth
 from google.api_core import exceptions  # type: ignore
-from google.api_core import gapic_v1    # type: ignore
+from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.auth import credentials  # type: ignore
@@ -33,28 +33,28 @@ from google.longrunning import operations_pb2 as operations  # type: ignore
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            'google-cloud-game-servers',
+            "google-cloud-game-servers",
         ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
+
 class GameServerDeploymentsServiceTransport(abc.ABC):
     """Abstract transport class for GameServerDeploymentsService."""
 
-    AUTH_SCOPES = (
-        'https://www.googleapis.com/auth/cloud-platform',
-    )
+    AUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
 
     def __init__(
-            self, *,
-            host: str = 'gameservices.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: typing.Optional[str] = None,
-            scopes: typing.Optional[typing.Sequence[str]] = AUTH_SCOPES,
-            quota_project_id: typing.Optional[str] = None,
-            **kwargs,
-            ) -> None:
+        self,
+        *,
+        host: str = "gameservices.googleapis.com",
+        credentials: credentials.Credentials = None,
+        credentials_file: typing.Optional[str] = None,
+        scopes: typing.Optional[typing.Sequence[str]] = AUTH_SCOPES,
+        quota_project_id: typing.Optional[str] = None,
+        **kwargs,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -72,24 +72,26 @@ class GameServerDeploymentsServiceTransport(abc.ABC):
                 and quota.
         """
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
-        if ':' not in host:
-            host += ':443'
+        if ":" not in host:
+            host += ":443"
         self._host = host
 
         # If no credentials are provided, then determine the appropriate
         # defaults.
         if credentials and credentials_file:
-            raise exceptions.DuplicateCredentialArgs("'credentials_file' and 'credentials' are mutually exclusive")
+            raise exceptions.DuplicateCredentialArgs(
+                "'credentials_file' and 'credentials' are mutually exclusive"
+            )
 
         if credentials_file is not None:
             credentials, _ = auth.load_credentials_from_file(
-                                credentials_file,
-                                scopes=scopes,
-                                quota_project_id=quota_project_id
-                            )
+                credentials_file, scopes=scopes, quota_project_id=quota_project_id
+            )
 
         elif credentials is None:
-            credentials, _ = auth.default(scopes=scopes, quota_project_id=quota_project_id)
+            credentials, _ = auth.default(
+                scopes=scopes, quota_project_id=quota_project_id
+            )
 
         # Save the credentials.
         self._credentials = credentials
@@ -175,7 +177,6 @@ class GameServerDeploymentsServiceTransport(abc.ABC):
                 default_timeout=60.0,
                 client_info=_client_info,
             ),
-
         }
 
     @property
@@ -184,87 +185,102 @@ class GameServerDeploymentsServiceTransport(abc.ABC):
         raise NotImplementedError()
 
     @property
-    def list_game_server_deployments(self) -> typing.Callable[
-            [game_server_deployments.ListGameServerDeploymentsRequest],
-            typing.Union[
-                game_server_deployments.ListGameServerDeploymentsResponse,
-                typing.Awaitable[game_server_deployments.ListGameServerDeploymentsResponse]
-            ]]:
+    def list_game_server_deployments(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.ListGameServerDeploymentsRequest],
+        typing.Union[
+            game_server_deployments.ListGameServerDeploymentsResponse,
+            typing.Awaitable[game_server_deployments.ListGameServerDeploymentsResponse],
+        ],
+    ]:
         raise NotImplementedError()
 
     @property
-    def get_game_server_deployment(self) -> typing.Callable[
-            [game_server_deployments.GetGameServerDeploymentRequest],
-            typing.Union[
-                game_server_deployments.GameServerDeployment,
-                typing.Awaitable[game_server_deployments.GameServerDeployment]
-            ]]:
+    def get_game_server_deployment(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.GetGameServerDeploymentRequest],
+        typing.Union[
+            game_server_deployments.GameServerDeployment,
+            typing.Awaitable[game_server_deployments.GameServerDeployment],
+        ],
+    ]:
         raise NotImplementedError()
 
     @property
-    def create_game_server_deployment(self) -> typing.Callable[
-            [game_server_deployments.CreateGameServerDeploymentRequest],
-            typing.Union[
-                operations.Operation,
-                typing.Awaitable[operations.Operation]
-            ]]:
+    def create_game_server_deployment(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.CreateGameServerDeploymentRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
         raise NotImplementedError()
 
     @property
-    def delete_game_server_deployment(self) -> typing.Callable[
-            [game_server_deployments.DeleteGameServerDeploymentRequest],
-            typing.Union[
-                operations.Operation,
-                typing.Awaitable[operations.Operation]
-            ]]:
+    def delete_game_server_deployment(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.DeleteGameServerDeploymentRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
         raise NotImplementedError()
 
     @property
-    def update_game_server_deployment(self) -> typing.Callable[
-            [game_server_deployments.UpdateGameServerDeploymentRequest],
-            typing.Union[
-                operations.Operation,
-                typing.Awaitable[operations.Operation]
-            ]]:
+    def update_game_server_deployment(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.UpdateGameServerDeploymentRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
         raise NotImplementedError()
 
     @property
-    def get_game_server_deployment_rollout(self) -> typing.Callable[
-            [game_server_deployments.GetGameServerDeploymentRolloutRequest],
-            typing.Union[
-                game_server_deployments.GameServerDeploymentRollout,
-                typing.Awaitable[game_server_deployments.GameServerDeploymentRollout]
-            ]]:
+    def get_game_server_deployment_rollout(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.GetGameServerDeploymentRolloutRequest],
+        typing.Union[
+            game_server_deployments.GameServerDeploymentRollout,
+            typing.Awaitable[game_server_deployments.GameServerDeploymentRollout],
+        ],
+    ]:
         raise NotImplementedError()
 
     @property
-    def update_game_server_deployment_rollout(self) -> typing.Callable[
-            [game_server_deployments.UpdateGameServerDeploymentRolloutRequest],
-            typing.Union[
-                operations.Operation,
-                typing.Awaitable[operations.Operation]
-            ]]:
+    def update_game_server_deployment_rollout(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.UpdateGameServerDeploymentRolloutRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
         raise NotImplementedError()
 
     @property
-    def preview_game_server_deployment_rollout(self) -> typing.Callable[
-            [game_server_deployments.PreviewGameServerDeploymentRolloutRequest],
-            typing.Union[
-                game_server_deployments.PreviewGameServerDeploymentRolloutResponse,
-                typing.Awaitable[game_server_deployments.PreviewGameServerDeploymentRolloutResponse]
-            ]]:
+    def preview_game_server_deployment_rollout(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.PreviewGameServerDeploymentRolloutRequest],
+        typing.Union[
+            game_server_deployments.PreviewGameServerDeploymentRolloutResponse,
+            typing.Awaitable[
+                game_server_deployments.PreviewGameServerDeploymentRolloutResponse
+            ],
+        ],
+    ]:
         raise NotImplementedError()
 
     @property
-    def fetch_deployment_state(self) -> typing.Callable[
-            [game_server_deployments.FetchDeploymentStateRequest],
-            typing.Union[
-                game_server_deployments.FetchDeploymentStateResponse,
-                typing.Awaitable[game_server_deployments.FetchDeploymentStateResponse]
-            ]]:
+    def fetch_deployment_state(
+        self,
+    ) -> typing.Callable[
+        [game_server_deployments.FetchDeploymentStateRequest],
+        typing.Union[
+            game_server_deployments.FetchDeploymentStateResponse,
+            typing.Awaitable[game_server_deployments.FetchDeploymentStateResponse],
+        ],
+    ]:
         raise NotImplementedError()
 
 
-__all__ = (
-    'GameServerDeploymentsServiceTransport',
-)
+__all__ = ("GameServerDeploymentsServiceTransport",)

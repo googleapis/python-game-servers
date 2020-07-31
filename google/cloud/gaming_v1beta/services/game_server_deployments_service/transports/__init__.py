@@ -24,13 +24,15 @@ from .grpc_asyncio import GameServerDeploymentsServiceGrpcAsyncIOTransport
 
 
 # Compile a registry of transports.
-_transport_registry = OrderedDict()  # type: Dict[str, Type[GameServerDeploymentsServiceTransport]]
-_transport_registry['grpc'] = GameServerDeploymentsServiceGrpcTransport
-_transport_registry['grpc_asyncio'] = GameServerDeploymentsServiceGrpcAsyncIOTransport
+_transport_registry = (
+    OrderedDict()
+)  # type: Dict[str, Type[GameServerDeploymentsServiceTransport]]
+_transport_registry["grpc"] = GameServerDeploymentsServiceGrpcTransport
+_transport_registry["grpc_asyncio"] = GameServerDeploymentsServiceGrpcAsyncIOTransport
 
 
 __all__ = (
-    'GameServerDeploymentsServiceTransport',
-    'GameServerDeploymentsServiceGrpcTransport',
-    'GameServerDeploymentsServiceGrpcAsyncIOTransport',
+    "GameServerDeploymentsServiceTransport",
+    "GameServerDeploymentsServiceGrpcTransport",
+    "GameServerDeploymentsServiceGrpcAsyncIOTransport",
 )

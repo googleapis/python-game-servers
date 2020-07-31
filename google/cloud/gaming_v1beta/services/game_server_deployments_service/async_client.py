@@ -21,12 +21,12 @@ import re
 from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions # type: ignore
-from google.api_core import exceptions                 # type: ignore
-from google.api_core import gapic_v1                   # type: ignore
-from google.api_core import retry as retries           # type: ignore
-from google.auth import credentials                    # type: ignore
-from google.oauth2 import service_account              # type: ignore
+import google.api_core.client_options as ClientOptions  # type: ignore
+from google.api_core import exceptions  # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.api_core import retry as retries  # type: ignore
+from google.auth import credentials  # type: ignore
+from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
 from google.api_core import operation_async
@@ -52,20 +52,31 @@ class GameServerDeploymentsServiceAsyncClient:
     DEFAULT_ENDPOINT = GameServerDeploymentsServiceClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = GameServerDeploymentsServiceClient.DEFAULT_MTLS_ENDPOINT
 
-    game_server_deployment_rollout_path = staticmethod(GameServerDeploymentsServiceClient.game_server_deployment_rollout_path)
+    game_server_deployment_rollout_path = staticmethod(
+        GameServerDeploymentsServiceClient.game_server_deployment_rollout_path
+    )
 
-    game_server_deployment_path = staticmethod(GameServerDeploymentsServiceClient.game_server_deployment_path)
+    game_server_deployment_path = staticmethod(
+        GameServerDeploymentsServiceClient.game_server_deployment_path
+    )
 
-    from_service_account_file = GameServerDeploymentsServiceClient.from_service_account_file
+    from_service_account_file = (
+        GameServerDeploymentsServiceClient.from_service_account_file
+    )
     from_service_account_json = from_service_account_file
 
-    get_transport_class = functools.partial(type(GameServerDeploymentsServiceClient).get_transport_class, type(GameServerDeploymentsServiceClient))
+    get_transport_class = functools.partial(
+        type(GameServerDeploymentsServiceClient).get_transport_class,
+        type(GameServerDeploymentsServiceClient),
+    )
 
-    def __init__(self, *,
-            credentials: credentials.Credentials = None,
-            transport: Union[str, GameServerDeploymentsServiceTransport] = 'grpc_asyncio',
-            client_options: ClientOptions = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        credentials: credentials.Credentials = None,
+        transport: Union[str, GameServerDeploymentsServiceTransport] = "grpc_asyncio",
+        client_options: ClientOptions = None,
+    ) -> None:
         """Instantiate the game server deployments service client.
 
         Args:
@@ -97,19 +108,18 @@ class GameServerDeploymentsServiceAsyncClient:
         """
 
         self._client = GameServerDeploymentsServiceClient(
-            credentials=credentials,
-            transport=transport,
-            client_options=client_options,
+            credentials=credentials, transport=transport, client_options=client_options,
         )
 
-    async def list_game_server_deployments(self,
-            request: game_server_deployments.ListGameServerDeploymentsRequest = None,
-            *,
-            parent: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> pagers.ListGameServerDeploymentsAsyncPager:
+    async def list_game_server_deployments(
+        self,
+        request: game_server_deployments.ListGameServerDeploymentsRequest = None,
+        *,
+        parent: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> pagers.ListGameServerDeploymentsAsyncPager:
         r"""Lists game server deployments in a given project and
         location.
 
@@ -143,8 +153,10 @@ class GameServerDeploymentsServiceAsyncClient:
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([parent]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         request = game_server_deployments.ListGameServerDeploymentsRequest(request)
 
@@ -171,39 +183,30 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__aiter__` convenience method.
         response = pagers.ListGameServerDeploymentsAsyncPager(
-            method=rpc,
-            request=request,
-            response=response,
-            metadata=metadata,
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
         return response
 
-    async def get_game_server_deployment(self,
-            request: game_server_deployments.GetGameServerDeploymentRequest = None,
-            *,
-            name: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_deployments.GameServerDeployment:
+    async def get_game_server_deployment(
+        self,
+        request: game_server_deployments.GetGameServerDeploymentRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.GameServerDeployment:
         r"""Gets details of a single game server deployment.
 
         Args:
@@ -233,8 +236,10 @@ class GameServerDeploymentsServiceAsyncClient:
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([name]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         request = game_server_deployments.GetGameServerDeploymentRequest(request)
 
@@ -261,31 +266,25 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    async def create_game_server_deployment(self,
-            request: game_server_deployments.CreateGameServerDeploymentRequest = None,
-            *,
-            parent: str = None,
-            game_server_deployment: game_server_deployments.GameServerDeployment = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation_async.AsyncOperation:
+    async def create_game_server_deployment(
+        self,
+        request: game_server_deployments.CreateGameServerDeploymentRequest = None,
+        *,
+        parent: str = None,
+        game_server_deployment: game_server_deployments.GameServerDeployment = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
         r"""Creates a new game server deployment in a given
         project and location.
 
@@ -325,8 +324,10 @@ class GameServerDeploymentsServiceAsyncClient:
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([parent, game_server_deployment]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         request = game_server_deployments.CreateGameServerDeploymentRequest(request)
 
@@ -349,18 +350,11 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -373,14 +367,15 @@ class GameServerDeploymentsServiceAsyncClient:
         # Done; return the response.
         return response
 
-    async def delete_game_server_deployment(self,
-            request: game_server_deployments.DeleteGameServerDeploymentRequest = None,
-            *,
-            name: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation_async.AsyncOperation:
+    async def delete_game_server_deployment(
+        self,
+        request: game_server_deployments.DeleteGameServerDeploymentRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
         r"""Deletes a single game server deployment.
 
         Args:
@@ -427,8 +422,10 @@ class GameServerDeploymentsServiceAsyncClient:
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([name]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         request = game_server_deployments.DeleteGameServerDeploymentRequest(request)
 
@@ -449,18 +446,11 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -473,15 +463,16 @@ class GameServerDeploymentsServiceAsyncClient:
         # Done; return the response.
         return response
 
-    async def update_game_server_deployment(self,
-            request: game_server_deployments.UpdateGameServerDeploymentRequest = None,
-            *,
-            game_server_deployment: game_server_deployments.GameServerDeployment = None,
-            update_mask: field_mask.FieldMask = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation_async.AsyncOperation:
+    async def update_game_server_deployment(
+        self,
+        request: game_server_deployments.UpdateGameServerDeploymentRequest = None,
+        *,
+        game_server_deployment: game_server_deployments.GameServerDeployment = None,
+        update_mask: field_mask.FieldMask = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
         r"""Patches a game server deployment.
 
         Args:
@@ -525,8 +516,10 @@ class GameServerDeploymentsServiceAsyncClient:
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([game_server_deployment, update_mask]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         request = game_server_deployments.UpdateGameServerDeploymentRequest(request)
 
@@ -549,18 +542,13 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('game_server_deployment.name', request.game_server_deployment.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("game_server_deployment.name", request.game_server_deployment.name),)
+            ),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -573,14 +561,15 @@ class GameServerDeploymentsServiceAsyncClient:
         # Done; return the response.
         return response
 
-    async def get_game_server_deployment_rollout(self,
-            request: game_server_deployments.GetGameServerDeploymentRolloutRequest = None,
-            *,
-            name: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_deployments.GameServerDeploymentRollout:
+    async def get_game_server_deployment_rollout(
+        self,
+        request: game_server_deployments.GetGameServerDeploymentRolloutRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.GameServerDeploymentRollout:
         r"""Gets details a single game server deployment rollout.
 
         Args:
@@ -613,8 +602,10 @@ class GameServerDeploymentsServiceAsyncClient:
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([name]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         request = game_server_deployments.GetGameServerDeploymentRolloutRequest(request)
 
@@ -641,31 +632,25 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    async def update_game_server_deployment_rollout(self,
-            request: game_server_deployments.UpdateGameServerDeploymentRolloutRequest = None,
-            *,
-            rollout: game_server_deployments.GameServerDeploymentRollout = None,
-            update_mask: field_mask.FieldMask = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation_async.AsyncOperation:
+    async def update_game_server_deployment_rollout(
+        self,
+        request: game_server_deployments.UpdateGameServerDeploymentRolloutRequest = None,
+        *,
+        rollout: game_server_deployments.GameServerDeploymentRollout = None,
+        update_mask: field_mask.FieldMask = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
         r"""Patches a single game server deployment rollout. The method will
         not return an error if the update does not affect any existing
         realms. For example - if the default_game_server_config is
@@ -715,10 +700,14 @@ class GameServerDeploymentsServiceAsyncClient:
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([rollout, update_mask]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
-        request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest(request)
+        request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest(
+            request
+        )
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
@@ -739,18 +728,13 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('rollout.name', request.rollout.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("rollout.name", request.rollout.name),)
+            ),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -763,13 +747,14 @@ class GameServerDeploymentsServiceAsyncClient:
         # Done; return the response.
         return response
 
-    async def preview_game_server_deployment_rollout(self,
-            request: game_server_deployments.PreviewGameServerDeploymentRolloutRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
+    async def preview_game_server_deployment_rollout(
+        self,
+        request: game_server_deployments.PreviewGameServerDeploymentRolloutRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
         r"""Previews the game server deployment rollout. This API
         does not mutate the rollout resource.
 
@@ -794,7 +779,9 @@ class GameServerDeploymentsServiceAsyncClient:
         """
         # Create or coerce a protobuf request object.
 
-        request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest(request)
+        request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest(
+            request
+        )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -813,29 +800,25 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('rollout.name', request.rollout.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("rollout.name", request.rollout.name),)
+            ),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    async def fetch_deployment_state(self,
-            request: game_server_deployments.FetchDeploymentStateRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_deployments.FetchDeploymentStateResponse:
+    async def fetch_deployment_state(
+        self,
+        request: game_server_deployments.FetchDeploymentStateRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.FetchDeploymentStateResponse:
         r"""Retrieves information about the current state of the
         game server deployment. Gathers all the Agones fleets
         and Agones autoscalers, including fleets running an
@@ -879,38 +862,24 @@ class GameServerDeploymentsServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
 
-
-
-
-
-
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            'google-cloud-game-servers',
+            "google-cloud-game-servers",
         ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = (
-    'GameServerDeploymentsServiceAsyncClient',
-)
+__all__ = ("GameServerDeploymentsServiceAsyncClient",)

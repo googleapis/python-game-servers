@@ -23,17 +23,17 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package='google.cloud.gaming.v1beta',
+    package="google.cloud.gaming.v1beta",
     manifest={
-        'OperationMetadata',
-        'OperationStatus',
-        'LabelSelector',
-        'RealmSelector',
-        'Schedule',
-        'SpecSource',
-        'TargetDetails',
-        'TargetState',
-        'DeployedFleetDetails',
+        "OperationMetadata",
+        "OperationStatus",
+        "LabelSelector",
+        "RealmSelector",
+        "Schedule",
+        "SpecSource",
+        "TargetDetails",
+        "TargetState",
+        "DeployedFleetDetails",
     },
 )
 
@@ -78,13 +78,9 @@ class OperationMetadata(proto.Message):
             includes an error code and error message.
     """
 
-    create_time = proto.Field(proto.MESSAGE, number=1,
-        message=timestamp.Timestamp,
-    )
+    create_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
 
-    end_time = proto.Field(proto.MESSAGE, number=2,
-        message=timestamp.Timestamp,
-    )
+    end_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
 
     target = proto.Field(proto.STRING, number=3)
 
@@ -98,8 +94,8 @@ class OperationMetadata(proto.Message):
 
     unreachable = proto.RepeatedField(proto.STRING, number=8)
 
-    operation_status = proto.MapField(proto.STRING, proto.MESSAGE, number=9,
-        message='OperationStatus',
+    operation_status = proto.MapField(
+        proto.STRING, proto.MESSAGE, number=9, message="OperationStatus",
     )
 
 
@@ -115,6 +111,7 @@ class OperationStatus(proto.Message):
         error_message (str):
             The human-readable error message.
     """
+
     class ErrorCode(proto.Enum):
         r""""""
         ERROR_CODE_UNSPECIFIED = 0
@@ -124,9 +121,7 @@ class OperationStatus(proto.Message):
 
     done = proto.Field(proto.BOOL, number=1)
 
-    error_code = proto.Field(proto.ENUM, number=2,
-        enum=ErrorCode,
-    )
+    error_code = proto.Field(proto.ENUM, number=2, enum=ErrorCode,)
 
     error_message = proto.Field(proto.STRING, number=3)
 
@@ -183,17 +178,11 @@ class Schedule(proto.Message):
             realm.
     """
 
-    start_time = proto.Field(proto.MESSAGE, number=1,
-        message=timestamp.Timestamp,
-    )
+    start_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
 
-    end_time = proto.Field(proto.MESSAGE, number=2,
-        message=timestamp.Timestamp,
-    )
+    end_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
 
-    cron_job_duration = proto.Field(proto.MESSAGE, number=3,
-        message=duration.Duration,
-    )
+    cron_job_duration = proto.Field(proto.MESSAGE, number=3, message=duration.Duration,)
 
     cron_spec = proto.Field(proto.STRING, number=4)
 
@@ -234,6 +223,7 @@ class TargetDetails(proto.Message):
             Agones fleet details for game server clusters
             and game server deployments.
     """
+
     class TargetFleetDetails(proto.Message):
         r"""Details of the target Agones fleet.
 
@@ -244,6 +234,7 @@ class TargetDetails(proto.Message):
                 Reference to target Agones fleet autoscaling
                 policy.
         """
+
         class TargetFleet(proto.Message):
             r"""Target Agones fleet specification.
 
@@ -257,9 +248,7 @@ class TargetDetails(proto.Message):
 
             name = proto.Field(proto.STRING, number=1)
 
-            spec_source = proto.Field(proto.MESSAGE, number=2,
-                message=SpecSource,
-            )
+            spec_source = proto.Field(proto.MESSAGE, number=2, message=SpecSource,)
 
         class TargetFleetAutoscaler(proto.Message):
             r"""Target Agones autoscaler policy reference.
@@ -274,24 +263,26 @@ class TargetDetails(proto.Message):
 
             name = proto.Field(proto.STRING, number=1)
 
-            spec_source = proto.Field(proto.MESSAGE, number=2,
-                message=SpecSource,
-            )
+            spec_source = proto.Field(proto.MESSAGE, number=2, message=SpecSource,)
 
-        fleet = proto.Field(proto.MESSAGE, number=1,
-            message='TargetDetails.TargetFleetDetails.TargetFleet',
+        fleet = proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message="TargetDetails.TargetFleetDetails.TargetFleet",
         )
 
-        autoscaler = proto.Field(proto.MESSAGE, number=2,
-            message='TargetDetails.TargetFleetDetails.TargetFleetAutoscaler',
+        autoscaler = proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message="TargetDetails.TargetFleetDetails.TargetFleetAutoscaler",
         )
 
     game_server_cluster_name = proto.Field(proto.STRING, number=1)
 
     game_server_deployment_name = proto.Field(proto.STRING, number=2)
 
-    fleet_details = proto.RepeatedField(proto.MESSAGE, number=3,
-        message=TargetFleetDetails,
+    fleet_details = proto.RepeatedField(
+        proto.MESSAGE, number=3, message=TargetFleetDetails,
     )
 
 
@@ -303,9 +294,7 @@ class TargetState(proto.Message):
             Details about Agones fleets.
     """
 
-    details = proto.RepeatedField(proto.MESSAGE, number=1,
-        message=TargetDetails,
-    )
+    details = proto.RepeatedField(proto.MESSAGE, number=1, message=TargetDetails,)
 
 
 class DeployedFleetDetails(proto.Message):
@@ -318,6 +307,7 @@ class DeployedFleetDetails(proto.Message):
             Information about the Agones autoscaler for
             that fleet.
     """
+
     class DeployedFleet(proto.Message):
         r"""Agones fleet specification and details.
 
@@ -336,6 +326,7 @@ class DeployedFleetDetails(proto.Message):
                 Includes count of game servers in various
                 states.
         """
+
         class DeployedFleetStatus(proto.Message):
             r"""DeployedFleetStatus has details about the Agones fleets such
             as how many are running, how many allocated, and so on.
@@ -369,12 +360,12 @@ class DeployedFleetDetails(proto.Message):
 
         fleet_spec = proto.Field(proto.STRING, number=2)
 
-        spec_source = proto.Field(proto.MESSAGE, number=3,
-            message=SpecSource,
-        )
+        spec_source = proto.Field(proto.MESSAGE, number=3, message=SpecSource,)
 
-        status = proto.Field(proto.MESSAGE, number=5,
-            message='DeployedFleetDetails.DeployedFleet.DeployedFleetStatus',
+        status = proto.Field(
+            proto.MESSAGE,
+            number=5,
+            message="DeployedFleetDetails.DeployedFleet.DeployedFleetStatus",
         )
 
     class DeployedFleetAutoscaler(proto.Message):
@@ -393,18 +384,14 @@ class DeployedFleetDetails(proto.Message):
 
         autoscaler = proto.Field(proto.STRING, number=1)
 
-        spec_source = proto.Field(proto.MESSAGE, number=4,
-            message=SpecSource,
-        )
+        spec_source = proto.Field(proto.MESSAGE, number=4, message=SpecSource,)
 
         fleet_autoscaler_spec = proto.Field(proto.STRING, number=3)
 
-    deployed_fleet = proto.Field(proto.MESSAGE, number=1,
-        message=DeployedFleet,
-    )
+    deployed_fleet = proto.Field(proto.MESSAGE, number=1, message=DeployedFleet,)
 
-    deployed_autoscaler = proto.Field(proto.MESSAGE, number=2,
-        message=DeployedFleetAutoscaler,
+    deployed_autoscaler = proto.Field(
+        proto.MESSAGE, number=2, message=DeployedFleetAutoscaler,
     )
 
 

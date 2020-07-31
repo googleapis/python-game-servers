@@ -21,14 +21,14 @@ import re
 from typing import Callable, Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions # type: ignore
-from google.api_core import exceptions                 # type: ignore
-from google.api_core import gapic_v1                   # type: ignore
-from google.api_core import retry as retries           # type: ignore
-from google.auth import credentials                    # type: ignore
-from google.auth.transport import mtls                 # type: ignore
+import google.api_core.client_options as ClientOptions  # type: ignore
+from google.api_core import exceptions  # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.api_core import retry as retries  # type: ignore
+from google.auth import credentials  # type: ignore
+from google.auth.transport import mtls  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
-from google.oauth2 import service_account              # type: ignore
+from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
 from google.api_core import operation_async
@@ -51,13 +51,18 @@ class GameServerDeploymentsServiceClientMeta(type):
     support objects (e.g. transport) without polluting the client instance
     objects.
     """
-    _transport_registry = OrderedDict()  # type: Dict[str, Type[GameServerDeploymentsServiceTransport]]
-    _transport_registry['grpc'] = GameServerDeploymentsServiceGrpcTransport
-    _transport_registry['grpc_asyncio'] = GameServerDeploymentsServiceGrpcAsyncIOTransport
 
-    def get_transport_class(cls,
-            label: str = None,
-        ) -> Type[GameServerDeploymentsServiceTransport]:
+    _transport_registry = (
+        OrderedDict()
+    )  # type: Dict[str, Type[GameServerDeploymentsServiceTransport]]
+    _transport_registry["grpc"] = GameServerDeploymentsServiceGrpcTransport
+    _transport_registry[
+        "grpc_asyncio"
+    ] = GameServerDeploymentsServiceGrpcAsyncIOTransport
+
+    def get_transport_class(
+        cls, label: str = None,
+    ) -> Type[GameServerDeploymentsServiceTransport]:
         """Return an appropriate transport class.
 
         Args:
@@ -76,7 +81,9 @@ class GameServerDeploymentsServiceClientMeta(type):
         return next(iter(cls._transport_registry.values()))
 
 
-class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceClientMeta):
+class GameServerDeploymentsServiceClient(
+    metaclass=GameServerDeploymentsServiceClientMeta
+):
     """The game server deployment is used to control the deployment
     of Agones fleets.
     """
@@ -110,7 +117,7 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
 
         return api_endpoint.replace(".googleapis.com", ".mtls.googleapis.com")
 
-    DEFAULT_ENDPOINT = 'gameservices.googleapis.com'
+    DEFAULT_ENDPOINT = "gameservices.googleapis.com"
     DEFAULT_MTLS_ENDPOINT = _get_default_mtls_endpoint.__func__(  # type: ignore
         DEFAULT_ENDPOINT
     )
@@ -129,39 +136,55 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         Returns:
             {@api.name}: The constructed client.
         """
-        credentials = service_account.Credentials.from_service_account_file(
-            filename)
-        kwargs['credentials'] = credentials
+        credentials = service_account.Credentials.from_service_account_file(filename)
+        kwargs["credentials"] = credentials
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
 
     @staticmethod
-    def game_server_deployment_path(project: str,location: str,deployment: str,) -> str:
+    def game_server_deployment_path(
+        project: str, location: str, deployment: str,
+    ) -> str:
         """Return a fully-qualified game_server_deployment string."""
-        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(project=project, location=location, deployment=deployment, )
+        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
+            project=project, location=location, deployment=deployment,
+        )
 
     @staticmethod
-    def parse_game_server_deployment_path(path: str) -> Dict[str,str]:
+    def parse_game_server_deployment_path(path: str) -> Dict[str, str]:
         """Parse a game_server_deployment path into its component segments."""
-        m = re.match(r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)$", path)
+        m = re.match(
+            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)$",
+            path,
+        )
         return m.groupdict() if m else {}
+
     @staticmethod
-    def game_server_deployment_rollout_path(project: str,location: str,deployment: str,) -> str:
+    def game_server_deployment_rollout_path(
+        project: str, location: str, deployment: str,
+    ) -> str:
         """Return a fully-qualified game_server_deployment_rollout string."""
-        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(project=project, location=location, deployment=deployment, )
+        return "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout".format(
+            project=project, location=location, deployment=deployment,
+        )
 
     @staticmethod
-    def parse_game_server_deployment_rollout_path(path: str) -> Dict[str,str]:
+    def parse_game_server_deployment_rollout_path(path: str) -> Dict[str, str]:
         """Parse a game_server_deployment_rollout path into its component segments."""
-        m = re.match(r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)/rollout$", path)
+        m = re.match(
+            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/gameServerDeployments/(?P<deployment>.+?)/rollout$",
+            path,
+        )
         return m.groupdict() if m else {}
 
-    def __init__(self, *,
-            credentials: credentials.Credentials = None,
-            transport: Union[str, GameServerDeploymentsServiceTransport] = None,
-            client_options: ClientOptions = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        credentials: credentials.Credentials = None,
+        transport: Union[str, GameServerDeploymentsServiceTransport] = None,
+        client_options: ClientOptions = None,
+    ) -> None:
         """Instantiate the game server deployments service client.
 
         Args:
@@ -208,7 +231,9 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
                     or mtls.has_default_client_cert_source()
                 )
                 client_options.api_endpoint = (
-                    self.DEFAULT_MTLS_ENDPOINT if has_client_cert_source else self.DEFAULT_ENDPOINT
+                    self.DEFAULT_MTLS_ENDPOINT
+                    if has_client_cert_source
+                    else self.DEFAULT_ENDPOINT
                 )
             else:
                 raise MutualTLSChannelError(
@@ -221,8 +246,10 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         if isinstance(transport, GameServerDeploymentsServiceTransport):
             # transport is a GameServerDeploymentsServiceTransport instance.
             if credentials or client_options.credentials_file:
-                raise ValueError('When providing a transport instance, '
-                                 'provide its credentials directly.')
+                raise ValueError(
+                    "When providing a transport instance, "
+                    "provide its credentials directly."
+                )
             if client_options.scopes:
                 raise ValueError(
                     "When providing a transport instance, "
@@ -241,14 +268,15 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
                 quota_project_id=client_options.quota_project_id,
             )
 
-    def list_game_server_deployments(self,
-            request: game_server_deployments.ListGameServerDeploymentsRequest = None,
-            *,
-            parent: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> pagers.ListGameServerDeploymentsPager:
+    def list_game_server_deployments(
+        self,
+        request: game_server_deployments.ListGameServerDeploymentsRequest = None,
+        *,
+        parent: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> pagers.ListGameServerDeploymentsPager:
         r"""Lists game server deployments in a given project and
         location.
 
@@ -283,14 +311,18 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_deployments.ListGameServerDeploymentsRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_deployments.ListGameServerDeploymentsRequest):
+        if not isinstance(
+            request, game_server_deployments.ListGameServerDeploymentsRequest
+        ):
             request = game_server_deployments.ListGameServerDeploymentsRequest(request)
 
             # If we have keyword arguments corresponding to fields on the
@@ -301,44 +333,37 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.list_game_server_deployments]
+        rpc = self._transport._wrapped_methods[
+            self._transport.list_game_server_deployments
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.ListGameServerDeploymentsPager(
-            method=rpc,
-            request=request,
-            response=response,
-            metadata=metadata,
+            method=rpc, request=request, response=response, metadata=metadata,
         )
 
         # Done; return the response.
         return response
 
-    def get_game_server_deployment(self,
-            request: game_server_deployments.GetGameServerDeploymentRequest = None,
-            *,
-            name: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_deployments.GameServerDeployment:
+    def get_game_server_deployment(
+        self,
+        request: game_server_deployments.GetGameServerDeploymentRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.GameServerDeployment:
         r"""Gets details of a single game server deployment.
 
         Args:
@@ -369,14 +394,18 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_deployments.GetGameServerDeploymentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_deployments.GetGameServerDeploymentRequest):
+        if not isinstance(
+            request, game_server_deployments.GetGameServerDeploymentRequest
+        ):
             request = game_server_deployments.GetGameServerDeploymentRequest(request)
 
             # If we have keyword arguments corresponding to fields on the
@@ -387,36 +416,32 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.get_game_server_deployment]
+        rpc = self._transport._wrapped_methods[
+            self._transport.get_game_server_deployment
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    def create_game_server_deployment(self,
-            request: game_server_deployments.CreateGameServerDeploymentRequest = None,
-            *,
-            parent: str = None,
-            game_server_deployment: game_server_deployments.GameServerDeployment = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation.Operation:
+    def create_game_server_deployment(
+        self,
+        request: game_server_deployments.CreateGameServerDeploymentRequest = None,
+        *,
+        parent: str = None,
+        game_server_deployment: game_server_deployments.GameServerDeployment = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
         r"""Creates a new game server deployment in a given
         project and location.
 
@@ -457,14 +482,18 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent, game_server_deployment])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_deployments.CreateGameServerDeploymentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_deployments.CreateGameServerDeploymentRequest):
+        if not isinstance(
+            request, game_server_deployments.CreateGameServerDeploymentRequest
+        ):
             request = game_server_deployments.CreateGameServerDeploymentRequest(request)
 
             # If we have keyword arguments corresponding to fields on the
@@ -477,23 +506,18 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.create_game_server_deployment]
+        rpc = self._transport._wrapped_methods[
+            self._transport.create_game_server_deployment
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -506,14 +530,15 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # Done; return the response.
         return response
 
-    def delete_game_server_deployment(self,
-            request: game_server_deployments.DeleteGameServerDeploymentRequest = None,
-            *,
-            name: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation.Operation:
+    def delete_game_server_deployment(
+        self,
+        request: game_server_deployments.DeleteGameServerDeploymentRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
         r"""Deletes a single game server deployment.
 
         Args:
@@ -561,14 +586,18 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_deployments.DeleteGameServerDeploymentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_deployments.DeleteGameServerDeploymentRequest):
+        if not isinstance(
+            request, game_server_deployments.DeleteGameServerDeploymentRequest
+        ):
             request = game_server_deployments.DeleteGameServerDeploymentRequest(request)
 
             # If we have keyword arguments corresponding to fields on the
@@ -579,23 +608,18 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.delete_game_server_deployment]
+        rpc = self._transport._wrapped_methods[
+            self._transport.delete_game_server_deployment
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -608,15 +632,16 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # Done; return the response.
         return response
 
-    def update_game_server_deployment(self,
-            request: game_server_deployments.UpdateGameServerDeploymentRequest = None,
-            *,
-            game_server_deployment: game_server_deployments.GameServerDeployment = None,
-            update_mask: field_mask.FieldMask = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation.Operation:
+    def update_game_server_deployment(
+        self,
+        request: game_server_deployments.UpdateGameServerDeploymentRequest = None,
+        *,
+        game_server_deployment: game_server_deployments.GameServerDeployment = None,
+        update_mask: field_mask.FieldMask = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
         r"""Patches a game server deployment.
 
         Args:
@@ -661,14 +686,18 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([game_server_deployment, update_mask])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_deployments.UpdateGameServerDeploymentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_deployments.UpdateGameServerDeploymentRequest):
+        if not isinstance(
+            request, game_server_deployments.UpdateGameServerDeploymentRequest
+        ):
             request = game_server_deployments.UpdateGameServerDeploymentRequest(request)
 
             # If we have keyword arguments corresponding to fields on the
@@ -681,23 +710,20 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.update_game_server_deployment]
+        rpc = self._transport._wrapped_methods[
+            self._transport.update_game_server_deployment
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('game_server_deployment.name', request.game_server_deployment.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("game_server_deployment.name", request.game_server_deployment.name),)
+            ),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -710,14 +736,15 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # Done; return the response.
         return response
 
-    def get_game_server_deployment_rollout(self,
-            request: game_server_deployments.GetGameServerDeploymentRolloutRequest = None,
-            *,
-            name: str = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_deployments.GameServerDeploymentRollout:
+    def get_game_server_deployment_rollout(
+        self,
+        request: game_server_deployments.GetGameServerDeploymentRolloutRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.GameServerDeploymentRollout:
         r"""Gets details a single game server deployment rollout.
 
         Args:
@@ -751,15 +778,21 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_deployments.GetGameServerDeploymentRolloutRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_deployments.GetGameServerDeploymentRolloutRequest):
-            request = game_server_deployments.GetGameServerDeploymentRolloutRequest(request)
+        if not isinstance(
+            request, game_server_deployments.GetGameServerDeploymentRolloutRequest
+        ):
+            request = game_server_deployments.GetGameServerDeploymentRolloutRequest(
+                request
+            )
 
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
@@ -769,36 +802,32 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.get_game_server_deployment_rollout]
+        rpc = self._transport._wrapped_methods[
+            self._transport.get_game_server_deployment_rollout
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    def update_game_server_deployment_rollout(self,
-            request: game_server_deployments.UpdateGameServerDeploymentRolloutRequest = None,
-            *,
-            rollout: game_server_deployments.GameServerDeploymentRollout = None,
-            update_mask: field_mask.FieldMask = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation.Operation:
+    def update_game_server_deployment_rollout(
+        self,
+        request: game_server_deployments.UpdateGameServerDeploymentRolloutRequest = None,
+        *,
+        rollout: game_server_deployments.GameServerDeploymentRollout = None,
+        update_mask: field_mask.FieldMask = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
         r"""Patches a single game server deployment rollout. The method will
         not return an error if the update does not affect any existing
         realms. For example - if the default_game_server_config is
@@ -849,15 +878,21 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([rollout, update_mask])
         if request is not None and has_flattened_params:
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         # Minor optimization to avoid making a copy if the user passes
         # in a game_server_deployments.UpdateGameServerDeploymentRolloutRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_deployments.UpdateGameServerDeploymentRolloutRequest):
-            request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest(request)
+        if not isinstance(
+            request, game_server_deployments.UpdateGameServerDeploymentRolloutRequest
+        ):
+            request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest(
+                request
+            )
 
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
@@ -869,23 +904,20 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.update_game_server_deployment_rollout]
+        rpc = self._transport._wrapped_methods[
+            self._transport.update_game_server_deployment_rollout
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('rollout.name', request.rollout.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("rollout.name", request.rollout.name),)
+            ),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -898,13 +930,14 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # Done; return the response.
         return response
 
-    def preview_game_server_deployment_rollout(self,
-            request: game_server_deployments.PreviewGameServerDeploymentRolloutRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
+    def preview_game_server_deployment_rollout(
+        self,
+        request: game_server_deployments.PreviewGameServerDeploymentRolloutRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
         r"""Previews the game server deployment rollout. This API
         does not mutate the rollout resource.
 
@@ -933,39 +966,41 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # in a game_server_deployments.PreviewGameServerDeploymentRolloutRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
-        if not isinstance(request, game_server_deployments.PreviewGameServerDeploymentRolloutRequest):
-            request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest(request)
+        if not isinstance(
+            request, game_server_deployments.PreviewGameServerDeploymentRolloutRequest
+        ):
+            request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest(
+                request
+            )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = self._transport._wrapped_methods[self._transport.preview_game_server_deployment_rollout]
+        rpc = self._transport._wrapped_methods[
+            self._transport.preview_game_server_deployment_rollout
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('rollout.name', request.rollout.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("rollout.name", request.rollout.name),)
+            ),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
-    def fetch_deployment_state(self,
-            request: game_server_deployments.FetchDeploymentStateRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> game_server_deployments.FetchDeploymentStateResponse:
+    def fetch_deployment_state(
+        self,
+        request: game_server_deployments.FetchDeploymentStateRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> game_server_deployments.FetchDeploymentStateResponse:
         r"""Retrieves information about the current state of the
         game server deployment. Gathers all the Agones fleets
         and Agones autoscalers, including fleets running an
@@ -1004,38 +1039,24 @@ class GameServerDeploymentsServiceClient(metaclass=GameServerDeploymentsServiceC
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('name', request.name),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
 
-
-
-
-
-
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            'google-cloud-game-servers',
+            "google-cloud-game-servers",
         ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = (
-    'GameServerDeploymentsServiceClient',
-)
+__all__ = ("GameServerDeploymentsServiceClient",)
