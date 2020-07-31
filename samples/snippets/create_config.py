@@ -97,8 +97,7 @@ def create_config(project_id, deployment_id, config_id):
     client = gaming.GameServerConfigsServiceClient()
 
     fleet_config = game_server_configs.FleetConfig(
-        name="my-fleet-spec",
-        fleet_spec=FLEET_SPEC,
+        name="my-fleet-spec", fleet_spec=FLEET_SPEC,
     )
 
     # Location is hard coded as global, as game server configs can
@@ -108,21 +107,26 @@ def create_config(project_id, deployment_id, config_id):
         parent=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}",
         config_id=config_id,
         game_server_config=game_server_configs.GameServerConfig(
-            description="My Game Server Config",
-            fleet_configs=[fleet_config],
+            description="My Game Server Config", fleet_configs=[fleet_config],
         ),
     )
 
     operation = client.create_game_server_config(request)
     print(f"Create config operation: {operation.operation.name}")
     operation.result(timeout=120)
+
+
 # [END cloud_game_servers_config_create]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--deployment-id', help='Your game server deployment ID.', required=True)
-    parser.add_argument('--config-id', help='Your game server config ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument(
+        "--deployment-id", help="Your game server deployment ID.", required=True
+    )
+    parser.add_argument(
+        "--config-id", help="Your game server config ID.", required=True
+    )
 
     args = parser.parse_args()
 
