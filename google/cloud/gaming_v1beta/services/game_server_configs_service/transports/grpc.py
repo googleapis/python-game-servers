@@ -17,10 +17,10 @@
 
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers  # type: ignore
+from google.api_core import grpc_helpers   # type: ignore
 from google.api_core import operations_v1  # type: ignore
-from google import auth  # type: ignore
-from google.auth import credentials  # type: ignore
+from google import auth                    # type: ignore
+from google.auth import credentials        # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 
@@ -45,21 +45,17 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
     It sends protocol buffers over the wire using gRPC (which is built on
     top of HTTP/2); the ``grpcio`` package must be installed.
     """
-
     _stubs: Dict[str, Callable]
 
-    def __init__(
-        self,
-        *,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        channel: grpc.Channel = None,
-        api_mtls_endpoint: str = None,
-        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
-        quota_project_id: Optional[str] = None
-    ) -> None:
+    def __init__(self, *,
+            host: str = 'gameservices.googleapis.com',
+            credentials: credentials.Credentials = None,
+            credentials_file: str = None,
+            scopes: Sequence[str] = None,
+            channel: grpc.Channel = None,
+            api_mtls_endpoint: str = None,
+            client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
+            quota_project_id: Optional[str] = None) -> None:
         """Instantiate the transport.
 
         Args:
@@ -102,16 +98,10 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
         elif api_mtls_endpoint:
-            host = (
-                api_mtls_endpoint
-                if ":" in api_mtls_endpoint
-                else api_mtls_endpoint + ":443"
-            )
+            host = api_mtls_endpoint if ":" in api_mtls_endpoint else api_mtls_endpoint + ":443"
 
             if credentials is None:
-                credentials, _ = auth.default(
-                    scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id
-                )
+                credentials, _ = auth.default(scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id)
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -145,15 +135,13 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         )
 
     @classmethod
-    def create_channel(
-        cls,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Optional[Sequence[str]] = None,
-        quota_project_id: Optional[str] = None,
-        **kwargs
-    ) -> grpc.Channel:
+    def create_channel(cls,
+                       host: str = 'gameservices.googleapis.com',
+                       credentials: credentials.Credentials = None,
+                       credentials_file: str = None,
+                       scopes: Optional[Sequence[str]] = None,
+                       quota_project_id: Optional[str] = None,
+                       **kwargs) -> grpc.Channel:
         """Create and return a gRPC channel object.
         Args:
             address (Optionsl[str]): The host for the channel to use.
@@ -198,9 +186,10 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         """
         # Sanity check: Only create a new channel if we do not already
         # have one.
-        if not hasattr(self, "_grpc_channel"):
+        if not hasattr(self, '_grpc_channel'):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials,
+                self._host,
+                credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -214,21 +203,18 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         client.
         """
         # Sanity check: Only create a new client if we do not already have one.
-        if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsClient(
+        if 'operations_client' not in self.__dict__:
+            self.__dict__['operations_client'] = operations_v1.OperationsClient(
                 self.grpc_channel
             )
 
         # Return the client from cache.
-        return self.__dict__["operations_client"]
+        return self.__dict__['operations_client']
 
     @property
-    def list_game_server_configs(
-        self,
-    ) -> Callable[
-        [game_server_configs.ListGameServerConfigsRequest],
-        game_server_configs.ListGameServerConfigsResponse,
-    ]:
+    def list_game_server_configs(self) -> Callable[
+            [game_server_configs.ListGameServerConfigsRequest],
+            game_server_configs.ListGameServerConfigsResponse]:
         r"""Return a callable for the list game server configs method over gRPC.
 
         Lists game server configs in a given project,
@@ -244,21 +230,18 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "list_game_server_configs" not in self._stubs:
-            self._stubs["list_game_server_configs"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerConfigsService/ListGameServerConfigs",
+        if 'list_game_server_configs' not in self._stubs:
+            self._stubs['list_game_server_configs'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerConfigsService/ListGameServerConfigs',
                 request_serializer=game_server_configs.ListGameServerConfigsRequest.serialize,
                 response_deserializer=game_server_configs.ListGameServerConfigsResponse.deserialize,
             )
-        return self._stubs["list_game_server_configs"]
+        return self._stubs['list_game_server_configs']
 
     @property
-    def get_game_server_config(
-        self,
-    ) -> Callable[
-        [game_server_configs.GetGameServerConfigRequest],
-        game_server_configs.GameServerConfig,
-    ]:
+    def get_game_server_config(self) -> Callable[
+            [game_server_configs.GetGameServerConfigRequest],
+            game_server_configs.GameServerConfig]:
         r"""Return a callable for the get game server config method over gRPC.
 
         Gets details of a single game server config.
@@ -273,20 +256,18 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "get_game_server_config" not in self._stubs:
-            self._stubs["get_game_server_config"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerConfigsService/GetGameServerConfig",
+        if 'get_game_server_config' not in self._stubs:
+            self._stubs['get_game_server_config'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerConfigsService/GetGameServerConfig',
                 request_serializer=game_server_configs.GetGameServerConfigRequest.serialize,
                 response_deserializer=game_server_configs.GameServerConfig.deserialize,
             )
-        return self._stubs["get_game_server_config"]
+        return self._stubs['get_game_server_config']
 
     @property
-    def create_game_server_config(
-        self,
-    ) -> Callable[
-        [game_server_configs.CreateGameServerConfigRequest], operations.Operation
-    ]:
+    def create_game_server_config(self) -> Callable[
+            [game_server_configs.CreateGameServerConfigRequest],
+            operations.Operation]:
         r"""Return a callable for the create game server config method over gRPC.
 
         Creates a new game server config in a given project,
@@ -305,20 +286,18 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "create_game_server_config" not in self._stubs:
-            self._stubs["create_game_server_config"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerConfigsService/CreateGameServerConfig",
+        if 'create_game_server_config' not in self._stubs:
+            self._stubs['create_game_server_config'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerConfigsService/CreateGameServerConfig',
                 request_serializer=game_server_configs.CreateGameServerConfigRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["create_game_server_config"]
+        return self._stubs['create_game_server_config']
 
     @property
-    def delete_game_server_config(
-        self,
-    ) -> Callable[
-        [game_server_configs.DeleteGameServerConfigRequest], operations.Operation
-    ]:
+    def delete_game_server_config(self) -> Callable[
+            [game_server_configs.DeleteGameServerConfigRequest],
+            operations.Operation]:
         r"""Return a callable for the delete game server config method over gRPC.
 
         Deletes a single game server config. The deletion
@@ -335,13 +314,15 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "delete_game_server_config" not in self._stubs:
-            self._stubs["delete_game_server_config"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerConfigsService/DeleteGameServerConfig",
+        if 'delete_game_server_config' not in self._stubs:
+            self._stubs['delete_game_server_config'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerConfigsService/DeleteGameServerConfig',
                 request_serializer=game_server_configs.DeleteGameServerConfigRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["delete_game_server_config"]
+        return self._stubs['delete_game_server_config']
 
 
-__all__ = ("GameServerConfigsServiceGrpcTransport",)
+__all__ = (
+    'GameServerConfigsServiceGrpcTransport',
+)

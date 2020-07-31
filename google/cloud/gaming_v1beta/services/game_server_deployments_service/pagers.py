@@ -37,17 +37,12 @@ class ListGameServerDeploymentsPager:
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
-
-    def __init__(
-        self,
-        method: Callable[
-            ..., game_server_deployments.ListGameServerDeploymentsResponse
-        ],
-        request: game_server_deployments.ListGameServerDeploymentsRequest,
-        response: game_server_deployments.ListGameServerDeploymentsResponse,
-        *,
-        metadata: Sequence[Tuple[str, str]] = ()
-    ):
+    def __init__(self,
+            method: Callable[..., game_server_deployments.ListGameServerDeploymentsResponse],
+            request: game_server_deployments.ListGameServerDeploymentsRequest,
+            response: game_server_deployments.ListGameServerDeploymentsResponse,
+            *,
+            metadata: Sequence[Tuple[str, str]] = ()):
         """Instantiate the pager.
 
         Args:
@@ -61,9 +56,7 @@ class ListGameServerDeploymentsPager:
                 sent along with the request as metadata.
         """
         self._method = method
-        self._request = game_server_deployments.ListGameServerDeploymentsRequest(
-            request
-        )
+        self._request = game_server_deployments.ListGameServerDeploymentsRequest(request)
         self._response = response
         self._metadata = metadata
 
@@ -71,9 +64,7 @@ class ListGameServerDeploymentsPager:
         return getattr(self._response, name)
 
     @property
-    def pages(
-        self,
-    ) -> Iterable[game_server_deployments.ListGameServerDeploymentsResponse]:
+    def pages(self) -> Iterable[game_server_deployments.ListGameServerDeploymentsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
@@ -85,7 +76,7 @@ class ListGameServerDeploymentsPager:
             yield from page.game_server_deployments
 
     def __repr__(self) -> str:
-        return "{0}<{1!r}>".format(self.__class__.__name__, self._response)
+        return '{0}<{1!r}>'.format(self.__class__.__name__, self._response)
 
 
 class ListGameServerDeploymentsAsyncPager:
@@ -105,17 +96,12 @@ class ListGameServerDeploymentsAsyncPager:
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
-
-    def __init__(
-        self,
-        method: Callable[
-            ..., Awaitable[game_server_deployments.ListGameServerDeploymentsResponse]
-        ],
-        request: game_server_deployments.ListGameServerDeploymentsRequest,
-        response: game_server_deployments.ListGameServerDeploymentsResponse,
-        *,
-        metadata: Sequence[Tuple[str, str]] = ()
-    ):
+    def __init__(self,
+            method: Callable[..., Awaitable[game_server_deployments.ListGameServerDeploymentsResponse]],
+            request: game_server_deployments.ListGameServerDeploymentsRequest,
+            response: game_server_deployments.ListGameServerDeploymentsResponse,
+            *,
+            metadata: Sequence[Tuple[str, str]] = ()):
         """Instantiate the pager.
 
         Args:
@@ -129,9 +115,7 @@ class ListGameServerDeploymentsAsyncPager:
                 sent along with the request as metadata.
         """
         self._method = method
-        self._request = game_server_deployments.ListGameServerDeploymentsRequest(
-            request
-        )
+        self._request = game_server_deployments.ListGameServerDeploymentsRequest(request)
         self._response = response
         self._metadata = metadata
 
@@ -139,9 +123,7 @@ class ListGameServerDeploymentsAsyncPager:
         return getattr(self._response, name)
 
     @property
-    async def pages(
-        self,
-    ) -> AsyncIterable[game_server_deployments.ListGameServerDeploymentsResponse]:
+    async def pages(self) -> AsyncIterable[game_server_deployments.ListGameServerDeploymentsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
@@ -157,4 +139,4 @@ class ListGameServerDeploymentsAsyncPager:
         return async_generator()
 
     def __repr__(self) -> str:
-        return "{0}<{1!r}>".format(self.__class__.__name__, self._response)
+        return '{0}<{1!r}>'.format(self.__class__.__name__, self._response)

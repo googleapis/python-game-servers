@@ -17,12 +17,12 @@
 
 from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers_async  # type: ignore
-from google.api_core import operations_v1  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.api_core import grpc_helpers_async         # type: ignore
+from google.api_core import operations_v1              # type: ignore
+from google.auth import credentials                    # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
-import grpc  # type: ignore
+import grpc                        # type: ignore
 from grpc.experimental import aio  # type: ignore
 
 from google.cloud.gaming_v1beta.types import realms
@@ -50,15 +50,13 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
     _stubs: Dict[str, Callable] = {}
 
     @classmethod
-    def create_channel(
-        cls,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        quota_project_id: Optional[str] = None,
-        **kwargs,
-    ) -> aio.Channel:
+    def create_channel(cls,
+                       host: str = 'gameservices.googleapis.com',
+                       credentials: credentials.Credentials = None,
+                       credentials_file: Optional[str] = None,
+                       scopes: Optional[Sequence[str]] = None,
+                       quota_project_id: Optional[str] = None,
+                       **kwargs) -> aio.Channel:
         """Create and return a gRPC AsyncIO channel object.
         Args:
             address (Optional[str]): The host for the channel to use.
@@ -87,21 +85,19 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
             credentials_file=credentials_file,
             scopes=scopes,
             quota_project_id=quota_project_id,
-            **kwargs,
+            **kwargs
         )
 
-    def __init__(
-        self,
-        *,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        channel: aio.Channel = None,
-        api_mtls_endpoint: str = None,
-        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
-        quota_project_id=None,
-    ) -> None:
+    def __init__(self, *,
+            host: str = 'gameservices.googleapis.com',
+            credentials: credentials.Credentials = None,
+            credentials_file: Optional[str] = None,
+            scopes: Optional[Sequence[str]] = None,
+            channel: aio.Channel = None,
+            api_mtls_endpoint: str = None,
+            client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
+            quota_project_id=None,
+            ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -145,11 +141,7 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
         elif api_mtls_endpoint:
-            host = (
-                api_mtls_endpoint
-                if ":" in api_mtls_endpoint
-                else api_mtls_endpoint + ":443"
-            )
+            host = api_mtls_endpoint if ":" in api_mtls_endpoint else api_mtls_endpoint + ":443"
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -191,9 +183,10 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
         """
         # Sanity check: Only create a new channel if we do not already
         # have one.
-        if not hasattr(self, "_grpc_channel"):
+        if not hasattr(self, '_grpc_channel'):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials,
+                self._host,
+                credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -207,18 +200,18 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
         client.
         """
         # Sanity check: Only create a new client if we do not already have one.
-        if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
+        if 'operations_client' not in self.__dict__:
+            self.__dict__['operations_client'] = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
         # Return the client from cache.
-        return self.__dict__["operations_client"]
+        return self.__dict__['operations_client']
 
     @property
-    def list_realms(
-        self,
-    ) -> Callable[[realms.ListRealmsRequest], Awaitable[realms.ListRealmsResponse]]:
+    def list_realms(self) -> Callable[
+            [realms.ListRealmsRequest],
+            Awaitable[realms.ListRealmsResponse]]:
         r"""Return a callable for the list realms method over gRPC.
 
         Lists realms in a given project and location.
@@ -233,16 +226,18 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "list_realms" not in self._stubs:
-            self._stubs["list_realms"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/ListRealms",
+        if 'list_realms' not in self._stubs:
+            self._stubs['list_realms'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/ListRealms',
                 request_serializer=realms.ListRealmsRequest.serialize,
                 response_deserializer=realms.ListRealmsResponse.deserialize,
             )
-        return self._stubs["list_realms"]
+        return self._stubs['list_realms']
 
     @property
-    def get_realm(self) -> Callable[[realms.GetRealmRequest], Awaitable[realms.Realm]]:
+    def get_realm(self) -> Callable[
+            [realms.GetRealmRequest],
+            Awaitable[realms.Realm]]:
         r"""Return a callable for the get realm method over gRPC.
 
         Gets details of a single realm.
@@ -257,18 +252,18 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "get_realm" not in self._stubs:
-            self._stubs["get_realm"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/GetRealm",
+        if 'get_realm' not in self._stubs:
+            self._stubs['get_realm'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/GetRealm',
                 request_serializer=realms.GetRealmRequest.serialize,
                 response_deserializer=realms.Realm.deserialize,
             )
-        return self._stubs["get_realm"]
+        return self._stubs['get_realm']
 
     @property
-    def create_realm(
-        self,
-    ) -> Callable[[realms.CreateRealmRequest], Awaitable[operations.Operation]]:
+    def create_realm(self) -> Callable[
+            [realms.CreateRealmRequest],
+            Awaitable[operations.Operation]]:
         r"""Return a callable for the create realm method over gRPC.
 
         Creates a new realm in a given project and location.
@@ -283,18 +278,18 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "create_realm" not in self._stubs:
-            self._stubs["create_realm"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/CreateRealm",
+        if 'create_realm' not in self._stubs:
+            self._stubs['create_realm'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/CreateRealm',
                 request_serializer=realms.CreateRealmRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["create_realm"]
+        return self._stubs['create_realm']
 
     @property
-    def delete_realm(
-        self,
-    ) -> Callable[[realms.DeleteRealmRequest], Awaitable[operations.Operation]]:
+    def delete_realm(self) -> Callable[
+            [realms.DeleteRealmRequest],
+            Awaitable[operations.Operation]]:
         r"""Return a callable for the delete realm method over gRPC.
 
         Deletes a single realm.
@@ -309,18 +304,18 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "delete_realm" not in self._stubs:
-            self._stubs["delete_realm"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/DeleteRealm",
+        if 'delete_realm' not in self._stubs:
+            self._stubs['delete_realm'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/DeleteRealm',
                 request_serializer=realms.DeleteRealmRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["delete_realm"]
+        return self._stubs['delete_realm']
 
     @property
-    def update_realm(
-        self,
-    ) -> Callable[[realms.UpdateRealmRequest], Awaitable[operations.Operation]]:
+    def update_realm(self) -> Callable[
+            [realms.UpdateRealmRequest],
+            Awaitable[operations.Operation]]:
         r"""Return a callable for the update realm method over gRPC.
 
         Patches a single realm.
@@ -335,20 +330,18 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "update_realm" not in self._stubs:
-            self._stubs["update_realm"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/UpdateRealm",
+        if 'update_realm' not in self._stubs:
+            self._stubs['update_realm'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/UpdateRealm',
                 request_serializer=realms.UpdateRealmRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["update_realm"]
+        return self._stubs['update_realm']
 
     @property
-    def preview_realm_update(
-        self,
-    ) -> Callable[
-        [realms.PreviewRealmUpdateRequest], Awaitable[realms.PreviewRealmUpdateResponse]
-    ]:
+    def preview_realm_update(self) -> Callable[
+            [realms.PreviewRealmUpdateRequest],
+            Awaitable[realms.PreviewRealmUpdateResponse]]:
         r"""Return a callable for the preview realm update method over gRPC.
 
         Previews patches to a single realm.
@@ -363,13 +356,15 @@ class RealmsServiceGrpcAsyncIOTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "preview_realm_update" not in self._stubs:
-            self._stubs["preview_realm_update"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/PreviewRealmUpdate",
+        if 'preview_realm_update' not in self._stubs:
+            self._stubs['preview_realm_update'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/PreviewRealmUpdate',
                 request_serializer=realms.PreviewRealmUpdateRequest.serialize,
                 response_deserializer=realms.PreviewRealmUpdateResponse.deserialize,
             )
-        return self._stubs["preview_realm_update"]
+        return self._stubs['preview_realm_update']
 
 
-__all__ = ("RealmsServiceGrpcAsyncIOTransport",)
+__all__ = (
+    'RealmsServiceGrpcAsyncIOTransport',
+)

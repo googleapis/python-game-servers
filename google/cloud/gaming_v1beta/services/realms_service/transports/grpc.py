@@ -17,10 +17,10 @@
 
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers  # type: ignore
+from google.api_core import grpc_helpers   # type: ignore
 from google.api_core import operations_v1  # type: ignore
-from google import auth  # type: ignore
-from google.auth import credentials  # type: ignore
+from google import auth                    # type: ignore
+from google.auth import credentials        # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 
@@ -45,21 +45,17 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
     It sends protocol buffers over the wire using gRPC (which is built on
     top of HTTP/2); the ``grpcio`` package must be installed.
     """
-
     _stubs: Dict[str, Callable]
 
-    def __init__(
-        self,
-        *,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        channel: grpc.Channel = None,
-        api_mtls_endpoint: str = None,
-        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
-        quota_project_id: Optional[str] = None
-    ) -> None:
+    def __init__(self, *,
+            host: str = 'gameservices.googleapis.com',
+            credentials: credentials.Credentials = None,
+            credentials_file: str = None,
+            scopes: Sequence[str] = None,
+            channel: grpc.Channel = None,
+            api_mtls_endpoint: str = None,
+            client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
+            quota_project_id: Optional[str] = None) -> None:
         """Instantiate the transport.
 
         Args:
@@ -102,16 +98,10 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
         elif api_mtls_endpoint:
-            host = (
-                api_mtls_endpoint
-                if ":" in api_mtls_endpoint
-                else api_mtls_endpoint + ":443"
-            )
+            host = api_mtls_endpoint if ":" in api_mtls_endpoint else api_mtls_endpoint + ":443"
 
             if credentials is None:
-                credentials, _ = auth.default(
-                    scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id
-                )
+                credentials, _ = auth.default(scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id)
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -145,15 +135,13 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         )
 
     @classmethod
-    def create_channel(
-        cls,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Optional[Sequence[str]] = None,
-        quota_project_id: Optional[str] = None,
-        **kwargs
-    ) -> grpc.Channel:
+    def create_channel(cls,
+                       host: str = 'gameservices.googleapis.com',
+                       credentials: credentials.Credentials = None,
+                       credentials_file: str = None,
+                       scopes: Optional[Sequence[str]] = None,
+                       quota_project_id: Optional[str] = None,
+                       **kwargs) -> grpc.Channel:
         """Create and return a gRPC channel object.
         Args:
             address (Optionsl[str]): The host for the channel to use.
@@ -198,9 +186,10 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         """
         # Sanity check: Only create a new channel if we do not already
         # have one.
-        if not hasattr(self, "_grpc_channel"):
+        if not hasattr(self, '_grpc_channel'):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials,
+                self._host,
+                credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -214,18 +203,18 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         client.
         """
         # Sanity check: Only create a new client if we do not already have one.
-        if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsClient(
+        if 'operations_client' not in self.__dict__:
+            self.__dict__['operations_client'] = operations_v1.OperationsClient(
                 self.grpc_channel
             )
 
         # Return the client from cache.
-        return self.__dict__["operations_client"]
+        return self.__dict__['operations_client']
 
     @property
-    def list_realms(
-        self,
-    ) -> Callable[[realms.ListRealmsRequest], realms.ListRealmsResponse]:
+    def list_realms(self) -> Callable[
+            [realms.ListRealmsRequest],
+            realms.ListRealmsResponse]:
         r"""Return a callable for the list realms method over gRPC.
 
         Lists realms in a given project and location.
@@ -240,16 +229,18 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "list_realms" not in self._stubs:
-            self._stubs["list_realms"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/ListRealms",
+        if 'list_realms' not in self._stubs:
+            self._stubs['list_realms'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/ListRealms',
                 request_serializer=realms.ListRealmsRequest.serialize,
                 response_deserializer=realms.ListRealmsResponse.deserialize,
             )
-        return self._stubs["list_realms"]
+        return self._stubs['list_realms']
 
     @property
-    def get_realm(self) -> Callable[[realms.GetRealmRequest], realms.Realm]:
+    def get_realm(self) -> Callable[
+            [realms.GetRealmRequest],
+            realms.Realm]:
         r"""Return a callable for the get realm method over gRPC.
 
         Gets details of a single realm.
@@ -264,18 +255,18 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "get_realm" not in self._stubs:
-            self._stubs["get_realm"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/GetRealm",
+        if 'get_realm' not in self._stubs:
+            self._stubs['get_realm'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/GetRealm',
                 request_serializer=realms.GetRealmRequest.serialize,
                 response_deserializer=realms.Realm.deserialize,
             )
-        return self._stubs["get_realm"]
+        return self._stubs['get_realm']
 
     @property
-    def create_realm(
-        self,
-    ) -> Callable[[realms.CreateRealmRequest], operations.Operation]:
+    def create_realm(self) -> Callable[
+            [realms.CreateRealmRequest],
+            operations.Operation]:
         r"""Return a callable for the create realm method over gRPC.
 
         Creates a new realm in a given project and location.
@@ -290,18 +281,18 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "create_realm" not in self._stubs:
-            self._stubs["create_realm"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/CreateRealm",
+        if 'create_realm' not in self._stubs:
+            self._stubs['create_realm'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/CreateRealm',
                 request_serializer=realms.CreateRealmRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["create_realm"]
+        return self._stubs['create_realm']
 
     @property
-    def delete_realm(
-        self,
-    ) -> Callable[[realms.DeleteRealmRequest], operations.Operation]:
+    def delete_realm(self) -> Callable[
+            [realms.DeleteRealmRequest],
+            operations.Operation]:
         r"""Return a callable for the delete realm method over gRPC.
 
         Deletes a single realm.
@@ -316,18 +307,18 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "delete_realm" not in self._stubs:
-            self._stubs["delete_realm"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/DeleteRealm",
+        if 'delete_realm' not in self._stubs:
+            self._stubs['delete_realm'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/DeleteRealm',
                 request_serializer=realms.DeleteRealmRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["delete_realm"]
+        return self._stubs['delete_realm']
 
     @property
-    def update_realm(
-        self,
-    ) -> Callable[[realms.UpdateRealmRequest], operations.Operation]:
+    def update_realm(self) -> Callable[
+            [realms.UpdateRealmRequest],
+            operations.Operation]:
         r"""Return a callable for the update realm method over gRPC.
 
         Patches a single realm.
@@ -342,20 +333,18 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "update_realm" not in self._stubs:
-            self._stubs["update_realm"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/UpdateRealm",
+        if 'update_realm' not in self._stubs:
+            self._stubs['update_realm'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/UpdateRealm',
                 request_serializer=realms.UpdateRealmRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["update_realm"]
+        return self._stubs['update_realm']
 
     @property
-    def preview_realm_update(
-        self,
-    ) -> Callable[
-        [realms.PreviewRealmUpdateRequest], realms.PreviewRealmUpdateResponse
-    ]:
+    def preview_realm_update(self) -> Callable[
+            [realms.PreviewRealmUpdateRequest],
+            realms.PreviewRealmUpdateResponse]:
         r"""Return a callable for the preview realm update method over gRPC.
 
         Previews patches to a single realm.
@@ -370,13 +359,15 @@ class RealmsServiceGrpcTransport(RealmsServiceTransport):
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "preview_realm_update" not in self._stubs:
-            self._stubs["preview_realm_update"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.RealmsService/PreviewRealmUpdate",
+        if 'preview_realm_update' not in self._stubs:
+            self._stubs['preview_realm_update'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.RealmsService/PreviewRealmUpdate',
                 request_serializer=realms.PreviewRealmUpdateRequest.serialize,
                 response_deserializer=realms.PreviewRealmUpdateResponse.deserialize,
             )
-        return self._stubs["preview_realm_update"]
+        return self._stubs['preview_realm_update']
 
 
-__all__ = ("RealmsServiceGrpcTransport",)
+__all__ = (
+    'RealmsServiceGrpcTransport',
+)

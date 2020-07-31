@@ -24,23 +24,23 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.gaming.v1beta",
+    package='google.cloud.gaming.v1beta',
     manifest={
-        "ListGameServerDeploymentsRequest",
-        "ListGameServerDeploymentsResponse",
-        "GetGameServerDeploymentRequest",
-        "GetGameServerDeploymentRolloutRequest",
-        "CreateGameServerDeploymentRequest",
-        "DeleteGameServerDeploymentRequest",
-        "UpdateGameServerDeploymentRequest",
-        "UpdateGameServerDeploymentRolloutRequest",
-        "FetchDeploymentStateRequest",
-        "FetchDeploymentStateResponse",
-        "GameServerDeployment",
-        "GameServerConfigOverride",
-        "GameServerDeploymentRollout",
-        "PreviewGameServerDeploymentRolloutRequest",
-        "PreviewGameServerDeploymentRolloutResponse",
+        'ListGameServerDeploymentsRequest',
+        'ListGameServerDeploymentsResponse',
+        'GetGameServerDeploymentRequest',
+        'GetGameServerDeploymentRolloutRequest',
+        'CreateGameServerDeploymentRequest',
+        'DeleteGameServerDeploymentRequest',
+        'UpdateGameServerDeploymentRequest',
+        'UpdateGameServerDeploymentRolloutRequest',
+        'FetchDeploymentStateRequest',
+        'FetchDeploymentStateResponse',
+        'GameServerDeployment',
+        'GameServerConfigOverride',
+        'GameServerDeploymentRollout',
+        'PreviewGameServerDeploymentRolloutRequest',
+        'PreviewGameServerDeploymentRolloutResponse',
     },
 )
 
@@ -103,8 +103,8 @@ class ListGameServerDeploymentsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    game_server_deployments = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GameServerDeployment",
+    game_server_deployments = proto.RepeatedField(proto.MESSAGE, number=1,
+        message='GameServerDeployment',
     )
 
     next_page_token = proto.Field(proto.STRING, number=2)
@@ -162,8 +162,8 @@ class CreateGameServerDeploymentRequest(proto.Message):
 
     deployment_id = proto.Field(proto.STRING, number=2)
 
-    game_server_deployment = proto.Field(
-        proto.MESSAGE, number=3, message="GameServerDeployment",
+    game_server_deployment = proto.Field(proto.MESSAGE, number=3,
+        message='GameServerDeployment',
     )
 
 
@@ -200,11 +200,13 @@ class UpdateGameServerDeploymentRequest(proto.Message):
             /docs/reference/google.protobuf#fieldmask
     """
 
-    game_server_deployment = proto.Field(
-        proto.MESSAGE, number=1, message="GameServerDeployment",
+    game_server_deployment = proto.Field(proto.MESSAGE, number=1,
+        message='GameServerDeployment',
     )
 
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
+    update_mask = proto.Field(proto.MESSAGE, number=2,
+        message=field_mask.FieldMask,
+    )
 
 
 class UpdateGameServerDeploymentRolloutRequest(proto.Message):
@@ -224,11 +226,13 @@ class UpdateGameServerDeploymentRolloutRequest(proto.Message):
             /docs/reference/google.protobuf#fieldmask
     """
 
-    rollout = proto.Field(
-        proto.MESSAGE, number=1, message="GameServerDeploymentRollout",
+    rollout = proto.Field(proto.MESSAGE, number=1,
+        message='GameServerDeploymentRollout',
     )
 
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
+    update_mask = proto.Field(proto.MESSAGE, number=2,
+        message=field_mask.FieldMask,
+    )
 
 
 class FetchDeploymentStateRequest(proto.Message):
@@ -257,7 +261,6 @@ class FetchDeploymentStateResponse(proto.Message):
         unavailable (Sequence[str]):
             List of locations that could not be reached.
     """
-
     class DeployedClusterState(proto.Message):
         r"""The game server cluster changes made by the game server
         deployment.
@@ -272,12 +275,12 @@ class FetchDeploymentStateResponse(proto.Message):
 
         cluster = proto.Field(proto.STRING, number=1)
 
-        fleet_details = proto.RepeatedField(
-            proto.MESSAGE, number=2, message=common.DeployedFleetDetails,
+        fleet_details = proto.RepeatedField(proto.MESSAGE, number=2,
+            message=common.DeployedFleetDetails,
         )
 
-    cluster_state = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=DeployedClusterState,
+    cluster_state = proto.RepeatedField(proto.MESSAGE, number=1,
+        message=DeployedClusterState,
     )
 
     unavailable = proto.RepeatedField(proto.STRING, number=2)
@@ -311,9 +314,13 @@ class GameServerDeployment(proto.Message):
 
     name = proto.Field(proto.STRING, number=1)
 
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+    create_time = proto.Field(proto.MESSAGE, number=2,
+        message=timestamp.Timestamp,
+    )
 
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=3,
+        message=timestamp.Timestamp,
+    )
 
     labels = proto.MapField(proto.STRING, proto.STRING, number=4)
 
@@ -332,11 +339,11 @@ class GameServerConfigOverride(proto.Message):
             The game server config for this override.
     """
 
-    realms_selector = proto.Field(
-        proto.MESSAGE, number=1, oneof="selector", message=common.RealmSelector,
+    realms_selector = proto.Field(proto.MESSAGE, number=1, oneof='selector',
+        message=common.RealmSelector,
     )
 
-    config_version = proto.Field(proto.STRING, number=100, oneof="change")
+    config_version = proto.Field(proto.STRING, number=100, oneof='change')
 
 
 class GameServerDeploymentRollout(proto.Message):
@@ -372,14 +379,18 @@ class GameServerDeploymentRollout(proto.Message):
 
     name = proto.Field(proto.STRING, number=1)
 
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+    create_time = proto.Field(proto.MESSAGE, number=2,
+        message=timestamp.Timestamp,
+    )
 
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=3,
+        message=timestamp.Timestamp,
+    )
 
     default_game_server_config = proto.Field(proto.STRING, number=4)
 
-    game_server_config_overrides = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=GameServerConfigOverride,
+    game_server_config_overrides = proto.RepeatedField(proto.MESSAGE, number=5,
+        message=GameServerConfigOverride,
     )
 
     etag = proto.Field(proto.STRING, number=6)
@@ -405,11 +416,17 @@ class PreviewGameServerDeploymentRolloutRequest(proto.Message):
             proposed rollout completes.
     """
 
-    rollout = proto.Field(proto.MESSAGE, number=1, message=GameServerDeploymentRollout,)
+    rollout = proto.Field(proto.MESSAGE, number=1,
+        message=GameServerDeploymentRollout,
+    )
 
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
+    update_mask = proto.Field(proto.MESSAGE, number=2,
+        message=field_mask.FieldMask,
+    )
 
-    preview_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+    preview_time = proto.Field(proto.MESSAGE, number=3,
+        message=timestamp.Timestamp,
+    )
 
 
 class PreviewGameServerDeploymentRolloutResponse(proto.Message):
@@ -431,7 +448,9 @@ class PreviewGameServerDeploymentRolloutResponse(proto.Message):
 
     etag = proto.Field(proto.STRING, number=3)
 
-    target_state = proto.Field(proto.MESSAGE, number=4, message=common.TargetState,)
+    target_state = proto.Field(proto.MESSAGE, number=4,
+        message=common.TargetState,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

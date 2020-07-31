@@ -37,15 +37,12 @@ class ListGameServerConfigsPager:
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
-
-    def __init__(
-        self,
-        method: Callable[..., game_server_configs.ListGameServerConfigsResponse],
-        request: game_server_configs.ListGameServerConfigsRequest,
-        response: game_server_configs.ListGameServerConfigsResponse,
-        *,
-        metadata: Sequence[Tuple[str, str]] = ()
-    ):
+    def __init__(self,
+            method: Callable[..., game_server_configs.ListGameServerConfigsResponse],
+            request: game_server_configs.ListGameServerConfigsRequest,
+            response: game_server_configs.ListGameServerConfigsResponse,
+            *,
+            metadata: Sequence[Tuple[str, str]] = ()):
         """Instantiate the pager.
 
         Args:
@@ -79,7 +76,7 @@ class ListGameServerConfigsPager:
             yield from page.game_server_configs
 
     def __repr__(self) -> str:
-        return "{0}<{1!r}>".format(self.__class__.__name__, self._response)
+        return '{0}<{1!r}>'.format(self.__class__.__name__, self._response)
 
 
 class ListGameServerConfigsAsyncPager:
@@ -99,17 +96,12 @@ class ListGameServerConfigsAsyncPager:
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
-
-    def __init__(
-        self,
-        method: Callable[
-            ..., Awaitable[game_server_configs.ListGameServerConfigsResponse]
-        ],
-        request: game_server_configs.ListGameServerConfigsRequest,
-        response: game_server_configs.ListGameServerConfigsResponse,
-        *,
-        metadata: Sequence[Tuple[str, str]] = ()
-    ):
+    def __init__(self,
+            method: Callable[..., Awaitable[game_server_configs.ListGameServerConfigsResponse]],
+            request: game_server_configs.ListGameServerConfigsRequest,
+            response: game_server_configs.ListGameServerConfigsResponse,
+            *,
+            metadata: Sequence[Tuple[str, str]] = ()):
         """Instantiate the pager.
 
         Args:
@@ -131,9 +123,7 @@ class ListGameServerConfigsAsyncPager:
         return getattr(self._response, name)
 
     @property
-    async def pages(
-        self,
-    ) -> AsyncIterable[game_server_configs.ListGameServerConfigsResponse]:
+    async def pages(self) -> AsyncIterable[game_server_configs.ListGameServerConfigsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
@@ -149,4 +139,4 @@ class ListGameServerConfigsAsyncPager:
         return async_generator()
 
     def __repr__(self) -> str:
-        return "{0}<{1!r}>".format(self.__class__.__name__, self._response)
+        return '{0}<{1!r}>'.format(self.__class__.__name__, self._response)

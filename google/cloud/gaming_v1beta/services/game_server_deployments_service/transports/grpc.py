@@ -17,10 +17,10 @@
 
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers  # type: ignore
+from google.api_core import grpc_helpers   # type: ignore
 from google.api_core import operations_v1  # type: ignore
-from google import auth  # type: ignore
-from google.auth import credentials  # type: ignore
+from google import auth                    # type: ignore
+from google.auth import credentials        # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 
@@ -45,21 +45,17 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
     It sends protocol buffers over the wire using gRPC (which is built on
     top of HTTP/2); the ``grpcio`` package must be installed.
     """
-
     _stubs: Dict[str, Callable]
 
-    def __init__(
-        self,
-        *,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        channel: grpc.Channel = None,
-        api_mtls_endpoint: str = None,
-        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
-        quota_project_id: Optional[str] = None
-    ) -> None:
+    def __init__(self, *,
+            host: str = 'gameservices.googleapis.com',
+            credentials: credentials.Credentials = None,
+            credentials_file: str = None,
+            scopes: Sequence[str] = None,
+            channel: grpc.Channel = None,
+            api_mtls_endpoint: str = None,
+            client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
+            quota_project_id: Optional[str] = None) -> None:
         """Instantiate the transport.
 
         Args:
@@ -102,16 +98,10 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
         elif api_mtls_endpoint:
-            host = (
-                api_mtls_endpoint
-                if ":" in api_mtls_endpoint
-                else api_mtls_endpoint + ":443"
-            )
+            host = api_mtls_endpoint if ":" in api_mtls_endpoint else api_mtls_endpoint + ":443"
 
             if credentials is None:
-                credentials, _ = auth.default(
-                    scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id
-                )
+                credentials, _ = auth.default(scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id)
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -145,15 +135,13 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         )
 
     @classmethod
-    def create_channel(
-        cls,
-        host: str = "gameservices.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Optional[Sequence[str]] = None,
-        quota_project_id: Optional[str] = None,
-        **kwargs
-    ) -> grpc.Channel:
+    def create_channel(cls,
+                       host: str = 'gameservices.googleapis.com',
+                       credentials: credentials.Credentials = None,
+                       credentials_file: str = None,
+                       scopes: Optional[Sequence[str]] = None,
+                       quota_project_id: Optional[str] = None,
+                       **kwargs) -> grpc.Channel:
         """Create and return a gRPC channel object.
         Args:
             address (Optionsl[str]): The host for the channel to use.
@@ -198,9 +186,10 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         """
         # Sanity check: Only create a new channel if we do not already
         # have one.
-        if not hasattr(self, "_grpc_channel"):
+        if not hasattr(self, '_grpc_channel'):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials,
+                self._host,
+                credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -214,21 +203,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         client.
         """
         # Sanity check: Only create a new client if we do not already have one.
-        if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsClient(
+        if 'operations_client' not in self.__dict__:
+            self.__dict__['operations_client'] = operations_v1.OperationsClient(
                 self.grpc_channel
             )
 
         # Return the client from cache.
-        return self.__dict__["operations_client"]
+        return self.__dict__['operations_client']
 
     @property
-    def list_game_server_deployments(
-        self,
-    ) -> Callable[
-        [game_server_deployments.ListGameServerDeploymentsRequest],
-        game_server_deployments.ListGameServerDeploymentsResponse,
-    ]:
+    def list_game_server_deployments(self) -> Callable[
+            [game_server_deployments.ListGameServerDeploymentsRequest],
+            game_server_deployments.ListGameServerDeploymentsResponse]:
         r"""Return a callable for the list game server deployments method over gRPC.
 
         Lists game server deployments in a given project and
@@ -244,21 +230,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "list_game_server_deployments" not in self._stubs:
-            self._stubs["list_game_server_deployments"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/ListGameServerDeployments",
+        if 'list_game_server_deployments' not in self._stubs:
+            self._stubs['list_game_server_deployments'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/ListGameServerDeployments',
                 request_serializer=game_server_deployments.ListGameServerDeploymentsRequest.serialize,
                 response_deserializer=game_server_deployments.ListGameServerDeploymentsResponse.deserialize,
             )
-        return self._stubs["list_game_server_deployments"]
+        return self._stubs['list_game_server_deployments']
 
     @property
-    def get_game_server_deployment(
-        self,
-    ) -> Callable[
-        [game_server_deployments.GetGameServerDeploymentRequest],
-        game_server_deployments.GameServerDeployment,
-    ]:
+    def get_game_server_deployment(self) -> Callable[
+            [game_server_deployments.GetGameServerDeploymentRequest],
+            game_server_deployments.GameServerDeployment]:
         r"""Return a callable for the get game server deployment method over gRPC.
 
         Gets details of a single game server deployment.
@@ -273,21 +256,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "get_game_server_deployment" not in self._stubs:
-            self._stubs["get_game_server_deployment"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/GetGameServerDeployment",
+        if 'get_game_server_deployment' not in self._stubs:
+            self._stubs['get_game_server_deployment'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/GetGameServerDeployment',
                 request_serializer=game_server_deployments.GetGameServerDeploymentRequest.serialize,
                 response_deserializer=game_server_deployments.GameServerDeployment.deserialize,
             )
-        return self._stubs["get_game_server_deployment"]
+        return self._stubs['get_game_server_deployment']
 
     @property
-    def create_game_server_deployment(
-        self,
-    ) -> Callable[
-        [game_server_deployments.CreateGameServerDeploymentRequest],
-        operations.Operation,
-    ]:
+    def create_game_server_deployment(self) -> Callable[
+            [game_server_deployments.CreateGameServerDeploymentRequest],
+            operations.Operation]:
         r"""Return a callable for the create game server deployment method over gRPC.
 
         Creates a new game server deployment in a given
@@ -303,23 +283,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "create_game_server_deployment" not in self._stubs:
-            self._stubs[
-                "create_game_server_deployment"
-            ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/CreateGameServerDeployment",
+        if 'create_game_server_deployment' not in self._stubs:
+            self._stubs['create_game_server_deployment'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/CreateGameServerDeployment',
                 request_serializer=game_server_deployments.CreateGameServerDeploymentRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["create_game_server_deployment"]
+        return self._stubs['create_game_server_deployment']
 
     @property
-    def delete_game_server_deployment(
-        self,
-    ) -> Callable[
-        [game_server_deployments.DeleteGameServerDeploymentRequest],
-        operations.Operation,
-    ]:
+    def delete_game_server_deployment(self) -> Callable[
+            [game_server_deployments.DeleteGameServerDeploymentRequest],
+            operations.Operation]:
         r"""Return a callable for the delete game server deployment method over gRPC.
 
         Deletes a single game server deployment.
@@ -334,23 +309,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "delete_game_server_deployment" not in self._stubs:
-            self._stubs[
-                "delete_game_server_deployment"
-            ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/DeleteGameServerDeployment",
+        if 'delete_game_server_deployment' not in self._stubs:
+            self._stubs['delete_game_server_deployment'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/DeleteGameServerDeployment',
                 request_serializer=game_server_deployments.DeleteGameServerDeploymentRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["delete_game_server_deployment"]
+        return self._stubs['delete_game_server_deployment']
 
     @property
-    def update_game_server_deployment(
-        self,
-    ) -> Callable[
-        [game_server_deployments.UpdateGameServerDeploymentRequest],
-        operations.Operation,
-    ]:
+    def update_game_server_deployment(self) -> Callable[
+            [game_server_deployments.UpdateGameServerDeploymentRequest],
+            operations.Operation]:
         r"""Return a callable for the update game server deployment method over gRPC.
 
         Patches a game server deployment.
@@ -365,23 +335,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "update_game_server_deployment" not in self._stubs:
-            self._stubs[
-                "update_game_server_deployment"
-            ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/UpdateGameServerDeployment",
+        if 'update_game_server_deployment' not in self._stubs:
+            self._stubs['update_game_server_deployment'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/UpdateGameServerDeployment',
                 request_serializer=game_server_deployments.UpdateGameServerDeploymentRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["update_game_server_deployment"]
+        return self._stubs['update_game_server_deployment']
 
     @property
-    def get_game_server_deployment_rollout(
-        self,
-    ) -> Callable[
-        [game_server_deployments.GetGameServerDeploymentRolloutRequest],
-        game_server_deployments.GameServerDeploymentRollout,
-    ]:
+    def get_game_server_deployment_rollout(self) -> Callable[
+            [game_server_deployments.GetGameServerDeploymentRolloutRequest],
+            game_server_deployments.GameServerDeploymentRollout]:
         r"""Return a callable for the get game server deployment
         rollout method over gRPC.
 
@@ -397,23 +362,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "get_game_server_deployment_rollout" not in self._stubs:
-            self._stubs[
-                "get_game_server_deployment_rollout"
-            ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/GetGameServerDeploymentRollout",
+        if 'get_game_server_deployment_rollout' not in self._stubs:
+            self._stubs['get_game_server_deployment_rollout'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/GetGameServerDeploymentRollout',
                 request_serializer=game_server_deployments.GetGameServerDeploymentRolloutRequest.serialize,
                 response_deserializer=game_server_deployments.GameServerDeploymentRollout.deserialize,
             )
-        return self._stubs["get_game_server_deployment_rollout"]
+        return self._stubs['get_game_server_deployment_rollout']
 
     @property
-    def update_game_server_deployment_rollout(
-        self,
-    ) -> Callable[
-        [game_server_deployments.UpdateGameServerDeploymentRolloutRequest],
-        operations.Operation,
-    ]:
+    def update_game_server_deployment_rollout(self) -> Callable[
+            [game_server_deployments.UpdateGameServerDeploymentRolloutRequest],
+            operations.Operation]:
         r"""Return a callable for the update game server deployment
         rollout method over gRPC.
 
@@ -435,23 +395,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "update_game_server_deployment_rollout" not in self._stubs:
-            self._stubs[
-                "update_game_server_deployment_rollout"
-            ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/UpdateGameServerDeploymentRollout",
+        if 'update_game_server_deployment_rollout' not in self._stubs:
+            self._stubs['update_game_server_deployment_rollout'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/UpdateGameServerDeploymentRollout',
                 request_serializer=game_server_deployments.UpdateGameServerDeploymentRolloutRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["update_game_server_deployment_rollout"]
+        return self._stubs['update_game_server_deployment_rollout']
 
     @property
-    def preview_game_server_deployment_rollout(
-        self,
-    ) -> Callable[
-        [game_server_deployments.PreviewGameServerDeploymentRolloutRequest],
-        game_server_deployments.PreviewGameServerDeploymentRolloutResponse,
-    ]:
+    def preview_game_server_deployment_rollout(self) -> Callable[
+            [game_server_deployments.PreviewGameServerDeploymentRolloutRequest],
+            game_server_deployments.PreviewGameServerDeploymentRolloutResponse]:
         r"""Return a callable for the preview game server deployment
         rollout method over gRPC.
 
@@ -468,23 +423,18 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "preview_game_server_deployment_rollout" not in self._stubs:
-            self._stubs[
-                "preview_game_server_deployment_rollout"
-            ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/PreviewGameServerDeploymentRollout",
+        if 'preview_game_server_deployment_rollout' not in self._stubs:
+            self._stubs['preview_game_server_deployment_rollout'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/PreviewGameServerDeploymentRollout',
                 request_serializer=game_server_deployments.PreviewGameServerDeploymentRolloutRequest.serialize,
                 response_deserializer=game_server_deployments.PreviewGameServerDeploymentRolloutResponse.deserialize,
             )
-        return self._stubs["preview_game_server_deployment_rollout"]
+        return self._stubs['preview_game_server_deployment_rollout']
 
     @property
-    def fetch_deployment_state(
-        self,
-    ) -> Callable[
-        [game_server_deployments.FetchDeploymentStateRequest],
-        game_server_deployments.FetchDeploymentStateResponse,
-    ]:
+    def fetch_deployment_state(self) -> Callable[
+            [game_server_deployments.FetchDeploymentStateRequest],
+            game_server_deployments.FetchDeploymentStateResponse]:
         r"""Return a callable for the fetch deployment state method over gRPC.
 
         Retrieves information about the current state of the
@@ -502,13 +452,15 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "fetch_deployment_state" not in self._stubs:
-            self._stubs["fetch_deployment_state"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/FetchDeploymentState",
+        if 'fetch_deployment_state' not in self._stubs:
+            self._stubs['fetch_deployment_state'] = self.grpc_channel.unary_unary(
+                '/google.cloud.gaming.v1beta.GameServerDeploymentsService/FetchDeploymentState',
                 request_serializer=game_server_deployments.FetchDeploymentStateRequest.serialize,
                 response_deserializer=game_server_deployments.FetchDeploymentStateResponse.deserialize,
             )
-        return self._stubs["fetch_deployment_state"]
+        return self._stubs['fetch_deployment_state']
 
 
-__all__ = ("GameServerDeploymentsServiceGrpcTransport",)
+__all__ = (
+    'GameServerDeploymentsServiceGrpcTransport',
+)

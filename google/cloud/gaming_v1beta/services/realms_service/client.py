@@ -21,14 +21,14 @@ import re
 from typing import Callable, Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
-from google.auth.transport import mtls  # type: ignore
+import google.api_core.client_options as ClientOptions # type: ignore
+from google.api_core import exceptions                 # type: ignore
+from google.api_core import gapic_v1                   # type: ignore
+from google.api_core import retry as retries           # type: ignore
+from google.auth import credentials                    # type: ignore
+from google.auth.transport import mtls                 # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
-from google.oauth2 import service_account  # type: ignore
+from google.oauth2 import service_account              # type: ignore
 
 from google.api_core import operation
 from google.api_core import operation_async
@@ -51,12 +51,13 @@ class RealmsServiceClientMeta(type):
     support objects (e.g. transport) without polluting the client instance
     objects.
     """
-
     _transport_registry = OrderedDict()  # type: Dict[str, Type[RealmsServiceTransport]]
-    _transport_registry["grpc"] = RealmsServiceGrpcTransport
-    _transport_registry["grpc_asyncio"] = RealmsServiceGrpcAsyncIOTransport
+    _transport_registry['grpc'] = RealmsServiceGrpcTransport
+    _transport_registry['grpc_asyncio'] = RealmsServiceGrpcAsyncIOTransport
 
-    def get_transport_class(cls, label: str = None,) -> Type[RealmsServiceTransport]:
+    def get_transport_class(cls,
+            label: str = None,
+        ) -> Type[RealmsServiceTransport]:
         """Return an appropriate transport class.
 
         Args:
@@ -109,7 +110,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
         return api_endpoint.replace(".googleapis.com", ".mtls.googleapis.com")
 
-    DEFAULT_ENDPOINT = "gameservices.googleapis.com"
+    DEFAULT_ENDPOINT = 'gameservices.googleapis.com'
     DEFAULT_MTLS_ENDPOINT = _get_default_mtls_endpoint.__func__(  # type: ignore
         DEFAULT_ENDPOINT
     )
@@ -128,35 +129,29 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         Returns:
             {@api.name}: The constructed client.
         """
-        credentials = service_account.Credentials.from_service_account_file(filename)
-        kwargs["credentials"] = credentials
+        credentials = service_account.Credentials.from_service_account_file(
+            filename)
+        kwargs['credentials'] = credentials
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
 
     @staticmethod
-    def realm_path(project: str, location: str, realm: str,) -> str:
+    def realm_path(project: str,location: str,realm: str,) -> str:
         """Return a fully-qualified realm string."""
-        return "projects/{project}/locations/{location}/realms/{realm}".format(
-            project=project, location=location, realm=realm,
-        )
+        return "projects/{project}/locations/{location}/realms/{realm}".format(project=project, location=location, realm=realm, )
 
     @staticmethod
-    def parse_realm_path(path: str) -> Dict[str, str]:
+    def parse_realm_path(path: str) -> Dict[str,str]:
         """Parse a realm path into its component segments."""
-        m = re.match(
-            r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/realms/(?P<realm>.+?)$",
-            path,
-        )
+        m = re.match(r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/realms/(?P<realm>.+?)$", path)
         return m.groupdict() if m else {}
 
-    def __init__(
-        self,
-        *,
-        credentials: credentials.Credentials = None,
-        transport: Union[str, RealmsServiceTransport] = None,
-        client_options: ClientOptions = None,
-    ) -> None:
+    def __init__(self, *,
+            credentials: credentials.Credentials = None,
+            transport: Union[str, RealmsServiceTransport] = None,
+            client_options: ClientOptions = None,
+            ) -> None:
         """Instantiate the realms service client.
 
         Args:
@@ -203,9 +198,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                     or mtls.has_default_client_cert_source()
                 )
                 client_options.api_endpoint = (
-                    self.DEFAULT_MTLS_ENDPOINT
-                    if has_client_cert_source
-                    else self.DEFAULT_ENDPOINT
+                    self.DEFAULT_MTLS_ENDPOINT if has_client_cert_source else self.DEFAULT_ENDPOINT
                 )
             else:
                 raise MutualTLSChannelError(
@@ -218,10 +211,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         if isinstance(transport, RealmsServiceTransport):
             # transport is a RealmsServiceTransport instance.
             if credentials or client_options.credentials_file:
-                raise ValueError(
-                    "When providing a transport instance, "
-                    "provide its credentials directly."
-                )
+                raise ValueError('When providing a transport instance, '
+                                 'provide its credentials directly.')
             if client_options.scopes:
                 raise ValueError(
                     "When providing a transport instance, "
@@ -240,15 +231,14 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 quota_project_id=client_options.quota_project_id,
             )
 
-    def list_realms(
-        self,
-        request: realms.ListRealmsRequest = None,
-        *,
-        parent: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> pagers.ListRealmsPager:
+    def list_realms(self,
+            request: realms.ListRealmsRequest = None,
+            *,
+            parent: str = None,
+            retry: retries.Retry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> pagers.ListRealmsPager:
         r"""Lists realms in a given project and location.
 
         Args:
@@ -282,10 +272,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
+            raise ValueError('If the `request` argument is set, then none of '
+                             'the individual field arguments should be set.')
 
         # Minor optimization to avoid making a copy if the user passes
         # in a realms.ListRealmsRequest.
@@ -307,30 +295,39 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
+            gapic_v1.routing_header.to_grpc_metadata((
+                ('parent', request.parent),
+            )),
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.ListRealmsPager(
-            method=rpc, request=request, response=response, metadata=metadata,
+            method=rpc,
+            request=request,
+            response=response,
+            metadata=metadata,
         )
 
         # Done; return the response.
         return response
 
-    def get_realm(
-        self,
-        request: realms.GetRealmRequest = None,
-        *,
-        name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> realms.Realm:
+    def get_realm(self,
+            request: realms.GetRealmRequest = None,
+            *,
+            name: str = None,
+            retry: retries.Retry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> realms.Realm:
         r"""Gets details of a single realm.
 
         Args:
@@ -360,10 +357,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
+            raise ValueError('If the `request` argument is set, then none of '
+                             'the individual field arguments should be set.')
 
         # Minor optimization to avoid making a copy if the user passes
         # in a realms.GetRealmRequest.
@@ -385,26 +380,32 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
+            gapic_v1.routing_header.to_grpc_metadata((
+                ('name', request.name),
+            )),
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Done; return the response.
         return response
 
-    def create_realm(
-        self,
-        request: realms.CreateRealmRequest = None,
-        *,
-        parent: str = None,
-        realm: realms.Realm = None,
-        realm_id: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    def create_realm(self,
+            request: realms.CreateRealmRequest = None,
+            *,
+            parent: str = None,
+            realm: realms.Realm = None,
+            realm_id: str = None,
+            retry: retries.Retry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> operation.Operation:
         r"""Creates a new realm in a given project and location.
 
         Args:
@@ -449,10 +450,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent, realm, realm_id])
         if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
+            raise ValueError('If the `request` argument is set, then none of '
+                             'the individual field arguments should be set.')
 
         # Minor optimization to avoid making a copy if the user passes
         # in a realms.CreateRealmRequest.
@@ -478,11 +477,18 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
+            gapic_v1.routing_header.to_grpc_metadata((
+                ('parent', request.parent),
+            )),
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -495,15 +501,14 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Done; return the response.
         return response
 
-    def delete_realm(
-        self,
-        request: realms.DeleteRealmRequest = None,
-        *,
-        name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    def delete_realm(self,
+            request: realms.DeleteRealmRequest = None,
+            *,
+            name: str = None,
+            retry: retries.Retry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> operation.Operation:
         r"""Deletes a single realm.
 
         Args:
@@ -550,10 +555,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
+            raise ValueError('If the `request` argument is set, then none of '
+                             'the individual field arguments should be set.')
 
         # Minor optimization to avoid making a copy if the user passes
         # in a realms.DeleteRealmRequest.
@@ -575,11 +578,18 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
+            gapic_v1.routing_header.to_grpc_metadata((
+                ('name', request.name),
+            )),
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -592,16 +602,15 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Done; return the response.
         return response
 
-    def update_realm(
-        self,
-        request: realms.UpdateRealmRequest = None,
-        *,
-        realm: realms.Realm = None,
-        update_mask: field_mask.FieldMask = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation.Operation:
+    def update_realm(self,
+            request: realms.UpdateRealmRequest = None,
+            *,
+            realm: realms.Realm = None,
+            update_mask: field_mask.FieldMask = None,
+            retry: retries.Retry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> operation.Operation:
         r"""Patches a single realm.
 
         Args:
@@ -643,10 +652,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([realm, update_mask])
         if request is not None and has_flattened_params:
-            raise ValueError(
-                "If the `request` argument is set, then none of "
-                "the individual field arguments should be set."
-            )
+            raise ValueError('If the `request` argument is set, then none of '
+                             'the individual field arguments should be set.')
 
         # Minor optimization to avoid making a copy if the user passes
         # in a realms.UpdateRealmRequest.
@@ -670,13 +677,18 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata(
-                (("realm.name", request.realm.name),)
-            ),
+            gapic_v1.routing_header.to_grpc_metadata((
+                ('realm.name', request.realm.name),
+            )),
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -689,14 +701,13 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Done; return the response.
         return response
 
-    def preview_realm_update(
-        self,
-        request: realms.PreviewRealmUpdateRequest = None,
-        *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> realms.PreviewRealmUpdateResponse:
+    def preview_realm_update(self,
+            request: realms.PreviewRealmUpdateRequest = None,
+            *,
+            retry: retries.Retry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> realms.PreviewRealmUpdateResponse:
         r"""Previews patches to a single realm.
 
         Args:
@@ -732,26 +743,38 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata(
-                (("realm.name", request.realm.name),)
-            ),
+            gapic_v1.routing_header.to_grpc_metadata((
+                ('realm.name', request.realm.name),
+            )),
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Done; return the response.
         return response
 
 
+
+
+
+
+
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            "google-cloud-game-servers",
+            'google-cloud-game-servers',
         ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = ("RealmsServiceClient",)
+__all__ = (
+    'RealmsServiceClient',
+)
