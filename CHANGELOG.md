@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.2.1](https://www.github.com/googleapis/python-game-servers/compare/v0.2.0...v0.2.1) (2020-07-31)
+
+
+### Documentation
+
+* **samples:** add samples for game server deployments ([#25](https://www.github.com/googleapis/python-game-servers/issues/25)) ([a3dee35](https://www.github.com/googleapis/python-game-servers/commit/a3dee35ff4db631a6f28c2b46e46e3fa66ba9418))
+* add more code samples for game servers ([#32](https://www.github.com/googleapis/python-game-servers/issues/32)) ([2d30003](https://www.github.com/googleapis/python-game-servers/commit/2d300031213fda468b6aa52d3ee8635215c37986))
+
 ## [0.2.0](https://www.github.com/googleapis/python-game-servers/compare/v0.1.1...v0.2.0) (2020-07-13)
 
 
