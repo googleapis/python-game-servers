@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for creating a Game Server Deployment.
+"""Google Cloud Game Servers sample for creating a game server deployment.
 
 Example usage:
     python create_deployment.py --project-id <project-id> --deployment-id <deployment-id>
@@ -26,15 +26,15 @@ from google.cloud import gaming
 from google.cloud.gaming_v1.types import game_server_deployments
 
 
-# [START cloud_game_servers_create_deployment]
+# [START cloud_game_servers_deployment_create]
 def create_deployment(project_id, deployment_id):
     """Creates a game server deployment."""
 
     client = gaming.GameServerDeploymentsServiceClient()
 
-    # Location is hard coded as global, as Game Server Deployments can
+    # Location is hard coded as global, as game server deployments can
     # only be created in global.  This is done for all operations on
-    # Game Server Deployments, as well as for its child resource types.
+    # game server deployments, as well as for its child resource types.
     request = game_server_deployments.CreateGameServerDeploymentRequest(
         parent=f"projects/{project_id}/locations/global",
         deployment_id=deployment_id,
@@ -46,7 +46,7 @@ def create_deployment(project_id, deployment_id):
     operation = client.create_game_server_deployment(request)
     print(f"Create deployment operation: {operation.operation.name}")
     operation.result(timeout=120)
-# [END cloud_game_servers_create_deployment]
+# [END cloud_game_servers_deployment_create]
 
 
 if __name__ == "__main__":

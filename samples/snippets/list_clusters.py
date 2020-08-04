@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Google Cloud Game Servers sample for listing game server deployments.
+"""Google Cloud Game Servers sample for listing game server clusters.
 
 Example usage:
-    python list_deployments.py --project-id <project-id>
+    python list_clusters.py --project-id <project-id> --location <location> --realm-id <realm-id>
 """
 
 import argparse
@@ -25,30 +25,29 @@ import argparse
 from google.cloud import gaming
 
 
-# [START cloud_game_servers_deployment_list]
-def list_deployments(project_id):
-    """Lists the existing game server deployments."""
+# [START cloud_game_servers_cluster_list]
+def list_clusters(project_id, location, realm_id):
+    """Lists the existing game server clusters."""
 
-    client = gaming.GameServerDeploymentsServiceClient()
+    client = gaming.GameServerClustersServiceClient()
 
-    # Location is hard coded as global, as game server deployments can
-    # only be created in global.  This is done for all operations on
-    # game server deployments, as well as for its child resource types.
-    response = client.list_game_server_deployments(
-        parent=f"projects/{project_id}/locations/global"
+    response = client.list_game_server_clusters(
+        parent=f"projects/{project_id}/locations/{location}/realms/{realm_id}"
     )
 
-    for deployment in response.game_server_deployments:
-        print(f"Name: {deployment.name}")
+    for cluster in response.game_server_clusters:
+        print(f"Name: {cluster.name}")
 
-    return response.game_server_deployments
-# [END cloud_game_servers_deployment_list]
+    return response.game_server_clusters
+# [END cloud_game_servers_cluster_list]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
+    parser.add_argument('--location', help='Your realm location.', required=True)
+    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
 
     args = parser.parse_args()
 
-    list_deployments(args.project_id)
+    list_clusters(args.project_id, args.location, args.realm_id)
