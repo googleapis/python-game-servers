@@ -24,7 +24,7 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.gaming.v1beta",
+    package="google.cloud.gaming.v1",
     manifest={
         "ListGameServerDeploymentsRequest",
         "ListGameServerDeploymentsResponse",
@@ -58,7 +58,7 @@ class ListGameServerDeploymentsRequest(proto.Message):
             unspecified, the server will pick an appropriate default.
             The server may return fewer items than requested. A caller
             should only rely on response's
-            [next_page_token][google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token]
+            [next_page_token][google.cloud.gaming.v1.ListGameServerDeploymentsResponse.next_page_token]
             to determine if there are more GameServerDeployments left to
             be queried.
         page_token (str):
@@ -89,7 +89,7 @@ class ListGameServerDeploymentsResponse(proto.Message):
     GameServerDeploymentsService.ListGameServerDeployments.
 
     Attributes:
-        game_server_deployments (Sequence[~.gcgv_game_server_deployments.GameServerDeployment]):
+        game_server_deployments (Sequence[~.gcg_game_server_deployments.GameServerDeployment]):
             The list of game server deployments.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -153,7 +153,7 @@ class CreateGameServerDeploymentRequest(proto.Message):
         deployment_id (str):
             Required. The ID of the game server
             delpoyment resource to be created.
-        game_server_deployment (~.gcgv_game_server_deployments.GameServerDeployment):
+        game_server_deployment (~.gcg_game_server_deployments.GameServerDeployment):
             Required. The game server delpoyment resource
             to be created.
     """
@@ -188,7 +188,7 @@ class UpdateGameServerDeploymentRequest(proto.Message):
     allows updates for labels.
 
     Attributes:
-        game_server_deployment (~.gcgv_game_server_deployments.GameServerDeployment):
+        game_server_deployment (~.gcg_game_server_deployments.GameServerDeployment):
             Required. The game server delpoyment to be updated. Only
             fields specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
@@ -212,7 +212,7 @@ class UpdateGameServerDeploymentRolloutRequest(proto.Message):
     GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
 
     Attributes:
-        rollout (~.gcgv_game_server_deployments.GameServerDeploymentRollout):
+        rollout (~.gcg_game_server_deployments.GameServerDeploymentRollout):
             Required. The game server delpoyment rollout to be updated.
             Only fields specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):
@@ -251,7 +251,7 @@ class FetchDeploymentStateResponse(proto.Message):
     GameServerDeploymentsService.FetchDeploymentState.
 
     Attributes:
-        cluster_state (Sequence[~.gcgv_game_server_deployments.FetchDeploymentStateResponse.DeployedClusterState]):
+        cluster_state (Sequence[~.gcg_game_server_deployments.FetchDeploymentStateResponse.DeployedClusterState]):
             The state of the game server deployment in
             each game server cluster.
         unavailable (Sequence[str]):
@@ -293,13 +293,12 @@ class GameServerDeployment(proto.Message):
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
             For example,
-
-            ``projects/my-project/locations/{location}/gameServerDeployments/my-deployment``.
+            ``projects/my-project/locations/global/gameServerDeployments/my-deployment``.
         create_time (~.timestamp.Timestamp):
             Output only. The creation time.
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[~.gcgv_game_server_deployments.GameServerDeployment.LabelsEntry]):
+        labels (Sequence[~.gcg_game_server_deployments.GameServerDeployment.LabelsEntry]):
             The labels associated with this game server
             deployment. Each label is a key-value pair.
         etag (str):
@@ -351,7 +350,7 @@ class GameServerDeploymentRollout(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
             For example,
 
-            ``projects/my-project/locations/{location}/gameServerDeployments/my-deployment/rollout``.
+            ``projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout``.
         create_time (~.timestamp.Timestamp):
             Output only. The creation time.
         update_time (~.timestamp.Timestamp):
@@ -361,7 +360,7 @@ class GameServerDeploymentRollout(proto.Message):
             unless overridden in the rollout. For example,
 
             ``projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config``.
-        game_server_config_overrides (Sequence[~.gcgv_game_server_deployments.GameServerConfigOverride]):
+        game_server_config_overrides (Sequence[~.gcg_game_server_deployments.GameServerConfigOverride]):
             Contains the game server config rollout
             overrides. Overrides are processed in the order
             they are listed. Once a match is found for a
@@ -389,7 +388,7 @@ class PreviewGameServerDeploymentRolloutRequest(proto.Message):
     r"""Request message for PreviewGameServerDeploymentRollout.
 
     Attributes:
-        rollout (~.gcgv_game_server_deployments.GameServerDeploymentRollout):
+        rollout (~.gcg_game_server_deployments.GameServerDeploymentRollout):
             Required. The game server deployment rollout to be updated.
             Only fields specified in update_mask are updated.
         update_mask (~.field_mask.FieldMask):

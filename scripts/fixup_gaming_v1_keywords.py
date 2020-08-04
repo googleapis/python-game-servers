@@ -67,6 +67,7 @@ class gamingCallTransformer(cst.CSTTransformer):
     'update_game_server_deployment': ('game_server_deployment', 'update_mask', ),
     'update_game_server_deployment_rollout': ('rollout', 'update_mask', ),
     'update_realm': ('realm', 'update_mask', ),
+
     }
 
     def leave_Call(self, original: cst.Call, updated: cst.Call) -> cst.CSTNode:

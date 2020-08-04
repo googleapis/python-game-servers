@@ -57,7 +57,8 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         scopes: Sequence[str] = None,
         channel: grpc.Channel = None,
         api_mtls_endpoint: str = None,
-        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
+        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None
     ) -> None:
         """Instantiate the transport.
 
@@ -84,6 +85,8 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
                 callback to provide client SSL certificate bytes and private key
                 bytes, both in PEM format. It is ignored if ``api_mtls_endpoint``
                 is None.
+            quota_project_id (Optional[str]): An optional project to use for billing
+                and quota.
 
         Raises:
           google.auth.exceptions.MutualTLSChannelError: If mutual TLS transport
@@ -106,7 +109,9 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
             )
 
             if credentials is None:
-                credentials, _ = auth.default(scopes=self.AUTH_SCOPES)
+                credentials, _ = auth.default(
+                    scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id
+                )
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -125,7 +130,10 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
                 credentials_file=credentials_file,
                 ssl_credentials=ssl_credentials,
                 scopes=scopes or self.AUTH_SCOPES,
+                quota_project_id=quota_project_id,
             )
+
+        self._stubs = {}  # type: Dict[str, Callable]
 
         # Run the base constructor.
         super().__init__(
@@ -133,9 +141,8 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
             credentials=credentials,
             credentials_file=credentials_file,
             scopes=scopes or self.AUTH_SCOPES,
+            quota_project_id=quota_project_id,
         )
-
-        self._stubs = {}  # type: Dict[str, Callable]
 
     @classmethod
     def create_channel(
@@ -144,6 +151,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         credentials: credentials.Credentials = None,
         credentials_file: str = None,
         scopes: Optional[Sequence[str]] = None,
+        quota_project_id: Optional[str] = None,
         **kwargs
     ) -> grpc.Channel:
         """Create and return a gRPC channel object.
@@ -160,6 +168,8 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
             scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
                 service. These are only used when credentials are not specified and
                 are passed to :func:`google.auth.default`.
+            quota_project_id (Optional[str]): An optional project to use for billing
+                and quota.
             kwargs (Optional[dict]): Keyword arguments, which are passed to the
                 channel creation.
         Returns:
@@ -175,6 +185,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
             credentials=credentials,
             credentials_file=credentials_file,
             scopes=scopes,
+            quota_project_id=quota_project_id,
             **kwargs
         )
 
@@ -235,7 +246,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         # to pass in the functions for each.
         if "list_game_server_configs" not in self._stubs:
             self._stubs["list_game_server_configs"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerConfigsService/ListGameServerConfigs",
+                "/google.cloud.gaming.v1.GameServerConfigsService/ListGameServerConfigs",
                 request_serializer=game_server_configs.ListGameServerConfigsRequest.serialize,
                 response_deserializer=game_server_configs.ListGameServerConfigsResponse.deserialize,
             )
@@ -264,7 +275,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         # to pass in the functions for each.
         if "get_game_server_config" not in self._stubs:
             self._stubs["get_game_server_config"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerConfigsService/GetGameServerConfig",
+                "/google.cloud.gaming.v1.GameServerConfigsService/GetGameServerConfig",
                 request_serializer=game_server_configs.GetGameServerConfigRequest.serialize,
                 response_deserializer=game_server_configs.GameServerConfig.deserialize,
             )
@@ -296,7 +307,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         # to pass in the functions for each.
         if "create_game_server_config" not in self._stubs:
             self._stubs["create_game_server_config"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerConfigsService/CreateGameServerConfig",
+                "/google.cloud.gaming.v1.GameServerConfigsService/CreateGameServerConfig",
                 request_serializer=game_server_configs.CreateGameServerConfigRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
@@ -326,7 +337,7 @@ class GameServerConfigsServiceGrpcTransport(GameServerConfigsServiceTransport):
         # to pass in the functions for each.
         if "delete_game_server_config" not in self._stubs:
             self._stubs["delete_game_server_config"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerConfigsService/DeleteGameServerConfig",
+                "/google.cloud.gaming.v1.GameServerConfigsService/DeleteGameServerConfig",
                 request_serializer=game_server_configs.DeleteGameServerConfigRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )

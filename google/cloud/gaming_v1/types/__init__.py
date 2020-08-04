@@ -26,27 +26,6 @@ from .common import (
     TargetState,
     DeployedFleetDetails,
 )
-from .game_server_configs import (
-    ListGameServerConfigsRequest,
-    ListGameServerConfigsResponse,
-    GetGameServerConfigRequest,
-    CreateGameServerConfigRequest,
-    DeleteGameServerConfigRequest,
-    ScalingConfig,
-    FleetConfig,
-    GameServerConfig,
-)
-from .realms import (
-    ListRealmsRequest,
-    ListRealmsResponse,
-    GetRealmRequest,
-    CreateRealmRequest,
-    DeleteRealmRequest,
-    UpdateRealmRequest,
-    PreviewRealmUpdateRequest,
-    PreviewRealmUpdateResponse,
-    Realm,
-)
 from .game_server_clusters import (
     ListGameServerClustersRequest,
     ListGameServerClustersResponse,
@@ -63,6 +42,16 @@ from .game_server_clusters import (
     GameServerClusterConnectionInfo,
     GkeClusterReference,
     GameServerCluster,
+)
+from .game_server_configs import (
+    ListGameServerConfigsRequest,
+    ListGameServerConfigsResponse,
+    GetGameServerConfigRequest,
+    CreateGameServerConfigRequest,
+    DeleteGameServerConfigRequest,
+    ScalingConfig,
+    FleetConfig,
+    GameServerConfig,
 )
 from .game_server_deployments import (
     ListGameServerDeploymentsRequest,
@@ -81,6 +70,17 @@ from .game_server_deployments import (
     PreviewGameServerDeploymentRolloutRequest,
     PreviewGameServerDeploymentRolloutResponse,
 )
+from .realms import (
+    ListRealmsRequest,
+    ListRealmsResponse,
+    GetRealmRequest,
+    CreateRealmRequest,
+    DeleteRealmRequest,
+    UpdateRealmRequest,
+    PreviewRealmUpdateRequest,
+    PreviewRealmUpdateResponse,
+    Realm,
+)
 
 
 __all__ = (
@@ -93,23 +93,6 @@ __all__ = (
     "TargetDetails",
     "TargetState",
     "DeployedFleetDetails",
-    "ListGameServerConfigsRequest",
-    "ListGameServerConfigsResponse",
-    "GetGameServerConfigRequest",
-    "CreateGameServerConfigRequest",
-    "DeleteGameServerConfigRequest",
-    "ScalingConfig",
-    "FleetConfig",
-    "GameServerConfig",
-    "ListRealmsRequest",
-    "ListRealmsResponse",
-    "GetRealmRequest",
-    "CreateRealmRequest",
-    "DeleteRealmRequest",
-    "UpdateRealmRequest",
-    "PreviewRealmUpdateRequest",
-    "PreviewRealmUpdateResponse",
-    "Realm",
     "ListGameServerClustersRequest",
     "ListGameServerClustersResponse",
     "GetGameServerClusterRequest",
@@ -125,6 +108,14 @@ __all__ = (
     "GameServerClusterConnectionInfo",
     "GkeClusterReference",
     "GameServerCluster",
+    "ListGameServerConfigsRequest",
+    "ListGameServerConfigsResponse",
+    "GetGameServerConfigRequest",
+    "CreateGameServerConfigRequest",
+    "DeleteGameServerConfigRequest",
+    "ScalingConfig",
+    "FleetConfig",
+    "GameServerConfig",
     "ListGameServerDeploymentsRequest",
     "ListGameServerDeploymentsResponse",
     "GetGameServerDeploymentRequest",
@@ -140,4 +131,13 @@ __all__ = (
     "GameServerDeploymentRollout",
     "PreviewGameServerDeploymentRolloutRequest",
     "PreviewGameServerDeploymentRolloutResponse",
+    "ListRealmsRequest",
+    "ListRealmsResponse",
+    "GetRealmRequest",
+    "CreateRealmRequest",
+    "DeleteRealmRequest",
+    "UpdateRealmRequest",
+    "PreviewRealmUpdateRequest",
+    "PreviewRealmUpdateResponse",
+    "Realm",
 )

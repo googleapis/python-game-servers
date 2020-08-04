@@ -17,14 +17,27 @@
 
 import abc
 import typing
+import pkg_resources
 
 from google import auth
 from google.api_core import exceptions  # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.api_core import retry as retries  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.auth import credentials  # type: ignore
 
 from google.cloud.gaming_v1.types import game_server_configs
 from google.longrunning import operations_pb2 as operations  # type: ignore
+
+
+try:
+    _client_info = gapic_v1.client_info.ClientInfo(
+        gapic_version=pkg_resources.get_distribution(
+            "google-cloud-game-servers",
+        ).version,
+    )
+except pkg_resources.DistributionNotFound:
+    _client_info = gapic_v1.client_info.ClientInfo()
 
 
 class GameServerConfigsServiceTransport(abc.ABC):
@@ -39,6 +52,7 @@ class GameServerConfigsServiceTransport(abc.ABC):
         credentials: credentials.Credentials = None,
         credentials_file: typing.Optional[str] = None,
         scopes: typing.Optional[typing.Sequence[str]] = AUTH_SCOPES,
+        quota_project_id: typing.Optional[str] = None,
         **kwargs,
     ) -> None:
         """Instantiate the transport.
@@ -54,6 +68,8 @@ class GameServerConfigsServiceTransport(abc.ABC):
                 be loaded with :func:`google.auth.load_credentials_from_file`.
                 This argument is mutually exclusive with credentials.
             scope (Optional[Sequence[str]]): A list of scopes.
+            quota_project_id (Optional[str]): An optional project to use for billing
+                and quota.
         """
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
         if ":" not in host:
@@ -69,13 +85,56 @@ class GameServerConfigsServiceTransport(abc.ABC):
 
         if credentials_file is not None:
             credentials, _ = auth.load_credentials_from_file(
-                credentials_file, scopes=scopes
+                credentials_file, scopes=scopes, quota_project_id=quota_project_id
             )
+
         elif credentials is None:
-            credentials, _ = auth.default(scopes=scopes)
+            credentials, _ = auth.default(
+                scopes=scopes, quota_project_id=quota_project_id
+            )
 
         # Save the credentials.
         self._credentials = credentials
+
+        # Lifted into its own function so it can be stubbed out during tests.
+        self._prep_wrapped_messages()
+
+    def _prep_wrapped_messages(self):
+        # Precompute the wrapped methods.
+        self._wrapped_methods = {
+            self.list_game_server_configs: gapic_v1.method.wrap_method(
+                self.list_game_server_configs,
+                default_retry=retries.Retry(
+                    initial=1.0,
+                    maximum=10.0,
+                    multiplier=1.3,
+                    predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                ),
+                default_timeout=60.0,
+                client_info=_client_info,
+            ),
+            self.get_game_server_config: gapic_v1.method.wrap_method(
+                self.get_game_server_config,
+                default_retry=retries.Retry(
+                    initial=1.0,
+                    maximum=10.0,
+                    multiplier=1.3,
+                    predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                ),
+                default_timeout=60.0,
+                client_info=_client_info,
+            ),
+            self.create_game_server_config: gapic_v1.method.wrap_method(
+                self.create_game_server_config,
+                default_timeout=60.0,
+                client_info=_client_info,
+            ),
+            self.delete_game_server_config: gapic_v1.method.wrap_method(
+                self.delete_game_server_config,
+                default_timeout=60.0,
+                client_info=_client_info,
+            ),
+        }
 
     @property
     def operations_client(self) -> operations_v1.OperationsClient:

@@ -23,7 +23,7 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.gaming.v1beta",
+    package="google.cloud.gaming.v1",
     manifest={
         "ListGameServerConfigsRequest",
         "ListGameServerConfigsResponse",
@@ -51,7 +51,7 @@ class ListGameServerConfigsRequest(proto.Message):
             unspecified, server will pick an appropriate default. Server
             may return fewer items than requested. A caller should only
             rely on response's
-            [next_page_token][google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token]
+            [next_page_token][google.cloud.gaming.v1.ListGameServerConfigsResponse.next_page_token]
             to determine if there are more GameServerConfigs left to be
             queried.
         page_token (str):
@@ -82,7 +82,7 @@ class ListGameServerConfigsResponse(proto.Message):
     GameServerConfigsService.ListGameServerConfigs.
 
     Attributes:
-        game_server_configs (Sequence[~.gcgv_game_server_configs.GameServerConfig]):
+        game_server_configs (Sequence[~.gcg_game_server_configs.GameServerConfig]):
             The list of game server configs.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -132,7 +132,7 @@ class CreateGameServerConfigRequest(proto.Message):
         config_id (str):
             Required. The ID of the game server config
             resource to be created.
-        game_server_config (~.gcgv_game_server_configs.GameServerConfig):
+        game_server_config (~.gcg_game_server_configs.GameServerConfig):
             Required. The game server config resource to
             be created.
     """
@@ -224,13 +224,13 @@ class GameServerConfig(proto.Message):
             Output only. The creation time.
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[~.gcgv_game_server_configs.GameServerConfig.LabelsEntry]):
+        labels (Sequence[~.gcg_game_server_configs.GameServerConfig.LabelsEntry]):
             The labels associated with this game server
             config. Each label is a key-value pair.
-        fleet_configs (Sequence[~.gcgv_game_server_configs.FleetConfig]):
+        fleet_configs (Sequence[~.gcg_game_server_configs.FleetConfig]):
             FleetConfig contains a list of Agones fleet
             specs. Only one FleetConfig is allowed.
-        scaling_configs (Sequence[~.gcgv_game_server_configs.ScalingConfig]):
+        scaling_configs (Sequence[~.gcg_game_server_configs.ScalingConfig]):
             The autoscaling settings.
         description (str):
             The description of the game server config.

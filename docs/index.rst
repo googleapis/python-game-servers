@@ -2,13 +2,21 @@
 
 .. include:: multiprocessing.rst
 
-API Reference
+v1 Reference
 -------------
 .. toctree::
     :maxdepth: 2
 
     gaming_v1/services
     gaming_v1/types
+
+v1beta Reference
+----------------
+.. toctree::
+    :maxdepth: 2
+
+    gaming_v1beta/services
+    gaming_v1beta/types
 
 
 Changelog

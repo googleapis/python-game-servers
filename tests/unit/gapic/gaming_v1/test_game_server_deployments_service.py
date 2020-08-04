@@ -55,6 +55,17 @@ def client_cert_source_callback():
     return b"cert bytes", b"key bytes"
 
 
+# If default endpoint is localhost, then default mtls endpoint will be the same.
+# This method modifies the default endpoint so the client can produce a different
+# mtls endpoint for endpoint testing purposes.
+def modify_default_endpoint(client):
+    return (
+        "foo.googleapis.com"
+        if ("localhost" in client.DEFAULT_ENDPOINT)
+        else client.DEFAULT_ENDPOINT
+    )
+
+
 def test__get_default_mtls_endpoint():
     api_endpoint = "example.googleapis.com"
     api_mtls_endpoint = "example.mtls.googleapis.com"
@@ -129,6 +140,16 @@ def test_game_server_deployments_service_client_get_transport_class():
         ),
     ],
 )
+@mock.patch.object(
+    GameServerDeploymentsServiceClient,
+    "DEFAULT_ENDPOINT",
+    modify_default_endpoint(GameServerDeploymentsServiceClient),
+)
+@mock.patch.object(
+    GameServerDeploymentsServiceAsyncClient,
+    "DEFAULT_ENDPOINT",
+    modify_default_endpoint(GameServerDeploymentsServiceAsyncClient),
+)
 def test_game_server_deployments_service_client_client_options(
     client_class, transport_class, transport_name
 ):
@@ -159,83 +180,13 @@ def test_game_server_deployments_service_client_client_options(
             scopes=None,
             api_mtls_endpoint="squid.clam.whelk",
             client_cert_source=None,
+            quota_project_id=None,
         )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS is
     # "never".
-    os.environ["GOOGLE_API_USE_MTLS"] = "never"
-    with mock.patch.object(transport_class, "__init__") as patched:
-        patched.return_value = None
-        client = client_class()
-        patched.assert_called_once_with(
-            credentials=None,
-            credentials_file=None,
-            host=client.DEFAULT_ENDPOINT,
-            scopes=None,
-            api_mtls_endpoint=client.DEFAULT_ENDPOINT,
-            client_cert_source=None,
-        )
-
-    # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS is
-    # "always".
-    os.environ["GOOGLE_API_USE_MTLS"] = "always"
-    with mock.patch.object(transport_class, "__init__") as patched:
-        patched.return_value = None
-        client = client_class()
-        patched.assert_called_once_with(
-            credentials=None,
-            credentials_file=None,
-            host=client.DEFAULT_MTLS_ENDPOINT,
-            scopes=None,
-            api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
-            client_cert_source=None,
-        )
-
-    # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
-    # "auto", and client_cert_source is provided.
-    os.environ["GOOGLE_API_USE_MTLS"] = "auto"
-    options = client_options.ClientOptions(
-        client_cert_source=client_cert_source_callback
-    )
-    with mock.patch.object(transport_class, "__init__") as patched:
-        patched.return_value = None
-        client = client_class(client_options=options)
-        patched.assert_called_once_with(
-            credentials=None,
-            credentials_file=None,
-            host=client.DEFAULT_MTLS_ENDPOINT,
-            scopes=None,
-            api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
-            client_cert_source=client_cert_source_callback,
-        )
-
-    # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
-    # "auto", and default_client_cert_source is provided.
-    os.environ["GOOGLE_API_USE_MTLS"] = "auto"
-    with mock.patch.object(transport_class, "__init__") as patched:
-        with mock.patch(
-            "google.auth.transport.mtls.has_default_client_cert_source",
-            return_value=True,
-        ):
-            patched.return_value = None
-            client = client_class()
-            patched.assert_called_once_with(
-                credentials=None,
-                credentials_file=None,
-                host=client.DEFAULT_MTLS_ENDPOINT,
-                scopes=None,
-                api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
-                client_cert_source=None,
-            )
-
-    # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
-    # "auto", but client_cert_source and default_client_cert_source are None.
-    os.environ["GOOGLE_API_USE_MTLS"] = "auto"
-    with mock.patch.object(transport_class, "__init__") as patched:
-        with mock.patch(
-            "google.auth.transport.mtls.has_default_client_cert_source",
-            return_value=False,
-        ):
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS": "never"}):
+        with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
             client = client_class()
             patched.assert_called_once_with(
@@ -245,15 +196,104 @@ def test_game_server_deployments_service_client_client_options(
                 scopes=None,
                 api_mtls_endpoint=client.DEFAULT_ENDPOINT,
                 client_cert_source=None,
+                quota_project_id=None,
             )
+
+    # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS is
+    # "always".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS": "always"}):
+        with mock.patch.object(transport_class, "__init__") as patched:
+            patched.return_value = None
+            client = client_class()
+            patched.assert_called_once_with(
+                credentials=None,
+                credentials_file=None,
+                host=client.DEFAULT_MTLS_ENDPOINT,
+                scopes=None,
+                api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
+                client_cert_source=None,
+                quota_project_id=None,
+            )
+
+    # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
+    # "auto", and client_cert_source is provided.
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS": "auto"}):
+        options = client_options.ClientOptions(
+            client_cert_source=client_cert_source_callback
+        )
+        with mock.patch.object(transport_class, "__init__") as patched:
+            patched.return_value = None
+            client = client_class(client_options=options)
+            patched.assert_called_once_with(
+                credentials=None,
+                credentials_file=None,
+                host=client.DEFAULT_MTLS_ENDPOINT,
+                scopes=None,
+                api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
+                client_cert_source=client_cert_source_callback,
+                quota_project_id=None,
+            )
+
+    # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
+    # "auto", and default_client_cert_source is provided.
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS": "auto"}):
+        with mock.patch.object(transport_class, "__init__") as patched:
+            with mock.patch(
+                "google.auth.transport.mtls.has_default_client_cert_source",
+                return_value=True,
+            ):
+                patched.return_value = None
+                client = client_class()
+                patched.assert_called_once_with(
+                    credentials=None,
+                    credentials_file=None,
+                    host=client.DEFAULT_MTLS_ENDPOINT,
+                    scopes=None,
+                    api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
+                    client_cert_source=None,
+                    quota_project_id=None,
+                )
+
+    # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
+    # "auto", but client_cert_source and default_client_cert_source are None.
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS": "auto"}):
+        with mock.patch.object(transport_class, "__init__") as patched:
+            with mock.patch(
+                "google.auth.transport.mtls.has_default_client_cert_source",
+                return_value=False,
+            ):
+                patched.return_value = None
+                client = client_class()
+                patched.assert_called_once_with(
+                    credentials=None,
+                    credentials_file=None,
+                    host=client.DEFAULT_ENDPOINT,
+                    scopes=None,
+                    api_mtls_endpoint=client.DEFAULT_ENDPOINT,
+                    client_cert_source=None,
+                    quota_project_id=None,
+                )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS has
     # unsupported value.
-    os.environ["GOOGLE_API_USE_MTLS"] = "Unsupported"
-    with pytest.raises(MutualTLSChannelError):
-        client = client_class()
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS": "Unsupported"}):
+        with pytest.raises(MutualTLSChannelError):
+            client = client_class()
 
-    del os.environ["GOOGLE_API_USE_MTLS"]
+    # Check the case quota_project_id is provided
+    options = client_options.ClientOptions(quota_project_id="octopus")
+    with mock.patch.object(transport_class, "__init__") as patched:
+        patched.return_value = None
+        client = client_class(client_options=options)
+        patched.assert_called_once_with(
+            credentials=None,
+            credentials_file=None,
+            host=client.DEFAULT_ENDPOINT,
+            scopes=None,
+            api_mtls_endpoint=client.DEFAULT_ENDPOINT,
+            client_cert_source=None,
+            quota_project_id="octopus",
+        )
 
 
 @pytest.mark.parametrize(
@@ -286,6 +326,7 @@ def test_game_server_deployments_service_client_client_options_scopes(
             scopes=["1", "2"],
             api_mtls_endpoint=client.DEFAULT_ENDPOINT,
             client_cert_source=None,
+            quota_project_id=None,
         )
 
 
@@ -319,6 +360,7 @@ def test_game_server_deployments_service_client_client_options_credentials_file(
             scopes=None,
             api_mtls_endpoint=client.DEFAULT_ENDPOINT,
             client_cert_source=None,
+            quota_project_id=None,
         )
 
 
@@ -337,17 +379,21 @@ def test_game_server_deployments_service_client_client_options_from_dict():
             scopes=None,
             api_mtls_endpoint="squid.clam.whelk",
             client_cert_source=None,
+            quota_project_id=None,
         )
 
 
-def test_list_game_server_deployments(transport: str = "grpc"):
+def test_list_game_server_deployments(
+    transport: str = "grpc",
+    request_type=game_server_deployments.ListGameServerDeploymentsRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.ListGameServerDeploymentsRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -364,7 +410,7 @@ def test_list_game_server_deployments(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == game_server_deployments.ListGameServerDeploymentsRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListGameServerDeploymentsPager)
@@ -372,6 +418,10 @@ def test_list_game_server_deployments(transport: str = "grpc"):
     assert response.next_page_token == "next_page_token_value"
 
     assert response.unreachable == ["unreachable_value"]
+
+
+def test_list_game_server_deployments_from_dict():
+    test_list_game_server_deployments(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -743,14 +793,17 @@ async def test_list_game_server_deployments_async_pages():
             assert page.raw_page.next_page_token == token
 
 
-def test_get_game_server_deployment(transport: str = "grpc"):
+def test_get_game_server_deployment(
+    transport: str = "grpc",
+    request_type=game_server_deployments.GetGameServerDeploymentRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.GetGameServerDeploymentRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -767,7 +820,7 @@ def test_get_game_server_deployment(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == game_server_deployments.GetGameServerDeploymentRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, game_server_deployments.GameServerDeployment)
@@ -777,6 +830,10 @@ def test_get_game_server_deployment(transport: str = "grpc"):
     assert response.etag == "etag_value"
 
     assert response.description == "description_value"
+
+
+def test_get_game_server_deployment_from_dict():
+    test_get_game_server_deployment(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -956,14 +1013,17 @@ async def test_get_game_server_deployment_flattened_error_async():
         )
 
 
-def test_create_game_server_deployment(transport: str = "grpc"):
+def test_create_game_server_deployment(
+    transport: str = "grpc",
+    request_type=game_server_deployments.CreateGameServerDeploymentRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.CreateGameServerDeploymentRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -978,10 +1038,14 @@ def test_create_game_server_deployment(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == game_server_deployments.CreateGameServerDeploymentRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
+
+
+def test_create_game_server_deployment_from_dict():
+    test_create_game_server_deployment(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1183,14 +1247,17 @@ async def test_create_game_server_deployment_flattened_error_async():
         )
 
 
-def test_delete_game_server_deployment(transport: str = "grpc"):
+def test_delete_game_server_deployment(
+    transport: str = "grpc",
+    request_type=game_server_deployments.DeleteGameServerDeploymentRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.DeleteGameServerDeploymentRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1205,10 +1272,14 @@ def test_delete_game_server_deployment(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == game_server_deployments.DeleteGameServerDeploymentRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
+
+
+def test_delete_game_server_deployment_from_dict():
+    test_delete_game_server_deployment(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1382,14 +1453,17 @@ async def test_delete_game_server_deployment_flattened_error_async():
         )
 
 
-def test_update_game_server_deployment(transport: str = "grpc"):
+def test_update_game_server_deployment(
+    transport: str = "grpc",
+    request_type=game_server_deployments.UpdateGameServerDeploymentRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.UpdateGameServerDeploymentRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1404,10 +1478,14 @@ def test_update_game_server_deployment(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == game_server_deployments.UpdateGameServerDeploymentRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
+
+
+def test_update_game_server_deployment_from_dict():
+    test_update_game_server_deployment(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1615,14 +1693,17 @@ async def test_update_game_server_deployment_flattened_error_async():
         )
 
 
-def test_get_game_server_deployment_rollout(transport: str = "grpc"):
+def test_get_game_server_deployment_rollout(
+    transport: str = "grpc",
+    request_type=game_server_deployments.GetGameServerDeploymentRolloutRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.GetGameServerDeploymentRolloutRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1641,7 +1722,9 @@ def test_get_game_server_deployment_rollout(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert (
+            args[0] == game_server_deployments.GetGameServerDeploymentRolloutRequest()
+        )
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, game_server_deployments.GameServerDeploymentRollout)
@@ -1651,6 +1734,10 @@ def test_get_game_server_deployment_rollout(transport: str = "grpc"):
     assert response.default_game_server_config == "default_game_server_config_value"
 
     assert response.etag == "etag_value"
+
+
+def test_get_game_server_deployment_rollout_from_dict():
+    test_get_game_server_deployment_rollout(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1836,14 +1923,17 @@ async def test_get_game_server_deployment_rollout_flattened_error_async():
         )
 
 
-def test_update_game_server_deployment_rollout(transport: str = "grpc"):
+def test_update_game_server_deployment_rollout(
+    transport: str = "grpc",
+    request_type=game_server_deployments.UpdateGameServerDeploymentRolloutRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1858,10 +1948,17 @@ def test_update_game_server_deployment_rollout(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert (
+            args[0]
+            == game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
+        )
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
+
+
+def test_update_game_server_deployment_rollout_from_dict():
+    test_update_game_server_deployment_rollout(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -2068,14 +2165,17 @@ async def test_update_game_server_deployment_rollout_flattened_error_async():
         )
 
 
-def test_preview_game_server_deployment_rollout(transport: str = "grpc"):
+def test_preview_game_server_deployment_rollout(
+    transport: str = "grpc",
+    request_type=game_server_deployments.PreviewGameServerDeploymentRolloutRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2092,7 +2192,10 @@ def test_preview_game_server_deployment_rollout(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert (
+            args[0]
+            == game_server_deployments.PreviewGameServerDeploymentRolloutRequest()
+        )
 
     # Establish that the response is the type that we expect.
     assert isinstance(
@@ -2102,6 +2205,10 @@ def test_preview_game_server_deployment_rollout(transport: str = "grpc"):
     assert response.unavailable == ["unavailable_value"]
 
     assert response.etag == "etag_value"
+
+
+def test_preview_game_server_deployment_rollout_from_dict():
+    test_preview_game_server_deployment_rollout(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -2212,14 +2319,17 @@ async def test_preview_game_server_deployment_rollout_field_headers_async():
     ]
 
 
-def test_fetch_deployment_state(transport: str = "grpc"):
+def test_fetch_deployment_state(
+    transport: str = "grpc",
+    request_type=game_server_deployments.FetchDeploymentStateRequest,
+):
     client = GameServerDeploymentsServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = game_server_deployments.FetchDeploymentStateRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2236,12 +2346,16 @@ def test_fetch_deployment_state(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == game_server_deployments.FetchDeploymentStateRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, game_server_deployments.FetchDeploymentStateResponse)
 
     assert response.unavailable == ["unavailable_value"]
+
+
+def test_fetch_deployment_state_from_dict():
+    test_fetch_deployment_state(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -2413,9 +2527,13 @@ def test_game_server_deployments_service_base_transport_error():
 
 def test_game_server_deployments_service_base_transport():
     # Instantiate the base transport.
-    transport = transports.GameServerDeploymentsServiceTransport(
-        credentials=credentials.AnonymousCredentials(),
-    )
+    with mock.patch(
+        "google.cloud.gaming_v1.services.game_server_deployments_service.transports.GameServerDeploymentsServiceTransport.__init__"
+    ) as Transport:
+        Transport.return_value = None
+        transport = transports.GameServerDeploymentsServiceTransport(
+            credentials=credentials.AnonymousCredentials(),
+        )
 
     # Every method on the transport should just blindly
     # raise NotImplementedError.
@@ -2442,14 +2560,20 @@ def test_game_server_deployments_service_base_transport():
 
 def test_game_server_deployments_service_base_transport_with_credentials_file():
     # Instantiate the base transport with a credentials file
-    with mock.patch.object(auth, "load_credentials_from_file") as load_creds:
+    with mock.patch.object(
+        auth, "load_credentials_from_file"
+    ) as load_creds, mock.patch(
+        "google.cloud.gaming_v1.services.game_server_deployments_service.transports.GameServerDeploymentsServiceTransport._prep_wrapped_messages"
+    ) as Transport:
+        Transport.return_value = None
         load_creds.return_value = (credentials.AnonymousCredentials(), None)
         transport = transports.GameServerDeploymentsServiceTransport(
-            credentials_file="credentials.json",
+            credentials_file="credentials.json", quota_project_id="octopus",
         )
         load_creds.assert_called_once_with(
             "credentials.json",
             scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            quota_project_id="octopus",
         )
 
 
@@ -2459,7 +2583,8 @@ def test_game_server_deployments_service_auth_adc():
         adc.return_value = (credentials.AnonymousCredentials(), None)
         GameServerDeploymentsServiceClient()
         adc.assert_called_once_with(
-            scopes=("https://www.googleapis.com/auth/cloud-platform",)
+            scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            quota_project_id=None,
         )
 
 
@@ -2468,9 +2593,12 @@ def test_game_server_deployments_service_transport_auth_adc():
     # ADC credentials.
     with mock.patch.object(auth, "default") as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
-        transports.GameServerDeploymentsServiceGrpcTransport(host="squid.clam.whelk")
+        transports.GameServerDeploymentsServiceGrpcTransport(
+            host="squid.clam.whelk", quota_project_id="octopus"
+        )
         adc.assert_called_once_with(
-            scopes=("https://www.googleapis.com/auth/cloud-platform",)
+            scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            quota_project_id="octopus",
         )
 
 
@@ -2558,6 +2686,7 @@ def test_game_server_deployments_service_grpc_transport_channel_mtls_with_client
         credentials_file=None,
         scopes=("https://www.googleapis.com/auth/cloud-platform",),
         ssl_credentials=mock_ssl_cred,
+        quota_project_id=None,
     )
     assert transport.grpc_channel == mock_grpc_channel
 
@@ -2592,6 +2721,7 @@ def test_game_server_deployments_service_grpc_asyncio_transport_channel_mtls_wit
         credentials_file=None,
         scopes=("https://www.googleapis.com/auth/cloud-platform",),
         ssl_credentials=mock_ssl_cred,
+        quota_project_id=None,
     )
     assert transport.grpc_channel == mock_grpc_channel
 
@@ -2628,6 +2758,7 @@ def test_game_server_deployments_service_grpc_transport_channel_mtls_with_adc(
             credentials_file=None,
             scopes=("https://www.googleapis.com/auth/cloud-platform",),
             ssl_credentials=mock_ssl_cred,
+            quota_project_id=None,
         )
         assert transport.grpc_channel == mock_grpc_channel
 
@@ -2664,6 +2795,7 @@ def test_game_server_deployments_service_grpc_asyncio_transport_channel_mtls_wit
             credentials_file=None,
             scopes=("https://www.googleapis.com/auth/cloud-platform",),
             ssl_credentials=mock_ssl_cred,
+            quota_project_id=None,
         )
         assert transport.grpc_channel == mock_grpc_channel
 

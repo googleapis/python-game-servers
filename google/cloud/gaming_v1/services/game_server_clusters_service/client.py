@@ -243,6 +243,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 scopes=client_options.scopes,
                 api_mtls_endpoint=client_options.api_endpoint,
                 client_cert_source=client_options.client_cert_source,
+                quota_project_id=client_options.quota_project_id,
             )
 
     def list_game_server_clusters(
@@ -287,27 +288,31 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent]):
+        has_flattened_params = any([parent])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.ListGameServerClustersRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_clusters.ListGameServerClustersRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_clusters.ListGameServerClustersRequest):
+            request = game_server_clusters.ListGameServerClustersRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
+            if parent is not None:
+                request.parent = parent
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.list_game_server_clusters,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.list_game_server_clusters
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -364,27 +369,29 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.GetGameServerClusterRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_clusters.GetGameServerClusterRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_clusters.GetGameServerClusterRequest):
+            request = game_server_clusters.GetGameServerClusterRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.get_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.get_game_server_cluster]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -453,33 +460,37 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any(
+        has_flattened_params = any(
             [parent, game_server_cluster, game_server_cluster_id]
-        ):
+        )
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.CreateGameServerClusterRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_clusters.CreateGameServerClusterRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_clusters.CreateGameServerClusterRequest):
+            request = game_server_clusters.CreateGameServerClusterRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
-        if game_server_cluster is not None:
-            request.game_server_cluster = game_server_cluster
-        if game_server_cluster_id is not None:
-            request.game_server_cluster_id = game_server_cluster_id
+            if parent is not None:
+                request.parent = parent
+            if game_server_cluster is not None:
+                request.game_server_cluster = game_server_cluster
+            if game_server_cluster_id is not None:
+                request.game_server_cluster_id = game_server_cluster_id
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.create_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.create_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -531,15 +542,22 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         """
         # Create or coerce a protobuf request object.
 
-        request = game_server_clusters.PreviewCreateGameServerClusterRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_clusters.PreviewCreateGameServerClusterRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_clusters.PreviewCreateGameServerClusterRequest
+        ):
+            request = game_server_clusters.PreviewCreateGameServerClusterRequest(
+                request
+            )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_create_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.preview_create_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -606,27 +624,31 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.DeleteGameServerClusterRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_clusters.DeleteGameServerClusterRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_clusters.DeleteGameServerClusterRequest):
+            request = game_server_clusters.DeleteGameServerClusterRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.delete_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.delete_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -677,15 +699,22 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         """
         # Create or coerce a protobuf request object.
 
-        request = game_server_clusters.PreviewDeleteGameServerClusterRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_clusters.PreviewDeleteGameServerClusterRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_clusters.PreviewDeleteGameServerClusterRequest
+        ):
+            request = game_server_clusters.PreviewDeleteGameServerClusterRequest(
+                request
+            )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_delete_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.preview_delete_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -750,29 +779,33 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([game_server_cluster, update_mask]):
+        has_flattened_params = any([game_server_cluster, update_mask])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_clusters.UpdateGameServerClusterRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_clusters.UpdateGameServerClusterRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_clusters.UpdateGameServerClusterRequest):
+            request = game_server_clusters.UpdateGameServerClusterRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if game_server_cluster is not None:
-            request.game_server_cluster = game_server_cluster
-        if update_mask is not None:
-            request.update_mask = update_mask
+            if game_server_cluster is not None:
+                request.game_server_cluster = game_server_cluster
+            if update_mask is not None:
+                request.update_mask = update_mask
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.update_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.update_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -825,15 +858,22 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         """
         # Create or coerce a protobuf request object.
 
-        request = game_server_clusters.PreviewUpdateGameServerClusterRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_clusters.PreviewUpdateGameServerClusterRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_clusters.PreviewUpdateGameServerClusterRequest
+        ):
+            request = game_server_clusters.PreviewUpdateGameServerClusterRequest(
+                request
+            )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_update_game_server_cluster,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.preview_update_game_server_cluster
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.

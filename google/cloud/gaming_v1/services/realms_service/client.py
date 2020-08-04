@@ -237,6 +237,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 scopes=client_options.scopes,
                 api_mtls_endpoint=client_options.api_endpoint,
                 client_cert_source=client_options.client_cert_source,
+                quota_project_id=client_options.quota_project_id,
             )
 
     def list_realms(
@@ -279,25 +280,29 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent]):
+        has_flattened_params = any([parent])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = realms.ListRealmsRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a realms.ListRealmsRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, realms.ListRealmsRequest):
+            request = realms.ListRealmsRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
+            if parent is not None:
+                request.parent = parent
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.list_realms, default_timeout=None, client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.list_realms]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -353,25 +358,29 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = realms.GetRealmRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a realms.GetRealmRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, realms.GetRealmRequest):
+            request = realms.GetRealmRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.get_realm, default_timeout=None, client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.get_realm]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -438,31 +447,33 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent, realm, realm_id]):
+        has_flattened_params = any([parent, realm, realm_id])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = realms.CreateRealmRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a realms.CreateRealmRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, realms.CreateRealmRequest):
+            request = realms.CreateRealmRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
-        if realm is not None:
-            request.realm = realm
-        if realm_id is not None:
-            request.realm_id = realm_id
+            if parent is not None:
+                request.parent = parent
+            if realm is not None:
+                request.realm = realm
+            if realm_id is not None:
+                request.realm_id = realm_id
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.create_realm,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.create_realm]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -537,27 +548,29 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = realms.DeleteRealmRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a realms.DeleteRealmRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, realms.DeleteRealmRequest):
+            request = realms.DeleteRealmRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.delete_realm,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.delete_realm]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -628,29 +641,31 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([realm, update_mask]):
+        has_flattened_params = any([realm, update_mask])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = realms.UpdateRealmRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a realms.UpdateRealmRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, realms.UpdateRealmRequest):
+            request = realms.UpdateRealmRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if realm is not None:
-            request.realm = realm
-        if update_mask is not None:
-            request.update_mask = update_mask
+            if realm is not None:
+                request.realm = realm
+            if update_mask is not None:
+                request.update_mask = update_mask
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.update_realm,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.update_realm]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -703,15 +718,16 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         """
         # Create or coerce a protobuf request object.
 
-        request = realms.PreviewRealmUpdateRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a realms.PreviewRealmUpdateRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, realms.PreviewRealmUpdateRequest):
+            request = realms.PreviewRealmUpdateRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_realm_update,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.preview_realm_update]
 
         # Certain fields should be provided within the metadata header;
         # add these here.

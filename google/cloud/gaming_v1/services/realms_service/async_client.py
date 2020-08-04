@@ -160,7 +160,13 @@ class RealmsServiceAsyncClient:
         # and friendly error handling.
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.list_realms,
-            default_timeout=None,
+            default_retry=retries.Retry(
+                initial=1.0,
+                maximum=10.0,
+                multiplier=1.3,
+                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+            ),
+            default_timeout=60.0,
             client_info=_client_info,
         )
 
@@ -236,7 +242,13 @@ class RealmsServiceAsyncClient:
         # and friendly error handling.
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.get_realm,
-            default_timeout=None,
+            default_retry=retries.Retry(
+                initial=1.0,
+                maximum=10.0,
+                multiplier=1.3,
+                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+            ),
+            default_timeout=60.0,
             client_info=_client_info,
         )
 
@@ -327,7 +339,7 @@ class RealmsServiceAsyncClient:
         # and friendly error handling.
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.create_realm,
-            default_timeout=None,
+            default_timeout=60.0,
             client_info=_client_info,
         )
 
@@ -422,7 +434,7 @@ class RealmsServiceAsyncClient:
         # and friendly error handling.
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.delete_realm,
-            default_timeout=None,
+            default_timeout=60.0,
             client_info=_client_info,
         )
 
@@ -515,7 +527,7 @@ class RealmsServiceAsyncClient:
         # and friendly error handling.
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.update_realm,
-            default_timeout=None,
+            default_timeout=60.0,
             client_info=_client_info,
         )
 
@@ -576,7 +588,13 @@ class RealmsServiceAsyncClient:
         # and friendly error handling.
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.preview_realm_update,
-            default_timeout=None,
+            default_retry=retries.Retry(
+                initial=1.0,
+                maximum=10.0,
+                multiplier=1.3,
+                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+            ),
+            default_timeout=60.0,
             client_info=_client_info,
         )
 
