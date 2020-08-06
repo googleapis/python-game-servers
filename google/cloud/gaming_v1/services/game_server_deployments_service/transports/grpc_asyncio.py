@@ -58,7 +58,8 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         credentials: credentials.Credentials = None,
         credentials_file: Optional[str] = None,
         scopes: Optional[Sequence[str]] = None,
-        **kwargs
+        quota_project_id: Optional[str] = None,
+        **kwargs,
     ) -> aio.Channel:
         """Create and return a gRPC AsyncIO channel object.
         Args:
@@ -74,6 +75,8 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
                 service. These are only used when credentials are not specified and
                 are passed to :func:`google.auth.default`.
+            quota_project_id (Optional[str]): An optional project to use for billing
+                and quota.
             kwargs (Optional[dict]): Keyword arguments, which are passed to the
                 channel creation.
         Returns:
@@ -85,7 +88,8 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             credentials=credentials,
             credentials_file=credentials_file,
             scopes=scopes,
-            **kwargs
+            quota_project_id=quota_project_id,
+            **kwargs,
         )
 
     def __init__(
@@ -97,7 +101,8 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         scopes: Optional[Sequence[str]] = None,
         channel: aio.Channel = None,
         api_mtls_endpoint: str = None,
-        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
+        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id=None,
     ) -> None:
         """Instantiate the transport.
 
@@ -125,6 +130,8 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
                 callback to provide client SSL certificate bytes and private key
                 bytes, both in PEM format. It is ignored if ``api_mtls_endpoint``
                 is None.
+            quota_project_id (Optional[str]): An optional project to use for billing
+                and quota.
 
         Raises:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
@@ -163,6 +170,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
                 credentials_file=credentials_file,
                 ssl_credentials=ssl_credentials,
                 scopes=scopes or self.AUTH_SCOPES,
+                quota_project_id=quota_project_id,
             )
 
         # Run the base constructor.
@@ -171,6 +179,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             credentials=credentials,
             credentials_file=credentials_file,
             scopes=scopes or self.AUTH_SCOPES,
+            quota_project_id=quota_project_id,
         )
 
         self._stubs = {}
@@ -232,7 +241,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         # to pass in the functions for each.
         if "list_game_server_deployments" not in self._stubs:
             self._stubs["list_game_server_deployments"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/ListGameServerDeployments",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/ListGameServerDeployments",
                 request_serializer=game_server_deployments.ListGameServerDeploymentsRequest.serialize,
                 response_deserializer=game_server_deployments.ListGameServerDeploymentsResponse.deserialize,
             )
@@ -261,7 +270,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         # to pass in the functions for each.
         if "get_game_server_deployment" not in self._stubs:
             self._stubs["get_game_server_deployment"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/GetGameServerDeployment",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/GetGameServerDeployment",
                 request_serializer=game_server_deployments.GetGameServerDeploymentRequest.serialize,
                 response_deserializer=game_server_deployments.GameServerDeployment.deserialize,
             )
@@ -293,7 +302,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             self._stubs[
                 "create_game_server_deployment"
             ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/CreateGameServerDeployment",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/CreateGameServerDeployment",
                 request_serializer=game_server_deployments.CreateGameServerDeploymentRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
@@ -324,7 +333,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             self._stubs[
                 "delete_game_server_deployment"
             ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/DeleteGameServerDeployment",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/DeleteGameServerDeployment",
                 request_serializer=game_server_deployments.DeleteGameServerDeploymentRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
@@ -355,7 +364,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             self._stubs[
                 "update_game_server_deployment"
             ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/UpdateGameServerDeployment",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/UpdateGameServerDeployment",
                 request_serializer=game_server_deployments.UpdateGameServerDeploymentRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
@@ -387,7 +396,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             self._stubs[
                 "get_game_server_deployment_rollout"
             ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/GetGameServerDeploymentRollout",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/GetGameServerDeploymentRollout",
                 request_serializer=game_server_deployments.GetGameServerDeploymentRolloutRequest.serialize,
                 response_deserializer=game_server_deployments.GameServerDeploymentRollout.deserialize,
             )
@@ -425,7 +434,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             self._stubs[
                 "update_game_server_deployment_rollout"
             ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/UpdateGameServerDeploymentRollout",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/UpdateGameServerDeploymentRollout",
                 request_serializer=game_server_deployments.UpdateGameServerDeploymentRolloutRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
@@ -458,7 +467,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
             self._stubs[
                 "preview_game_server_deployment_rollout"
             ] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/PreviewGameServerDeploymentRollout",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/PreviewGameServerDeploymentRollout",
                 request_serializer=game_server_deployments.PreviewGameServerDeploymentRolloutRequest.serialize,
                 response_deserializer=game_server_deployments.PreviewGameServerDeploymentRolloutResponse.deserialize,
             )
@@ -490,7 +499,7 @@ class GameServerDeploymentsServiceGrpcAsyncIOTransport(
         # to pass in the functions for each.
         if "fetch_deployment_state" not in self._stubs:
             self._stubs["fetch_deployment_state"] = self.grpc_channel.unary_unary(
-                "/google.cloud.gaming.v1beta.GameServerDeploymentsService/FetchDeploymentState",
+                "/google.cloud.gaming.v1.GameServerDeploymentsService/FetchDeploymentState",
                 request_serializer=game_server_deployments.FetchDeploymentStateRequest.serialize,
                 response_deserializer=game_server_deployments.FetchDeploymentStateResponse.deserialize,
             )

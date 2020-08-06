@@ -3,30 +3,30 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/python-game-servers.git",
-        "sha": "1c69b1ed137047c80e65a0545a56c191baa1f4ab"
+        "remote": "git@github.com:googleapis/python-game-servers",
+        "sha": "ee9347879e35c0b95a90391ca61692b54fb8e0cf"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "67415b43e7435d98ec104bca8cdaf4abfd3e8338",
-        "internalRef": "320987315"
+        "sha": "80442a7b7dbc10e27138e65bfc2cb28935d28f61",
+        "internalRef": "324717428"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "3a89215abd0e66dfc4f21d07d552d0b543abf082"
+        "sha": "4f8f5dc24af79694887385015294e4dbb214c352"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "3a89215abd0e66dfc4f21d07d552d0b543abf082"
+        "sha": "4f8f5dc24af79694887385015294e4dbb214c352"
       }
     }
   ],
@@ -37,7 +37,16 @@
         "apiName": "gameservices",
         "apiVersion": "v1beta",
         "language": "python",
-        "generator": "gapic-generator-python"
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "gameservices",
+        "apiVersion": "v1",
+        "language": "python",
+        "generator": "bazel"
       }
     }
   ]

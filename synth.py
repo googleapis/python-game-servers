@@ -19,21 +19,21 @@ import synthtool as s
 import synthtool.gcp as gcp
 from synthtool.languages import python
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 common = gcp.CommonTemplates()
 
 # ----------------------------------------------------------------------------
 # Generate Game Servers GAPIC layer
 # ----------------------------------------------------------------------------
-library = gapic.py_library(
-    "gameservices", "v1beta", proto_path="google/cloud/gaming/v1beta"
-)
 
-s.move(library, excludes=["nox.py", "setup.py", "README.rst", "docs/index.rst"])
+versions = ["v1beta", "v1"]
+for version in versions:
+    library = gapic.py_library(
+        "gameservices", version, bazel_target=f"//google/cloud/gaming/{version}:gaming-{version}-py"
+    )
 
-# correct license headers
-python.fix_pb2_headers()
-python.fix_pb2_grpc_headers()
+    s.move(library, excludes=["nox.py", "setup.py", "README.rst", "docs/index.rst"])
+
 
 # rename library to google-cloud-game-servers
 s.replace(

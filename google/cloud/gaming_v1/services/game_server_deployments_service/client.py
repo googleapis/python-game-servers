@@ -265,6 +265,7 @@ class GameServerDeploymentsServiceClient(
                 scopes=client_options.scopes,
                 api_mtls_endpoint=client_options.api_endpoint,
                 client_cert_source=client_options.client_cert_source,
+                quota_project_id=client_options.quota_project_id,
             )
 
     def list_game_server_deployments(
@@ -308,27 +309,33 @@ class GameServerDeploymentsServiceClient(
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent]):
+        has_flattened_params = any([parent])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_deployments.ListGameServerDeploymentsRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.ListGameServerDeploymentsRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_deployments.ListGameServerDeploymentsRequest
+        ):
+            request = game_server_deployments.ListGameServerDeploymentsRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
+            if parent is not None:
+                request.parent = parent
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.list_game_server_deployments,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.list_game_server_deployments
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -385,27 +392,33 @@ class GameServerDeploymentsServiceClient(
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_deployments.GetGameServerDeploymentRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.GetGameServerDeploymentRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_deployments.GetGameServerDeploymentRequest
+        ):
+            request = game_server_deployments.GetGameServerDeploymentRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.get_game_server_deployment,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.get_game_server_deployment
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -467,29 +480,35 @@ class GameServerDeploymentsServiceClient(
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent, game_server_deployment]):
+        has_flattened_params = any([parent, game_server_deployment])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_deployments.CreateGameServerDeploymentRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.CreateGameServerDeploymentRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_deployments.CreateGameServerDeploymentRequest
+        ):
+            request = game_server_deployments.CreateGameServerDeploymentRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
-        if game_server_deployment is not None:
-            request.game_server_deployment = game_server_deployment
+            if parent is not None:
+                request.parent = parent
+            if game_server_deployment is not None:
+                request.game_server_deployment = game_server_deployment
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.create_game_server_deployment,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.create_game_server_deployment
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -565,27 +584,33 @@ class GameServerDeploymentsServiceClient(
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_deployments.DeleteGameServerDeploymentRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.DeleteGameServerDeploymentRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_deployments.DeleteGameServerDeploymentRequest
+        ):
+            request = game_server_deployments.DeleteGameServerDeploymentRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.delete_game_server_deployment,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.delete_game_server_deployment
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -659,29 +684,35 @@ class GameServerDeploymentsServiceClient(
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([game_server_deployment, update_mask]):
+        has_flattened_params = any([game_server_deployment, update_mask])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_deployments.UpdateGameServerDeploymentRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.UpdateGameServerDeploymentRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_deployments.UpdateGameServerDeploymentRequest
+        ):
+            request = game_server_deployments.UpdateGameServerDeploymentRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if game_server_deployment is not None:
-            request.game_server_deployment = game_server_deployment
-        if update_mask is not None:
-            request.update_mask = update_mask
+            if game_server_deployment is not None:
+                request.game_server_deployment = game_server_deployment
+            if update_mask is not None:
+                request.update_mask = update_mask
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.update_game_server_deployment,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.update_game_server_deployment
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -745,27 +776,35 @@ class GameServerDeploymentsServiceClient(
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_deployments.GetGameServerDeploymentRolloutRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.GetGameServerDeploymentRolloutRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_deployments.GetGameServerDeploymentRolloutRequest
+        ):
+            request = game_server_deployments.GetGameServerDeploymentRolloutRequest(
+                request
+            )
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.get_game_server_deployment_rollout,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.get_game_server_deployment_rollout
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -837,31 +876,37 @@ class GameServerDeploymentsServiceClient(
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([rollout, update_mask]):
+        has_flattened_params = any([rollout, update_mask])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest(
-            request
-        )
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.UpdateGameServerDeploymentRolloutRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_deployments.UpdateGameServerDeploymentRolloutRequest
+        ):
+            request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest(
+                request
+            )
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if rollout is not None:
-            request.rollout = rollout
-        if update_mask is not None:
-            request.update_mask = update_mask
+            if rollout is not None:
+                request.rollout = rollout
+            if update_mask is not None:
+                request.update_mask = update_mask
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.update_game_server_deployment_rollout,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.update_game_server_deployment_rollout
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -917,17 +962,22 @@ class GameServerDeploymentsServiceClient(
         """
         # Create or coerce a protobuf request object.
 
-        request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest(
-            request
-        )
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.PreviewGameServerDeploymentRolloutRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, game_server_deployments.PreviewGameServerDeploymentRolloutRequest
+        ):
+            request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest(
+                request
+            )
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.preview_game_server_deployment_rollout,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.preview_game_server_deployment_rollout
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -975,15 +1025,16 @@ class GameServerDeploymentsServiceClient(
         """
         # Create or coerce a protobuf request object.
 
-        request = game_server_deployments.FetchDeploymentStateRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_deployments.FetchDeploymentStateRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_deployments.FetchDeploymentStateRequest):
+            request = game_server_deployments.FetchDeploymentStateRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.fetch_deployment_state,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.fetch_deployment_state]
 
         # Certain fields should be provided within the metadata header;
         # add these here.

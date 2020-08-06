@@ -242,6 +242,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 scopes=client_options.scopes,
                 api_mtls_endpoint=client_options.api_endpoint,
                 client_cert_source=client_options.client_cert_source,
+                quota_project_id=client_options.quota_project_id,
             )
 
     def list_game_server_configs(
@@ -286,27 +287,29 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent]):
+        has_flattened_params = any([parent])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_configs.ListGameServerConfigsRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_configs.ListGameServerConfigsRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_configs.ListGameServerConfigsRequest):
+            request = game_server_configs.ListGameServerConfigsRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
+            if parent is not None:
+                request.parent = parent
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.list_game_server_configs,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.list_game_server_configs]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -363,27 +366,29 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_configs.GetGameServerConfigRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_configs.GetGameServerConfigRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_configs.GetGameServerConfigRequest):
+            request = game_server_configs.GetGameServerConfigRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.get_game_server_config,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.get_game_server_config]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -449,29 +454,33 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent, game_server_config]):
+        has_flattened_params = any([parent, game_server_config])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_configs.CreateGameServerConfigRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_configs.CreateGameServerConfigRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_configs.CreateGameServerConfigRequest):
+            request = game_server_configs.CreateGameServerConfigRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
-        if game_server_config is not None:
-            request.game_server_config = game_server_config
+            if parent is not None:
+                request.parent = parent
+            if game_server_config is not None:
+                request.game_server_config = game_server_config
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.create_game_server_config,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.create_game_server_config
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -549,27 +558,31 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = game_server_configs.DeleteGameServerConfigRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a game_server_configs.DeleteGameServerConfigRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, game_server_configs.DeleteGameServerConfigRequest):
+            request = game_server_configs.DeleteGameServerConfigRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.delete_game_server_config,
-            default_timeout=None,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[
+            self._transport.delete_game_server_config
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.

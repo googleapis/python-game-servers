@@ -23,7 +23,7 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.gaming.v1beta",
+    package="google.cloud.gaming.v1",
     manifest={
         "OperationMetadata",
         "OperationStatus",

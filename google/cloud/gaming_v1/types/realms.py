@@ -24,7 +24,7 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.gaming.v1beta",
+    package="google.cloud.gaming.v1",
     manifest={
         "ListRealmsRequest",
         "ListRealmsResponse",
@@ -51,7 +51,7 @@ class ListRealmsRequest(proto.Message):
             unspecified, server will pick an appropriate default. Server
             may return fewer items than requested. A caller should only
             rely on response's
-            [next_page_token][google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token]
+            [next_page_token][google.cloud.gaming.v1.ListRealmsResponse.next_page_token]
             to determine if there are more realms left to be queried.
         page_token (str):
             Optional. The next_page_token value returned from a previous
@@ -80,7 +80,7 @@ class ListRealmsResponse(proto.Message):
     r"""Response message for RealmsService.ListRealms.
 
     Attributes:
-        realms (Sequence[~.gcgv_realms.Realm]):
+        realms (Sequence[~.gcg_realms.Realm]):
             The list of realms.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -123,7 +123,7 @@ class CreateRealmRequest(proto.Message):
         realm_id (str):
             Required. The ID of the realm resource to be
             created.
-        realm (~.gcgv_realms.Realm):
+        realm (~.gcg_realms.Realm):
             Required. The realm resource to be created.
     """
 
@@ -150,7 +150,7 @@ class UpdateRealmRequest(proto.Message):
     r"""Request message for RealmsService.UpdateRealm.
 
     Attributes:
-        realm (~.gcgv_realms.Realm):
+        realm (~.gcg_realms.Realm):
             Required. The realm to be updated. Only fields specified in
             update_mask are updated.
         update_mask (~.field_mask.FieldMask):
@@ -170,7 +170,7 @@ class PreviewRealmUpdateRequest(proto.Message):
     r"""Request message for RealmsService.PreviewRealmUpdate.
 
     Attributes:
-        realm (~.gcgv_realms.Realm):
+        realm (~.gcg_realms.Realm):
             Required. The realm to be updated. Only fields specified in
             update_mask are updated.
         update_mask (~.field_mask.FieldMask):
@@ -219,7 +219,7 @@ class Realm(proto.Message):
             Output only. The creation time.
         update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[~.gcgv_realms.Realm.LabelsEntry]):
+        labels (Sequence[~.gcg_realms.Realm.LabelsEntry]):
             The labels associated with this realm. Each
             label is a key-value pair.
         time_zone (str):
