@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/python-game-servers",
-        "sha": "ee9347879e35c0b95a90391ca61692b54fb8e0cf"
+        "remote": "https://github.com/googleapis/python-game-servers.git",
+        "sha": "db5d76495aa7410934651847d0d97de17b5a747d"
       }
     },
     {
