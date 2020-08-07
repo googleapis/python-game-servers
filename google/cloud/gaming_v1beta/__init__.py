@@ -92,7 +92,6 @@ __all__ = (
     "FleetConfig",
     "GameServerCluster",
     "GameServerClusterConnectionInfo",
-    "GameServerClustersServiceClient",
     "GameServerConfig",
     "GameServerConfigOverride",
     "GameServerConfigsServiceClient",
