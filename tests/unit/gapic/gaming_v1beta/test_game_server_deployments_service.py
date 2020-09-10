@@ -2828,6 +2828,33 @@ def test_game_server_deployments_service_grpc_lro_async_client():
     assert transport.operations_client is transport.operations_client
 
 
+def test_game_server_deployment_path():
+    project = "squid"
+    location = "clam"
+    deployment = "whelk"
+
+    expected = "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
+        project=project, location=location, deployment=deployment,
+    )
+    actual = GameServerDeploymentsServiceClient.game_server_deployment_path(
+        project, location, deployment
+    )
+    assert expected == actual
+
+
+def test_parse_game_server_deployment_path():
+    expected = {
+        "project": "octopus",
+        "location": "oyster",
+        "deployment": "nudibranch",
+    }
+    path = GameServerDeploymentsServiceClient.game_server_deployment_path(**expected)
+
+    # Check that the path construction is reversible.
+    actual = GameServerDeploymentsServiceClient.parse_game_server_deployment_path(path)
+    assert expected == actual
+
+
 def test_game_server_deployment_rollout_path():
     project = "squid"
     location = "clam"
@@ -2856,31 +2883,4 @@ def test_parse_game_server_deployment_rollout_path():
     actual = GameServerDeploymentsServiceClient.parse_game_server_deployment_rollout_path(
         path
     )
-    assert expected == actual
-
-
-def test_game_server_deployment_path():
-    project = "squid"
-    location = "clam"
-    deployment = "whelk"
-
-    expected = "projects/{project}/locations/{location}/gameServerDeployments/{deployment}".format(
-        project=project, location=location, deployment=deployment,
-    )
-    actual = GameServerDeploymentsServiceClient.game_server_deployment_path(
-        project, location, deployment
-    )
-    assert expected == actual
-
-
-def test_parse_game_server_deployment_path():
-    expected = {
-        "project": "octopus",
-        "location": "oyster",
-        "deployment": "nudibranch",
-    }
-    path = GameServerDeploymentsServiceClient.game_server_deployment_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = GameServerDeploymentsServiceClient.parse_game_server_deployment_path(path)
     assert expected == actual

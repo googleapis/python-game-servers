@@ -3,30 +3,30 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/python-game-servers",
-        "sha": "ee9347879e35c0b95a90391ca61692b54fb8e0cf"
+        "remote": "https://github.com/googleapis/python-game-servers.git",
+        "sha": "ae50e3323d3e048d7495c870c288768fc7f10633"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "80442a7b7dbc10e27138e65bfc2cb28935d28f61",
-        "internalRef": "324717428"
+        "sha": "fb84629a56703d04f0b5304c4a9ade7313ebd92d",
+        "internalRef": "325339219"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "4f8f5dc24af79694887385015294e4dbb214c352"
+        "sha": "5f2f711c91199ba2f609d3f06a2fe22aee4e5be3"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "4f8f5dc24af79694887385015294e4dbb214c352"
+        "sha": "5f2f711c91199ba2f609d3f06a2fe22aee4e5be3"
       }
     }
   ],
