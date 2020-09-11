@@ -59,9 +59,9 @@ def clean_up_old_deployments():
             now_date = datetime.datetime.utcfromtimestamp(int(time.time()))
             difftime = now_date - test_date
 
-            # *NOTE* Restrict to deployments used in the tests older than 7 days
+            # *NOTE* Restrict to deployments used in the tests older than 2 days
             #        to prevent thrashing in the case of async tests
-            if (difftime.days > 7):
+            if (difftime.days > 2):
                 print(f"Cleaning up old deployment {deployment_id} and its configs, difftime: {difftime}")
                 clean_up_deployment_and_configs(deployment_id)
 

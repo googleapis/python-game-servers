@@ -52,9 +52,9 @@ def clean_up_old_realms():
             now_date = datetime.datetime.utcfromtimestamp(int(time.time()))
             difftime = now_date - test_date
 
-            # *NOTE* Restrict to realms used in the tests older than 7 days
+            # *NOTE* Restrict to realms used in the tests older than 2 days
             #        to prevent thrashing in the case of async tests
-            if (difftime.days > 7):
+            if (difftime.days > 2):
                 print(f"Cleaning up old realm {realm_id} and its clusters, difftime: {difftime}")
                 clean_up_realm_and_clusters(realm_id)
 
