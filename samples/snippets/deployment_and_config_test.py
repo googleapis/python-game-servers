@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import datetime
+import time
 import uuid
 
 from google.api_core import exceptions
@@ -36,12 +38,37 @@ import update_rollout_remove_override
 
 PROJECT_ID = "python-docs-samples-tests"
 CONFIG_ID = "my-game-server-config"
-REALM_LOCATION = "us-central1"
+REALM_LOCATION = "global"
+
+# The format of realm ID. This is used in the unit tests and cleanup below.
+realm_id_format = 'test-realm-{}-{}'
+
+# The format of deployment ID. This is used in the unit tests and cleanup below.
+deployment_id_format = 'test-deployment-{}-{}'
+
+
+@pytest.fixture(scope="session", autouse=True)
+def clean_up_old_deployments():
+    all_deployments = list_deployments.list_deployments(PROJECT_ID)
+    for deployment in all_deployments:
+        deployment_name = deployment.name
+        deployment_id = deployment_name[deployment_name.rfind('/') + 1: len(deployment_name)]
+        if deployment_id.find('test-deployment-') == 0:
+            time_str = deployment_id[deployment_id.rfind('-') + 1: len(deployment_id)]
+            test_date = datetime.datetime.utcfromtimestamp(int(time_str))
+            now_date = datetime.datetime.utcfromtimestamp(int(time.time()))
+            difftime = now_date - test_date
+
+            # *NOTE* Restrict to deployments used in the tests older than 7 days
+            #        to prevent thrashing in the case of async tests
+            if (difftime.days > 7):
+                print(f"Cleaning up old deployment {deployment_id} and its configs, difftime: {difftime}")
+                clean_up_deployment_and_configs(deployment_id)
 
 
 @pytest.fixture(scope="function")
 def test_deployment():
-    deployment_id = "deployment-{}".format(uuid.uuid4())
+    deployment_id = deployment_id_format.format(uuid.uuid4().hex, int(time.time()))
 
     print(f"Creating deployment {deployment_id} in project {PROJECT_ID}")
     create_deployment.create_deployment(PROJECT_ID, deployment_id)
@@ -63,7 +90,7 @@ def clean_up_deployment(deployment_id):
 
 @pytest.fixture(scope="function")
 def test_deployment_with_config():
-    deployment_id = "deployment-{}".format(uuid.uuid4())
+    deployment_id = deployment_id_format.format(uuid.uuid4().hex, int(time.time()))
 
     print(f"Creating deployment {deployment_id} in project {PROJECT_ID}")
     create_deployment.create_deployment(PROJECT_ID, deployment_id)
@@ -112,7 +139,7 @@ def clean_up_deployment_and_configs(deployment_id):
 
 @pytest.fixture(scope="function")
 def test_realm():
-    realm_id = "realm-{}".format(uuid.uuid4())
+    realm_id = realm_id_format.format(uuid.uuid4().hex, int(time.time()))
 
     print(f"Creating realm {realm_id} in location {REALM_LOCATION} in project {PROJECT_ID}")
     create_realm.create_realm(PROJECT_ID, REALM_LOCATION, realm_id)
