@@ -244,10 +244,10 @@ class GameServerConfig(proto.Message):
 
     labels = proto.MapField(proto.STRING, proto.STRING, number=4)
 
-    fleet_configs = proto.RepeatedField(proto.MESSAGE, number=5, message=FleetConfig,)
+    fleet_configs = proto.RepeatedField(proto.MESSAGE, number=5, message="FleetConfig",)
 
     scaling_configs = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=ScalingConfig,
+        proto.MESSAGE, number=6, message="ScalingConfig",
     )
 
     description = proto.Field(proto.STRING, number=7)
