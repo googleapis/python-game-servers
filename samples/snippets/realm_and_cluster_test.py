@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import datetime
+import time
 import uuid
 
 from google.api_core import exceptions
@@ -29,14 +31,37 @@ import update_cluster
 import update_realm
 
 PROJECT_ID = "python-docs-samples-tests"
-REALM_LOCATION = "us-central1"
+REALM_LOCATION = "global"
 CLUSTER_ID = "my-cluster"
 GKE_CLUSTER_NAME = "projects/gcgs-client-lib-samples/locations/us-central1/clusters/gke-shared-default"
 
 
+# The format of realm ID. This is used in the unit tests and cleanup below.
+realm_id_format = 'test-realm-{}-{}'
+
+
+@pytest.fixture(scope="session", autouse=True)
+def clean_up_old_realms():
+    all_realms = list_realms.list_realms(PROJECT_ID, REALM_LOCATION)
+    for realm in all_realms:
+        realm_name = realm.name
+        realm_id = realm_name[realm_name.rfind('/') + 1: len(realm_name)]
+        if realm_id.find('test-realm-') == 0:
+            time_str = realm_id[realm_id.rfind('-') + 1: len(realm_id)]
+            test_date = datetime.datetime.utcfromtimestamp(int(time_str))
+            now_date = datetime.datetime.utcfromtimestamp(int(time.time()))
+            difftime = now_date - test_date
+
+            # *NOTE* Restrict to realms used in the tests older than 2 days
+            #        to prevent thrashing in the case of async tests
+            if (difftime.days > 2):
+                print(f"Cleaning up old realm {realm_id} and its clusters, difftime: {difftime}")
+                clean_up_realm_and_clusters(realm_id)
+
+
 @pytest.fixture(scope="function")
 def test_realm():
-    realm_id = "realm-{}".format(uuid.uuid4())
+    realm_id = realm_id_format.format(uuid.uuid4().hex, int(time.time()))
 
     print(f"Creating realm {realm_id} in location {REALM_LOCATION} in project {PROJECT_ID}")
     create_realm.create_realm(PROJECT_ID, REALM_LOCATION, realm_id)
@@ -58,7 +83,7 @@ def clean_up_realm(realm_id):
 
 @pytest.fixture(scope="function")
 def test_realm_with_cluster():
-    realm_id = "realm-{}".format(uuid.uuid4())
+    realm_id = realm_id_format.format(uuid.uuid4().hex, int(time.time()))
 
     print(f"Creating realm {realm_id} in location {REALM_LOCATION} in project {PROJECT_ID}")
     create_realm.create_realm(PROJECT_ID, REALM_LOCATION, realm_id)
