@@ -248,7 +248,7 @@ class TargetDetails(proto.Message):
 
             name = proto.Field(proto.STRING, number=1)
 
-            spec_source = proto.Field(proto.MESSAGE, number=2, message=SpecSource,)
+            spec_source = proto.Field(proto.MESSAGE, number=2, message="SpecSource",)
 
         class TargetFleetAutoscaler(proto.Message):
             r"""Target Agones autoscaler policy reference.
@@ -263,7 +263,7 @@ class TargetDetails(proto.Message):
 
             name = proto.Field(proto.STRING, number=1)
 
-            spec_source = proto.Field(proto.MESSAGE, number=2, message=SpecSource,)
+            spec_source = proto.Field(proto.MESSAGE, number=2, message="SpecSource",)
 
         fleet = proto.Field(
             proto.MESSAGE,
@@ -294,7 +294,7 @@ class TargetState(proto.Message):
             Details about Agones fleets.
     """
 
-    details = proto.RepeatedField(proto.MESSAGE, number=1, message=TargetDetails,)
+    details = proto.RepeatedField(proto.MESSAGE, number=1, message="TargetDetails",)
 
 
 class DeployedFleetDetails(proto.Message):
@@ -360,7 +360,7 @@ class DeployedFleetDetails(proto.Message):
 
         fleet_spec = proto.Field(proto.STRING, number=2)
 
-        spec_source = proto.Field(proto.MESSAGE, number=3, message=SpecSource,)
+        spec_source = proto.Field(proto.MESSAGE, number=3, message="SpecSource",)
 
         status = proto.Field(
             proto.MESSAGE,
@@ -384,7 +384,7 @@ class DeployedFleetDetails(proto.Message):
 
         autoscaler = proto.Field(proto.STRING, number=1)
 
-        spec_source = proto.Field(proto.MESSAGE, number=4, message=SpecSource,)
+        spec_source = proto.Field(proto.MESSAGE, number=4, message="SpecSource",)
 
         fleet_autoscaler_spec = proto.Field(proto.STRING, number=3)
 

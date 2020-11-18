@@ -378,7 +378,7 @@ class GameServerDeploymentRollout(proto.Message):
     default_game_server_config = proto.Field(proto.STRING, number=4)
 
     game_server_config_overrides = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=GameServerConfigOverride,
+        proto.MESSAGE, number=5, message="GameServerConfigOverride",
     )
 
     etag = proto.Field(proto.STRING, number=6)
@@ -404,7 +404,9 @@ class PreviewGameServerDeploymentRolloutRequest(proto.Message):
             proposed rollout completes.
     """
 
-    rollout = proto.Field(proto.MESSAGE, number=1, message=GameServerDeploymentRollout,)
+    rollout = proto.Field(
+        proto.MESSAGE, number=1, message="GameServerDeploymentRollout",
+    )
 
     update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
 

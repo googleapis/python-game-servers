@@ -398,7 +398,7 @@ class GameServerCluster(proto.Message):
     labels = proto.MapField(proto.STRING, proto.STRING, number=4)
 
     connection_info = proto.Field(
-        proto.MESSAGE, number=5, message=GameServerClusterConnectionInfo,
+        proto.MESSAGE, number=5, message="GameServerClusterConnectionInfo",
     )
 
     etag = proto.Field(proto.STRING, number=6)
