@@ -97,6 +97,7 @@ __all__ = (
     "GameServerConfigOverride",
     "GameServerConfigsServiceClient",
     "GameServerDeployment",
+    "GameServerDeploymentsServiceClient",
     "GameServerDeploymentRollout",
     "GetGameServerClusterRequest",
     "GetGameServerConfigRequest",
@@ -137,5 +138,4 @@ __all__ = (
     "UpdateGameServerDeploymentRequest",
     "UpdateGameServerDeploymentRolloutRequest",
     "UpdateRealmRequest",
-    "GameServerDeploymentsServiceClient",
 )
