@@ -30,7 +30,6 @@ _transport_registry = (
 _transport_registry["grpc"] = GameServerConfigsServiceGrpcTransport
 _transport_registry["grpc_asyncio"] = GameServerConfigsServiceGrpcAsyncIOTransport
 
-
 __all__ = (
     "GameServerConfigsServiceTransport",
     "GameServerConfigsServiceGrpcTransport",

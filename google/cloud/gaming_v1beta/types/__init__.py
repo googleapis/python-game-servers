@@ -82,7 +82,6 @@ from .realms import (
     Realm,
 )
 
-
 __all__ = (
     "OperationMetadata",
     "OperationStatus",
