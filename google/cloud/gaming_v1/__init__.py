@@ -95,10 +95,10 @@ __all__ = (
     "GameServerClustersServiceClient",
     "GameServerConfig",
     "GameServerConfigOverride",
-    "GameServerConfigsServiceClient"
+    "GameServerConfigsServiceClient",
     "GameServerDeployment",
-    "GameServerDeploymentsServiceClient",
     "GameServerDeploymentRollout",
+    "GameServerDeploymentsServiceClient",
     "GetGameServerClusterRequest",
     "GetGameServerConfigRequest",
     "GetGameServerDeploymentRequest",
@@ -128,7 +128,6 @@ __all__ = (
     "PreviewUpdateGameServerClusterResponse",
     "Realm",
     "RealmSelector",
-    "RealmsServiceClient",
     "ScalingConfig",
     "Schedule",
     "SpecSource",
@@ -138,4 +137,5 @@ __all__ = (
     "UpdateGameServerDeploymentRequest",
     "UpdateGameServerDeploymentRolloutRequest",
     "UpdateRealmRequest",
+    "RealmsServiceClient",
 )
