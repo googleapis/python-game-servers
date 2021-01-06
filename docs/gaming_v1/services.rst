@@ -1,15 +1,9 @@
 Services for Google Cloud Gaming v1 API
 =======================================
+.. toctree::
+    :maxdepth: 2
 
-.. automodule:: google.cloud.gaming_v1.services.game_server_clusters_service
-    :members:
-    :inherited-members:
-.. automodule:: google.cloud.gaming_v1.services.game_server_configs_service
-    :members:
-    :inherited-members:
-.. automodule:: google.cloud.gaming_v1.services.game_server_deployments_service
-    :members:
-    :inherited-members:
-.. automodule:: google.cloud.gaming_v1.services.realms_service
-    :members:
-    :inherited-members:
+    game_server_clusters_service
+    game_server_configs_service
+    game_server_deployments_service
+    realms_service

@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "69697504d9eba1d064820c3085b4750767be6d08",
-        "internalRef": "348952930"
+        "sha": "520682435235d9c503983a360a2090025aa47cd1",
+        "internalRef": "350246057"
       }
     },
     {
@@ -51,6 +51,7 @@
     }
   ],
   "generatedFiles": [
+    ".coveragerc",
     ".flake8",
     ".github/CONTRIBUTING.md",
     ".github/ISSUE_TEMPLATE/bug_report.md",
@@ -103,8 +104,16 @@
     "docs/_static/custom.css",
     "docs/_templates/layout.html",
     "docs/conf.py",
+    "docs/gaming_v1/game_server_clusters_service.rst",
+    "docs/gaming_v1/game_server_configs_service.rst",
+    "docs/gaming_v1/game_server_deployments_service.rst",
+    "docs/gaming_v1/realms_service.rst",
     "docs/gaming_v1/services.rst",
     "docs/gaming_v1/types.rst",
+    "docs/gaming_v1beta/game_server_clusters_service.rst",
+    "docs/gaming_v1beta/game_server_configs_service.rst",
+    "docs/gaming_v1beta/game_server_deployments_service.rst",
+    "docs/gaming_v1beta/realms_service.rst",
     "docs/gaming_v1beta/services.rst",
     "docs/gaming_v1beta/types.rst",
     "docs/multiprocessing.rst",

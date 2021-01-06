@@ -121,6 +121,22 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     )
 
     @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            GameServerClustersServiceClient: The constructed client.
+        """
+        credentials = service_account.Credentials.from_service_account_info(info)
+        kwargs["credentials"] = credentials
+        return cls(*args, **kwargs)
+
+    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
         file.
@@ -132,7 +148,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            {@api.name}: The constructed client.
+            GameServerClustersServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -242,10 +258,10 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.GameServerClustersServiceTransport]): The
+            transport (Union[str, GameServerClustersServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (client_options_lib.ClientOptions): Custom options for the
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -356,13 +372,14 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         location.
 
         Args:
-            request (:class:`~.game_server_clusters.ListGameServerClustersRequest`):
+            request (google.cloud.gaming_v1.types.ListGameServerClustersRequest):
                 The request object. Request message for
                 GameServerClustersService.ListGameServerClusters.
-            parent (:class:`str`):
+            parent (str):
                 Required. The parent resource name.
                 Uses the form:
                 "projects/{project}/locations/{location}/realms/{realm}".
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -374,7 +391,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListGameServerClustersPager:
+            google.cloud.gaming_v1.services.game_server_clusters_service.pagers.ListGameServerClustersPager:
                 Response message for
                 GameServerClustersService.ListGameServerClusters.
                 Iterating over this object will yield
@@ -441,14 +458,15 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         r"""Gets details of a single game server cluster.
 
         Args:
-            request (:class:`~.game_server_clusters.GetGameServerClusterRequest`):
+            request (google.cloud.gaming_v1.types.GetGameServerClusterRequest):
                 The request object. Request message for
                 GameServerClustersService.GetGameServerCluster.
-            name (:class:`str`):
+            name (str):
                 Required. The name of the game server cluster to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -460,7 +478,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_clusters.GameServerCluster:
+            google.cloud.gaming_v1.types.GameServerCluster:
                 A game server cluster resource.
         """
         # Create or coerce a protobuf request object.
@@ -517,24 +535,27 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         and location.
 
         Args:
-            request (:class:`~.game_server_clusters.CreateGameServerClusterRequest`):
+            request (google.cloud.gaming_v1.types.CreateGameServerClusterRequest):
                 The request object. Request message for
                 GameServerClustersService.CreateGameServerCluster.
-            parent (:class:`str`):
+            parent (str):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}/realms/{realm-id}``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            game_server_cluster (:class:`~.game_server_clusters.GameServerCluster`):
+            game_server_cluster (google.cloud.gaming_v1.types.GameServerCluster):
                 Required. The game server cluster
                 resource to be created.
+
                 This corresponds to the ``game_server_cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            game_server_cluster_id (:class:`str`):
+            game_server_cluster_id (str):
                 Required. The ID of the game server
                 cluster resource to be created.
+
                 This corresponds to the ``game_server_cluster_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -546,12 +567,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_clusters.GameServerCluster``: A
-                game server cluster resource.
+                :class:`google.cloud.gaming_v1.types.GameServerCluster`
+                A game server cluster resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -621,7 +642,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         given project and location.
 
         Args:
-            request (:class:`~.game_server_clusters.PreviewCreateGameServerClusterRequest`):
+            request (google.cloud.gaming_v1.types.PreviewCreateGameServerClusterRequest):
                 The request object. Request message for
                 GameServerClustersService.PreviewCreateGameServerCluster.
 
@@ -632,7 +653,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_clusters.PreviewCreateGameServerClusterResponse:
+            google.cloud.gaming_v1.types.PreviewCreateGameServerClusterResponse:
                 Response message for
                 GameServerClustersService.PreviewCreateGameServerCluster.
 
@@ -680,13 +701,14 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         r"""Deletes a single game server cluster.
 
         Args:
-            request (:class:`~.game_server_clusters.DeleteGameServerClusterRequest`):
+            request (google.cloud.gaming_v1.types.DeleteGameServerClusterRequest):
                 The request object. Request message for
                 GameServerClustersService.DeleteGameServerCluster.
-            name (:class:`str`):
+            name (str):
                 Required. The name of the game server cluster to delete.
                 Uses the form:
                 ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -698,24 +720,22 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -778,7 +798,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         r"""Previews deletion of a single game server cluster.
 
         Args:
-            request (:class:`~.game_server_clusters.PreviewDeleteGameServerClusterRequest`):
+            request (google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterRequest):
                 The request object. Request message for
                 GameServerClustersService.PreviewDeleteGameServerCluster.
 
@@ -789,7 +809,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_clusters.PreviewDeleteGameServerClusterResponse:
+            google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterResponse:
                 Response message for
                 GameServerClustersService.PreviewDeleteGameServerCluster.
 
@@ -838,22 +858,24 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         r"""Patches a single game server cluster.
 
         Args:
-            request (:class:`~.game_server_clusters.UpdateGameServerClusterRequest`):
+            request (google.cloud.gaming_v1.types.UpdateGameServerClusterRequest):
                 The request object. Request message for
                 GameServerClustersService.UpdateGameServerCluster.
-            game_server_cluster (:class:`~.game_server_clusters.GameServerCluster`):
+            game_server_cluster (google.cloud.gaming_v1.types.GameServerCluster):
                 Required. The game server cluster to be updated. Only
                 fields specified in update_mask are updated.
+
                 This corresponds to the ``game_server_cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`~.field_mask.FieldMask`):
+            update_mask (google.protobuf.field_mask_pb2.FieldMask):
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
 
                 https: //developers.google.com/protocol-buffers //
                 /docs/reference/google.protobuf#fieldmask
+
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -865,12 +887,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_clusters.GameServerCluster``: A
-                game server cluster resource.
+                :class:`google.cloud.gaming_v1.types.GameServerCluster`
+                A game server cluster resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -937,7 +959,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         r"""Previews updating a GameServerCluster.
 
         Args:
-            request (:class:`~.game_server_clusters.PreviewUpdateGameServerClusterRequest`):
+            request (google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterRequest):
                 The request object. Request message for
                 GameServerClustersService.UpdateGameServerCluster.
 
@@ -948,7 +970,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_clusters.PreviewUpdateGameServerClusterResponse:
+            google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterResponse:
                 Response message for
                 GameServerClustersService.PreviewUpdateGameServerCluster
 
