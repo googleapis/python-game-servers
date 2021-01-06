@@ -92,6 +92,7 @@ __all__ = (
     "FleetConfig",
     "GameServerCluster",
     "GameServerClusterConnectionInfo",
+    "GameServerClustersServiceClient",
     "GameServerConfig",
     "GameServerConfigOverride",
     "GameServerConfigsServiceClient",
@@ -127,7 +128,6 @@ __all__ = (
     "PreviewUpdateGameServerClusterResponse",
     "Realm",
     "RealmSelector",
-    "RealmsServiceClient",
     "ScalingConfig",
     "Schedule",
     "SpecSource",
@@ -137,5 +137,5 @@ __all__ = (
     "UpdateGameServerDeploymentRequest",
     "UpdateGameServerDeploymentRolloutRequest",
     "UpdateRealmRequest",
-    "GameServerClustersServiceClient",
+    "RealmsServiceClient",
 )
