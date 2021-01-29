@@ -36,7 +36,7 @@ import update_rollout_override
 import update_rollout_remove_default
 import update_rollout_remove_override
 
-PROJECT_ID = "python-docs-samples-tests"
+PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "python-docs-samples-tests")
 CONFIG_ID = "my-game-server-config"
 REALM_LOCATION = "global"
 
