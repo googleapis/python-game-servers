@@ -100,15 +100,20 @@ def test__get_default_mtls_endpoint():
     )
 
 
-def test_game_server_deployments_service_client_from_service_account_info():
+@pytest.mark.parametrize(
+    "client_class",
+    [GameServerDeploymentsServiceClient, GameServerDeploymentsServiceAsyncClient,],
+)
+def test_game_server_deployments_service_client_from_service_account_info(client_class):
     creds = credentials.AnonymousCredentials()
     with mock.patch.object(
         service_account.Credentials, "from_service_account_info"
     ) as factory:
         factory.return_value = creds
         info = {"valid": True}
-        client = GameServerDeploymentsServiceClient.from_service_account_info(info)
+        client = client_class.from_service_account_info(info)
         assert client.transport._credentials == creds
+        assert isinstance(client, client_class)
 
         assert client.transport._host == "gameservices.googleapis.com:443"
 
@@ -125,9 +130,11 @@ def test_game_server_deployments_service_client_from_service_account_file(client
         factory.return_value = creds
         client = client_class.from_service_account_file("dummy/file/path.json")
         assert client.transport._credentials == creds
+        assert isinstance(client, client_class)
 
         client = client_class.from_service_account_json("dummy/file/path.json")
         assert client.transport._credentials == creds
+        assert isinstance(client, client_class)
 
         assert client.transport._host == "gameservices.googleapis.com:443"
 
@@ -519,6 +526,24 @@ def test_list_game_server_deployments(
 
 def test_list_game_server_deployments_from_dict():
     test_list_game_server_deployments(request_type=dict)
+
+
+def test_list_game_server_deployments_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.list_game_server_deployments), "__call__"
+    ) as call:
+        client.list_game_server_deployments()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == game_server_deployments.ListGameServerDeploymentsRequest()
 
 
 @pytest.mark.asyncio
@@ -944,6 +969,24 @@ def test_get_game_server_deployment_from_dict():
     test_get_game_server_deployment(request_type=dict)
 
 
+def test_get_game_server_deployment_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.get_game_server_deployment), "__call__"
+    ) as call:
+        client.get_game_server_deployment()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == game_server_deployments.GetGameServerDeploymentRequest()
+
+
 @pytest.mark.asyncio
 async def test_get_game_server_deployment_async(
     transport: str = "grpc_asyncio",
@@ -1162,6 +1205,24 @@ def test_create_game_server_deployment(
 
 def test_create_game_server_deployment_from_dict():
     test_create_game_server_deployment(request_type=dict)
+
+
+def test_create_game_server_deployment_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.create_game_server_deployment), "__call__"
+    ) as call:
+        client.create_game_server_deployment()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == game_server_deployments.CreateGameServerDeploymentRequest()
 
 
 @pytest.mark.asyncio
@@ -1406,6 +1467,24 @@ def test_delete_game_server_deployment_from_dict():
     test_delete_game_server_deployment(request_type=dict)
 
 
+def test_delete_game_server_deployment_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.delete_game_server_deployment), "__call__"
+    ) as call:
+        client.delete_game_server_deployment()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == game_server_deployments.DeleteGameServerDeploymentRequest()
+
+
 @pytest.mark.asyncio
 async def test_delete_game_server_deployment_async(
     transport: str = "grpc_asyncio",
@@ -1618,6 +1697,24 @@ def test_update_game_server_deployment(
 
 def test_update_game_server_deployment_from_dict():
     test_update_game_server_deployment(request_type=dict)
+
+
+def test_update_game_server_deployment_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.update_game_server_deployment), "__call__"
+    ) as call:
+        client.update_game_server_deployment()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == game_server_deployments.UpdateGameServerDeploymentRequest()
 
 
 @pytest.mark.asyncio
@@ -1881,6 +1978,26 @@ def test_get_game_server_deployment_rollout_from_dict():
     test_get_game_server_deployment_rollout(request_type=dict)
 
 
+def test_get_game_server_deployment_rollout_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.get_game_server_deployment_rollout), "__call__"
+    ) as call:
+        client.get_game_server_deployment_rollout()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert (
+            args[0] == game_server_deployments.GetGameServerDeploymentRolloutRequest()
+        )
+
+
 @pytest.mark.asyncio
 async def test_get_game_server_deployment_rollout_async(
     transport: str = "grpc_asyncio",
@@ -2108,6 +2225,27 @@ def test_update_game_server_deployment_rollout(
 
 def test_update_game_server_deployment_rollout_from_dict():
     test_update_game_server_deployment_rollout(request_type=dict)
+
+
+def test_update_game_server_deployment_rollout_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.update_game_server_deployment_rollout), "__call__"
+    ) as call:
+        client.update_game_server_deployment_rollout()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert (
+            args[0]
+            == game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
+        )
 
 
 @pytest.mark.asyncio
@@ -2367,6 +2505,27 @@ def test_preview_game_server_deployment_rollout_from_dict():
     test_preview_game_server_deployment_rollout(request_type=dict)
 
 
+def test_preview_game_server_deployment_rollout_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.preview_game_server_deployment_rollout), "__call__"
+    ) as call:
+        client.preview_game_server_deployment_rollout()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert (
+            args[0]
+            == game_server_deployments.PreviewGameServerDeploymentRolloutRequest()
+        )
+
+
 @pytest.mark.asyncio
 async def test_preview_game_server_deployment_rollout_async(
     transport: str = "grpc_asyncio",
@@ -2520,6 +2679,24 @@ def test_fetch_deployment_state(
 
 def test_fetch_deployment_state_from_dict():
     test_fetch_deployment_state(request_type=dict)
+
+
+def test_fetch_deployment_state_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = GameServerDeploymentsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.fetch_deployment_state), "__call__"
+    ) as call:
+        client.fetch_deployment_state()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == game_server_deployments.FetchDeploymentStateRequest()
 
 
 @pytest.mark.asyncio

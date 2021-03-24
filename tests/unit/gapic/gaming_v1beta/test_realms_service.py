@@ -91,15 +91,19 @@ def test__get_default_mtls_endpoint():
     )
 
 
-def test_realms_service_client_from_service_account_info():
+@pytest.mark.parametrize(
+    "client_class", [RealmsServiceClient, RealmsServiceAsyncClient,]
+)
+def test_realms_service_client_from_service_account_info(client_class):
     creds = credentials.AnonymousCredentials()
     with mock.patch.object(
         service_account.Credentials, "from_service_account_info"
     ) as factory:
         factory.return_value = creds
         info = {"valid": True}
-        client = RealmsServiceClient.from_service_account_info(info)
+        client = client_class.from_service_account_info(info)
         assert client.transport._credentials == creds
+        assert isinstance(client, client_class)
 
         assert client.transport._host == "gameservices.googleapis.com:443"
 
@@ -115,9 +119,11 @@ def test_realms_service_client_from_service_account_file(client_class):
         factory.return_value = creds
         client = client_class.from_service_account_file("dummy/file/path.json")
         assert client.transport._credentials == creds
+        assert isinstance(client, client_class)
 
         client = client_class.from_service_account_json("dummy/file/path.json")
         assert client.transport._credentials == creds
+        assert isinstance(client, client_class)
 
         assert client.transport._host == "gameservices.googleapis.com:443"
 
@@ -480,6 +486,22 @@ def test_list_realms_from_dict():
     test_list_realms(request_type=dict)
 
 
+def test_list_realms_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = RealmsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.list_realms), "__call__") as call:
+        client.list_realms()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == realms.ListRealmsRequest()
+
+
 @pytest.mark.asyncio
 async def test_list_realms_async(
     transport: str = "grpc_asyncio", request_type=realms.ListRealmsRequest
@@ -791,6 +813,22 @@ def test_get_realm_from_dict():
     test_get_realm(request_type=dict)
 
 
+def test_get_realm_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = RealmsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.get_realm), "__call__") as call:
+        client.get_realm()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == realms.GetRealmRequest()
+
+
 @pytest.mark.asyncio
 async def test_get_realm_async(
     transport: str = "grpc_asyncio", request_type=realms.GetRealmRequest
@@ -982,6 +1020,22 @@ def test_create_realm(transport: str = "grpc", request_type=realms.CreateRealmRe
 
 def test_create_realm_from_dict():
     test_create_realm(request_type=dict)
+
+
+def test_create_realm_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = RealmsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.create_realm), "__call__") as call:
+        client.create_realm()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == realms.CreateRealmRequest()
 
 
 @pytest.mark.asyncio
@@ -1190,6 +1244,22 @@ def test_delete_realm_from_dict():
     test_delete_realm(request_type=dict)
 
 
+def test_delete_realm_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = RealmsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.delete_realm), "__call__") as call:
+        client.delete_realm()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == realms.DeleteRealmRequest()
+
+
 @pytest.mark.asyncio
 async def test_delete_realm_async(
     transport: str = "grpc_asyncio", request_type=realms.DeleteRealmRequest
@@ -1372,6 +1442,22 @@ def test_update_realm(transport: str = "grpc", request_type=realms.UpdateRealmRe
 
 def test_update_realm_from_dict():
     test_update_realm(request_type=dict)
+
+
+def test_update_realm_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = RealmsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.update_realm), "__call__") as call:
+        client.update_realm()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == realms.UpdateRealmRequest()
 
 
 @pytest.mark.asyncio
@@ -1577,6 +1663,24 @@ def test_preview_realm_update(
 
 def test_preview_realm_update_from_dict():
     test_preview_realm_update(request_type=dict)
+
+
+def test_preview_realm_update_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = RealmsServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.preview_realm_update), "__call__"
+    ) as call:
+        client.preview_realm_update()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == realms.PreviewRealmUpdateRequest()
 
 
 @pytest.mark.asyncio
