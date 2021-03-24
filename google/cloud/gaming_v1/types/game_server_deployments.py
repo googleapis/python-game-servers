@@ -89,7 +89,7 @@ class ListGameServerDeploymentsResponse(proto.Message):
     GameServerDeploymentsService.ListGameServerDeployments.
 
     Attributes:
-        game_server_deployments (Sequence[google.cloud.gaming_v1.types.GameServerDeployment]):
+        game_server_deployments (Sequence[~.gcg_game_server_deployments.GameServerDeployment]):
             The list of game server deployments.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -153,7 +153,7 @@ class CreateGameServerDeploymentRequest(proto.Message):
         deployment_id (str):
             Required. The ID of the game server
             delpoyment resource to be created.
-        game_server_deployment (google.cloud.gaming_v1.types.GameServerDeployment):
+        game_server_deployment (~.gcg_game_server_deployments.GameServerDeployment):
             Required. The game server delpoyment resource
             to be created.
     """
@@ -188,10 +188,10 @@ class UpdateGameServerDeploymentRequest(proto.Message):
     allows updates for labels.
 
     Attributes:
-        game_server_deployment (google.cloud.gaming_v1.types.GameServerDeployment):
+        game_server_deployment (~.gcg_game_server_deployments.GameServerDeployment):
             Required. The game server delpoyment to be updated. Only
             fields specified in update_mask are updated.
-        update_mask (google.protobuf.field_mask_pb2.FieldMask):
+        update_mask (~.field_mask.FieldMask):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
@@ -212,10 +212,10 @@ class UpdateGameServerDeploymentRolloutRequest(proto.Message):
     GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
 
     Attributes:
-        rollout (google.cloud.gaming_v1.types.GameServerDeploymentRollout):
+        rollout (~.gcg_game_server_deployments.GameServerDeploymentRollout):
             Required. The game server delpoyment rollout to be updated.
             Only fields specified in update_mask are updated.
-        update_mask (google.protobuf.field_mask_pb2.FieldMask):
+        update_mask (~.field_mask.FieldMask):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
@@ -251,7 +251,7 @@ class FetchDeploymentStateResponse(proto.Message):
     GameServerDeploymentsService.FetchDeploymentState.
 
     Attributes:
-        cluster_state (Sequence[google.cloud.gaming_v1.types.FetchDeploymentStateResponse.DeployedClusterState]):
+        cluster_state (Sequence[~.gcg_game_server_deployments.FetchDeploymentStateResponse.DeployedClusterState]):
             The state of the game server deployment in
             each game server cluster.
         unavailable (Sequence[str]):
@@ -265,7 +265,7 @@ class FetchDeploymentStateResponse(proto.Message):
         Attributes:
             cluster (str):
                 The name of the cluster.
-            fleet_details (Sequence[google.cloud.gaming_v1.types.DeployedFleetDetails]):
+            fleet_details (Sequence[~.common.DeployedFleetDetails]):
                 The details about the Agones fleets and
                 autoscalers created in the game server cluster.
         """
@@ -294,11 +294,11 @@ class GameServerDeployment(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
             For example,
             ``projects/my-project/locations/global/gameServerDeployments/my-deployment``.
-        create_time (google.protobuf.timestamp_pb2.Timestamp):
+        create_time (~.timestamp.Timestamp):
             Output only. The creation time.
-        update_time (google.protobuf.timestamp_pb2.Timestamp):
+        update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[google.cloud.gaming_v1.types.GameServerDeployment.LabelsEntry]):
+        labels (Sequence[~.gcg_game_server_deployments.GameServerDeployment.LabelsEntry]):
             The labels associated with this game server
             deployment. Each label is a key-value pair.
         etag (str):
@@ -325,7 +325,7 @@ class GameServerConfigOverride(proto.Message):
     r"""A game server config override.
 
     Attributes:
-        realms_selector (google.cloud.gaming_v1.types.RealmSelector):
+        realms_selector (~.common.RealmSelector):
             Selector for choosing applicable realms.
         config_version (str):
             The game server config for this override.
@@ -351,16 +351,16 @@ class GameServerDeploymentRollout(proto.Message):
             For example,
 
             ``projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout``.
-        create_time (google.protobuf.timestamp_pb2.Timestamp):
+        create_time (~.timestamp.Timestamp):
             Output only. The creation time.
-        update_time (google.protobuf.timestamp_pb2.Timestamp):
+        update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
         default_game_server_config (str):
             The default game server config is applied to all realms
             unless overridden in the rollout. For example,
 
             ``projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config``.
-        game_server_config_overrides (Sequence[google.cloud.gaming_v1.types.GameServerConfigOverride]):
+        game_server_config_overrides (Sequence[~.gcg_game_server_deployments.GameServerConfigOverride]):
             Contains the game server config rollout
             overrides. Overrides are processed in the order
             they are listed. Once a match is found for a
@@ -388,17 +388,17 @@ class PreviewGameServerDeploymentRolloutRequest(proto.Message):
     r"""Request message for PreviewGameServerDeploymentRollout.
 
     Attributes:
-        rollout (google.cloud.gaming_v1.types.GameServerDeploymentRollout):
+        rollout (~.gcg_game_server_deployments.GameServerDeploymentRollout):
             Required. The game server deployment rollout to be updated.
             Only fields specified in update_mask are updated.
-        update_mask (google.protobuf.field_mask_pb2.FieldMask):
+        update_mask (~.field_mask.FieldMask):
             Optional. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
 
             https: //developers.google.com/protocol-buffers //
             /docs/reference/google.protobuf#fieldmask
-        preview_time (google.protobuf.timestamp_pb2.Timestamp):
+        preview_time (~.timestamp.Timestamp):
             Optional. The target timestamp to compute the
             preview. Defaults to the immediately after the
             proposed rollout completes.
@@ -424,7 +424,7 @@ class PreviewGameServerDeploymentRolloutResponse(proto.Message):
             request.
         etag (str):
             ETag of the game server deployment.
-        target_state (google.cloud.gaming_v1.types.TargetState):
+        target_state (~.common.TargetState):
             The target state.
     """
 

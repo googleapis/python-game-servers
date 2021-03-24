@@ -80,7 +80,7 @@ class ListRealmsResponse(proto.Message):
     r"""Response message for RealmsService.ListRealms.
 
     Attributes:
-        realms (Sequence[google.cloud.gaming_v1.types.Realm]):
+        realms (Sequence[~.gcg_realms.Realm]):
             The list of realms.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -123,7 +123,7 @@ class CreateRealmRequest(proto.Message):
         realm_id (str):
             Required. The ID of the realm resource to be
             created.
-        realm (google.cloud.gaming_v1.types.Realm):
+        realm (~.gcg_realms.Realm):
             Required. The realm resource to be created.
     """
 
@@ -150,10 +150,10 @@ class UpdateRealmRequest(proto.Message):
     r"""Request message for RealmsService.UpdateRealm.
 
     Attributes:
-        realm (google.cloud.gaming_v1.types.Realm):
+        realm (~.gcg_realms.Realm):
             Required. The realm to be updated. Only fields specified in
             update_mask are updated.
-        update_mask (google.protobuf.field_mask_pb2.FieldMask):
+        update_mask (~.field_mask.FieldMask):
             Required. The update mask applies to the resource. For the
             ``FieldMask`` definition, see
 
@@ -170,16 +170,16 @@ class PreviewRealmUpdateRequest(proto.Message):
     r"""Request message for RealmsService.PreviewRealmUpdate.
 
     Attributes:
-        realm (google.cloud.gaming_v1.types.Realm):
+        realm (~.gcg_realms.Realm):
             Required. The realm to be updated. Only fields specified in
             update_mask are updated.
-        update_mask (google.protobuf.field_mask_pb2.FieldMask):
+        update_mask (~.field_mask.FieldMask):
             Required. The update mask applies to the resource. For the
             ``FieldMask`` definition, see
 
             https: //developers.google.com/protocol-buffers //
             /docs/reference/google.protobuf#fieldmask
-        preview_time (google.protobuf.timestamp_pb2.Timestamp):
+        preview_time (~.timestamp.Timestamp):
             Optional. The target timestamp to compute the
             preview.
     """
@@ -197,7 +197,7 @@ class PreviewRealmUpdateResponse(proto.Message):
     Attributes:
         etag (str):
             ETag of the realm.
-        target_state (google.cloud.gaming_v1.types.TargetState):
+        target_state (~.common.TargetState):
             The target state.
     """
 
@@ -215,11 +215,11 @@ class Realm(proto.Message):
             ``projects/{project}/locations/{location}/realms/{realm}``.
             For example,
             ``projects/my-project/locations/{location}/realms/my-realm``.
-        create_time (google.protobuf.timestamp_pb2.Timestamp):
+        create_time (~.timestamp.Timestamp):
             Output only. The creation time.
-        update_time (google.protobuf.timestamp_pb2.Timestamp):
+        update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[google.cloud.gaming_v1.types.Realm.LabelsEntry]):
+        labels (Sequence[~.gcg_realms.Realm.LabelsEntry]):
             The labels associated with this realm. Each
             label is a key-value pair.
         time_zone (str):

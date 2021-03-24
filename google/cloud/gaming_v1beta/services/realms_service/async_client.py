@@ -84,7 +84,6 @@ class RealmsServiceAsyncClient:
         RealmsServiceClient.parse_common_location_path
     )
 
-    from_service_account_info = RealmsServiceClient.from_service_account_info
     from_service_account_file = RealmsServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -161,13 +160,12 @@ class RealmsServiceAsyncClient:
         r"""Lists realms in a given project and location.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.ListRealmsRequest`):
+            request (:class:`~.realms.ListRealmsRequest`):
                 The request object. Request message for
                 RealmsService.ListRealms.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -179,7 +177,7 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.gaming_v1beta.services.realms_service.pagers.ListRealmsAsyncPager:
+            ~.pagers.ListRealmsAsyncPager:
                 Response message for
                 RealmsService.ListRealms.
                 Iterating over this object will yield
@@ -249,14 +247,13 @@ class RealmsServiceAsyncClient:
         r"""Gets details of a single realm.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.GetRealmRequest`):
+            request (:class:`~.realms.GetRealmRequest`):
                 The request object. Request message for
                 RealmsService.GetRealm.
             name (:class:`str`):
                 Required. The name of the realm to retrieve. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -268,7 +265,7 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.gaming_v1beta.types.Realm:
+            ~.realms.Realm:
                 A realm resource.
         """
         # Create or coerce a protobuf request object.
@@ -329,27 +326,24 @@ class RealmsServiceAsyncClient:
         r"""Creates a new realm in a given project and location.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.CreateRealmRequest`):
+            request (:class:`~.realms.CreateRealmRequest`):
                 The request object. Request message for
                 RealmsService.CreateRealm.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            realm (:class:`google.cloud.gaming_v1beta.types.Realm`):
+            realm (:class:`~.realms.Realm`):
                 Required. The realm resource to be
                 created.
-
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             realm_id (:class:`str`):
                 Required. The ID of the realm
                 resource to be created.
-
                 This corresponds to the ``realm_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -361,12 +355,11 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation_async.AsyncOperation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:`google.cloud.gaming_v1beta.types.Realm` A realm
-                resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -431,14 +424,13 @@ class RealmsServiceAsyncClient:
         r"""Deletes a single realm.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.DeleteRealmRequest`):
+            request (:class:`~.realms.DeleteRealmRequest`):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
             name (:class:`str`):
                 Required. The name of the realm to delete. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -450,22 +442,24 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation_async.AsyncOperation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
-                   empty messages in your APIs. A typical example is to
-                   use it as the request or the response type of an API
-                   method. For instance:
+                The result type for the operation will be
+                :class:``~.empty.Empty``: A generic empty message that
+                you can re-use to avoid defining duplicated empty
+                messages in your APIs. A typical example is to use it as
+                the request or the response type of an API method. For
+                instance:
 
-                      service Foo {
-                         rpc Bar(google.protobuf.Empty) returns
-                         (google.protobuf.Empty);
+                ::
 
-                      }
+                    service Foo {
+                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+                    }
 
-                   The JSON representation for Empty is empty JSON
-                   object {}.
+                The JSON representation for ``Empty`` is empty JSON
+                object ``{}``.
 
         """
         # Create or coerce a protobuf request object.
@@ -527,23 +521,21 @@ class RealmsServiceAsyncClient:
         r"""Patches a single realm.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.UpdateRealmRequest`):
+            request (:class:`~.realms.UpdateRealmRequest`):
                 The request object. Request message for
                 RealmsService.UpdateRealm.
-            realm (:class:`google.cloud.gaming_v1beta.types.Realm`):
+            realm (:class:`~.realms.Realm`):
                 Required. The realm to be updated. Only fields specified
                 in update_mask are updated.
-
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`google.protobuf.field_mask_pb2.FieldMask`):
+            update_mask (:class:`~.field_mask.FieldMask`):
                 Required. The update mask applies to the resource. For
                 the ``FieldMask`` definition, see
 
                 https: //developers.google.com/protocol-buffers //
                 /docs/reference/google.protobuf#fieldmask
-
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -555,12 +547,11 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation_async.AsyncOperation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:`google.cloud.gaming_v1beta.types.Realm` A realm
-                resource.
+                :class:``~.realms.Realm``: A realm resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -624,7 +615,7 @@ class RealmsServiceAsyncClient:
         r"""Previews patches to a single realm.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.PreviewRealmUpdateRequest`):
+            request (:class:`~.realms.PreviewRealmUpdateRequest`):
                 The request object. Request message for
                 RealmsService.PreviewRealmUpdate.
 
@@ -635,7 +626,7 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.gaming_v1beta.types.PreviewRealmUpdateResponse:
+            ~.realms.PreviewRealmUpdateResponse:
                 Response message for
                 RealmsService.PreviewRealmUpdate.
 

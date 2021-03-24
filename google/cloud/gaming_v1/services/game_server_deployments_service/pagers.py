@@ -24,7 +24,7 @@ class ListGameServerDeploymentsPager:
     """A pager for iterating through ``list_game_server_deployments`` requests.
 
     This class thinly wraps an initial
-    :class:`google.cloud.gaming_v1.types.ListGameServerDeploymentsResponse` object, and
+    :class:`~.game_server_deployments.ListGameServerDeploymentsResponse` object, and
     provides an ``__iter__`` method to iterate through its
     ``game_server_deployments`` field.
 
@@ -33,7 +33,7 @@ class ListGameServerDeploymentsPager:
     through the ``game_server_deployments`` field on the
     corresponding responses.
 
-    All the usual :class:`google.cloud.gaming_v1.types.ListGameServerDeploymentsResponse`
+    All the usual :class:`~.game_server_deployments.ListGameServerDeploymentsResponse`
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
@@ -53,9 +53,9 @@ class ListGameServerDeploymentsPager:
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (google.cloud.gaming_v1.types.ListGameServerDeploymentsRequest):
+            request (:class:`~.game_server_deployments.ListGameServerDeploymentsRequest`):
                 The initial request object.
-            response (google.cloud.gaming_v1.types.ListGameServerDeploymentsResponse):
+            response (:class:`~.game_server_deployments.ListGameServerDeploymentsResponse`):
                 The initial response object.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
@@ -92,7 +92,7 @@ class ListGameServerDeploymentsAsyncPager:
     """A pager for iterating through ``list_game_server_deployments`` requests.
 
     This class thinly wraps an initial
-    :class:`google.cloud.gaming_v1.types.ListGameServerDeploymentsResponse` object, and
+    :class:`~.game_server_deployments.ListGameServerDeploymentsResponse` object, and
     provides an ``__aiter__`` method to iterate through its
     ``game_server_deployments`` field.
 
@@ -101,7 +101,7 @@ class ListGameServerDeploymentsAsyncPager:
     through the ``game_server_deployments`` field on the
     corresponding responses.
 
-    All the usual :class:`google.cloud.gaming_v1.types.ListGameServerDeploymentsResponse`
+    All the usual :class:`~.game_server_deployments.ListGameServerDeploymentsResponse`
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
@@ -121,9 +121,9 @@ class ListGameServerDeploymentsAsyncPager:
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (google.cloud.gaming_v1.types.ListGameServerDeploymentsRequest):
+            request (:class:`~.game_server_deployments.ListGameServerDeploymentsRequest`):
                 The initial request object.
-            response (google.cloud.gaming_v1.types.ListGameServerDeploymentsResponse):
+            response (:class:`~.game_server_deployments.ListGameServerDeploymentsResponse`):
                 The initial response object.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.

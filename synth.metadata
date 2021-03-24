@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-game-servers.git",
-        "sha": "2498118e8c8b317dae643ab09040c62010930165"
+        "sha": "a2f4992addb34bed9b9f7b366e8d8a90b86259a8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "89e3c509923819eb87bedc8331a823403d9dba55",
-        "internalRef": "351705536"
+        "sha": "69697504d9eba1d064820c3085b4750767be6d08",
+        "internalRef": "348952930"
       }
     },
     {
@@ -51,7 +51,6 @@
     }
   ],
   "generatedFiles": [
-    ".coveragerc",
     ".flake8",
     ".github/CONTRIBUTING.md",
     ".github/ISSUE_TEMPLATE/bug_report.md",
@@ -104,16 +103,8 @@
     "docs/_static/custom.css",
     "docs/_templates/layout.html",
     "docs/conf.py",
-    "docs/gaming_v1/game_server_clusters_service.rst",
-    "docs/gaming_v1/game_server_configs_service.rst",
-    "docs/gaming_v1/game_server_deployments_service.rst",
-    "docs/gaming_v1/realms_service.rst",
     "docs/gaming_v1/services.rst",
     "docs/gaming_v1/types.rst",
-    "docs/gaming_v1beta/game_server_clusters_service.rst",
-    "docs/gaming_v1beta/game_server_configs_service.rst",
-    "docs/gaming_v1beta/game_server_deployments_service.rst",
-    "docs/gaming_v1beta/realms_service.rst",
     "docs/gaming_v1beta/services.rst",
     "docs/gaming_v1beta/types.rst",
     "docs/multiprocessing.rst",

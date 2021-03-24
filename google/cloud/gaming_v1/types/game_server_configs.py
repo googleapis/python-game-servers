@@ -82,7 +82,7 @@ class ListGameServerConfigsResponse(proto.Message):
     GameServerConfigsService.ListGameServerConfigs.
 
     Attributes:
-        game_server_configs (Sequence[google.cloud.gaming_v1.types.GameServerConfig]):
+        game_server_configs (Sequence[~.gcg_game_server_configs.GameServerConfig]):
             The list of game server configs.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -132,7 +132,7 @@ class CreateGameServerConfigRequest(proto.Message):
         config_id (str):
             Required. The ID of the game server config
             resource to be created.
-        game_server_config (google.cloud.gaming_v1.types.GameServerConfig):
+        game_server_config (~.gcg_game_server_configs.GameServerConfig):
             Required. The game server config resource to
             be created.
     """
@@ -171,13 +171,13 @@ class ScalingConfig(proto.Message):
             Required. Agones fleet autoscaler spec.
             Example spec:
             https://agones.dev/site/docs/reference/fleetautoscaler/
-        selectors (Sequence[google.cloud.gaming_v1.types.LabelSelector]):
+        selectors (Sequence[~.common.LabelSelector]):
             Labels used to identify the game server
             clusters to which this Agones scaling config
             applies. A game server cluster is subject to
             this Agones scaling config if its labels match
             any of the selector entries.
-        schedules (Sequence[google.cloud.gaming_v1.types.Schedule]):
+        schedules (Sequence[~.common.Schedule]):
             The schedules to which this Scaling Config
             applies.
     """
@@ -220,17 +220,17 @@ class GameServerConfig(proto.Message):
             For example,
 
             ``projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config``.
-        create_time (google.protobuf.timestamp_pb2.Timestamp):
+        create_time (~.timestamp.Timestamp):
             Output only. The creation time.
-        update_time (google.protobuf.timestamp_pb2.Timestamp):
+        update_time (~.timestamp.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[google.cloud.gaming_v1.types.GameServerConfig.LabelsEntry]):
+        labels (Sequence[~.gcg_game_server_configs.GameServerConfig.LabelsEntry]):
             The labels associated with this game server
             config. Each label is a key-value pair.
-        fleet_configs (Sequence[google.cloud.gaming_v1.types.FleetConfig]):
+        fleet_configs (Sequence[~.gcg_game_server_configs.FleetConfig]):
             FleetConfig contains a list of Agones fleet
             specs. Only one FleetConfig is allowed.
-        scaling_configs (Sequence[google.cloud.gaming_v1.types.ScalingConfig]):
+        scaling_configs (Sequence[~.gcg_game_server_configs.ScalingConfig]):
             The autoscaling settings.
         description (str):
             The description of the game server config.

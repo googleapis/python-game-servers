@@ -100,9 +100,6 @@ class GameServerDeploymentsServiceAsyncClient:
         GameServerDeploymentsServiceClient.parse_common_location_path
     )
 
-    from_service_account_info = (
-        GameServerDeploymentsServiceClient.from_service_account_info
-    )
     from_service_account_file = (
         GameServerDeploymentsServiceClient.from_service_account_file
     )
@@ -183,13 +180,12 @@ class GameServerDeploymentsServiceAsyncClient:
         location.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.ListGameServerDeploymentsRequest`):
+            request (:class:`~.game_server_deployments.ListGameServerDeploymentsRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.ListGameServerDeployments.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -201,7 +197,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.gaming_v1beta.services.game_server_deployments_service.pagers.ListGameServerDeploymentsAsyncPager:
+            ~.pagers.ListGameServerDeploymentsAsyncPager:
                 Response message for
                 GameServerDeploymentsService.ListGameServerDeployments.
                 Iterating over this object will yield
@@ -271,7 +267,7 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Gets details of a single game server deployment.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.GetGameServerDeploymentRequest`):
+            request (:class:`~.game_server_deployments.GetGameServerDeploymentRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeployment.
             name (:class:`str`):
@@ -279,7 +275,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -291,7 +286,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.gaming_v1beta.types.GameServerDeployment:
+            ~.game_server_deployments.GameServerDeployment:
                 A game server deployment resource.
         """
         # Create or coerce a protobuf request object.
@@ -352,20 +347,18 @@ class GameServerDeploymentsServiceAsyncClient:
         project and location.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.CreateGameServerDeploymentRequest`):
+            request (:class:`~.game_server_deployments.CreateGameServerDeploymentRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.CreateGameServerDeployment.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            game_server_deployment (:class:`google.cloud.gaming_v1beta.types.GameServerDeployment`):
+            game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
                 Required. The game server delpoyment
                 resource to be created.
-
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -377,11 +370,11 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation_async.AsyncOperation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:`google.cloud.gaming_v1beta.types.GameServerDeployment`
+                :class:``~.game_server_deployments.GameServerDeployment``:
                 A game server deployment resource.
 
         """
@@ -445,7 +438,7 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Deletes a single game server deployment.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.DeleteGameServerDeploymentRequest`):
+            request (:class:`~.game_server_deployments.DeleteGameServerDeploymentRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.DeleteGameServerDeployment.
             name (:class:`str`):
@@ -453,7 +446,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 delete. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -465,22 +457,24 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation_async.AsyncOperation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
-                   empty messages in your APIs. A typical example is to
-                   use it as the request or the response type of an API
-                   method. For instance:
+                The result type for the operation will be
+                :class:``~.empty.Empty``: A generic empty message that
+                you can re-use to avoid defining duplicated empty
+                messages in your APIs. A typical example is to use it as
+                the request or the response type of an API method. For
+                instance:
 
-                      service Foo {
-                         rpc Bar(google.protobuf.Empty) returns
-                         (google.protobuf.Empty);
+                ::
 
-                      }
+                    service Foo {
+                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+                    }
 
-                   The JSON representation for Empty is empty JSON
-                   object {}.
+                The JSON representation for ``Empty`` is empty JSON
+                object ``{}``.
 
         """
         # Create or coerce a protobuf request object.
@@ -542,25 +536,23 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Patches a game server deployment.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRequest`):
+            request (:class:`~.game_server_deployments.UpdateGameServerDeploymentRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.UpdateGameServerDeployment.
                 Only allows updates for labels.
-            game_server_deployment (:class:`google.cloud.gaming_v1beta.types.GameServerDeployment`):
+            game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
                 Required. The game server delpoyment to be updated. Only
                 fields specified in update_mask are updated.
-
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`google.protobuf.field_mask_pb2.FieldMask`):
+            update_mask (:class:`~.field_mask.FieldMask`):
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
 
                 https: //developers.google.com/protocol-buffers //
                 /docs/reference/google.protobuf#fieldmask
-
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -572,11 +564,11 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation_async.AsyncOperation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:`google.cloud.gaming_v1beta.types.GameServerDeployment`
+                :class:``~.game_server_deployments.GameServerDeployment``:
                 A game server deployment resource.
 
         """
@@ -642,7 +634,7 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Gets details a single game server deployment rollout.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.GetGameServerDeploymentRolloutRequest`):
+            request (:class:`~.game_server_deployments.GetGameServerDeploymentRolloutRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeploymentRollout.
             name (:class:`str`):
@@ -650,7 +642,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -662,7 +653,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.gaming_v1beta.types.GameServerDeploymentRollout:
+            ~.game_server_deployments.GameServerDeploymentRollout:
                 The game server deployment rollout
                 which represents the desired rollout
                 state.
@@ -731,25 +722,23 @@ class GameServerDeploymentsServiceAsyncClient:
         an error.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRolloutRequest`):
+            request (:class:`~.game_server_deployments.UpdateGameServerDeploymentRolloutRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
-            rollout (:class:`google.cloud.gaming_v1beta.types.GameServerDeploymentRollout`):
+            rollout (:class:`~.game_server_deployments.GameServerDeploymentRollout`):
                 Required. The game server delpoyment rollout to be
                 updated. Only fields specified in update_mask are
                 updated.
-
                 This corresponds to the ``rollout`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`google.protobuf.field_mask_pb2.FieldMask`):
+            update_mask (:class:`~.field_mask.FieldMask`):
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
 
                 https: //developers.google.com/protocol-buffers //
                 /docs/reference/google.protobuf#fieldmask
-
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -761,11 +750,11 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation_async.AsyncOperation:
+            ~.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:`google.cloud.gaming_v1beta.types.GameServerDeployment`
+                :class:``~.game_server_deployments.GameServerDeployment``:
                 A game server deployment resource.
 
         """
@@ -833,7 +822,7 @@ class GameServerDeploymentsServiceAsyncClient:
         does not mutate the rollout resource.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutRequest`):
+            request (:class:`~.game_server_deployments.PreviewGameServerDeploymentRolloutRequest`):
                 The request object. Request message for
                 PreviewGameServerDeploymentRollout.
 
@@ -844,7 +833,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutResponse:
+            ~.game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
                 Response message for
                 PreviewGameServerDeploymentRollout. This
                 has details about the Agones fleet and
@@ -899,7 +888,7 @@ class GameServerDeploymentsServiceAsyncClient:
         older version of the game server deployment.
 
         Args:
-            request (:class:`google.cloud.gaming_v1beta.types.FetchDeploymentStateRequest`):
+            request (:class:`~.game_server_deployments.FetchDeploymentStateRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.FetchDeploymentState.
 
@@ -910,7 +899,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.gaming_v1beta.types.FetchDeploymentStateResponse:
+            ~.game_server_deployments.FetchDeploymentStateResponse:
                 Response message for
                 GameServerDeploymentsService.FetchDeploymentState.
 
