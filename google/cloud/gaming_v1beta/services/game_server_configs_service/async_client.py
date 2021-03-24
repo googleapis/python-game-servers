@@ -91,6 +91,7 @@ class GameServerConfigsServiceAsyncClient:
         GameServerConfigsServiceClient.parse_common_location_path
     )
 
+    from_service_account_info = GameServerConfigsServiceClient.from_service_account_info
     from_service_account_file = GameServerConfigsServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -169,13 +170,14 @@ class GameServerConfigsServiceAsyncClient:
         location, and game server deployment.
 
         Args:
-            request (:class:`~.game_server_configs.ListGameServerConfigsRequest`):
+            request (:class:`google.cloud.gaming_v1beta.types.ListGameServerConfigsRequest`):
                 The request object. Request message for
                 GameServerConfigsService.ListGameServerConfigs.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -187,7 +189,7 @@ class GameServerConfigsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListGameServerConfigsAsyncPager:
+            google.cloud.gaming_v1beta.services.game_server_configs_service.pagers.ListGameServerConfigsAsyncPager:
                 Response message for
                 GameServerConfigsService.ListGameServerConfigs.
                 Iterating over this object will yield
@@ -257,7 +259,7 @@ class GameServerConfigsServiceAsyncClient:
         r"""Gets details of a single game server config.
 
         Args:
-            request (:class:`~.game_server_configs.GetGameServerConfigRequest`):
+            request (:class:`google.cloud.gaming_v1beta.types.GetGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.GetGameServerConfig.
             name (:class:`str`):
@@ -265,6 +267,7 @@ class GameServerConfigsServiceAsyncClient:
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -276,7 +279,7 @@ class GameServerConfigsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_configs.GameServerConfig:
+            google.cloud.gaming_v1beta.types.GameServerConfig:
                 A game server config resource.
         """
         # Create or coerce a protobuf request object.
@@ -340,19 +343,21 @@ class GameServerConfigsServiceAsyncClient:
         resource.
 
         Args:
-            request (:class:`~.game_server_configs.CreateGameServerConfigRequest`):
+            request (:class:`google.cloud.gaming_v1beta.types.CreateGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.CreateGameServerConfig.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            game_server_config (:class:`~.game_server_configs.GameServerConfig`):
+            game_server_config (:class:`google.cloud.gaming_v1beta.types.GameServerConfig`):
                 Required. The game server config
                 resource to be created.
+
                 This corresponds to the ``game_server_config`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -364,12 +369,12 @@ class GameServerConfigsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_configs.GameServerConfig``: A
-                game server config resource.
+                :class:`google.cloud.gaming_v1beta.types.GameServerConfig`
+                A game server config resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -434,7 +439,7 @@ class GameServerConfigsServiceAsyncClient:
         game server deployment rollout.
 
         Args:
-            request (:class:`~.game_server_configs.DeleteGameServerConfigRequest`):
+            request (:class:`google.cloud.gaming_v1beta.types.DeleteGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
             name (:class:`str`):
@@ -442,6 +447,7 @@ class GameServerConfigsServiceAsyncClient:
                 Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -453,24 +459,22 @@ class GameServerConfigsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
