@@ -42,10 +42,10 @@ class OperationMetadata(proto.Message):
     r"""Represents the metadata of the long-running operation.
 
     Attributes:
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The time the operation was
             created.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The time the operation finished
             running.
         target (str):
@@ -69,7 +69,7 @@ class OperationMetadata(proto.Message):
         unreachable (Sequence[str]):
             Output only. List of Locations that could not
             be reached.
-        operation_status (Sequence[~.common.OperationMetadata.OperationStatusEntry]):
+        operation_status (Sequence[google.cloud.gaming_v1.types.OperationMetadata.OperationStatusEntry]):
             Output only. Operation status for Game
             Services API operations. Operation status is in
             the form of key-value pairs where keys are
@@ -106,7 +106,7 @@ class OperationStatus(proto.Message):
         done (bool):
             Output only. Whether the operation is done or
             still in progress.
-        error_code (~.common.OperationStatus.ErrorCode):
+        error_code (google.cloud.gaming_v1.types.OperationStatus.ErrorCode):
             The error code in case of failures.
         error_message (str):
             The human-readable error message.
@@ -130,7 +130,7 @@ class LabelSelector(proto.Message):
     r"""The label selector, used to group labels on the resources.
 
     Attributes:
-        labels (Sequence[~.common.LabelSelector.LabelsEntry]):
+        labels (Sequence[google.cloud.gaming_v1.types.LabelSelector.LabelsEntry]):
             Resource labels for this selector.
     """
 
@@ -163,11 +163,11 @@ class Schedule(proto.Message):
 
 
     Attributes:
-        start_time (~.timestamp.Timestamp):
+        start_time (google.protobuf.timestamp_pb2.Timestamp):
             The start time of the event.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             The end time of the event.
-        cron_job_duration (~.duration.Duration):
+        cron_job_duration (google.protobuf.duration_pb2.Duration):
             The duration for the cron job event. The
             duration of the event is effective after the
             cron job's start time.
@@ -219,7 +219,7 @@ class TargetDetails(proto.Message):
             The game server deployment name. Uses the form:
 
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}``.
-        fleet_details (Sequence[~.common.TargetDetails.TargetFleetDetails]):
+        fleet_details (Sequence[google.cloud.gaming_v1.types.TargetDetails.TargetFleetDetails]):
             Agones fleet details for game server clusters
             and game server deployments.
     """
@@ -228,9 +228,9 @@ class TargetDetails(proto.Message):
         r"""Details of the target Agones fleet.
 
         Attributes:
-            fleet (~.common.TargetDetails.TargetFleetDetails.TargetFleet):
+            fleet (google.cloud.gaming_v1.types.TargetDetails.TargetFleetDetails.TargetFleet):
                 Reference to target Agones fleet.
-            autoscaler (~.common.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler):
+            autoscaler (google.cloud.gaming_v1.types.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler):
                 Reference to target Agones fleet autoscaling
                 policy.
         """
@@ -241,7 +241,7 @@ class TargetDetails(proto.Message):
             Attributes:
                 name (str):
                     The name of the Agones fleet.
-                spec_source (~.common.SpecSource):
+                spec_source (google.cloud.gaming_v1.types.SpecSource):
                     Encapsulates the source of the Agones fleet
                     spec. The Agones fleet spec source.
             """
@@ -256,7 +256,7 @@ class TargetDetails(proto.Message):
             Attributes:
                 name (str):
                     The name of the Agones autoscaler.
-                spec_source (~.common.SpecSource):
+                spec_source (google.cloud.gaming_v1.types.SpecSource):
                     Encapsulates the source of the Agones fleet
                     spec. Details about the Agones autoscaler spec.
             """
@@ -290,7 +290,7 @@ class TargetState(proto.Message):
     r"""Encapsulates the Target state.
 
     Attributes:
-        details (Sequence[~.common.TargetDetails]):
+        details (Sequence[google.cloud.gaming_v1.types.TargetDetails]):
             Details about Agones fleets.
     """
 
@@ -301,9 +301,9 @@ class DeployedFleetDetails(proto.Message):
     r"""Details of the deployed Agones fleet.
 
     Attributes:
-        deployed_fleet (~.common.DeployedFleetDetails.DeployedFleet):
+        deployed_fleet (google.cloud.gaming_v1.types.DeployedFleetDetails.DeployedFleet):
             Information about the Agones fleet.
-        deployed_autoscaler (~.common.DeployedFleetDetails.DeployedFleetAutoscaler):
+        deployed_autoscaler (google.cloud.gaming_v1.types.DeployedFleetDetails.DeployedFleetAutoscaler):
             Information about the Agones autoscaler for
             that fleet.
     """
@@ -317,11 +317,11 @@ class DeployedFleetDetails(proto.Message):
             fleet_spec (str):
                 The fleet spec retrieved from the Agones
                 fleet.
-            spec_source (~.common.SpecSource):
+            spec_source (google.cloud.gaming_v1.types.SpecSource):
                 The source spec that is used to create the
                 Agones fleet. The GameServerConfig resource may
                 no longer exist in the system.
-            status (~.common.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus):
+            status (google.cloud.gaming_v1.types.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus):
                 The current status of the Agones fleet.
                 Includes count of game servers in various
                 states.
@@ -374,7 +374,7 @@ class DeployedFleetDetails(proto.Message):
         Attributes:
             autoscaler (str):
                 The name of the Agones autoscaler.
-            spec_source (~.common.SpecSource):
+            spec_source (google.cloud.gaming_v1.types.SpecSource):
                 The source spec that is used to create the
                 autoscaler. The GameServerConfig resource may no
                 longer exist in the system.
