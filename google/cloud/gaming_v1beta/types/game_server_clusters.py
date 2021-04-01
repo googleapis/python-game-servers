@@ -90,7 +90,7 @@ class ListGameServerClustersResponse(proto.Message):
     GameServerClustersService.ListGameServerClusters.
 
     Attributes:
-        game_server_clusters (Sequence[~.gcg_game_server_clusters.GameServerCluster]):
+        game_server_clusters (Sequence[google.cloud.gaming_v1beta.types.GameServerCluster]):
             The list of game server clusters.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -139,7 +139,7 @@ class CreateGameServerClusterRequest(proto.Message):
         game_server_cluster_id (str):
             Required. The ID of the game server cluster
             resource to be created.
-        game_server_cluster (~.gcg_game_server_clusters.GameServerCluster):
+        game_server_cluster (google.cloud.gaming_v1beta.types.GameServerCluster):
             Required. The game server cluster resource to
             be created.
     """
@@ -164,10 +164,10 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
         game_server_cluster_id (str):
             Required. The ID of the game server cluster
             resource to be created.
-        game_server_cluster (~.gcg_game_server_clusters.GameServerCluster):
+        game_server_cluster (google.cloud.gaming_v1beta.types.GameServerCluster):
             Required. The game server cluster resource to
             be created.
-        preview_time (~.timestamp.Timestamp):
+        preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
             preview.
     """
@@ -190,7 +190,7 @@ class PreviewCreateGameServerClusterResponse(proto.Message):
     Attributes:
         etag (str):
             The ETag of the game server cluster.
-        target_state (~.common.TargetState):
+        target_state (google.cloud.gaming_v1beta.types.TargetState):
             The target state.
     """
 
@@ -222,7 +222,7 @@ class PreviewDeleteGameServerClusterRequest(proto.Message):
             Required. The name of the game server cluster to delete.
             Uses the form:
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
-        preview_time (~.timestamp.Timestamp):
+        preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
             preview.
     """
@@ -239,7 +239,7 @@ class PreviewDeleteGameServerClusterResponse(proto.Message):
     Attributes:
         etag (str):
             The ETag of the game server cluster.
-        target_state (~.common.TargetState):
+        target_state (google.cloud.gaming_v1beta.types.TargetState):
             The target state.
     """
 
@@ -253,10 +253,10 @@ class UpdateGameServerClusterRequest(proto.Message):
     GameServerClustersService.UpdateGameServerCluster.
 
     Attributes:
-        game_server_cluster (~.gcg_game_server_clusters.GameServerCluster):
+        game_server_cluster (google.cloud.gaming_v1beta.types.GameServerCluster):
             Required. The game server cluster to be updated. Only fields
             specified in update_mask are updated.
-        update_mask (~.field_mask.FieldMask):
+        update_mask (google.protobuf.field_mask_pb2.FieldMask):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
@@ -277,17 +277,17 @@ class PreviewUpdateGameServerClusterRequest(proto.Message):
     GameServerClustersService.UpdateGameServerCluster.
 
     Attributes:
-        game_server_cluster (~.gcg_game_server_clusters.GameServerCluster):
+        game_server_cluster (google.cloud.gaming_v1beta.types.GameServerCluster):
             Required. The game server cluster to be updated. Only fields
             specified in update_mask are updated.
-        update_mask (~.field_mask.FieldMask):
+        update_mask (google.protobuf.field_mask_pb2.FieldMask):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
 
             https: //developers.google.com/protocol-buffers //
             /docs/reference/google.protobuf#fieldmask
-        preview_time (~.timestamp.Timestamp):
+        preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
             preview.
     """
@@ -308,7 +308,7 @@ class PreviewUpdateGameServerClusterResponse(proto.Message):
     Attributes:
         etag (str):
             The ETag of the game server cluster.
-        target_state (~.common.TargetState):
+        target_state (google.cloud.gaming_v1beta.types.TargetState):
             The target state.
     """
 
@@ -321,7 +321,7 @@ class GameServerClusterConnectionInfo(proto.Message):
     r"""The game server cluster connection information.
 
     Attributes:
-        gke_cluster_reference (~.gcg_game_server_clusters.GkeClusterReference):
+        gke_cluster_reference (google.cloud.gaming_v1beta.types.GkeClusterReference):
             Reference to the GKE cluster where the game
             servers are installed.
         namespace (str):
@@ -372,14 +372,14 @@ class GameServerCluster(proto.Message):
             For example,
 
             ``projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster``.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The creation time.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[~.gcg_game_server_clusters.GameServerCluster.LabelsEntry]):
+        labels (Sequence[google.cloud.gaming_v1beta.types.GameServerCluster.LabelsEntry]):
             The labels associated with this game server
             cluster. Each label is a key-value pair.
-        connection_info (~.gcg_game_server_clusters.GameServerClusterConnectionInfo):
+        connection_info (google.cloud.gaming_v1beta.types.GameServerClusterConnectionInfo):
             The game server cluster connection
             information. This information is used to manage
             game server clusters.

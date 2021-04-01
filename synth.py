@@ -32,7 +32,7 @@ for version in versions:
         "gameservices", version, bazel_target=f"//google/cloud/gaming/{version}:gaming-{version}-py"
     )
 
-    s.move(library, excludes=["nox.py", "setup.py", "README.rst", "docs/index.rst"])
+    s.move(library, excludes=["nox.py", "setup.py", "README.rst", "docs/index.rst", "*.tar.gz"])
 
 
 # rename library to google-cloud-game-servers
@@ -48,7 +48,7 @@ s.replace(
     "google/**/common.py",
     """    start_time\|-------\[cron job\]-------\[cron job\]-------\[cron
     job\]---\|end_time cron job: cron spec start time \+ duration""",
-    """    :: 
+    """    ::
 
         start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
         cron job: cron spec start time + duration

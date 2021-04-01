@@ -15,7 +15,16 @@
 # limitations under the License.
 #
 
-from typing import Any, AsyncIterable, Awaitable, Callable, Iterable, Sequence, Tuple
+from typing import (
+    Any,
+    AsyncIterable,
+    Awaitable,
+    Callable,
+    Iterable,
+    Sequence,
+    Tuple,
+    Optional,
+)
 
 from google.cloud.gaming_v1beta.types import realms
 
@@ -24,7 +33,7 @@ class ListRealmsPager:
     """A pager for iterating through ``list_realms`` requests.
 
     This class thinly wraps an initial
-    :class:`~.realms.ListRealmsResponse` object, and
+    :class:`google.cloud.gaming_v1beta.types.ListRealmsResponse` object, and
     provides an ``__iter__`` method to iterate through its
     ``realms`` field.
 
@@ -33,7 +42,7 @@ class ListRealmsPager:
     through the ``realms`` field on the
     corresponding responses.
 
-    All the usual :class:`~.realms.ListRealmsResponse`
+    All the usual :class:`google.cloud.gaming_v1beta.types.ListRealmsResponse`
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
@@ -51,9 +60,9 @@ class ListRealmsPager:
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (:class:`~.realms.ListRealmsRequest`):
+            request (google.cloud.gaming_v1beta.types.ListRealmsRequest):
                 The initial request object.
-            response (:class:`~.realms.ListRealmsResponse`):
+            response (google.cloud.gaming_v1beta.types.ListRealmsResponse):
                 The initial response object.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
@@ -86,7 +95,7 @@ class ListRealmsAsyncPager:
     """A pager for iterating through ``list_realms`` requests.
 
     This class thinly wraps an initial
-    :class:`~.realms.ListRealmsResponse` object, and
+    :class:`google.cloud.gaming_v1beta.types.ListRealmsResponse` object, and
     provides an ``__aiter__`` method to iterate through its
     ``realms`` field.
 
@@ -95,7 +104,7 @@ class ListRealmsAsyncPager:
     through the ``realms`` field on the
     corresponding responses.
 
-    All the usual :class:`~.realms.ListRealmsResponse`
+    All the usual :class:`google.cloud.gaming_v1beta.types.ListRealmsResponse`
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
@@ -113,9 +122,9 @@ class ListRealmsAsyncPager:
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (:class:`~.realms.ListRealmsRequest`):
+            request (google.cloud.gaming_v1beta.types.ListRealmsRequest):
                 The initial request object.
-            response (:class:`~.realms.ListRealmsResponse`):
+            response (google.cloud.gaming_v1beta.types.ListRealmsResponse):
                 The initial response object.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.

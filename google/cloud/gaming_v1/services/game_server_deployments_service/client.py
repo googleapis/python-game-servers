@@ -125,6 +125,22 @@ class GameServerDeploymentsServiceClient(
     )
 
     @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            GameServerDeploymentsServiceClient: The constructed client.
+        """
+        credentials = service_account.Credentials.from_service_account_info(info)
+        kwargs["credentials"] = credentials
+        return cls(*args, **kwargs)
+
+    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
         file.
@@ -136,7 +152,7 @@ class GameServerDeploymentsServiceClient(
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            {@api.name}: The constructed client.
+            GameServerDeploymentsServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -264,10 +280,10 @@ class GameServerDeploymentsServiceClient(
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.GameServerDeploymentsServiceTransport]): The
+            transport (Union[str, GameServerDeploymentsServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (client_options_lib.ClientOptions): Custom options for the
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -303,21 +319,17 @@ class GameServerDeploymentsServiceClient(
             util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
         )
 
-        ssl_credentials = None
+        client_cert_source_func = None
         is_mtls = False
         if use_client_cert:
             if client_options.client_cert_source:
-                import grpc  # type: ignore
-
-                cert, key = client_options.client_cert_source()
-                ssl_credentials = grpc.ssl_channel_credentials(
-                    certificate_chain=cert, private_key=key
-                )
                 is_mtls = True
+                client_cert_source_func = client_options.client_cert_source
             else:
-                creds = SslCredentials()
-                is_mtls = creds.is_mtls
-                ssl_credentials = creds.ssl_credentials if is_mtls else None
+                is_mtls = mtls.has_default_client_cert_source()
+                client_cert_source_func = (
+                    mtls.default_client_cert_source() if is_mtls else None
+                )
 
         # Figure out which api endpoint to use.
         if client_options.api_endpoint is not None:
@@ -360,7 +372,7 @@ class GameServerDeploymentsServiceClient(
                 credentials_file=client_options.credentials_file,
                 host=api_endpoint,
                 scopes=client_options.scopes,
-                ssl_channel_credentials=ssl_credentials,
+                client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
             )
@@ -378,12 +390,13 @@ class GameServerDeploymentsServiceClient(
         location.
 
         Args:
-            request (:class:`~.game_server_deployments.ListGameServerDeploymentsRequest`):
+            request (google.cloud.gaming_v1.types.ListGameServerDeploymentsRequest):
                 The request object. Request message for
                 GameServerDeploymentsService.ListGameServerDeployments.
-            parent (:class:`str`):
+            parent (str):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -395,7 +408,7 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListGameServerDeploymentsPager:
+            google.cloud.gaming_v1.services.game_server_deployments_service.pagers.ListGameServerDeploymentsPager:
                 Response message for
                 GameServerDeploymentsService.ListGameServerDeployments.
                 Iterating over this object will yield
@@ -464,14 +477,15 @@ class GameServerDeploymentsServiceClient(
         r"""Gets details of a single game server deployment.
 
         Args:
-            request (:class:`~.game_server_deployments.GetGameServerDeploymentRequest`):
+            request (google.cloud.gaming_v1.types.GetGameServerDeploymentRequest):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeployment.
-            name (:class:`str`):
+            name (str):
                 Required. The name of the game server delpoyment to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -483,7 +497,7 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_deployments.GameServerDeployment:
+            google.cloud.gaming_v1.types.GameServerDeployment:
                 A game server deployment resource.
         """
         # Create or coerce a protobuf request object.
@@ -543,18 +557,20 @@ class GameServerDeploymentsServiceClient(
         project and location.
 
         Args:
-            request (:class:`~.game_server_deployments.CreateGameServerDeploymentRequest`):
+            request (google.cloud.gaming_v1.types.CreateGameServerDeploymentRequest):
                 The request object. Request message for
                 GameServerDeploymentsService.CreateGameServerDeployment.
-            parent (:class:`str`):
+            parent (str):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
+            game_server_deployment (google.cloud.gaming_v1.types.GameServerDeployment):
                 Required. The game server delpoyment
                 resource to be created.
+
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -566,11 +582,11 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_deployments.GameServerDeployment``:
+                :class:`google.cloud.gaming_v1.types.GameServerDeployment`
                 A game server deployment resource.
 
         """
@@ -639,14 +655,15 @@ class GameServerDeploymentsServiceClient(
         r"""Deletes a single game server deployment.
 
         Args:
-            request (:class:`~.game_server_deployments.DeleteGameServerDeploymentRequest`):
+            request (google.cloud.gaming_v1.types.DeleteGameServerDeploymentRequest):
                 The request object. Request message for
                 GameServerDeploymentsService.DeleteGameServerDeployment.
-            name (:class:`str`):
+            name (str):
                 Required. The name of the game server delpoyment to
                 delete. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -658,24 +675,22 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -742,23 +757,25 @@ class GameServerDeploymentsServiceClient(
         r"""Patches a game server deployment.
 
         Args:
-            request (:class:`~.game_server_deployments.UpdateGameServerDeploymentRequest`):
+            request (google.cloud.gaming_v1.types.UpdateGameServerDeploymentRequest):
                 The request object. Request message for
                 GameServerDeploymentsService.UpdateGameServerDeployment.
                 Only allows updates for labels.
-            game_server_deployment (:class:`~.game_server_deployments.GameServerDeployment`):
+            game_server_deployment (google.cloud.gaming_v1.types.GameServerDeployment):
                 Required. The game server delpoyment to be updated. Only
                 fields specified in update_mask are updated.
+
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`~.field_mask.FieldMask`):
+            update_mask (google.protobuf.field_mask_pb2.FieldMask):
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
 
                 https: //developers.google.com/protocol-buffers //
                 /docs/reference/google.protobuf#fieldmask
+
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -770,11 +787,11 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_deployments.GameServerDeployment``:
+                :class:`google.cloud.gaming_v1.types.GameServerDeployment`
                 A game server deployment resource.
 
         """
@@ -845,14 +862,15 @@ class GameServerDeploymentsServiceClient(
         r"""Gets details a single game server deployment rollout.
 
         Args:
-            request (:class:`~.game_server_deployments.GetGameServerDeploymentRolloutRequest`):
+            request (google.cloud.gaming_v1.types.GetGameServerDeploymentRolloutRequest):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeploymentRollout.
-            name (:class:`str`):
+            name (str):
                 Required. The name of the game server delpoyment to
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -864,7 +882,7 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_deployments.GameServerDeploymentRollout:
+            google.cloud.gaming_v1.types.GameServerDeploymentRollout:
                 The game server deployment rollout
                 which represents the desired rollout
                 state.
@@ -934,23 +952,25 @@ class GameServerDeploymentsServiceClient(
         an error.
 
         Args:
-            request (:class:`~.game_server_deployments.UpdateGameServerDeploymentRolloutRequest`):
+            request (google.cloud.gaming_v1.types.UpdateGameServerDeploymentRolloutRequest):
                 The request object. Request message for
                 GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
-            rollout (:class:`~.game_server_deployments.GameServerDeploymentRollout`):
+            rollout (google.cloud.gaming_v1.types.GameServerDeploymentRollout):
                 Required. The game server delpoyment rollout to be
                 updated. Only fields specified in update_mask are
                 updated.
+
                 This corresponds to the ``rollout`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`~.field_mask.FieldMask`):
+            update_mask (google.protobuf.field_mask_pb2.FieldMask):
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
 
                 https: //developers.google.com/protocol-buffers //
                 /docs/reference/google.protobuf#fieldmask
+
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -962,11 +982,11 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_deployments.GameServerDeployment``:
+                :class:`google.cloud.gaming_v1.types.GameServerDeployment`
                 A game server deployment resource.
 
         """
@@ -1039,7 +1059,7 @@ class GameServerDeploymentsServiceClient(
         does not mutate the rollout resource.
 
         Args:
-            request (:class:`~.game_server_deployments.PreviewGameServerDeploymentRolloutRequest`):
+            request (google.cloud.gaming_v1.types.PreviewGameServerDeploymentRolloutRequest):
                 The request object. Request message for
                 PreviewGameServerDeploymentRollout.
 
@@ -1050,7 +1070,7 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
+            google.cloud.gaming_v1.types.PreviewGameServerDeploymentRolloutResponse:
                 Response message for
                 PreviewGameServerDeploymentRollout. This
                 has details about the Agones fleet and
@@ -1104,7 +1124,7 @@ class GameServerDeploymentsServiceClient(
         older version of the game server deployment.
 
         Args:
-            request (:class:`~.game_server_deployments.FetchDeploymentStateRequest`):
+            request (google.cloud.gaming_v1.types.FetchDeploymentStateRequest):
                 The request object. Request message for
                 GameServerDeploymentsService.FetchDeploymentState.
 
@@ -1115,7 +1135,7 @@ class GameServerDeploymentsServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_deployments.FetchDeploymentStateResponse:
+            google.cloud.gaming_v1.types.FetchDeploymentStateResponse:
                 Response message for
                 GameServerDeploymentsService.FetchDeploymentState.
 
