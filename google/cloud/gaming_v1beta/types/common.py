@@ -156,7 +156,7 @@ class Schedule(proto.Message):
     specified, the event is effective starting at the local time
     specified by cron_spec, and is recurring.
 
-    :: 
+    ::
 
         start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
         cron job: cron spec start time + duration
