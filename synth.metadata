@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-game-servers.git",
-        "sha": "f1ce24029d7b963a7a5c7eb459cea59a2a4ecaaf"
+        "sha": "b0ebf8096ca03dd5c9393ad6869616e882298f52"
       }
     },
     {
