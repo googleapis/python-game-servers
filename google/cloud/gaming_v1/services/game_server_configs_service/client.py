@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -39,7 +37,6 @@ from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import game_server_configs
 from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
-
 from .transports.base import GameServerConfigsServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import GameServerConfigsServiceGrpcTransport
 from .transports.grpc_asyncio import GameServerConfigsServiceGrpcAsyncIOTransport
@@ -378,7 +375,6 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -410,10 +406,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         # there are no flattened fields.
         if not isinstance(request, game_server_configs.ListGameServerConfigsRequest):
             request = game_server_configs.ListGameServerConfigsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
 
@@ -463,7 +457,6 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -490,10 +483,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         # there are no flattened fields.
         if not isinstance(request, game_server_configs.GetGameServerConfigRequest):
             request = game_server_configs.GetGameServerConfigRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if name is not None:
                 request.name = name
 
@@ -548,7 +539,6 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 This corresponds to the ``game_server_config`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -580,10 +570,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         # there are no flattened fields.
         if not isinstance(request, game_server_configs.CreateGameServerConfigRequest):
             request = game_server_configs.CreateGameServerConfigRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
             if game_server_config is not None:
@@ -641,7 +629,6 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -683,10 +670,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         # there are no flattened fields.
         if not isinstance(request, game_server_configs.DeleteGameServerConfigRequest):
             request = game_server_configs.DeleteGameServerConfigRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if name is not None:
                 request.name = name
 

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,28 +14,29 @@
 # limitations under the License.
 #
 
-from google.cloud.gaming_v1.services.game_server_clusters_service.async_client import (
-    GameServerClustersServiceAsyncClient,
-)
 from google.cloud.gaming_v1.services.game_server_clusters_service.client import (
     GameServerClustersServiceClient,
 )
-from google.cloud.gaming_v1.services.game_server_configs_service.async_client import (
-    GameServerConfigsServiceAsyncClient,
+from google.cloud.gaming_v1.services.game_server_clusters_service.async_client import (
+    GameServerClustersServiceAsyncClient,
 )
 from google.cloud.gaming_v1.services.game_server_configs_service.client import (
     GameServerConfigsServiceClient,
 )
-from google.cloud.gaming_v1.services.game_server_deployments_service.async_client import (
-    GameServerDeploymentsServiceAsyncClient,
+from google.cloud.gaming_v1.services.game_server_configs_service.async_client import (
+    GameServerConfigsServiceAsyncClient,
 )
 from google.cloud.gaming_v1.services.game_server_deployments_service.client import (
     GameServerDeploymentsServiceClient,
 )
+from google.cloud.gaming_v1.services.game_server_deployments_service.async_client import (
+    GameServerDeploymentsServiceAsyncClient,
+)
+from google.cloud.gaming_v1.services.realms_service.client import RealmsServiceClient
 from google.cloud.gaming_v1.services.realms_service.async_client import (
     RealmsServiceAsyncClient,
 )
-from google.cloud.gaming_v1.services.realms_service.client import RealmsServiceClient
+
 from google.cloud.gaming_v1.types.common import DeployedFleetDetails
 from google.cloud.gaming_v1.types.common import LabelSelector
 from google.cloud.gaming_v1.types.common import OperationMetadata
@@ -157,68 +157,68 @@ from google.cloud.gaming_v1.types.realms import Realm
 from google.cloud.gaming_v1.types.realms import UpdateRealmRequest
 
 __all__ = (
-    "CreateGameServerClusterRequest",
-    "CreateGameServerConfigRequest",
-    "CreateGameServerDeploymentRequest",
-    "CreateRealmRequest",
-    "DeleteGameServerClusterRequest",
-    "DeleteGameServerConfigRequest",
-    "DeleteGameServerDeploymentRequest",
-    "DeleteRealmRequest",
-    "DeployedFleetDetails",
-    "FetchDeploymentStateRequest",
-    "FetchDeploymentStateResponse",
-    "FleetConfig",
-    "GameServerCluster",
-    "GameServerClusterConnectionInfo",
-    "GameServerClustersServiceAsyncClient",
     "GameServerClustersServiceClient",
-    "GameServerConfig",
-    "GameServerConfigOverride",
-    "GameServerConfigsServiceAsyncClient",
+    "GameServerClustersServiceAsyncClient",
     "GameServerConfigsServiceClient",
-    "GameServerDeployment",
-    "GameServerDeploymentRollout",
-    "GameServerDeploymentsServiceAsyncClient",
+    "GameServerConfigsServiceAsyncClient",
     "GameServerDeploymentsServiceClient",
-    "GetGameServerClusterRequest",
-    "GetGameServerConfigRequest",
-    "GetGameServerDeploymentRequest",
-    "GetGameServerDeploymentRolloutRequest",
-    "GetRealmRequest",
-    "GkeClusterReference",
+    "GameServerDeploymentsServiceAsyncClient",
+    "RealmsServiceClient",
+    "RealmsServiceAsyncClient",
+    "DeployedFleetDetails",
     "LabelSelector",
-    "ListGameServerClustersRequest",
-    "ListGameServerClustersResponse",
-    "ListGameServerConfigsRequest",
-    "ListGameServerConfigsResponse",
-    "ListGameServerDeploymentsRequest",
-    "ListGameServerDeploymentsResponse",
-    "ListRealmsRequest",
-    "ListRealmsResponse",
     "OperationMetadata",
     "OperationStatus",
-    "PreviewCreateGameServerClusterRequest",
-    "PreviewCreateGameServerClusterResponse",
-    "PreviewDeleteGameServerClusterRequest",
-    "PreviewDeleteGameServerClusterResponse",
-    "PreviewGameServerDeploymentRolloutRequest",
-    "PreviewGameServerDeploymentRolloutResponse",
-    "PreviewRealmUpdateRequest",
-    "PreviewRealmUpdateResponse",
-    "PreviewUpdateGameServerClusterRequest",
-    "PreviewUpdateGameServerClusterResponse",
-    "Realm",
     "RealmSelector",
-    "RealmsServiceAsyncClient",
-    "RealmsServiceClient",
-    "ScalingConfig",
     "Schedule",
     "SpecSource",
     "TargetDetails",
     "TargetState",
+    "CreateGameServerClusterRequest",
+    "DeleteGameServerClusterRequest",
+    "GameServerCluster",
+    "GameServerClusterConnectionInfo",
+    "GetGameServerClusterRequest",
+    "GkeClusterReference",
+    "ListGameServerClustersRequest",
+    "ListGameServerClustersResponse",
+    "PreviewCreateGameServerClusterRequest",
+    "PreviewCreateGameServerClusterResponse",
+    "PreviewDeleteGameServerClusterRequest",
+    "PreviewDeleteGameServerClusterResponse",
+    "PreviewUpdateGameServerClusterRequest",
+    "PreviewUpdateGameServerClusterResponse",
     "UpdateGameServerClusterRequest",
+    "CreateGameServerConfigRequest",
+    "DeleteGameServerConfigRequest",
+    "FleetConfig",
+    "GameServerConfig",
+    "GetGameServerConfigRequest",
+    "ListGameServerConfigsRequest",
+    "ListGameServerConfigsResponse",
+    "ScalingConfig",
+    "CreateGameServerDeploymentRequest",
+    "DeleteGameServerDeploymentRequest",
+    "FetchDeploymentStateRequest",
+    "FetchDeploymentStateResponse",
+    "GameServerConfigOverride",
+    "GameServerDeployment",
+    "GameServerDeploymentRollout",
+    "GetGameServerDeploymentRequest",
+    "GetGameServerDeploymentRolloutRequest",
+    "ListGameServerDeploymentsRequest",
+    "ListGameServerDeploymentsResponse",
+    "PreviewGameServerDeploymentRolloutRequest",
+    "PreviewGameServerDeploymentRolloutResponse",
     "UpdateGameServerDeploymentRequest",
     "UpdateGameServerDeploymentRolloutRequest",
+    "CreateRealmRequest",
+    "DeleteRealmRequest",
+    "GetRealmRequest",
+    "ListRealmsRequest",
+    "ListRealmsResponse",
+    "PreviewRealmUpdateRequest",
+    "PreviewRealmUpdateResponse",
+    "Realm",
     "UpdateRealmRequest",
 )
