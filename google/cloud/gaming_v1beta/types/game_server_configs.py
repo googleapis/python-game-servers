@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import proto  # type: ignore
 
-
 from google.cloud.gaming_v1beta.types import common
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
@@ -66,15 +63,11 @@ class ListGameServerConfigsRequest(proto.Message):
             https://cloud.google.com/apis/design/design_patterns#sorting_order.
     """
 
-    parent = proto.Field(proto.STRING, number=1)
-
-    page_size = proto.Field(proto.INT32, number=2)
-
-    page_token = proto.Field(proto.STRING, number=3)
-
-    filter = proto.Field(proto.STRING, number=4)
-
-    order_by = proto.Field(proto.STRING, number=5)
+    parent = proto.Field(proto.STRING, number=1,)
+    page_size = proto.Field(proto.INT32, number=2,)
+    page_token = proto.Field(proto.STRING, number=3,)
+    filter = proto.Field(proto.STRING, number=4,)
+    order_by = proto.Field(proto.STRING, number=5,)
 
 
 class ListGameServerConfigsResponse(proto.Message):
@@ -99,10 +92,8 @@ class ListGameServerConfigsResponse(proto.Message):
     game_server_configs = proto.RepeatedField(
         proto.MESSAGE, number=1, message="GameServerConfig",
     )
-
-    next_page_token = proto.Field(proto.STRING, number=2)
-
-    unreachable = proto.RepeatedField(proto.STRING, number=4)
+    next_page_token = proto.Field(proto.STRING, number=2,)
+    unreachable = proto.RepeatedField(proto.STRING, number=4,)
 
 
 class GetGameServerConfigRequest(proto.Message):
@@ -117,7 +108,7 @@ class GetGameServerConfigRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
     """
 
-    name = proto.Field(proto.STRING, number=1)
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class CreateGameServerConfigRequest(proto.Message):
@@ -137,10 +128,8 @@ class CreateGameServerConfigRequest(proto.Message):
             be created.
     """
 
-    parent = proto.Field(proto.STRING, number=1)
-
-    config_id = proto.Field(proto.STRING, number=2)
-
+    parent = proto.Field(proto.STRING, number=1,)
+    config_id = proto.Field(proto.STRING, number=2,)
     game_server_config = proto.Field(
         proto.MESSAGE, number=3, message="GameServerConfig",
     )
@@ -158,12 +147,11 @@ class DeleteGameServerConfigRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
     """
 
-    name = proto.Field(proto.STRING, number=1)
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class ScalingConfig(proto.Message):
     r"""Autoscaling config for an Agones fleet.
-
     Attributes:
         name (str):
             Required. The name of the Scaling Config
@@ -182,20 +170,16 @@ class ScalingConfig(proto.Message):
             applies.
     """
 
-    name = proto.Field(proto.STRING, number=1)
-
-    fleet_autoscaler_spec = proto.Field(proto.STRING, number=2)
-
+    name = proto.Field(proto.STRING, number=1,)
+    fleet_autoscaler_spec = proto.Field(proto.STRING, number=2,)
     selectors = proto.RepeatedField(
         proto.MESSAGE, number=4, message=common.LabelSelector,
     )
-
     schedules = proto.RepeatedField(proto.MESSAGE, number=5, message=common.Schedule,)
 
 
 class FleetConfig(proto.Message):
     r"""Fleet configs for Agones.
-
     Attributes:
         fleet_spec (str):
             Agones fleet spec. Example spec:
@@ -204,14 +188,12 @@ class FleetConfig(proto.Message):
             The name of the FleetConfig.
     """
 
-    fleet_spec = proto.Field(proto.STRING, number=1)
-
-    name = proto.Field(proto.STRING, number=2)
+    fleet_spec = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(proto.STRING, number=2,)
 
 
 class GameServerConfig(proto.Message):
     r"""A game server config resource.
-
     Attributes:
         name (str):
             The resource name of the game server config. Uses the form:
@@ -236,21 +218,15 @@ class GameServerConfig(proto.Message):
             The description of the game server config.
     """
 
-    name = proto.Field(proto.STRING, number=1)
-
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
-
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
-
-    labels = proto.MapField(proto.STRING, proto.STRING, number=4)
-
+    name = proto.Field(proto.STRING, number=1,)
+    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp_pb2.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,)
+    labels = proto.MapField(proto.STRING, proto.STRING, number=4,)
     fleet_configs = proto.RepeatedField(proto.MESSAGE, number=5, message="FleetConfig",)
-
     scaling_configs = proto.RepeatedField(
         proto.MESSAGE, number=6, message="ScalingConfig",
     )
-
-    description = proto.Field(proto.STRING, number=7)
+    description = proto.Field(proto.STRING, number=7,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,9 +15,16 @@
 #
 
 from .services.game_server_clusters_service import GameServerClustersServiceClient
+from .services.game_server_clusters_service import GameServerClustersServiceAsyncClient
 from .services.game_server_configs_service import GameServerConfigsServiceClient
+from .services.game_server_configs_service import GameServerConfigsServiceAsyncClient
 from .services.game_server_deployments_service import GameServerDeploymentsServiceClient
+from .services.game_server_deployments_service import (
+    GameServerDeploymentsServiceAsyncClient,
+)
 from .services.realms_service import RealmsServiceClient
+from .services.realms_service import RealmsServiceAsyncClient
+
 from .types.common import DeployedFleetDetails
 from .types.common import LabelSelector
 from .types.common import OperationMetadata
@@ -76,7 +82,6 @@ from .types.realms import PreviewRealmUpdateResponse
 from .types.realms import Realm
 from .types.realms import UpdateRealmRequest
 
-
 __all__ = (
     "CreateGameServerClusterRequest",
     "CreateGameServerConfigRequest",
@@ -128,6 +133,7 @@ __all__ = (
     "PreviewUpdateGameServerClusterResponse",
     "Realm",
     "RealmSelector",
+    "RealmsServiceClient",
     "ScalingConfig",
     "Schedule",
     "SpecSource",
@@ -137,5 +143,4 @@ __all__ = (
     "UpdateGameServerDeploymentRequest",
     "UpdateGameServerDeploymentRolloutRequest",
     "UpdateRealmRequest",
-    "RealmsServiceClient",
 )
