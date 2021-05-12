@@ -1,6 +1,5 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import argparse
 import os
 import libcst as cst
@@ -41,34 +39,33 @@ def partition(
 class gamingCallTransformer(cst.CSTTransformer):
     CTRL_PARAMS: Tuple[str] = ('retry', 'timeout', 'metadata')
     METHOD_TO_PARAMS: Dict[str, Tuple[str]] = {
-    'create_game_server_cluster': ('parent', 'game_server_cluster_id', 'game_server_cluster', ),
-    'create_game_server_config': ('parent', 'config_id', 'game_server_config', ),
-    'create_game_server_deployment': ('parent', 'deployment_id', 'game_server_deployment', ),
-    'create_realm': ('parent', 'realm_id', 'realm', ),
-    'delete_game_server_cluster': ('name', ),
-    'delete_game_server_config': ('name', ),
-    'delete_game_server_deployment': ('name', ),
-    'delete_realm': ('name', ),
-    'fetch_deployment_state': ('name', ),
-    'get_game_server_cluster': ('name', ),
-    'get_game_server_config': ('name', ),
-    'get_game_server_deployment': ('name', ),
-    'get_game_server_deployment_rollout': ('name', ),
-    'get_realm': ('name', ),
-    'list_game_server_clusters': ('parent', 'page_size', 'page_token', 'filter', 'order_by', ),
-    'list_game_server_configs': ('parent', 'page_size', 'page_token', 'filter', 'order_by', ),
-    'list_game_server_deployments': ('parent', 'page_size', 'page_token', 'filter', 'order_by', ),
-    'list_realms': ('parent', 'page_size', 'page_token', 'filter', 'order_by', ),
-    'preview_create_game_server_cluster': ('parent', 'game_server_cluster_id', 'game_server_cluster', 'preview_time', ),
-    'preview_delete_game_server_cluster': ('name', 'preview_time', ),
-    'preview_game_server_deployment_rollout': ('rollout', 'update_mask', 'preview_time', ),
-    'preview_realm_update': ('realm', 'update_mask', 'preview_time', ),
-    'preview_update_game_server_cluster': ('game_server_cluster', 'update_mask', 'preview_time', ),
-    'update_game_server_cluster': ('game_server_cluster', 'update_mask', ),
-    'update_game_server_deployment': ('game_server_deployment', 'update_mask', ),
-    'update_game_server_deployment_rollout': ('rollout', 'update_mask', ),
-    'update_realm': ('realm', 'update_mask', ),
-
+          'create_game_server_cluster': ('parent', 'game_server_cluster_id', 'game_server_cluster', ),
+          'create_game_server_config': ('parent', 'config_id', 'game_server_config', ),
+          'create_game_server_deployment': ('parent', 'deployment_id', 'game_server_deployment', ),
+          'create_realm': ('parent', 'realm_id', 'realm', ),
+          'delete_game_server_cluster': ('name', ),
+          'delete_game_server_config': ('name', ),
+          'delete_game_server_deployment': ('name', ),
+          'delete_realm': ('name', ),
+          'fetch_deployment_state': ('name', ),
+          'get_game_server_cluster': ('name', ),
+          'get_game_server_config': ('name', ),
+          'get_game_server_deployment': ('name', ),
+          'get_game_server_deployment_rollout': ('name', ),
+          'get_realm': ('name', ),
+          'list_game_server_clusters': ('parent', 'page_size', 'page_token', 'filter', 'order_by', ),
+          'list_game_server_configs': ('parent', 'page_size', 'page_token', 'filter', 'order_by', ),
+          'list_game_server_deployments': ('parent', 'page_size', 'page_token', 'filter', 'order_by', ),
+          'list_realms': ('parent', 'page_size', 'page_token', 'filter', 'order_by', ),
+          'preview_create_game_server_cluster': ('parent', 'game_server_cluster_id', 'game_server_cluster', 'preview_time', ),
+          'preview_delete_game_server_cluster': ('name', 'preview_time', ),
+          'preview_game_server_deployment_rollout': ('rollout', 'update_mask', 'preview_time', ),
+          'preview_realm_update': ('realm', 'update_mask', 'preview_time', ),
+          'preview_update_game_server_cluster': ('game_server_cluster', 'update_mask', 'preview_time', ),
+          'update_game_server_cluster': ('game_server_cluster', 'update_mask', ),
+          'update_game_server_deployment': ('game_server_deployment', 'update_mask', ),
+          'update_game_server_deployment_rollout': ('rollout', 'update_mask', ),
+          'update_realm': ('realm', 'update_mask', ),
     }
 
     def leave_Call(self, original: cst.Call, updated: cst.Call) -> cst.CSTNode:
@@ -99,7 +96,7 @@ class gamingCallTransformer(cst.CSTTransformer):
             value=cst.Dict([
                 cst.DictElement(
                     cst.SimpleString("'{}'".format(name)),
-                    cst.Element(value=arg.value)
+cst.Element(value=arg.value)
                 )
                 # Note: the args + kwargs looks silly, but keep in mind that
                 # the control parameters had to be stripped out, and that
