@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 import functools
 import re
@@ -22,10 +20,10 @@ from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation  # type: ignore
@@ -33,9 +31,8 @@ from google.api_core import operation_async  # type: ignore
 from google.cloud.gaming_v1.services.game_server_configs_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import game_server_configs
-from google.protobuf import empty_pb2 as empty  # type: ignore
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
-
+from google.protobuf import empty_pb2  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 from .transports.base import GameServerConfigsServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import GameServerConfigsServiceGrpcAsyncIOTransport
 from .client import GameServerConfigsServiceClient
@@ -57,33 +54,28 @@ class GameServerConfigsServiceAsyncClient:
     parse_game_server_config_path = staticmethod(
         GameServerConfigsServiceClient.parse_game_server_config_path
     )
-
     common_billing_account_path = staticmethod(
         GameServerConfigsServiceClient.common_billing_account_path
     )
     parse_common_billing_account_path = staticmethod(
         GameServerConfigsServiceClient.parse_common_billing_account_path
     )
-
     common_folder_path = staticmethod(GameServerConfigsServiceClient.common_folder_path)
     parse_common_folder_path = staticmethod(
         GameServerConfigsServiceClient.parse_common_folder_path
     )
-
     common_organization_path = staticmethod(
         GameServerConfigsServiceClient.common_organization_path
     )
     parse_common_organization_path = staticmethod(
         GameServerConfigsServiceClient.parse_common_organization_path
     )
-
     common_project_path = staticmethod(
         GameServerConfigsServiceClient.common_project_path
     )
     parse_common_project_path = staticmethod(
         GameServerConfigsServiceClient.parse_common_project_path
     )
-
     common_location_path = staticmethod(
         GameServerConfigsServiceClient.common_location_path
     )
@@ -93,7 +85,8 @@ class GameServerConfigsServiceAsyncClient:
 
     @classmethod
     def from_service_account_info(cls, info: dict, *args, **kwargs):
-        """Creates an instance of this client using the provided credentials info.
+        """Creates an instance of this client using the provided credentials
+            info.
 
         Args:
             info (dict): The service account private key info.
@@ -108,7 +101,7 @@ class GameServerConfigsServiceAsyncClient:
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
-        file.
+            file.
 
         Args:
             filename (str): The path to the service account private key json
@@ -125,7 +118,7 @@ class GameServerConfigsServiceAsyncClient:
 
     @property
     def transport(self) -> GameServerConfigsServiceTransport:
-        """Return the transport used by the client instance.
+        """Returns the transport used by the client instance.
 
         Returns:
             GameServerConfigsServiceTransport: The transport used by the client instance.
@@ -140,12 +133,12 @@ class GameServerConfigsServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: credentials.Credentials = None,
+        credentials: ga_credentials.Credentials = None,
         transport: Union[str, GameServerConfigsServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
-        """Instantiate the game server configs service client.
+        """Instantiates the game server configs service client.
 
         Args:
             credentials (Optional[google.auth.credentials.Credentials]): The
@@ -177,7 +170,6 @@ class GameServerConfigsServiceAsyncClient:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-
         self._client = GameServerConfigsServiceClient(
             credentials=credentials,
             transport=transport,
@@ -209,7 +201,6 @@ class GameServerConfigsServiceAsyncClient:
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -239,7 +230,6 @@ class GameServerConfigsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
 
@@ -251,7 +241,9 @@ class GameServerConfigsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
                 deadline=60.0,
             ),
             default_timeout=60.0,
@@ -300,7 +292,6 @@ class GameServerConfigsServiceAsyncClient:
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -325,7 +316,6 @@ class GameServerConfigsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -337,7 +327,9 @@ class GameServerConfigsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
                 deadline=60.0,
             ),
             default_timeout=60.0,
@@ -391,7 +383,6 @@ class GameServerConfigsServiceAsyncClient:
                 This corresponds to the ``game_server_config`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -421,7 +412,6 @@ class GameServerConfigsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
         if game_server_config is not None:
@@ -481,7 +471,6 @@ class GameServerConfigsServiceAsyncClient:
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -521,7 +510,6 @@ class GameServerConfigsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -546,7 +534,7 @@ class GameServerConfigsServiceAsyncClient:
         response = operation_async.from_gapic(
             response,
             self._client._transport.operations_client,
-            empty.Empty,
+            empty_pb2.Empty,
             metadata_type=common.OperationMetadata,
         )
 

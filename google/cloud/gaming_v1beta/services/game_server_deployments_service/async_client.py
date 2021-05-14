@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 import functools
 import re
@@ -22,10 +20,10 @@ from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation  # type: ignore
@@ -33,10 +31,9 @@ from google.api_core import operation_async  # type: ignore
 from google.cloud.gaming_v1beta.services.game_server_deployments_service import pagers
 from google.cloud.gaming_v1beta.types import common
 from google.cloud.gaming_v1beta.types import game_server_deployments
-from google.protobuf import empty_pb2 as empty  # type: ignore
-from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
-
+from google.protobuf import empty_pb2  # type: ignore
+from google.protobuf import field_mask_pb2  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 from .transports.base import GameServerDeploymentsServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import GameServerDeploymentsServiceGrpcAsyncIOTransport
 from .client import GameServerDeploymentsServiceClient
@@ -64,35 +61,30 @@ class GameServerDeploymentsServiceAsyncClient:
     parse_game_server_deployment_rollout_path = staticmethod(
         GameServerDeploymentsServiceClient.parse_game_server_deployment_rollout_path
     )
-
     common_billing_account_path = staticmethod(
         GameServerDeploymentsServiceClient.common_billing_account_path
     )
     parse_common_billing_account_path = staticmethod(
         GameServerDeploymentsServiceClient.parse_common_billing_account_path
     )
-
     common_folder_path = staticmethod(
         GameServerDeploymentsServiceClient.common_folder_path
     )
     parse_common_folder_path = staticmethod(
         GameServerDeploymentsServiceClient.parse_common_folder_path
     )
-
     common_organization_path = staticmethod(
         GameServerDeploymentsServiceClient.common_organization_path
     )
     parse_common_organization_path = staticmethod(
         GameServerDeploymentsServiceClient.parse_common_organization_path
     )
-
     common_project_path = staticmethod(
         GameServerDeploymentsServiceClient.common_project_path
     )
     parse_common_project_path = staticmethod(
         GameServerDeploymentsServiceClient.parse_common_project_path
     )
-
     common_location_path = staticmethod(
         GameServerDeploymentsServiceClient.common_location_path
     )
@@ -102,7 +94,8 @@ class GameServerDeploymentsServiceAsyncClient:
 
     @classmethod
     def from_service_account_info(cls, info: dict, *args, **kwargs):
-        """Creates an instance of this client using the provided credentials info.
+        """Creates an instance of this client using the provided credentials
+            info.
 
         Args:
             info (dict): The service account private key info.
@@ -117,7 +110,7 @@ class GameServerDeploymentsServiceAsyncClient:
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
-        file.
+            file.
 
         Args:
             filename (str): The path to the service account private key json
@@ -134,7 +127,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
     @property
     def transport(self) -> GameServerDeploymentsServiceTransport:
-        """Return the transport used by the client instance.
+        """Returns the transport used by the client instance.
 
         Returns:
             GameServerDeploymentsServiceTransport: The transport used by the client instance.
@@ -149,12 +142,12 @@ class GameServerDeploymentsServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: credentials.Credentials = None,
+        credentials: ga_credentials.Credentials = None,
         transport: Union[str, GameServerDeploymentsServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
-        """Instantiate the game server deployments service client.
+        """Instantiates the game server deployments service client.
 
         Args:
             credentials (Optional[google.auth.credentials.Credentials]): The
@@ -186,7 +179,6 @@ class GameServerDeploymentsServiceAsyncClient:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-
         self._client = GameServerDeploymentsServiceClient(
             credentials=credentials,
             transport=transport,
@@ -217,7 +209,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -247,7 +238,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
 
@@ -259,7 +249,9 @@ class GameServerDeploymentsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
                 deadline=60.0,
             ),
             default_timeout=60.0,
@@ -308,7 +300,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -333,7 +324,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -345,7 +335,9 @@ class GameServerDeploymentsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
                 deadline=60.0,
             ),
             default_timeout=60.0,
@@ -395,7 +387,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 This corresponds to the ``game_server_deployment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -425,7 +416,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
         if game_server_deployment is not None:
@@ -483,7 +473,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -523,7 +512,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -548,7 +536,7 @@ class GameServerDeploymentsServiceAsyncClient:
         response = operation_async.from_gapic(
             response,
             self._client._transport.operations_client,
-            empty.Empty,
+            empty_pb2.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -560,7 +548,7 @@ class GameServerDeploymentsServiceAsyncClient:
         request: game_server_deployments.UpdateGameServerDeploymentRequest = None,
         *,
         game_server_deployment: game_server_deployments.GameServerDeployment = None,
-        update_mask: field_mask.FieldMask = None,
+        update_mask: field_mask_pb2.FieldMask = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -590,7 +578,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -620,7 +607,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if game_server_deployment is not None:
             request.game_server_deployment = game_server_deployment
         if update_mask is not None:
@@ -680,7 +666,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -708,7 +693,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -720,7 +704,9 @@ class GameServerDeploymentsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
                 deadline=60.0,
             ),
             default_timeout=60.0,
@@ -744,7 +730,7 @@ class GameServerDeploymentsServiceAsyncClient:
         request: game_server_deployments.UpdateGameServerDeploymentRolloutRequest = None,
         *,
         rollout: game_server_deployments.GameServerDeploymentRollout = None,
-        update_mask: field_mask.FieldMask = None,
+        update_mask: field_mask_pb2.FieldMask = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -780,7 +766,6 @@ class GameServerDeploymentsServiceAsyncClient:
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -812,7 +797,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if rollout is not None:
             request.rollout = rollout
         if update_mask is not None:
@@ -863,7 +847,6 @@ class GameServerDeploymentsServiceAsyncClient:
             request (:class:`google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutRequest`):
                 The request object. Request message for
                 PreviewGameServerDeploymentRollout.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -879,7 +862,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-
         request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest(
             request
         )
@@ -892,7 +874,9 @@ class GameServerDeploymentsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
                 deadline=60.0,
             ),
             default_timeout=60.0,
@@ -930,7 +914,6 @@ class GameServerDeploymentsServiceAsyncClient:
             request (:class:`google.cloud.gaming_v1beta.types.FetchDeploymentStateRequest`):
                 The request object. Request message for
                 GameServerDeploymentsService.FetchDeploymentState.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -944,7 +927,6 @@ class GameServerDeploymentsServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-
         request = game_server_deployments.FetchDeploymentStateRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
@@ -955,7 +937,9 @@ class GameServerDeploymentsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
                 deadline=60.0,
             ),
             default_timeout=60.0,
