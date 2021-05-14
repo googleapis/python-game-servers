@@ -5,7 +5,6 @@ RealmsService
     :members:
     :inherited-members:
 
-
 .. automodule:: google.cloud.gaming_v1.services.realms_service.pagers
     :members:
     :inherited-members:
