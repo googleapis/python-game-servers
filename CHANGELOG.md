@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://www.github.com/googleapis/python-game-servers/compare/v0.3.0...v0.4.0) (2021-05-16)
+
+
+### Features
+
+* add `from_service_account_info` ([#90](https://www.github.com/googleapis/python-game-servers/issues/90)) ([f1ce240](https://www.github.com/googleapis/python-game-servers/commit/f1ce24029d7b963a7a5c7eb459cea59a2a4ecaaf))
+* add common resource path helper methods, expose client transport ([#45](https://www.github.com/googleapis/python-game-servers/issues/45)) ([cf0999f](https://www.github.com/googleapis/python-game-servers/commit/cf0999fd3a95b77ef32977318019193a777d4c5b))
+
+
+### Bug Fixes
+
+* fix retry deadlines ([f1ce240](https://www.github.com/googleapis/python-game-servers/commit/f1ce24029d7b963a7a5c7eb459cea59a2a4ecaaf))
+* remove gRPC send/recv limit; expose client transport ([#71](https://www.github.com/googleapis/python-game-servers/issues/71)) ([79622f7](https://www.github.com/googleapis/python-game-servers/commit/79622f71f807c5c09d88c757e51794813cda5572))
+
 ## [0.3.0](https://www.github.com/googleapis/python-game-servers/compare/v0.2.0...v0.3.0) (2020-08-07)
 
 
