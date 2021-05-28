@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.4.1](https://www.github.com/googleapis/python-game-servers/compare/v0.4.0...v0.4.1) (2021-05-28)
+
+
+### Bug Fixes
+
+* **deps:** add packaging requirement ([#122](https://www.github.com/googleapis/python-game-servers/issues/122)) ([af6460a](https://www.github.com/googleapis/python-game-servers/commit/af6460a38fa0cd5d6aebec02152ca49f9a91bf0d))
+
 ## [0.4.0](https://www.github.com/googleapis/python-game-servers/compare/v0.3.0...v0.4.0) (2021-05-16)
 
 
