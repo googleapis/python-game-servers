@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.4.2](https://www.github.com/googleapis/python-game-servers/compare/v0.4.1...v0.4.2) (2021-06-16)
+
+
+### Bug Fixes
+
+* exclude docs and tests from package ([#128](https://www.github.com/googleapis/python-game-servers/issues/128)) ([624542d](https://www.github.com/googleapis/python-game-servers/commit/624542d4251575629172b473ff1e9215e6c982c0))
+
 ### [0.4.1](https://www.github.com/googleapis/python-game-servers/compare/v0.4.0...v0.4.1) (2021-05-28)
 
 
