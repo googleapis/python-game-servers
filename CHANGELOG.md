@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.4.3](https://www.github.com/googleapis/python-game-servers/compare/v0.4.2...v0.4.3) (2021-06-19)
+
+
+### Documentation
+
+* omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-game-servers/issues/1127)) ([#132](https://www.github.com/googleapis/python-game-servers/issues/132)) ([46c7313](https://www.github.com/googleapis/python-game-servers/commit/46c7313ab392d08b956793fbb9babc2e2e13091a)), closes [#1126](https://www.github.com/googleapis/python-game-servers/issues/1126)
+
 ### [0.4.2](https://www.github.com/googleapis/python-game-servers/compare/v0.4.1...v0.4.2) (2021-06-16)
 
 
