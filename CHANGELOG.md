@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://www.github.com/googleapis/python-game-servers/compare/v0.5.0...v1.0.0) (2021-06-30)
+
+
+### Features
+
+* bump release level to production/stable ([#120](https://www.github.com/googleapis/python-game-servers/issues/120)) ([7abb7bb](https://www.github.com/googleapis/python-game-servers/commit/7abb7bb281c9cd1bbd94a9aa08690f6ed2faf349))
+
 ## [0.5.0](https://www.github.com/googleapis/python-game-servers/compare/v0.4.2...v0.5.0) (2021-06-30)
 
 
