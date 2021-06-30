@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.5.0](https://www.github.com/googleapis/python-game-servers/compare/v0.4.2...v0.5.0) (2021-06-30)
+
+
+### Features
+
+* add always_use_jwt_access ([#137](https://www.github.com/googleapis/python-game-servers/issues/137)) ([e0e5c5f](https://www.github.com/googleapis/python-game-servers/commit/e0e5c5fc643c28df4b6a199642b271a710c0c047))
+
+
+### Bug Fixes
+
+* disable always_use_jwt_access ([#141](https://www.github.com/googleapis/python-game-servers/issues/141)) ([3867cdf](https://www.github.com/googleapis/python-game-servers/commit/3867cdf2bf956f84371ffbaa558a444c1f699564))
+
+
+### Documentation
+
+* omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-game-servers/issues/1127)) ([#132](https://www.github.com/googleapis/python-game-servers/issues/132)) ([46c7313](https://www.github.com/googleapis/python-game-servers/commit/46c7313ab392d08b956793fbb9babc2e2e13091a)), closes [#1126](https://www.github.com/googleapis/python-game-servers/issues/1126)
+
 ### [0.4.2](https://www.github.com/googleapis/python-game-servers/compare/v0.4.1...v0.4.2) (2021-06-16)
 
 
