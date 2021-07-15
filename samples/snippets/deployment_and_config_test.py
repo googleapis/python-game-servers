@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import datetime
+import os
 import time
 import uuid
 
@@ -36,7 +37,7 @@ import update_rollout_override
 import update_rollout_remove_default
 import update_rollout_remove_override
 
-PROJECT_ID = "python-docs-samples-tests"
+PROJECT_ID = os.getenv("BUILD_SPECIFIC_GCLOUD_PROJECT")
 CONFIG_ID = "my-game-server-config"
 REALM_LOCATION = "global"
 
