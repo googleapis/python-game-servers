@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/python-game-servers/compare/v1.0.0...v1.0.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* **deps:** pin 'google-{api,cloud}-core', 'google-auth' to allow 2.x versions ([#162](https://www.github.com/googleapis/python-game-servers/issues/162)) ([a4263ce](https://www.github.com/googleapis/python-game-servers/commit/a4263ce7550cf34f96875ed7bf01e825d2211911))
+
 ## [1.0.0](https://www.github.com/googleapis/python-game-servers/compare/v0.5.0...v1.0.0) (2021-06-30)
 
 
