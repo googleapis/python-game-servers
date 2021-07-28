@@ -1,5 +1,22 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/python-game-servers/compare/v1.0.1...v1.0.2) (2021-07-28)
+
+
+### Bug Fixes
+
+* enable self signed jwt for grpc ([#168](https://www.github.com/googleapis/python-game-servers/issues/168)) ([9d4ccd1](https://www.github.com/googleapis/python-game-servers/commit/9d4ccd1804824e5b3f9a3250d1c905c1f86e6d99))
+
+
+### Documentation
+
+* add Samples section to CONTRIBUTING.rst ([#163](https://www.github.com/googleapis/python-game-servers/issues/163)) ([a4b018e](https://www.github.com/googleapis/python-game-servers/commit/a4b018e7dfd6c8cd8e084306a8fd21da5329c255))
+
+
+### Miscellaneous Chores
+
+* release as 1.0.2 ([#169](https://www.github.com/googleapis/python-game-servers/issues/169)) ([00c3a82](https://www.github.com/googleapis/python-game-servers/commit/00c3a824eee4a46f8b54172541c90afc542ee9f5))
+
 ### [1.0.1](https://www.github.com/googleapis/python-game-servers/compare/v1.0.0...v1.0.1) (2021-07-20)
 
 
