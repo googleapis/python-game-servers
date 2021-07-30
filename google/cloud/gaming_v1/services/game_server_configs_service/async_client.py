@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 import functools
 import re
@@ -22,10 +20,10 @@ from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation  # type: ignore
@@ -33,9 +31,8 @@ from google.api_core import operation_async  # type: ignore
 from google.cloud.gaming_v1.services.game_server_configs_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import game_server_configs
-from google.protobuf import empty_pb2 as empty  # type: ignore
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
-
+from google.protobuf import empty_pb2  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 from .transports.base import GameServerConfigsServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import GameServerConfigsServiceGrpcAsyncIOTransport
 from .client import GameServerConfigsServiceClient
@@ -57,33 +54,28 @@ class GameServerConfigsServiceAsyncClient:
     parse_game_server_config_path = staticmethod(
         GameServerConfigsServiceClient.parse_game_server_config_path
     )
-
     common_billing_account_path = staticmethod(
         GameServerConfigsServiceClient.common_billing_account_path
     )
     parse_common_billing_account_path = staticmethod(
         GameServerConfigsServiceClient.parse_common_billing_account_path
     )
-
     common_folder_path = staticmethod(GameServerConfigsServiceClient.common_folder_path)
     parse_common_folder_path = staticmethod(
         GameServerConfigsServiceClient.parse_common_folder_path
     )
-
     common_organization_path = staticmethod(
         GameServerConfigsServiceClient.common_organization_path
     )
     parse_common_organization_path = staticmethod(
         GameServerConfigsServiceClient.parse_common_organization_path
     )
-
     common_project_path = staticmethod(
         GameServerConfigsServiceClient.common_project_path
     )
     parse_common_project_path = staticmethod(
         GameServerConfigsServiceClient.parse_common_project_path
     )
-
     common_location_path = staticmethod(
         GameServerConfigsServiceClient.common_location_path
     )
@@ -91,12 +83,42 @@ class GameServerConfigsServiceAsyncClient:
         GameServerConfigsServiceClient.parse_common_location_path
     )
 
-    from_service_account_file = GameServerConfigsServiceClient.from_service_account_file
+    @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials
+            info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            GameServerConfigsServiceAsyncClient: The constructed client.
+        """
+        return GameServerConfigsServiceClient.from_service_account_info.__func__(GameServerConfigsServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+
+    @classmethod
+    def from_service_account_file(cls, filename: str, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials
+            file.
+
+        Args:
+            filename (str): The path to the service account private key json
+                file.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            GameServerConfigsServiceAsyncClient: The constructed client.
+        """
+        return GameServerConfigsServiceClient.from_service_account_file.__func__(GameServerConfigsServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+
     from_service_account_json = from_service_account_file
 
     @property
     def transport(self) -> GameServerConfigsServiceTransport:
-        """Return the transport used by the client instance.
+        """Returns the transport used by the client instance.
 
         Returns:
             GameServerConfigsServiceTransport: The transport used by the client instance.
@@ -111,12 +133,12 @@ class GameServerConfigsServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: credentials.Credentials = None,
+        credentials: ga_credentials.Credentials = None,
         transport: Union[str, GameServerConfigsServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
-        """Instantiate the game server configs service client.
+        """Instantiates the game server configs service client.
 
         Args:
             credentials (Optional[google.auth.credentials.Credentials]): The
@@ -148,7 +170,6 @@ class GameServerConfigsServiceAsyncClient:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-
         self._client = GameServerConfigsServiceClient(
             credentials=credentials,
             transport=transport,
@@ -169,17 +190,17 @@ class GameServerConfigsServiceAsyncClient:
         location, and game server deployment.
 
         Args:
-            request (:class:`~.game_server_configs.ListGameServerConfigsRequest`):
+            request (:class:`google.cloud.gaming_v1.types.ListGameServerConfigsRequest`):
                 The request object. Request message for
                 GameServerConfigsService.ListGameServerConfigs.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -187,7 +208,7 @@ class GameServerConfigsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListGameServerConfigsAsyncPager:
+            google.cloud.gaming_v1.services.game_server_configs_service.pagers.ListGameServerConfigsAsyncPager:
                 Response message for
                 GameServerConfigsService.ListGameServerConfigs.
                 Iterating over this object will yield
@@ -209,7 +230,6 @@ class GameServerConfigsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
 
@@ -221,7 +241,10 @@ class GameServerConfigsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
+                deadline=60.0,
             ),
             default_timeout=60.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -257,7 +280,7 @@ class GameServerConfigsServiceAsyncClient:
         r"""Gets details of a single game server config.
 
         Args:
-            request (:class:`~.game_server_configs.GetGameServerConfigRequest`):
+            request (:class:`google.cloud.gaming_v1.types.GetGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.GetGameServerConfig.
             name (:class:`str`):
@@ -265,10 +288,10 @@ class GameServerConfigsServiceAsyncClient:
                 retrieve. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -276,7 +299,7 @@ class GameServerConfigsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.game_server_configs.GameServerConfig:
+            google.cloud.gaming_v1.types.GameServerConfig:
                 A game server config resource.
         """
         # Create or coerce a protobuf request object.
@@ -293,7 +316,6 @@ class GameServerConfigsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -305,7 +327,10 @@ class GameServerConfigsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
+                deadline=60.0,
             ),
             default_timeout=60.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -340,23 +365,24 @@ class GameServerConfigsServiceAsyncClient:
         resource.
 
         Args:
-            request (:class:`~.game_server_configs.CreateGameServerConfigRequest`):
+            request (:class:`google.cloud.gaming_v1.types.CreateGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.CreateGameServerConfig.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            game_server_config (:class:`~.game_server_configs.GameServerConfig`):
+            game_server_config (:class:`google.cloud.gaming_v1.types.GameServerConfig`):
                 Required. The game server config
                 resource to be created.
+
                 This corresponds to the ``game_server_config`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -364,11 +390,11 @@ class GameServerConfigsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.game_server_configs.GameServerConfig``: A
+                :class:`google.cloud.gaming_v1.types.GameServerConfig` A
                 game server config resource.
 
         """
@@ -386,7 +412,6 @@ class GameServerConfigsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
         if game_server_config is not None:
@@ -434,7 +459,7 @@ class GameServerConfigsServiceAsyncClient:
         game server deployment rollout.
 
         Args:
-            request (:class:`~.game_server_configs.DeleteGameServerConfigRequest`):
+            request (:class:`google.cloud.gaming_v1.types.DeleteGameServerConfigRequest`):
                 The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
             name (:class:`str`):
@@ -442,10 +467,10 @@ class GameServerConfigsServiceAsyncClient:
                 Uses the form:
 
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -453,24 +478,22 @@ class GameServerConfigsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -487,7 +510,6 @@ class GameServerConfigsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -512,7 +534,7 @@ class GameServerConfigsServiceAsyncClient:
         response = operation_async.from_gapic(
             response,
             self._client._transport.operations_client,
-            empty.Empty,
+            empty_pb2.Empty,
             metadata_type=common.OperationMetadata,
         )
 

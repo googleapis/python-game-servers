@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 import functools
 import re
@@ -22,10 +20,10 @@ from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation  # type: ignore
@@ -33,10 +31,9 @@ from google.api_core import operation_async  # type: ignore
 from google.cloud.gaming_v1.services.realms_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import realms
-from google.protobuf import empty_pb2 as empty  # type: ignore
-from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
-
+from google.protobuf import empty_pb2  # type: ignore
+from google.protobuf import field_mask_pb2  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 from .transports.base import RealmsServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import RealmsServiceGrpcAsyncIOTransport
 from .client import RealmsServiceClient
@@ -54,42 +51,67 @@ class RealmsServiceAsyncClient:
 
     realm_path = staticmethod(RealmsServiceClient.realm_path)
     parse_realm_path = staticmethod(RealmsServiceClient.parse_realm_path)
-
     common_billing_account_path = staticmethod(
         RealmsServiceClient.common_billing_account_path
     )
     parse_common_billing_account_path = staticmethod(
         RealmsServiceClient.parse_common_billing_account_path
     )
-
     common_folder_path = staticmethod(RealmsServiceClient.common_folder_path)
     parse_common_folder_path = staticmethod(
         RealmsServiceClient.parse_common_folder_path
     )
-
     common_organization_path = staticmethod(
         RealmsServiceClient.common_organization_path
     )
     parse_common_organization_path = staticmethod(
         RealmsServiceClient.parse_common_organization_path
     )
-
     common_project_path = staticmethod(RealmsServiceClient.common_project_path)
     parse_common_project_path = staticmethod(
         RealmsServiceClient.parse_common_project_path
     )
-
     common_location_path = staticmethod(RealmsServiceClient.common_location_path)
     parse_common_location_path = staticmethod(
         RealmsServiceClient.parse_common_location_path
     )
 
-    from_service_account_file = RealmsServiceClient.from_service_account_file
+    @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials
+            info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            RealmsServiceAsyncClient: The constructed client.
+        """
+        return RealmsServiceClient.from_service_account_info.__func__(RealmsServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+
+    @classmethod
+    def from_service_account_file(cls, filename: str, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials
+            file.
+
+        Args:
+            filename (str): The path to the service account private key json
+                file.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            RealmsServiceAsyncClient: The constructed client.
+        """
+        return RealmsServiceClient.from_service_account_file.__func__(RealmsServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+
     from_service_account_json = from_service_account_file
 
     @property
     def transport(self) -> RealmsServiceTransport:
-        """Return the transport used by the client instance.
+        """Returns the transport used by the client instance.
 
         Returns:
             RealmsServiceTransport: The transport used by the client instance.
@@ -103,12 +125,12 @@ class RealmsServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: credentials.Credentials = None,
+        credentials: ga_credentials.Credentials = None,
         transport: Union[str, RealmsServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
-        """Instantiate the realms service client.
+        """Instantiates the realms service client.
 
         Args:
             credentials (Optional[google.auth.credentials.Credentials]): The
@@ -140,7 +162,6 @@ class RealmsServiceAsyncClient:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-
         self._client = RealmsServiceClient(
             credentials=credentials,
             transport=transport,
@@ -160,16 +181,16 @@ class RealmsServiceAsyncClient:
         r"""Lists realms in a given project and location.
 
         Args:
-            request (:class:`~.realms.ListRealmsRequest`):
+            request (:class:`google.cloud.gaming_v1.types.ListRealmsRequest`):
                 The request object. Request message for
                 RealmsService.ListRealms.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -177,7 +198,7 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListRealmsAsyncPager:
+            google.cloud.gaming_v1.services.realms_service.pagers.ListRealmsAsyncPager:
                 Response message for
                 RealmsService.ListRealms.
                 Iterating over this object will yield
@@ -199,7 +220,6 @@ class RealmsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
 
@@ -211,7 +231,10 @@ class RealmsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
+                deadline=60.0,
             ),
             default_timeout=60.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -247,17 +270,17 @@ class RealmsServiceAsyncClient:
         r"""Gets details of a single realm.
 
         Args:
-            request (:class:`~.realms.GetRealmRequest`):
+            request (:class:`google.cloud.gaming_v1.types.GetRealmRequest`):
                 The request object. Request message for
                 RealmsService.GetRealm.
             name (:class:`str`):
                 Required. The name of the realm to retrieve. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -265,7 +288,7 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.realms.Realm:
+            google.cloud.gaming_v1.types.Realm:
                 A realm resource.
         """
         # Create or coerce a protobuf request object.
@@ -282,7 +305,6 @@ class RealmsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -294,7 +316,10 @@ class RealmsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
+                deadline=60.0,
             ),
             default_timeout=60.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -326,28 +351,30 @@ class RealmsServiceAsyncClient:
         r"""Creates a new realm in a given project and location.
 
         Args:
-            request (:class:`~.realms.CreateRealmRequest`):
+            request (:class:`google.cloud.gaming_v1.types.CreateRealmRequest`):
                 The request object. Request message for
                 RealmsService.CreateRealm.
             parent (:class:`str`):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            realm (:class:`~.realms.Realm`):
+            realm (:class:`google.cloud.gaming_v1.types.Realm`):
                 Required. The realm resource to be
                 created.
+
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             realm_id (:class:`str`):
                 Required. The ID of the realm
                 resource to be created.
+
                 This corresponds to the ``realm_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -355,11 +382,12 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A realm resource.
+                :class:`google.cloud.gaming_v1.types.Realm` A realm
+                resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -376,7 +404,6 @@ class RealmsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
         if realm is not None:
@@ -424,17 +451,17 @@ class RealmsServiceAsyncClient:
         r"""Deletes a single realm.
 
         Args:
-            request (:class:`~.realms.DeleteRealmRequest`):
+            request (:class:`google.cloud.gaming_v1.types.DeleteRealmRequest`):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
             name (:class:`str`):
                 Required. The name of the realm to delete. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -442,24 +469,22 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -476,7 +501,6 @@ class RealmsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -501,7 +525,7 @@ class RealmsServiceAsyncClient:
         response = operation_async.from_gapic(
             response,
             self._client._transport.operations_client,
-            empty.Empty,
+            empty_pb2.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -513,7 +537,7 @@ class RealmsServiceAsyncClient:
         request: realms.UpdateRealmRequest = None,
         *,
         realm: realms.Realm = None,
-        update_mask: field_mask.FieldMask = None,
+        update_mask: field_mask_pb2.FieldMask = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -521,25 +545,26 @@ class RealmsServiceAsyncClient:
         r"""Patches a single realm.
 
         Args:
-            request (:class:`~.realms.UpdateRealmRequest`):
+            request (:class:`google.cloud.gaming_v1.types.UpdateRealmRequest`):
                 The request object. Request message for
                 RealmsService.UpdateRealm.
-            realm (:class:`~.realms.Realm`):
+            realm (:class:`google.cloud.gaming_v1.types.Realm`):
                 Required. The realm to be updated. Only fields specified
                 in update_mask are updated.
+
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`~.field_mask.FieldMask`):
+            update_mask (:class:`google.protobuf.field_mask_pb2.FieldMask`):
                 Required. The update mask applies to the resource. For
                 the ``FieldMask`` definition, see
 
                 https: //developers.google.com/protocol-buffers //
                 /docs/reference/google.protobuf#fieldmask
+
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -547,11 +572,12 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A realm resource.
+                :class:`google.cloud.gaming_v1.types.Realm` A realm
+                resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -568,7 +594,6 @@ class RealmsServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if realm is not None:
             request.realm = realm
         if update_mask is not None:
@@ -615,10 +640,9 @@ class RealmsServiceAsyncClient:
         r"""Previews patches to a single realm.
 
         Args:
-            request (:class:`~.realms.PreviewRealmUpdateRequest`):
+            request (:class:`google.cloud.gaming_v1.types.PreviewRealmUpdateRequest`):
                 The request object. Request message for
                 RealmsService.PreviewRealmUpdate.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -626,13 +650,12 @@ class RealmsServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.realms.PreviewRealmUpdateResponse:
+            google.cloud.gaming_v1.types.PreviewRealmUpdateResponse:
                 Response message for
                 RealmsService.PreviewRealmUpdate.
 
         """
         # Create or coerce a protobuf request object.
-
         request = realms.PreviewRealmUpdateRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
@@ -643,7 +666,10 @@ class RealmsServiceAsyncClient:
                 initial=1.0,
                 maximum=10.0,
                 multiplier=1.3,
-                predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                predicate=retries.if_exception_type(
+                    core_exceptions.ServiceUnavailable,
+                ),
+                deadline=60.0,
             ),
             default_timeout=60.0,
             client_info=DEFAULT_CLIENT_INFO,

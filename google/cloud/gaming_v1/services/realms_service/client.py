@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -23,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -37,10 +35,9 @@ from google.api_core import operation_async  # type: ignore
 from google.cloud.gaming_v1.services.realms_service import pagers
 from google.cloud.gaming_v1.types import common
 from google.cloud.gaming_v1.types import realms
-from google.protobuf import empty_pb2 as empty  # type: ignore
-from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
-
+from google.protobuf import empty_pb2  # type: ignore
+from google.protobuf import field_mask_pb2  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 from .transports.base import RealmsServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import RealmsServiceGrpcTransport
 from .transports.grpc_asyncio import RealmsServiceGrpcAsyncIOTransport
@@ -59,7 +56,7 @@ class RealmsServiceClientMeta(type):
     _transport_registry["grpc_asyncio"] = RealmsServiceGrpcAsyncIOTransport
 
     def get_transport_class(cls, label: str = None,) -> Type[RealmsServiceTransport]:
-        """Return an appropriate transport class.
+        """Returns an appropriate transport class.
 
         Args:
             label: The name of the desired transport. If none is
@@ -84,7 +81,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     @staticmethod
     def _get_default_mtls_endpoint(api_endpoint):
-        """Convert api endpoint to mTLS endpoint.
+        """Converts api endpoint to mTLS endpoint.
+
         Convert "*.sandbox.googleapis.com" and "*.googleapis.com" to
         "*.mtls.sandbox.googleapis.com" and "*.mtls.googleapis.com" respectively.
         Args:
@@ -117,9 +115,26 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     )
 
     @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials
+            info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            RealmsServiceClient: The constructed client.
+        """
+        credentials = service_account.Credentials.from_service_account_info(info)
+        kwargs["credentials"] = credentials
+        return cls(*args, **kwargs)
+
+    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
-        file.
+            file.
 
         Args:
             filename (str): The path to the service account private key json
@@ -128,7 +143,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            {@api.name}: The constructed client.
+            RealmsServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -138,23 +153,24 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     @property
     def transport(self) -> RealmsServiceTransport:
-        """Return the transport used by the client instance.
+        """Returns the transport used by the client instance.
 
         Returns:
-            RealmsServiceTransport: The transport used by the client instance.
+            RealmsServiceTransport: The transport used by the client
+                instance.
         """
         return self._transport
 
     @staticmethod
     def realm_path(project: str, location: str, realm: str,) -> str:
-        """Return a fully-qualified realm string."""
+        """Returns a fully-qualified realm string."""
         return "projects/{project}/locations/{location}/realms/{realm}".format(
             project=project, location=location, realm=realm,
         )
 
     @staticmethod
     def parse_realm_path(path: str) -> Dict[str, str]:
-        """Parse a realm path into its component segments."""
+        """Parses a realm path into its component segments."""
         m = re.match(
             r"^projects/(?P<project>.+?)/locations/(?P<location>.+?)/realms/(?P<realm>.+?)$",
             path,
@@ -163,7 +179,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     @staticmethod
     def common_billing_account_path(billing_account: str,) -> str:
-        """Return a fully-qualified billing_account string."""
+        """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
         )
@@ -176,7 +192,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     @staticmethod
     def common_folder_path(folder: str,) -> str:
-        """Return a fully-qualified folder string."""
+        """Returns a fully-qualified folder string."""
         return "folders/{folder}".format(folder=folder,)
 
     @staticmethod
@@ -187,7 +203,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     @staticmethod
     def common_organization_path(organization: str,) -> str:
-        """Return a fully-qualified organization string."""
+        """Returns a fully-qualified organization string."""
         return "organizations/{organization}".format(organization=organization,)
 
     @staticmethod
@@ -198,7 +214,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     @staticmethod
     def common_project_path(project: str,) -> str:
-        """Return a fully-qualified project string."""
+        """Returns a fully-qualified project string."""
         return "projects/{project}".format(project=project,)
 
     @staticmethod
@@ -209,7 +225,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     @staticmethod
     def common_location_path(project: str, location: str,) -> str:
-        """Return a fully-qualified location string."""
+        """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
             project=project, location=location,
         )
@@ -223,12 +239,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, RealmsServiceTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
-        """Instantiate the realms service client.
+        """Instantiates the realms service client.
 
         Args:
             credentials (Optional[google.auth.credentials.Credentials]): The
@@ -236,10 +252,10 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.RealmsServiceTransport]): The
+            transport (Union[str, RealmsServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (client_options_lib.ClientOptions): Custom options for the
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -275,21 +291,18 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
             util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
         )
 
-        ssl_credentials = None
+        client_cert_source_func = None
         is_mtls = False
         if use_client_cert:
             if client_options.client_cert_source:
-                import grpc  # type: ignore
-
-                cert, key = client_options.client_cert_source()
-                ssl_credentials = grpc.ssl_channel_credentials(
-                    certificate_chain=cert, private_key=key
-                )
                 is_mtls = True
+                client_cert_source_func = client_options.client_cert_source
             else:
-                creds = SslCredentials()
-                is_mtls = creds.is_mtls
-                ssl_credentials = creds.ssl_credentials if is_mtls else None
+                is_mtls = mtls.has_default_client_cert_source()
+                if is_mtls:
+                    client_cert_source_func = mtls.default_client_cert_source()
+                else:
+                    client_cert_source_func = None
 
         # Figure out which api endpoint to use.
         if client_options.api_endpoint is not None:
@@ -301,12 +314,14 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
             elif use_mtls_env == "always":
                 api_endpoint = self.DEFAULT_MTLS_ENDPOINT
             elif use_mtls_env == "auto":
-                api_endpoint = (
-                    self.DEFAULT_MTLS_ENDPOINT if is_mtls else self.DEFAULT_ENDPOINT
-                )
+                if is_mtls:
+                    api_endpoint = self.DEFAULT_MTLS_ENDPOINT
+                else:
+                    api_endpoint = self.DEFAULT_ENDPOINT
             else:
                 raise MutualTLSChannelError(
-                    "Unsupported GOOGLE_API_USE_MTLS_ENDPOINT value. Accepted values: never, auto, always"
+                    "Unsupported GOOGLE_API_USE_MTLS_ENDPOINT value. Accepted "
+                    "values: never, auto, always"
                 )
 
         # Save or instantiate the transport.
@@ -321,8 +336,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 )
             if client_options.scopes:
                 raise ValueError(
-                    "When providing a transport instance, "
-                    "provide its scopes directly."
+                    "When providing a transport instance, provide its scopes "
+                    "directly."
                 )
             self._transport = transport
         else:
@@ -332,9 +347,13 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 credentials_file=client_options.credentials_file,
                 host=api_endpoint,
                 scopes=client_options.scopes,
-                ssl_channel_credentials=ssl_credentials,
+                client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=(
+                    Transport == type(self).get_transport_class("grpc")
+                    or Transport == type(self).get_transport_class("grpc_asyncio")
+                ),
             )
 
     def list_realms(
@@ -349,16 +368,16 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Lists realms in a given project and location.
 
         Args:
-            request (:class:`~.realms.ListRealmsRequest`):
+            request (google.cloud.gaming_v1.types.ListRealmsRequest):
                 The request object. Request message for
                 RealmsService.ListRealms.
-            parent (:class:`str`):
+            parent (str):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -366,7 +385,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListRealmsPager:
+            google.cloud.gaming_v1.services.realms_service.pagers.ListRealmsPager:
                 Response message for
                 RealmsService.ListRealms.
                 Iterating over this object will yield
@@ -390,10 +409,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, realms.ListRealmsRequest):
             request = realms.ListRealmsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
 
@@ -431,17 +448,17 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Gets details of a single realm.
 
         Args:
-            request (:class:`~.realms.GetRealmRequest`):
+            request (google.cloud.gaming_v1.types.GetRealmRequest):
                 The request object. Request message for
                 RealmsService.GetRealm.
-            name (:class:`str`):
+            name (str):
                 Required. The name of the realm to retrieve. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -449,7 +466,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.realms.Realm:
+            google.cloud.gaming_v1.types.Realm:
                 A realm resource.
         """
         # Create or coerce a protobuf request object.
@@ -468,10 +485,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, realms.GetRealmRequest):
             request = realms.GetRealmRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if name is not None:
                 request.name = name
 
@@ -505,28 +520,30 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Creates a new realm in a given project and location.
 
         Args:
-            request (:class:`~.realms.CreateRealmRequest`):
+            request (google.cloud.gaming_v1.types.CreateRealmRequest):
                 The request object. Request message for
                 RealmsService.CreateRealm.
-            parent (:class:`str`):
+            parent (str):
                 Required. The parent resource name. Uses the form:
                 ``projects/{project}/locations/{location}``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            realm (:class:`~.realms.Realm`):
+            realm (google.cloud.gaming_v1.types.Realm):
                 Required. The realm resource to be
                 created.
+
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            realm_id (:class:`str`):
+            realm_id (str):
                 Required. The ID of the realm
                 resource to be created.
+
                 This corresponds to the ``realm_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -534,11 +551,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A realm resource.
+                :class:`google.cloud.gaming_v1.types.Realm` A realm
+                resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -557,10 +575,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, realms.CreateRealmRequest):
             request = realms.CreateRealmRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
             if realm is not None:
@@ -604,17 +620,17 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Deletes a single realm.
 
         Args:
-            request (:class:`~.realms.DeleteRealmRequest`):
+            request (google.cloud.gaming_v1.types.DeleteRealmRequest):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
-            name (:class:`str`):
+            name (str):
                 Required. The name of the realm to delete. Uses the
                 form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -622,24 +638,22 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -658,10 +672,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, realms.DeleteRealmRequest):
             request = realms.DeleteRealmRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if name is not None:
                 request.name = name
 
@@ -682,7 +694,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         response = operation.from_gapic(
             response,
             self._transport.operations_client,
-            empty.Empty,
+            empty_pb2.Empty,
             metadata_type=common.OperationMetadata,
         )
 
@@ -694,7 +706,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         request: realms.UpdateRealmRequest = None,
         *,
         realm: realms.Realm = None,
-        update_mask: field_mask.FieldMask = None,
+        update_mask: field_mask_pb2.FieldMask = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -702,25 +714,26 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Patches a single realm.
 
         Args:
-            request (:class:`~.realms.UpdateRealmRequest`):
+            request (google.cloud.gaming_v1.types.UpdateRealmRequest):
                 The request object. Request message for
                 RealmsService.UpdateRealm.
-            realm (:class:`~.realms.Realm`):
+            realm (google.cloud.gaming_v1.types.Realm):
                 Required. The realm to be updated. Only fields specified
                 in update_mask are updated.
+
                 This corresponds to the ``realm`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`~.field_mask.FieldMask`):
+            update_mask (google.protobuf.field_mask_pb2.FieldMask):
                 Required. The update mask applies to the resource. For
                 the ``FieldMask`` definition, see
 
                 https: //developers.google.com/protocol-buffers //
                 /docs/reference/google.protobuf#fieldmask
+
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -728,11 +741,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.realms.Realm``: A realm resource.
+                :class:`google.cloud.gaming_v1.types.Realm` A realm
+                resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -751,10 +765,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, realms.UpdateRealmRequest):
             request = realms.UpdateRealmRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if realm is not None:
                 request.realm = realm
             if update_mask is not None:
@@ -797,10 +809,9 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Previews patches to a single realm.
 
         Args:
-            request (:class:`~.realms.PreviewRealmUpdateRequest`):
+            request (google.cloud.gaming_v1.types.PreviewRealmUpdateRequest):
                 The request object. Request message for
                 RealmsService.PreviewRealmUpdate.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -808,13 +819,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.realms.PreviewRealmUpdateResponse:
+            google.cloud.gaming_v1.types.PreviewRealmUpdateResponse:
                 Response message for
                 RealmsService.PreviewRealmUpdate.
 
         """
         # Create or coerce a protobuf request object.
-
         # Minor optimization to avoid making a copy if the user passes
         # in a realms.PreviewRealmUpdateRequest.
         # There's no risk of modifying the input as we've already verified

@@ -19,41 +19,28 @@ import synthtool as s
 import synthtool.gcp as gcp
 from synthtool.languages import python
 
-gapic = gcp.GAPICBazel()
 common = gcp.CommonTemplates()
 
-# ----------------------------------------------------------------------------
-# Generate Game Servers GAPIC layer
-# ----------------------------------------------------------------------------
+default_version = "v1"
 
-versions = ["v1beta", "v1"]
-for version in versions:
-    library = gapic.py_library(
-        "gameservices", version, bazel_target=f"//google/cloud/gaming/{version}:gaming-{version}-py"
-    )
+for library in s.get_staging_dirs(default_version):
+    # rename library to google-cloud-game-servers
+    s.replace(library / "**/*.py", "google-cloud-gaming", "google-cloud-game-servers")
 
-    s.move(library, excludes=["nox.py", "setup.py", "README.rst", "docs/index.rst"])
-
-
-# rename library to google-cloud-game-servers
-s.replace(
-    ["google/**/*.py", "tests/**/*.py"],
-    "google-cloud-gaming",
-    "google-cloud-game-servers",
-)
-
-
-# Fix paragaraph in docstring that should be a raw block
-s.replace(
-    "google/**/common.py",
+    # Fix paragaraph in docstring that should be a raw block
+    s.replace(library / "google/**/common.py",
     """    start_time\|-------\[cron job\]-------\[cron job\]-------\[cron
     job\]---\|end_time cron job: cron spec start time \+ duration""",
-    """    :: 
+    """    ::
 
         start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
-        cron job: cron spec start time + duration
-""",
-)
+        cron job: cron spec start time + duration\n""",
+    )
+
+    s.move(library, excludes=["nox.py", "setup.py", "README.rst", "docs/index.rst", "*.tar.gz"])
+
+s.remove_staging_dirs()
+
 # ----------------------------------------------------------------------------
 # Add templated files
 # ----------------------------------------------------------------------------

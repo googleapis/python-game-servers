@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import proto  # type: ignore
 
-
 from google.cloud.gaming_v1beta.types import common
-from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
+from google.protobuf import field_mask_pb2  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
@@ -73,15 +70,11 @@ class ListGameServerDeploymentsRequest(proto.Message):
             https://cloud.google.com/apis/design/design_patterns#sorting_order.
     """
 
-    parent = proto.Field(proto.STRING, number=1)
-
-    page_size = proto.Field(proto.INT32, number=2)
-
-    page_token = proto.Field(proto.STRING, number=3)
-
-    filter = proto.Field(proto.STRING, number=4)
-
-    order_by = proto.Field(proto.STRING, number=5)
+    parent = proto.Field(proto.STRING, number=1,)
+    page_size = proto.Field(proto.INT32, number=2,)
+    page_token = proto.Field(proto.STRING, number=3,)
+    filter = proto.Field(proto.STRING, number=4,)
+    order_by = proto.Field(proto.STRING, number=5,)
 
 
 class ListGameServerDeploymentsResponse(proto.Message):
@@ -89,7 +82,7 @@ class ListGameServerDeploymentsResponse(proto.Message):
     GameServerDeploymentsService.ListGameServerDeployments.
 
     Attributes:
-        game_server_deployments (Sequence[~.gcg_game_server_deployments.GameServerDeployment]):
+        game_server_deployments (Sequence[google.cloud.gaming_v1beta.types.GameServerDeployment]):
             The list of game server deployments.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -106,10 +99,8 @@ class ListGameServerDeploymentsResponse(proto.Message):
     game_server_deployments = proto.RepeatedField(
         proto.MESSAGE, number=1, message="GameServerDeployment",
     )
-
-    next_page_token = proto.Field(proto.STRING, number=2)
-
-    unreachable = proto.RepeatedField(proto.STRING, number=4)
+    next_page_token = proto.Field(proto.STRING, number=2,)
+    unreachable = proto.RepeatedField(proto.STRING, number=4,)
 
 
 class GetGameServerDeploymentRequest(proto.Message):
@@ -124,7 +115,7 @@ class GetGameServerDeploymentRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
     """
 
-    name = proto.Field(proto.STRING, number=1)
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class GetGameServerDeploymentRolloutRequest(proto.Message):
@@ -139,7 +130,7 @@ class GetGameServerDeploymentRolloutRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
     """
 
-    name = proto.Field(proto.STRING, number=1)
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class CreateGameServerDeploymentRequest(proto.Message):
@@ -153,15 +144,13 @@ class CreateGameServerDeploymentRequest(proto.Message):
         deployment_id (str):
             Required. The ID of the game server
             delpoyment resource to be created.
-        game_server_deployment (~.gcg_game_server_deployments.GameServerDeployment):
+        game_server_deployment (google.cloud.gaming_v1beta.types.GameServerDeployment):
             Required. The game server delpoyment resource
             to be created.
     """
 
-    parent = proto.Field(proto.STRING, number=1)
-
-    deployment_id = proto.Field(proto.STRING, number=2)
-
+    parent = proto.Field(proto.STRING, number=1,)
+    deployment_id = proto.Field(proto.STRING, number=2,)
     game_server_deployment = proto.Field(
         proto.MESSAGE, number=3, message="GameServerDeployment",
     )
@@ -179,7 +168,7 @@ class DeleteGameServerDeploymentRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
     """
 
-    name = proto.Field(proto.STRING, number=1)
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class UpdateGameServerDeploymentRequest(proto.Message):
@@ -188,10 +177,10 @@ class UpdateGameServerDeploymentRequest(proto.Message):
     allows updates for labels.
 
     Attributes:
-        game_server_deployment (~.gcg_game_server_deployments.GameServerDeployment):
+        game_server_deployment (google.cloud.gaming_v1beta.types.GameServerDeployment):
             Required. The game server delpoyment to be updated. Only
             fields specified in update_mask are updated.
-        update_mask (~.field_mask.FieldMask):
+        update_mask (google.protobuf.field_mask_pb2.FieldMask):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
@@ -203,8 +192,9 @@ class UpdateGameServerDeploymentRequest(proto.Message):
     game_server_deployment = proto.Field(
         proto.MESSAGE, number=1, message="GameServerDeployment",
     )
-
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
+    update_mask = proto.Field(
+        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+    )
 
 
 class UpdateGameServerDeploymentRolloutRequest(proto.Message):
@@ -212,10 +202,10 @@ class UpdateGameServerDeploymentRolloutRequest(proto.Message):
     GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
 
     Attributes:
-        rollout (~.gcg_game_server_deployments.GameServerDeploymentRollout):
+        rollout (google.cloud.gaming_v1beta.types.GameServerDeploymentRollout):
             Required. The game server delpoyment rollout to be updated.
             Only fields specified in update_mask are updated.
-        update_mask (~.field_mask.FieldMask):
+        update_mask (google.protobuf.field_mask_pb2.FieldMask):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
@@ -227,8 +217,9 @@ class UpdateGameServerDeploymentRolloutRequest(proto.Message):
     rollout = proto.Field(
         proto.MESSAGE, number=1, message="GameServerDeploymentRollout",
     )
-
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
+    update_mask = proto.Field(
+        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+    )
 
 
 class FetchDeploymentStateRequest(proto.Message):
@@ -243,7 +234,7 @@ class FetchDeploymentStateRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
     """
 
-    name = proto.Field(proto.STRING, number=1)
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class FetchDeploymentStateResponse(proto.Message):
@@ -251,7 +242,7 @@ class FetchDeploymentStateResponse(proto.Message):
     GameServerDeploymentsService.FetchDeploymentState.
 
     Attributes:
-        cluster_state (Sequence[~.gcg_game_server_deployments.FetchDeploymentStateResponse.DeployedClusterState]):
+        cluster_state (Sequence[google.cloud.gaming_v1beta.types.FetchDeploymentStateResponse.DeployedClusterState]):
             The state of the game server deployment in
             each game server cluster.
         unavailable (Sequence[str]):
@@ -265,13 +256,12 @@ class FetchDeploymentStateResponse(proto.Message):
         Attributes:
             cluster (str):
                 The name of the cluster.
-            fleet_details (Sequence[~.common.DeployedFleetDetails]):
+            fleet_details (Sequence[google.cloud.gaming_v1beta.types.DeployedFleetDetails]):
                 The details about the Agones fleets and
                 autoscalers created in the game server cluster.
         """
 
-        cluster = proto.Field(proto.STRING, number=1)
-
+        cluster = proto.Field(proto.STRING, number=1,)
         fleet_details = proto.RepeatedField(
             proto.MESSAGE, number=2, message=common.DeployedFleetDetails,
         )
@@ -279,13 +269,11 @@ class FetchDeploymentStateResponse(proto.Message):
     cluster_state = proto.RepeatedField(
         proto.MESSAGE, number=1, message=DeployedClusterState,
     )
-
-    unavailable = proto.RepeatedField(proto.STRING, number=2)
+    unavailable = proto.RepeatedField(proto.STRING, number=2,)
 
 
 class GameServerDeployment(proto.Message):
     r"""A game server deployment resource.
-
     Attributes:
         name (str):
             The resource name of the game server deployment. Uses the
@@ -295,11 +283,11 @@ class GameServerDeployment(proto.Message):
             For example,
 
             ``projects/my-project/locations/{location}/gameServerDeployments/my-deployment``.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The creation time.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[~.gcg_game_server_deployments.GameServerDeployment.LabelsEntry]):
+        labels (Sequence[google.cloud.gaming_v1beta.types.GameServerDeployment.LabelsEntry]):
             The labels associated with this game server
             deployment. Each label is a key-value pair.
         etag (str):
@@ -309,24 +297,18 @@ class GameServerDeployment(proto.Message):
             delpoyment.
     """
 
-    name = proto.Field(proto.STRING, number=1)
-
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
-
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
-
-    labels = proto.MapField(proto.STRING, proto.STRING, number=4)
-
-    etag = proto.Field(proto.STRING, number=7)
-
-    description = proto.Field(proto.STRING, number=8)
+    name = proto.Field(proto.STRING, number=1,)
+    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp_pb2.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,)
+    labels = proto.MapField(proto.STRING, proto.STRING, number=4,)
+    etag = proto.Field(proto.STRING, number=7,)
+    description = proto.Field(proto.STRING, number=8,)
 
 
 class GameServerConfigOverride(proto.Message):
     r"""A game server config override.
-
     Attributes:
-        realms_selector (~.common.RealmSelector):
+        realms_selector (google.cloud.gaming_v1beta.types.RealmSelector):
             Selector for choosing applicable realms.
         config_version (str):
             The game server config for this override.
@@ -335,8 +317,7 @@ class GameServerConfigOverride(proto.Message):
     realms_selector = proto.Field(
         proto.MESSAGE, number=1, oneof="selector", message=common.RealmSelector,
     )
-
-    config_version = proto.Field(proto.STRING, number=100, oneof="change")
+    config_version = proto.Field(proto.STRING, number=100, oneof="change",)
 
 
 class GameServerDeploymentRollout(proto.Message):
@@ -352,16 +333,16 @@ class GameServerDeploymentRollout(proto.Message):
             For example,
 
             ``projects/my-project/locations/{location}/gameServerDeployments/my-deployment/rollout``.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The creation time.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The last-modified time.
         default_game_server_config (str):
             The default game server config is applied to all realms
             unless overridden in the rollout. For example,
 
             ``projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config``.
-        game_server_config_overrides (Sequence[~.gcg_game_server_deployments.GameServerConfigOverride]):
+        game_server_config_overrides (Sequence[google.cloud.gaming_v1beta.types.GameServerConfigOverride]):
             Contains the game server config rollout
             overrides. Overrides are processed in the order
             they are listed. Once a match is found for a
@@ -370,36 +351,30 @@ class GameServerDeploymentRollout(proto.Message):
             ETag of the resource.
     """
 
-    name = proto.Field(proto.STRING, number=1)
-
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
-
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
-
-    default_game_server_config = proto.Field(proto.STRING, number=4)
-
+    name = proto.Field(proto.STRING, number=1,)
+    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp_pb2.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,)
+    default_game_server_config = proto.Field(proto.STRING, number=4,)
     game_server_config_overrides = proto.RepeatedField(
         proto.MESSAGE, number=5, message="GameServerConfigOverride",
     )
-
-    etag = proto.Field(proto.STRING, number=6)
+    etag = proto.Field(proto.STRING, number=6,)
 
 
 class PreviewGameServerDeploymentRolloutRequest(proto.Message):
     r"""Request message for PreviewGameServerDeploymentRollout.
-
     Attributes:
-        rollout (~.gcg_game_server_deployments.GameServerDeploymentRollout):
+        rollout (google.cloud.gaming_v1beta.types.GameServerDeploymentRollout):
             Required. The game server deployment rollout to be updated.
             Only fields specified in update_mask are updated.
-        update_mask (~.field_mask.FieldMask):
+        update_mask (google.protobuf.field_mask_pb2.FieldMask):
             Optional. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
 
             https: //developers.google.com/protocol-buffers //
             /docs/reference/google.protobuf#fieldmask
-        preview_time (~.timestamp.Timestamp):
+        preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
             preview. Defaults to the immediately after the
             proposed rollout completes.
@@ -408,10 +383,12 @@ class PreviewGameServerDeploymentRolloutRequest(proto.Message):
     rollout = proto.Field(
         proto.MESSAGE, number=1, message="GameServerDeploymentRollout",
     )
-
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
-
-    preview_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+    update_mask = proto.Field(
+        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+    )
+    preview_time = proto.Field(
+        proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,
+    )
 
 
 class PreviewGameServerDeploymentRolloutResponse(proto.Message):
@@ -425,14 +402,12 @@ class PreviewGameServerDeploymentRolloutResponse(proto.Message):
             request.
         etag (str):
             ETag of the game server deployment.
-        target_state (~.common.TargetState):
+        target_state (google.cloud.gaming_v1beta.types.TargetState):
             The target state.
     """
 
-    unavailable = proto.RepeatedField(proto.STRING, number=2)
-
-    etag = proto.Field(proto.STRING, number=3)
-
+    unavailable = proto.RepeatedField(proto.STRING, number=2,)
+    etag = proto.Field(proto.STRING, number=3,)
     target_state = proto.Field(proto.MESSAGE, number=4, message=common.TargetState,)
 
 

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-from typing import Any, AsyncIterable, Awaitable, Callable, Iterable, Sequence, Tuple
+from typing import (
+    Any,
+    AsyncIterable,
+    Awaitable,
+    Callable,
+    Iterable,
+    Sequence,
+    Tuple,
+    Optional,
+)
 
 from google.cloud.gaming_v1beta.types import game_server_configs
 
@@ -24,7 +31,7 @@ class ListGameServerConfigsPager:
     """A pager for iterating through ``list_game_server_configs`` requests.
 
     This class thinly wraps an initial
-    :class:`~.game_server_configs.ListGameServerConfigsResponse` object, and
+    :class:`google.cloud.gaming_v1beta.types.ListGameServerConfigsResponse` object, and
     provides an ``__iter__`` method to iterate through its
     ``game_server_configs`` field.
 
@@ -33,7 +40,7 @@ class ListGameServerConfigsPager:
     through the ``game_server_configs`` field on the
     corresponding responses.
 
-    All the usual :class:`~.game_server_configs.ListGameServerConfigsResponse`
+    All the usual :class:`google.cloud.gaming_v1beta.types.ListGameServerConfigsResponse`
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
@@ -51,9 +58,9 @@ class ListGameServerConfigsPager:
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (:class:`~.game_server_configs.ListGameServerConfigsRequest`):
+            request (google.cloud.gaming_v1beta.types.ListGameServerConfigsRequest):
                 The initial request object.
-            response (:class:`~.game_server_configs.ListGameServerConfigsResponse`):
+            response (google.cloud.gaming_v1beta.types.ListGameServerConfigsResponse):
                 The initial response object.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
@@ -86,7 +93,7 @@ class ListGameServerConfigsAsyncPager:
     """A pager for iterating through ``list_game_server_configs`` requests.
 
     This class thinly wraps an initial
-    :class:`~.game_server_configs.ListGameServerConfigsResponse` object, and
+    :class:`google.cloud.gaming_v1beta.types.ListGameServerConfigsResponse` object, and
     provides an ``__aiter__`` method to iterate through its
     ``game_server_configs`` field.
 
@@ -95,7 +102,7 @@ class ListGameServerConfigsAsyncPager:
     through the ``game_server_configs`` field on the
     corresponding responses.
 
-    All the usual :class:`~.game_server_configs.ListGameServerConfigsResponse`
+    All the usual :class:`google.cloud.gaming_v1beta.types.ListGameServerConfigsResponse`
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
@@ -110,14 +117,14 @@ class ListGameServerConfigsAsyncPager:
         *,
         metadata: Sequence[Tuple[str, str]] = ()
     ):
-        """Instantiate the pager.
+        """Instantiates the pager.
 
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (:class:`~.game_server_configs.ListGameServerConfigsRequest`):
+            request (google.cloud.gaming_v1beta.types.ListGameServerConfigsRequest):
                 The initial request object.
-            response (:class:`~.game_server_configs.ListGameServerConfigsResponse`):
+            response (google.cloud.gaming_v1beta.types.ListGameServerConfigsResponse):
                 The initial response object.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.

@@ -68,10 +68,12 @@ Using ``nox``
 We use `nox <https://nox.readthedocs.io/en/latest/>`__ to instrument our tests.
 
 - To test your changes, run unit tests with ``nox``::
+    $ nox -s unit
 
-    $ nox -s unit-2.7
-    $ nox -s unit-3.7
-    $ ...
+- To run a single unit test::
+
+    $ nox -s unit-3.9 -- -k <name of test>
+
 
   .. note::
 
@@ -93,8 +95,12 @@ On Debian/Ubuntu::
 ************
 Coding Style
 ************
+- We use the automatic code formatter ``black``. You can run it using
+  the nox session ``blacken``. This will eliminate many lint errors. Run via::
 
-- PEP8 compliance, with exceptions defined in the linter configuration.
+   $ nox -s blacken
+
+- PEP8 compliance is required, with exceptions defined in the linter configuration.
   If you have ``nox`` installed, you can test that you have not introduced
   any non-compliant code via::
 
@@ -133,34 +139,23 @@ Running System Tests
 
 - To run system tests, you can execute::
 
-   $ nox -s system-3.7
-   $ nox -s system-2.7
+   # Run all system tests
+   $ nox -s system
+
+   # Run a single system test
+   $ nox -s system-3.8 -- -k <name of test>
+
 
   .. note::
 
-      System tests are only configured to run under Python 2.7 and
-      Python 3.7. For expediency, we do not run them in older versions
-      of Python 3.
+      System tests are only configured to run under Python 3.8.
+      For expediency, we do not run them in older versions of Python 3.
 
   This alone will not run the tests. You'll need to change some local
   auth settings and change some configuration in your project to
   run all the tests.
 
-- System tests will be run against an actual project and
-  so you'll need to provide some environment variables to facilitate
-  authentication to your project:
-
-  - ``GOOGLE_APPLICATION_CREDENTIALS``: The path to a JSON key file;
-    Such a file can be downloaded directly from the developer's console by clicking
-    "Generate new JSON key". See private key
-    `docs <https://cloud.google.com/storage/docs/authentication#generating-a-private-key>`__
-    for more details.
-
-- Once you have downloaded your json keys, set the environment variable 
-  ``GOOGLE_APPLICATION_CREDENTIALS`` to the absolute path of the json file::
-
-   $ export GOOGLE_APPLICATION_CREDENTIALS="/Users/<your_username>/path/to/app_credentials.json"
-
+- System tests will be run against an actual project. You should use local credentials from gcloud when possible. See `Best practices for application authentication <https://cloud.google.com/docs/authentication/best-practices-applications#local_development_and_testing_with_the>`__. Some tests require a service account. For those tests see `Authenticating as a service account <https://cloud.google.com/docs/authentication/production>`__.
 
 *************
 Test Coverage
@@ -181,6 +176,30 @@ or adds the feature.
 Build the docs via:
 
    $ nox -s docs
+
+*************************
+Samples and code snippets
+*************************
+
+Code samples and snippets live in the `samples/` catalogue. Feel free to
+provide more examples, but make sure to write tests for those examples.
+Each folder containing example code requires its own `noxfile.py` script
+which automates testing. If you decide to create a new folder, you can
+base it on the `samples/snippets` folder (providing `noxfile.py` and
+the requirements files).
+
+The tests will run against a real Google Cloud Project, so you should
+configure them just like the System Tests.
+
+- To run sample tests, you can execute::
+
+   # Run all tests in a folder
+   $ cd samples/snippets
+   $ nox -s py-3.8
+
+   # Run a single sample test
+   $ cd samples/snippets
+   $ nox -s py-3.8 -- -k <name of test>
 
 ********************************************
 Note About ``README`` as it pertains to PyPI
@@ -218,8 +237,8 @@ Supported versions can be found in our ``noxfile.py`` `config`_.
 .. _config: https://github.com/googleapis/python-game-servers/blob/master/noxfile.py
 
 
-We also explicitly decided to support Python 3 beginning with version
-3.6. Reasons for this include:
+We also explicitly decided to support Python 3 beginning with version 3.6.
+Reasons for this include:
 
 -  Encouraging use of newest versions of Python 3
 -  Taking the lead of `prominent`_ open-source `projects`_

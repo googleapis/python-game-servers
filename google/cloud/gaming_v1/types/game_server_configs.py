@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import proto  # type: ignore
 
-
 from google.cloud.gaming_v1.types import common
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
@@ -66,15 +63,11 @@ class ListGameServerConfigsRequest(proto.Message):
             https://cloud.google.com/apis/design/design_patterns#sorting_order.
     """
 
-    parent = proto.Field(proto.STRING, number=1)
-
-    page_size = proto.Field(proto.INT32, number=2)
-
-    page_token = proto.Field(proto.STRING, number=3)
-
-    filter = proto.Field(proto.STRING, number=4)
-
-    order_by = proto.Field(proto.STRING, number=5)
+    parent = proto.Field(proto.STRING, number=1,)
+    page_size = proto.Field(proto.INT32, number=2,)
+    page_token = proto.Field(proto.STRING, number=3,)
+    filter = proto.Field(proto.STRING, number=4,)
+    order_by = proto.Field(proto.STRING, number=5,)
 
 
 class ListGameServerConfigsResponse(proto.Message):
@@ -82,7 +75,7 @@ class ListGameServerConfigsResponse(proto.Message):
     GameServerConfigsService.ListGameServerConfigs.
 
     Attributes:
-        game_server_configs (Sequence[~.gcg_game_server_configs.GameServerConfig]):
+        game_server_configs (Sequence[google.cloud.gaming_v1.types.GameServerConfig]):
             The list of game server configs.
         next_page_token (str):
             Token to retrieve the next page of results,
@@ -99,10 +92,8 @@ class ListGameServerConfigsResponse(proto.Message):
     game_server_configs = proto.RepeatedField(
         proto.MESSAGE, number=1, message="GameServerConfig",
     )
-
-    next_page_token = proto.Field(proto.STRING, number=2)
-
-    unreachable = proto.RepeatedField(proto.STRING, number=4)
+    next_page_token = proto.Field(proto.STRING, number=2,)
+    unreachable = proto.RepeatedField(proto.STRING, number=4,)
 
 
 class GetGameServerConfigRequest(proto.Message):
@@ -117,7 +108,7 @@ class GetGameServerConfigRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
     """
 
-    name = proto.Field(proto.STRING, number=1)
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class CreateGameServerConfigRequest(proto.Message):
@@ -132,15 +123,13 @@ class CreateGameServerConfigRequest(proto.Message):
         config_id (str):
             Required. The ID of the game server config
             resource to be created.
-        game_server_config (~.gcg_game_server_configs.GameServerConfig):
+        game_server_config (google.cloud.gaming_v1.types.GameServerConfig):
             Required. The game server config resource to
             be created.
     """
 
-    parent = proto.Field(proto.STRING, number=1)
-
-    config_id = proto.Field(proto.STRING, number=2)
-
+    parent = proto.Field(proto.STRING, number=1,)
+    config_id = proto.Field(proto.STRING, number=2,)
     game_server_config = proto.Field(
         proto.MESSAGE, number=3, message="GameServerConfig",
     )
@@ -158,12 +147,11 @@ class DeleteGameServerConfigRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
     """
 
-    name = proto.Field(proto.STRING, number=1)
+    name = proto.Field(proto.STRING, number=1,)
 
 
 class ScalingConfig(proto.Message):
     r"""Autoscaling config for an Agones fleet.
-
     Attributes:
         name (str):
             Required. The name of the Scaling Config
@@ -171,31 +159,27 @@ class ScalingConfig(proto.Message):
             Required. Agones fleet autoscaler spec.
             Example spec:
             https://agones.dev/site/docs/reference/fleetautoscaler/
-        selectors (Sequence[~.common.LabelSelector]):
+        selectors (Sequence[google.cloud.gaming_v1.types.LabelSelector]):
             Labels used to identify the game server
             clusters to which this Agones scaling config
             applies. A game server cluster is subject to
             this Agones scaling config if its labels match
             any of the selector entries.
-        schedules (Sequence[~.common.Schedule]):
+        schedules (Sequence[google.cloud.gaming_v1.types.Schedule]):
             The schedules to which this Scaling Config
             applies.
     """
 
-    name = proto.Field(proto.STRING, number=1)
-
-    fleet_autoscaler_spec = proto.Field(proto.STRING, number=2)
-
+    name = proto.Field(proto.STRING, number=1,)
+    fleet_autoscaler_spec = proto.Field(proto.STRING, number=2,)
     selectors = proto.RepeatedField(
         proto.MESSAGE, number=4, message=common.LabelSelector,
     )
-
     schedules = proto.RepeatedField(proto.MESSAGE, number=5, message=common.Schedule,)
 
 
 class FleetConfig(proto.Message):
     r"""Fleet configs for Agones.
-
     Attributes:
         fleet_spec (str):
             Agones fleet spec. Example spec:
@@ -204,14 +188,12 @@ class FleetConfig(proto.Message):
             The name of the FleetConfig.
     """
 
-    fleet_spec = proto.Field(proto.STRING, number=1)
-
-    name = proto.Field(proto.STRING, number=2)
+    fleet_spec = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(proto.STRING, number=2,)
 
 
 class GameServerConfig(proto.Message):
     r"""A game server config resource.
-
     Attributes:
         name (str):
             The resource name of the game server config. Uses the form:
@@ -220,37 +202,31 @@ class GameServerConfig(proto.Message):
             For example,
 
             ``projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config``.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The creation time.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[~.gcg_game_server_configs.GameServerConfig.LabelsEntry]):
+        labels (Sequence[google.cloud.gaming_v1.types.GameServerConfig.LabelsEntry]):
             The labels associated with this game server
             config. Each label is a key-value pair.
-        fleet_configs (Sequence[~.gcg_game_server_configs.FleetConfig]):
+        fleet_configs (Sequence[google.cloud.gaming_v1.types.FleetConfig]):
             FleetConfig contains a list of Agones fleet
             specs. Only one FleetConfig is allowed.
-        scaling_configs (Sequence[~.gcg_game_server_configs.ScalingConfig]):
+        scaling_configs (Sequence[google.cloud.gaming_v1.types.ScalingConfig]):
             The autoscaling settings.
         description (str):
             The description of the game server config.
     """
 
-    name = proto.Field(proto.STRING, number=1)
-
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
-
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
-
-    labels = proto.MapField(proto.STRING, proto.STRING, number=4)
-
+    name = proto.Field(proto.STRING, number=1,)
+    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp_pb2.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,)
+    labels = proto.MapField(proto.STRING, proto.STRING, number=4,)
     fleet_configs = proto.RepeatedField(proto.MESSAGE, number=5, message="FleetConfig",)
-
     scaling_configs = proto.RepeatedField(
         proto.MESSAGE, number=6, message="ScalingConfig",
     )
-
-    description = proto.Field(proto.STRING, number=7)
+    description = proto.Field(proto.STRING, number=7,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

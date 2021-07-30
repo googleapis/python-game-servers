@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-from typing import Any, AsyncIterable, Awaitable, Callable, Iterable, Sequence, Tuple
+from typing import (
+    Any,
+    AsyncIterable,
+    Awaitable,
+    Callable,
+    Iterable,
+    Sequence,
+    Tuple,
+    Optional,
+)
 
 from google.cloud.gaming_v1.types import game_server_clusters
 
@@ -24,7 +31,7 @@ class ListGameServerClustersPager:
     """A pager for iterating through ``list_game_server_clusters`` requests.
 
     This class thinly wraps an initial
-    :class:`~.game_server_clusters.ListGameServerClustersResponse` object, and
+    :class:`google.cloud.gaming_v1.types.ListGameServerClustersResponse` object, and
     provides an ``__iter__`` method to iterate through its
     ``game_server_clusters`` field.
 
@@ -33,7 +40,7 @@ class ListGameServerClustersPager:
     through the ``game_server_clusters`` field on the
     corresponding responses.
 
-    All the usual :class:`~.game_server_clusters.ListGameServerClustersResponse`
+    All the usual :class:`google.cloud.gaming_v1.types.ListGameServerClustersResponse`
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
@@ -51,9 +58,9 @@ class ListGameServerClustersPager:
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (:class:`~.game_server_clusters.ListGameServerClustersRequest`):
+            request (google.cloud.gaming_v1.types.ListGameServerClustersRequest):
                 The initial request object.
-            response (:class:`~.game_server_clusters.ListGameServerClustersResponse`):
+            response (google.cloud.gaming_v1.types.ListGameServerClustersResponse):
                 The initial response object.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
@@ -86,7 +93,7 @@ class ListGameServerClustersAsyncPager:
     """A pager for iterating through ``list_game_server_clusters`` requests.
 
     This class thinly wraps an initial
-    :class:`~.game_server_clusters.ListGameServerClustersResponse` object, and
+    :class:`google.cloud.gaming_v1.types.ListGameServerClustersResponse` object, and
     provides an ``__aiter__`` method to iterate through its
     ``game_server_clusters`` field.
 
@@ -95,7 +102,7 @@ class ListGameServerClustersAsyncPager:
     through the ``game_server_clusters`` field on the
     corresponding responses.
 
-    All the usual :class:`~.game_server_clusters.ListGameServerClustersResponse`
+    All the usual :class:`google.cloud.gaming_v1.types.ListGameServerClustersResponse`
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
@@ -110,14 +117,14 @@ class ListGameServerClustersAsyncPager:
         *,
         metadata: Sequence[Tuple[str, str]] = ()
     ):
-        """Instantiate the pager.
+        """Instantiates the pager.
 
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (:class:`~.game_server_clusters.ListGameServerClustersRequest`):
+            request (google.cloud.gaming_v1.types.ListGameServerClustersRequest):
                 The initial request object.
-            response (:class:`~.game_server_clusters.ListGameServerClustersResponse`):
+            response (google.cloud.gaming_v1.types.ListGameServerClustersResponse):
                 The initial response object.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
