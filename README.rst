@@ -9,7 +9,7 @@ Python Client for Cloud Game Servers
 - `Product Documentation`_
 
 .. |GA| image:: https://img.shields.io/badge/support-ga-gold.svg
-   :target: https://github.com/googleapis/google-cloud-python/blob/main/README.rst#general-availability
+   :target: https://github.com/googleapis/google-cloud-python/blob/master/README.rst#general-availability
 .. |pypi| image:: https://img.shields.io/pypi/v/google-cloud-game-servers.svg
    :target: https://pypi.org/project/google-cloud-game-servers/
 .. |versions| image:: https://img.shields.io/pypi/pyversions/google-cloud-game-servers.svg
@@ -78,4 +78,4 @@ Next Steps
    APIs that we cover.
 
 .. _Cl Product documentation:  https://cloud.google.com/game-servers/
-.. _README: https://github.com/googleapis/google-cloud-python/blob/main/README.rst
+.. _README: https://github.com/googleapis/google-cloud-python/blob/master/README.rst
