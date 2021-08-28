@@ -23,6 +23,7 @@ from google.protobuf import timestamp_pb2  # type: ignore
 __protobuf__ = proto.module(
     package="google.cloud.gaming.v1",
     manifest={
+        "GameServerClusterView",
         "ListGameServerClustersRequest",
         "ListGameServerClustersResponse",
         "GetGameServerClusterRequest",
@@ -38,8 +39,16 @@ __protobuf__ = proto.module(
         "GameServerClusterConnectionInfo",
         "GkeClusterReference",
         "GameServerCluster",
+        "KubernetesClusterState",
     },
 )
+
+
+class GameServerClusterView(proto.Enum):
+    r"""A view for GameServerCluster objects."""
+    GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED = 0
+    BASIC = 1
+    FULL = 2
 
 
 class ListGameServerClustersRequest(proto.Message):
@@ -48,8 +57,8 @@ class ListGameServerClustersRequest(proto.Message):
 
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the
-            form:
+            Required. The parent resource name, in the
+            following form:
             "projects/{project}/locations/{location}/realms/{realm}".
         page_size (int):
             Optional. The maximum number of items to return. If
@@ -69,6 +78,14 @@ class ListGameServerClustersRequest(proto.Message):
             Optional. Specifies the ordering of results following syntax
             at
             https://cloud.google.com/apis/design/design_patterns#sorting_order.
+        view (google.cloud.gaming_v1.types.GameServerClusterView):
+            Optional. View for the returned GameServerCluster objects.
+            When ``FULL`` is specified, the ``cluster_state`` field is
+            also returned in the GameServerCluster object, which
+            includes the state of the referenced Kubernetes cluster such
+            as versions and provider info. The default/unset value is
+            GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which
+            does not return the ``cluster_state`` field.
     """
 
     parent = proto.Field(proto.STRING, number=1,)
@@ -76,6 +93,7 @@ class ListGameServerClustersRequest(proto.Message):
     page_token = proto.Field(proto.STRING, number=3,)
     filter = proto.Field(proto.STRING, number=4,)
     order_by = proto.Field(proto.STRING, number=5,)
+    view = proto.Field(proto.ENUM, number=6, enum="GameServerClusterView",)
 
 
 class ListGameServerClustersResponse(proto.Message):
@@ -110,13 +128,21 @@ class GetGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the game server cluster to retrieve.
-            Uses the form:
-
+            Required. The name of the game server cluster to retrieve,
+            in the following form:
             ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
+        view (google.cloud.gaming_v1.types.GameServerClusterView):
+            Optional. View for the returned GameServerCluster objects.
+            When ``FULL`` is specified, the ``cluster_state`` field is
+            also returned in the GameServerCluster object, which
+            includes the state of the referenced Kubernetes cluster such
+            as versions and provider info. The default/unset value is
+            GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which
+            does not return the ``cluster_state`` field.
     """
 
     name = proto.Field(proto.STRING, number=1,)
+    view = proto.Field(proto.ENUM, number=6, enum="GameServerClusterView",)
 
 
 class CreateGameServerClusterRequest(proto.Message):
@@ -125,7 +151,7 @@ class CreateGameServerClusterRequest(proto.Message):
 
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the form:
+            Required. The parent resource name, in the following form:
             ``projects/{project}/locations/{location}/realms/{realm-id}``.
         game_server_cluster_id (str):
             Required. The ID of the game server cluster
@@ -148,7 +174,7 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
 
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the form:
+            Required. The parent resource name, in the following form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
         game_server_cluster_id (str):
             Required. The ID of the game server cluster
@@ -159,6 +185,9 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
         preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
             preview.
+        view (google.cloud.gaming_v1.types.GameServerClusterView):
+            Optional. This field is deprecated, preview
+            will always return KubernetesClusterState.
     """
 
     parent = proto.Field(proto.STRING, number=1,)
@@ -169,6 +198,7 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
     preview_time = proto.Field(
         proto.MESSAGE, number=4, message=timestamp_pb2.Timestamp,
     )
+    view = proto.Field(proto.ENUM, number=6, enum="GameServerClusterView",)
 
 
 class PreviewCreateGameServerClusterResponse(proto.Message):
@@ -180,10 +210,17 @@ class PreviewCreateGameServerClusterResponse(proto.Message):
             The ETag of the game server cluster.
         target_state (google.cloud.gaming_v1.types.TargetState):
             The target state.
+        cluster_state (google.cloud.gaming_v1.types.KubernetesClusterState):
+            Output only. The state of the Kubernetes cluster in preview,
+            this will be available if 'view' is set to ``FULL`` in the
+            relevant List/Get/Preview request.
     """
 
     etag = proto.Field(proto.STRING, number=2,)
     target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
+    cluster_state = proto.Field(
+        proto.MESSAGE, number=4, message="KubernetesClusterState",
+    )
 
 
 class DeleteGameServerClusterRequest(proto.Message):
@@ -192,8 +229,8 @@ class DeleteGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the game server cluster to delete.
-            Uses the form:
+            Required. The name of the game server cluster to delete, in
+            the following form:
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
     """
 
@@ -206,8 +243,8 @@ class PreviewDeleteGameServerClusterRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the game server cluster to delete.
-            Uses the form:
+            Required. The name of the game server cluster to delete, in
+            the following form:
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
         preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
@@ -247,9 +284,7 @@ class UpdateGameServerClusterRequest(proto.Message):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
-
-            https: //developers.google.com/protocol-buffers //
-            /docs/reference/google.protobuf#fieldmask
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
     """
 
     game_server_cluster = proto.Field(
@@ -272,9 +307,7 @@ class PreviewUpdateGameServerClusterRequest(proto.Message):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
-
-            https: //developers.google.com/protocol-buffers //
-            /docs/reference/google.protobuf#fieldmask
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
             preview.
@@ -350,12 +383,10 @@ class GameServerCluster(proto.Message):
     r"""A game server cluster resource.
     Attributes:
         name (str):
-            Required. The resource name of the game server cluster. Uses
-            the form:
-
+            Required. The resource name of the game server cluster, in
+            the following form:
             ``projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}``.
             For example,
-
             ``projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster``.
         create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The creation time.
@@ -372,6 +403,10 @@ class GameServerCluster(proto.Message):
             ETag of the resource.
         description (str):
             Human readable description of the cluster.
+        cluster_state (google.cloud.gaming_v1.types.KubernetesClusterState):
+            Output only. The state of the Kubernetes cluster, this will
+            be available if 'view' is set to ``FULL`` in the relevant
+            List/Get/Preview request.
     """
 
     name = proto.Field(proto.STRING, number=1,)
@@ -383,6 +418,59 @@ class GameServerCluster(proto.Message):
     )
     etag = proto.Field(proto.STRING, number=6,)
     description = proto.Field(proto.STRING, number=7,)
+    cluster_state = proto.Field(
+        proto.MESSAGE, number=11, message="KubernetesClusterState",
+    )
+
+
+class KubernetesClusterState(proto.Message):
+    r"""The state of the Kubernetes cluster.
+    Attributes:
+        agones_version_installed (str):
+            Output only. The version of Agones currently
+            installed in the registered Kubernetes cluster.
+        kubernetes_version_installed (str):
+            Output only. The version of Kubernetes that
+            is currently used in the registered Kubernetes
+            cluster (as detected by the Cloud Game Servers
+            service).
+        installation_state (google.cloud.gaming_v1.types.KubernetesClusterState.InstallationState):
+            Output only. The state for the installed
+            versions of Agones/Kubernetes.
+        version_installed_error_message (str):
+            Output only. The detailed error message for
+            the installed versions of Agones/Kubernetes.
+        provider (str):
+            Output only. The cloud provider type reported
+            by the first node's providerID in the list of
+            nodes on the Kubernetes endpoint. On Kubernetes
+            platforms that support zero-node clusters (like
+            GKE-on-GCP), the provider type will be empty.
+        agones_version_targeted (str):
+            Output only. The version of Agones that is
+            targeted to be installed in the cluster.
+    """
+
+    class InstallationState(proto.Enum):
+        r"""The state of the installed versions of Agones/Kubernetes. See
+        also https://cloud.google.com/game-servers/docs/versions-and-
+        upgrades.
+        """
+        INSTALLATION_STATE_UNSPECIFIED = 0
+        AGONES_KUBERNETES_VERSION_SUPPORTED = 1
+        AGONES_VERSION_UNSUPPORTED = 2
+        AGONES_KUBERNETES_VERSION_UNSUPPORTED = 3
+        AGONES_VERSION_UNRECOGNIZED = 4
+        KUBERNETES_VERSION_UNRECOGNIZED = 5
+        VERSION_VERIFICATION_FAILED = 6
+        AGONES_NOT_INSTALLED = 7
+
+    agones_version_installed = proto.Field(proto.STRING, number=1,)
+    kubernetes_version_installed = proto.Field(proto.STRING, number=2,)
+    installation_state = proto.Field(proto.ENUM, number=3, enum=InstallationState,)
+    version_installed_error_message = proto.Field(proto.STRING, number=4,)
+    provider = proto.Field(proto.STRING, number=5,)
+    agones_version_targeted = proto.Field(proto.STRING, number=6,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

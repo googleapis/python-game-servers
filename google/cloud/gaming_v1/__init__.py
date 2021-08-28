@@ -40,6 +40,7 @@ from .types.game_server_clusters import GameServerCluster
 from .types.game_server_clusters import GameServerClusterConnectionInfo
 from .types.game_server_clusters import GetGameServerClusterRequest
 from .types.game_server_clusters import GkeClusterReference
+from .types.game_server_clusters import KubernetesClusterState
 from .types.game_server_clusters import ListGameServerClustersRequest
 from .types.game_server_clusters import ListGameServerClustersResponse
 from .types.game_server_clusters import PreviewCreateGameServerClusterRequest
@@ -49,6 +50,7 @@ from .types.game_server_clusters import PreviewDeleteGameServerClusterResponse
 from .types.game_server_clusters import PreviewUpdateGameServerClusterRequest
 from .types.game_server_clusters import PreviewUpdateGameServerClusterResponse
 from .types.game_server_clusters import UpdateGameServerClusterRequest
+from .types.game_server_clusters import GameServerClusterView
 from .types.game_server_configs import CreateGameServerConfigRequest
 from .types.game_server_configs import DeleteGameServerConfigRequest
 from .types.game_server_configs import FleetConfig
@@ -101,6 +103,7 @@ __all__ = (
     "FleetConfig",
     "GameServerCluster",
     "GameServerClusterConnectionInfo",
+    "GameServerClusterView",
     "GameServerClustersServiceClient",
     "GameServerConfig",
     "GameServerConfigOverride",
@@ -114,6 +117,7 @@ __all__ = (
     "GetGameServerDeploymentRolloutRequest",
     "GetRealmRequest",
     "GkeClusterReference",
+    "KubernetesClusterState",
     "LabelSelector",
     "ListGameServerClustersRequest",
     "ListGameServerClustersResponse",

@@ -372,8 +372,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 The request object. Request message for
                 RealmsService.ListRealms.
             parent (str):
-                Required. The parent resource name. Uses the form:
-                ``projects/{project}/locations/{location}``.
+                Required. The parent resource name, in the following
+                form: ``projects/{project}/locations/{location}``.
 
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -452,8 +452,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 The request object. Request message for
                 RealmsService.GetRealm.
             name (str):
-                Required. The name of the realm to retrieve. Uses the
-                form:
+                Required. The name of the realm to retrieve, in the
+                following form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
 
                 This corresponds to the ``name`` field
@@ -524,8 +524,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 The request object. Request message for
                 RealmsService.CreateRealm.
             parent (str):
-                Required. The parent resource name. Uses the form:
-                ``projects/{project}/locations/{location}``.
+                Required. The parent resource name, in the following
+                form: ``projects/{project}/locations/{location}``.
 
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -624,8 +624,8 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
             name (str):
-                Required. The name of the realm to delete. Uses the
-                form:
+                Required. The name of the realm to delete, in the
+                following form:
                 ``projects/{project}/locations/{location}/realms/{realm}``.
 
                 This corresponds to the ``name`` field
@@ -727,9 +727,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
             update_mask (google.protobuf.field_mask_pb2.FieldMask):
                 Required. The update mask applies to the resource. For
                 the ``FieldMask`` definition, see
-
-                https: //developers.google.com/protocol-buffers //
-                /docs/reference/google.protobuf#fieldmask
+                https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
 
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
