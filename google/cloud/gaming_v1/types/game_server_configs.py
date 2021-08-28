@@ -40,8 +40,7 @@ class ListGameServerConfigsRequest(proto.Message):
 
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the form:
-
+            Required. The parent resource name, in the following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*``.
         page_size (int):
             Optional. The maximum number of items to return. If
@@ -102,9 +101,8 @@ class GetGameServerConfigRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the game server config to retrieve.
-            Uses the form:
-
+            Required. The name of the game server config to retrieve, in
+            the following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
     """
 
@@ -117,8 +115,7 @@ class CreateGameServerConfigRequest(proto.Message):
 
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the form:
-
+            Required. The parent resource name, in the following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/``.
         config_id (str):
             Required. The ID of the game server config
@@ -141,9 +138,8 @@ class DeleteGameServerConfigRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the game server config to delete. Uses
-            the form:
-
+            Required. The name of the game server config to delete, in
+            the following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
     """
 
@@ -196,11 +192,10 @@ class GameServerConfig(proto.Message):
     r"""A game server config resource.
     Attributes:
         name (str):
-            The resource name of the game server config. Uses the form:
-
+            The resource name of the game server config, in the
+            following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
             For example,
-
             ``projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config``.
         create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The creation time.

@@ -401,8 +401,8 @@ class GameServerDeploymentsServiceClient(
                 The request object. Request message for
                 GameServerDeploymentsService.ListGameServerDeployments.
             parent (str):
-                Required. The parent resource name. Uses the form:
-                ``projects/{project}/locations/{location}``.
+                Required. The parent resource name, in the following
+                form: ``projects/{project}/locations/{location}``.
 
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -486,8 +486,7 @@ class GameServerDeploymentsServiceClient(
                 GameServerDeploymentsService.GetGameServerDeployment.
             name (str):
                 Required. The name of the game server delpoyment to
-                retrieve. Uses the form:
-
+                retrieve, in the following form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
 
                 This corresponds to the ``name`` field
@@ -562,8 +561,8 @@ class GameServerDeploymentsServiceClient(
                 The request object. Request message for
                 GameServerDeploymentsService.CreateGameServerDeployment.
             parent (str):
-                Required. The parent resource name. Uses the form:
-                ``projects/{project}/locations/{location}``.
+                Required. The parent resource name, in the following
+                form: ``projects/{project}/locations/{location}``.
 
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -658,8 +657,7 @@ class GameServerDeploymentsServiceClient(
                 GameServerDeploymentsService.DeleteGameServerDeployment.
             name (str):
                 Required. The name of the game server delpoyment to
-                delete. Uses the form:
-
+                delete, in the following form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
 
                 This corresponds to the ``name`` field
@@ -767,9 +765,7 @@ class GameServerDeploymentsServiceClient(
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
-
-                https: //developers.google.com/protocol-buffers //
-                /docs/reference/google.protobuf#fieldmask
+                https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
 
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -859,8 +855,7 @@ class GameServerDeploymentsServiceClient(
                 GameServerDeploymentsService.GetGameServerDeploymentRollout.
             name (str):
                 Required. The name of the game server delpoyment to
-                retrieve. Uses the form:
-
+                retrieve, in the following form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
 
                 This corresponds to the ``name`` field
@@ -956,9 +951,7 @@ class GameServerDeploymentsServiceClient(
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
-
-                https: //developers.google.com/protocol-buffers //
-                /docs/reference/google.protobuf#fieldmask
+                https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
 
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this

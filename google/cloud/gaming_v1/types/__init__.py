@@ -31,6 +31,7 @@ from .game_server_clusters import (
     GameServerClusterConnectionInfo,
     GetGameServerClusterRequest,
     GkeClusterReference,
+    KubernetesClusterState,
     ListGameServerClustersRequest,
     ListGameServerClustersResponse,
     PreviewCreateGameServerClusterRequest,
@@ -40,6 +41,7 @@ from .game_server_clusters import (
     PreviewUpdateGameServerClusterRequest,
     PreviewUpdateGameServerClusterResponse,
     UpdateGameServerClusterRequest,
+    GameServerClusterView,
 )
 from .game_server_configs import (
     CreateGameServerConfigRequest,
@@ -96,6 +98,7 @@ __all__ = (
     "GameServerClusterConnectionInfo",
     "GetGameServerClusterRequest",
     "GkeClusterReference",
+    "KubernetesClusterState",
     "ListGameServerClustersRequest",
     "ListGameServerClustersResponse",
     "PreviewCreateGameServerClusterRequest",
@@ -105,6 +108,7 @@ __all__ = (
     "PreviewUpdateGameServerClusterRequest",
     "PreviewUpdateGameServerClusterResponse",
     "UpdateGameServerClusterRequest",
+    "GameServerClusterView",
     "CreateGameServerConfigRequest",
     "DeleteGameServerConfigRequest",
     "FleetConfig",

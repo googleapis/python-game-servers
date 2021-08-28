@@ -197,8 +197,8 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.ListGameServerClusters.
             parent (:class:`str`):
-                Required. The parent resource name.
-                Uses the form:
+                Required. The parent resource name,
+                in the following form:
                 "projects/{project}/locations/{location}/realms/{realm}".
 
                 This corresponds to the ``parent`` field
@@ -288,8 +288,7 @@ class GameServerClustersServiceAsyncClient:
                 GameServerClustersService.GetGameServerCluster.
             name (:class:`str`):
                 Required. The name of the game server cluster to
-                retrieve. Uses the form:
-
+                retrieve, in the following form:
                 ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
 
                 This corresponds to the ``name`` field
@@ -370,7 +369,8 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.CreateGameServerCluster.
             parent (:class:`str`):
-                Required. The parent resource name. Uses the form:
+                Required. The parent resource name, in the following
+                form:
                 ``projects/{project}/locations/{location}/realms/{realm-id}``.
 
                 This corresponds to the ``parent`` field
@@ -531,8 +531,8 @@ class GameServerClustersServiceAsyncClient:
                 The request object. Request message for
                 GameServerClustersService.DeleteGameServerCluster.
             name (:class:`str`):
-                Required. The name of the game server cluster to delete.
-                Uses the form:
+                Required. The name of the game server cluster to delete,
+                in the following form:
                 ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
 
                 This corresponds to the ``name`` field
@@ -693,9 +693,7 @@ class GameServerClustersServiceAsyncClient:
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
-
-                https: //developers.google.com/protocol-buffers //
-                /docs/reference/google.protobuf#fieldmask
+                https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
 
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this

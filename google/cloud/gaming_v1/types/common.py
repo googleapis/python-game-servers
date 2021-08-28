@@ -176,7 +176,6 @@ class SpecSource(proto.Message):
     Attributes:
         game_server_config_name (str):
             The game server config resource. Uses the form:
-
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}/configs/{config_id}``.
         name (str):
             The name of the Agones leet config or Agones
@@ -193,11 +192,9 @@ class TargetDetails(proto.Message):
     Attributes:
         game_server_cluster_name (str):
             The game server cluster name. Uses the form:
-
             ``projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}``.
         game_server_deployment_name (str):
             The game server deployment name. Uses the form:
-
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}``.
         fleet_details (Sequence[google.cloud.gaming_v1.types.TargetDetails.TargetFleetDetails]):
             Agones fleet details for game server clusters

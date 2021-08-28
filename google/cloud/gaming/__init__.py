@@ -60,6 +60,7 @@ from google.cloud.gaming_v1.types.game_server_clusters import (
     GetGameServerClusterRequest,
 )
 from google.cloud.gaming_v1.types.game_server_clusters import GkeClusterReference
+from google.cloud.gaming_v1.types.game_server_clusters import KubernetesClusterState
 from google.cloud.gaming_v1.types.game_server_clusters import (
     ListGameServerClustersRequest,
 )
@@ -87,6 +88,7 @@ from google.cloud.gaming_v1.types.game_server_clusters import (
 from google.cloud.gaming_v1.types.game_server_clusters import (
     UpdateGameServerClusterRequest,
 )
+from google.cloud.gaming_v1.types.game_server_clusters import GameServerClusterView
 from google.cloud.gaming_v1.types.game_server_configs import (
     CreateGameServerConfigRequest,
 )
@@ -180,6 +182,7 @@ __all__ = (
     "GameServerClusterConnectionInfo",
     "GetGameServerClusterRequest",
     "GkeClusterReference",
+    "KubernetesClusterState",
     "ListGameServerClustersRequest",
     "ListGameServerClustersResponse",
     "PreviewCreateGameServerClusterRequest",
@@ -189,6 +192,7 @@ __all__ = (
     "PreviewUpdateGameServerClusterRequest",
     "PreviewUpdateGameServerClusterResponse",
     "UpdateGameServerClusterRequest",
+    "GameServerClusterView",
     "CreateGameServerConfigRequest",
     "DeleteGameServerConfigRequest",
     "FleetConfig",

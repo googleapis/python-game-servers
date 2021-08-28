@@ -48,7 +48,7 @@ class ListGameServerDeploymentsRequest(proto.Message):
 
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the form:
+            Required. The parent resource name, in the following form:
             ``projects/{project}/locations/{location}``.
         page_size (int):
             Optional. The maximum number of items to return. If
@@ -110,8 +110,7 @@ class GetGameServerDeploymentRequest(proto.Message):
     Attributes:
         name (str):
             Required. The name of the game server delpoyment to
-            retrieve. Uses the form:
-
+            retrieve, in the following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
     """
 
@@ -125,8 +124,7 @@ class GetGameServerDeploymentRolloutRequest(proto.Message):
     Attributes:
         name (str):
             Required. The name of the game server delpoyment to
-            retrieve. Uses the form:
-
+            retrieve, in the following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
     """
 
@@ -139,7 +137,7 @@ class CreateGameServerDeploymentRequest(proto.Message):
 
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the form:
+            Required. The parent resource name, in the following form:
             ``projects/{project}/locations/{location}``.
         deployment_id (str):
             Required. The ID of the game server
@@ -162,9 +160,8 @@ class DeleteGameServerDeploymentRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the game server delpoyment to delete.
-            Uses the form:
-
+            Required. The name of the game server delpoyment to delete,
+            in the following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
     """
 
@@ -184,9 +181,7 @@ class UpdateGameServerDeploymentRequest(proto.Message):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
-
-            https: //developers.google.com/protocol-buffers //
-            /docs/reference/google.protobuf#fieldmask
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
     """
 
     game_server_deployment = proto.Field(
@@ -209,9 +204,7 @@ class UpdateGameServerDeploymentRolloutRequest(proto.Message):
             Required. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
-
-            https: //developers.google.com/protocol-buffers //
-            /docs/reference/google.protobuf#fieldmask
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
     """
 
     rollout = proto.Field(
@@ -228,9 +221,8 @@ class FetchDeploymentStateRequest(proto.Message):
 
     Attributes:
         name (str):
-            Required. The name of the game server delpoyment. Uses the
-            form:
-
+            Required. The name of the game server delpoyment, in the
+            following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
     """
 
@@ -276,9 +268,8 @@ class GameServerDeployment(proto.Message):
     r"""A game server deployment resource.
     Attributes:
         name (str):
-            The resource name of the game server deployment. Uses the
-            form:
-
+            The resource name of the game server deployment, in the
+            following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}``.
             For example,
             ``projects/my-project/locations/global/gameServerDeployments/my-deployment``.
@@ -325,12 +316,10 @@ class GameServerDeploymentRollout(proto.Message):
 
     Attributes:
         name (str):
-            The resource name of the game server deployment rollout.
-            Uses the form:
-
+            The resource name of the game server deployment rollout, in
+            the following form:
             ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout``.
             For example,
-
             ``projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout``.
         create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The creation time.
@@ -339,7 +328,6 @@ class GameServerDeploymentRollout(proto.Message):
         default_game_server_config (str):
             The default game server config is applied to all realms
             unless overridden in the rollout. For example,
-
             ``projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config``.
         game_server_config_overrides (Sequence[google.cloud.gaming_v1.types.GameServerConfigOverride]):
             Contains the game server config rollout
@@ -370,9 +358,7 @@ class PreviewGameServerDeploymentRolloutRequest(proto.Message):
             Optional. Mask of fields to update. At least one path must
             be supplied in this field. For the ``FieldMask`` definition,
             see
-
-            https: //developers.google.com/protocol-buffers //
-            /docs/reference/google.protobuf#fieldmask
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
             preview. Defaults to the immediately after the

@@ -194,8 +194,8 @@ class GameServerConfigsServiceAsyncClient:
                 The request object. Request message for
                 GameServerConfigsService.ListGameServerConfigs.
             parent (:class:`str`):
-                Required. The parent resource name. Uses the form:
-
+                Required. The parent resource name, in the following
+                form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*``.
 
                 This corresponds to the ``parent`` field
@@ -285,8 +285,7 @@ class GameServerConfigsServiceAsyncClient:
                 GameServerConfigsService.GetGameServerConfig.
             name (:class:`str`):
                 Required. The name of the game server config to
-                retrieve. Uses the form:
-
+                retrieve, in the following form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
 
                 This corresponds to the ``name`` field
@@ -369,8 +368,8 @@ class GameServerConfigsServiceAsyncClient:
                 The request object. Request message for
                 GameServerConfigsService.CreateGameServerConfig.
             parent (:class:`str`):
-                Required. The parent resource name. Uses the form:
-
+                Required. The parent resource name, in the following
+                form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/``.
 
                 This corresponds to the ``parent`` field
@@ -463,9 +462,8 @@ class GameServerConfigsServiceAsyncClient:
                 The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
             name (:class:`str`):
-                Required. The name of the game server config to delete.
-                Uses the form:
-
+                Required. The name of the game server config to delete,
+                in the following form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
 
                 This corresponds to the ``name`` field

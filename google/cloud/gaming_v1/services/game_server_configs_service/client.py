@@ -378,8 +378,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 The request object. Request message for
                 GameServerConfigsService.ListGameServerConfigs.
             parent (str):
-                Required. The parent resource name. Uses the form:
-
+                Required. The parent resource name, in the following
+                form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*``.
 
                 This corresponds to the ``parent`` field
@@ -460,8 +460,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 GameServerConfigsService.GetGameServerConfig.
             name (str):
                 Required. The name of the game server config to
-                retrieve. Uses the form:
-
+                retrieve, in the following form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
 
                 This corresponds to the ``name`` field
@@ -535,8 +534,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 The request object. Request message for
                 GameServerConfigsService.CreateGameServerConfig.
             parent (str):
-                Required. The parent resource name. Uses the form:
-
+                Required. The parent resource name, in the following
+                form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/``.
 
                 This corresponds to the ``parent`` field
@@ -631,9 +630,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
                 The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
             name (str):
-                Required. The name of the game server config to delete.
-                Uses the form:
-
+                Required. The name of the game server config to delete,
+                in the following form:
                 ``projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}``.
 
                 This corresponds to the ``name`` field

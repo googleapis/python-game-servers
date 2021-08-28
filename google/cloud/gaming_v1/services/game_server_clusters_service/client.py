@@ -379,8 +379,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 The request object. Request message for
                 GameServerClustersService.ListGameServerClusters.
             parent (str):
-                Required. The parent resource name.
-                Uses the form:
+                Required. The parent resource name,
+                in the following form:
                 "projects/{project}/locations/{location}/realms/{realm}".
 
                 This corresponds to the ``parent`` field
@@ -463,8 +463,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 GameServerClustersService.GetGameServerCluster.
             name (str):
                 Required. The name of the game server cluster to
-                retrieve. Uses the form:
-
+                retrieve, in the following form:
                 ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
 
                 This corresponds to the ``name`` field
@@ -536,7 +535,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 The request object. Request message for
                 GameServerClustersService.CreateGameServerCluster.
             parent (str):
-                Required. The parent resource name. Uses the form:
+                Required. The parent resource name, in the following
+                form:
                 ``projects/{project}/locations/{location}/realms/{realm-id}``.
 
                 This corresponds to the ``parent`` field
@@ -697,8 +697,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 The request object. Request message for
                 GameServerClustersService.DeleteGameServerCluster.
             name (str):
-                Required. The name of the game server cluster to delete.
-                Uses the form:
+                Required. The name of the game server cluster to delete,
+                in the following form:
                 ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
 
                 This corresponds to the ``name`` field
@@ -859,9 +859,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 Required. Mask of fields to update. At least one path
                 must be supplied in this field. For the ``FieldMask``
                 definition, see
-
-                https: //developers.google.com/protocol-buffers //
-                /docs/reference/google.protobuf#fieldmask
+                https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
 
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this

@@ -40,7 +40,7 @@ class ListRealmsRequest(proto.Message):
     r"""Request message for RealmsService.ListRealms.
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the form:
+            Required. The parent resource name, in the following form:
             ``projects/{project}/locations/{location}``.
         page_size (int):
             Optional. The maximum number of items to return. If
@@ -94,7 +94,8 @@ class GetRealmRequest(proto.Message):
     r"""Request message for RealmsService.GetRealm.
     Attributes:
         name (str):
-            Required. The name of the realm to retrieve. Uses the form:
+            Required. The name of the realm to retrieve, in the
+            following form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
     """
 
@@ -105,7 +106,7 @@ class CreateRealmRequest(proto.Message):
     r"""Request message for RealmsService.CreateRealm.
     Attributes:
         parent (str):
-            Required. The parent resource name. Uses the form:
+            Required. The parent resource name, in the following form:
             ``projects/{project}/locations/{location}``.
         realm_id (str):
             Required. The ID of the realm resource to be
@@ -123,7 +124,8 @@ class DeleteRealmRequest(proto.Message):
     r"""Request message for RealmsService.DeleteRealm.
     Attributes:
         name (str):
-            Required. The name of the realm to delete. Uses the form:
+            Required. The name of the realm to delete, in the following
+            form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
     """
 
@@ -139,9 +141,7 @@ class UpdateRealmRequest(proto.Message):
         update_mask (google.protobuf.field_mask_pb2.FieldMask):
             Required. The update mask applies to the resource. For the
             ``FieldMask`` definition, see
-
-            https: //developers.google.com/protocol-buffers //
-            /docs/reference/google.protobuf#fieldmask
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
     """
 
     realm = proto.Field(proto.MESSAGE, number=1, message="Realm",)
@@ -159,9 +159,7 @@ class PreviewRealmUpdateRequest(proto.Message):
         update_mask (google.protobuf.field_mask_pb2.FieldMask):
             Required. The update mask applies to the resource. For the
             ``FieldMask`` definition, see
-
-            https: //developers.google.com/protocol-buffers //
-            /docs/reference/google.protobuf#fieldmask
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         preview_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The target timestamp to compute the
             preview.
@@ -193,7 +191,7 @@ class Realm(proto.Message):
     r"""A realm resource.
     Attributes:
         name (str):
-            The resource name of the realm. Uses the form:
+            The resource name of the realm, in the following form:
             ``projects/{project}/locations/{location}/realms/{realm}``.
             For example,
             ``projects/my-project/locations/{location}/realms/my-realm``.
