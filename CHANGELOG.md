@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/python-game-servers/compare/v1.0.2...v1.1.0) (2021-08-28)
+
+
+### Features
+
+* add cluster_state to show the state of the Kubernetes cluster ([a149bb7](https://www.github.com/googleapis/python-game-servers/commit/a149bb788248bd12dc905ff0d50becd557af0fb3))
+* support version reporting API ([#180](https://www.github.com/googleapis/python-game-servers/issues/180)) ([a149bb7](https://www.github.com/googleapis/python-game-servers/commit/a149bb788248bd12dc905ff0d50becd557af0fb3))
+
 ### [1.0.2](https://www.github.com/googleapis/python-game-servers/compare/v1.0.1...v1.0.2) (2021-07-28)
 
 
