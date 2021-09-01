@@ -23,6 +23,7 @@ Example usage:
 import argparse
 
 from google.cloud import gaming
+from google.cloud.gaming_v1.types import game_server_clusters
 
 
 # [START cloud_game_servers_cluster_list]
@@ -32,21 +33,27 @@ def list_clusters(project_id, location, realm_id):
     client = gaming.GameServerClustersServiceClient()
 
     response = client.list_game_server_clusters(
-        parent=f"projects/{project_id}/locations/{location}/realms/{realm_id}"
+        request=game_server_clusters.ListGameServerClustersRequest(
+            parent=f"projects/{project_id}/locations/{location}/realms/{realm_id}",
+            view=game_server_clusters.GameServerClusterView.FULL,
+        )
     )
 
     for cluster in response.game_server_clusters:
         print(f"Name: {cluster.name}")
+        print(f"State:\n{cluster.cluster_state}")
 
     return response.game_server_clusters
+
+
 # [END cloud_game_servers_cluster_list]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--location', help='Your realm location.', required=True)
-    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument("--location", help="Your realm location.", required=True)
+    parser.add_argument("--realm-id", help="Your realm ID.", required=True)
 
     args = parser.parse_args()
 
