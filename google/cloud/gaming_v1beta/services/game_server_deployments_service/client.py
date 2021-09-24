@@ -17,7 +17,7 @@ from collections import OrderedDict
 from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
@@ -386,7 +386,9 @@ class GameServerDeploymentsServiceClient(
 
     def list_game_server_deployments(
         self,
-        request: game_server_deployments.ListGameServerDeploymentsRequest = None,
+        request: Union[
+            game_server_deployments.ListGameServerDeploymentsRequest, dict
+        ] = None,
         *,
         parent: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -397,7 +399,7 @@ class GameServerDeploymentsServiceClient(
         location.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.ListGameServerDeploymentsRequest):
+            request (Union[google.cloud.gaming_v1beta.types.ListGameServerDeploymentsRequest, dict]):
                 The request object. Request message for
                 GameServerDeploymentsService.ListGameServerDeployments.
             parent (str):
@@ -471,7 +473,9 @@ class GameServerDeploymentsServiceClient(
 
     def get_game_server_deployment(
         self,
-        request: game_server_deployments.GetGameServerDeploymentRequest = None,
+        request: Union[
+            game_server_deployments.GetGameServerDeploymentRequest, dict
+        ] = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -481,7 +485,7 @@ class GameServerDeploymentsServiceClient(
         r"""Gets details of a single game server deployment.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.GetGameServerDeploymentRequest):
+            request (Union[google.cloud.gaming_v1beta.types.GetGameServerDeploymentRequest, dict]):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeployment.
             name (str):
@@ -546,7 +550,9 @@ class GameServerDeploymentsServiceClient(
 
     def create_game_server_deployment(
         self,
-        request: game_server_deployments.CreateGameServerDeploymentRequest = None,
+        request: Union[
+            game_server_deployments.CreateGameServerDeploymentRequest, dict
+        ] = None,
         *,
         parent: str = None,
         game_server_deployment: game_server_deployments.GameServerDeployment = None,
@@ -558,7 +564,7 @@ class GameServerDeploymentsServiceClient(
         project and location.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.CreateGameServerDeploymentRequest):
+            request (Union[google.cloud.gaming_v1beta.types.CreateGameServerDeploymentRequest, dict]):
                 The request object. Request message for
                 GameServerDeploymentsService.CreateGameServerDeployment.
             parent (str):
@@ -643,7 +649,9 @@ class GameServerDeploymentsServiceClient(
 
     def delete_game_server_deployment(
         self,
-        request: game_server_deployments.DeleteGameServerDeploymentRequest = None,
+        request: Union[
+            game_server_deployments.DeleteGameServerDeploymentRequest, dict
+        ] = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -653,7 +661,7 @@ class GameServerDeploymentsServiceClient(
         r"""Deletes a single game server deployment.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.DeleteGameServerDeploymentRequest):
+            request (Union[google.cloud.gaming_v1beta.types.DeleteGameServerDeploymentRequest, dict]):
                 The request object. Request message for
                 GameServerDeploymentsService.DeleteGameServerDeployment.
             name (str):
@@ -741,7 +749,9 @@ class GameServerDeploymentsServiceClient(
 
     def update_game_server_deployment(
         self,
-        request: game_server_deployments.UpdateGameServerDeploymentRequest = None,
+        request: Union[
+            game_server_deployments.UpdateGameServerDeploymentRequest, dict
+        ] = None,
         *,
         game_server_deployment: game_server_deployments.GameServerDeployment = None,
         update_mask: field_mask_pb2.FieldMask = None,
@@ -752,7 +762,7 @@ class GameServerDeploymentsServiceClient(
         r"""Patches a game server deployment.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRequest):
+            request (Union[google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRequest, dict]):
                 The request object. Request message for
                 GameServerDeploymentsService.UpdateGameServerDeployment.
                 Only allows updates for labels.
@@ -844,7 +854,9 @@ class GameServerDeploymentsServiceClient(
 
     def get_game_server_deployment_rollout(
         self,
-        request: game_server_deployments.GetGameServerDeploymentRolloutRequest = None,
+        request: Union[
+            game_server_deployments.GetGameServerDeploymentRolloutRequest, dict
+        ] = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -854,7 +866,7 @@ class GameServerDeploymentsServiceClient(
         r"""Gets details a single game server deployment rollout.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.GetGameServerDeploymentRolloutRequest):
+            request (Union[google.cloud.gaming_v1beta.types.GetGameServerDeploymentRolloutRequest, dict]):
                 The request object. Request message for
                 GameServerDeploymentsService.GetGameServerDeploymentRollout.
             name (str):
@@ -924,7 +936,9 @@ class GameServerDeploymentsServiceClient(
 
     def update_game_server_deployment_rollout(
         self,
-        request: game_server_deployments.UpdateGameServerDeploymentRolloutRequest = None,
+        request: Union[
+            game_server_deployments.UpdateGameServerDeploymentRolloutRequest, dict
+        ] = None,
         *,
         rollout: game_server_deployments.GameServerDeploymentRollout = None,
         update_mask: field_mask_pb2.FieldMask = None,
@@ -941,7 +955,7 @@ class GameServerDeploymentsServiceClient(
         an error.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRolloutRequest):
+            request (Union[google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRolloutRequest, dict]):
                 The request object. Request message for
                 GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
             rollout (google.cloud.gaming_v1beta.types.GameServerDeploymentRollout):
@@ -1035,7 +1049,9 @@ class GameServerDeploymentsServiceClient(
 
     def preview_game_server_deployment_rollout(
         self,
-        request: game_server_deployments.PreviewGameServerDeploymentRolloutRequest = None,
+        request: Union[
+            game_server_deployments.PreviewGameServerDeploymentRolloutRequest, dict
+        ] = None,
         *,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
@@ -1045,7 +1061,7 @@ class GameServerDeploymentsServiceClient(
         does not mutate the rollout resource.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutRequest):
+            request (Union[google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutRequest, dict]):
                 The request object. Request message for
                 PreviewGameServerDeploymentRollout.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
@@ -1096,7 +1112,9 @@ class GameServerDeploymentsServiceClient(
 
     def fetch_deployment_state(
         self,
-        request: game_server_deployments.FetchDeploymentStateRequest = None,
+        request: Union[
+            game_server_deployments.FetchDeploymentStateRequest, dict
+        ] = None,
         *,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
@@ -1108,7 +1126,7 @@ class GameServerDeploymentsServiceClient(
         older version of the game server deployment.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.FetchDeploymentStateRequest):
+            request (Union[google.cloud.gaming_v1beta.types.FetchDeploymentStateRequest, dict]):
                 The request object. Request message for
                 GameServerDeploymentsService.FetchDeploymentState.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
