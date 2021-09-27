@@ -34,20 +34,25 @@ def get_cluster(project_id, location, realm_id, cluster_id):
 
     request = game_server_clusters.GetGameServerClusterRequest(
         name=f"projects/{project_id}/locations/{location}/realms/{realm_id}/gameServerClusters/{cluster_id}",
+        view=game_server_clusters.GameServerClusterView.FULL,
     )
 
     response = client.get_game_server_cluster(request)
     print(f"Get cluster response:\n{response}")
     return response
+
+
 # [END cloud_game_servers_cluster_get]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--location', help='Your realm location.', required=True)
-    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
-    parser.add_argument('--cluster-id', help='Your game server cluster ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument("--location", help="Your realm location.", required=True)
+    parser.add_argument("--realm-id", help="Your realm ID.", required=True)
+    parser.add_argument(
+        "--cluster-id", help="Your game server cluster ID.", required=True
+    )
 
     args = parser.parse_args()
 
