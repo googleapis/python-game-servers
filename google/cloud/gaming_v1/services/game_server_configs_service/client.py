@@ -17,7 +17,7 @@ from collections import OrderedDict
 from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
@@ -363,7 +363,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def list_game_server_configs(
         self,
-        request: game_server_configs.ListGameServerConfigsRequest = None,
+        request: Union[game_server_configs.ListGameServerConfigsRequest, dict] = None,
         *,
         parent: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -374,7 +374,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         location, and game server deployment.
 
         Args:
-            request (google.cloud.gaming_v1.types.ListGameServerConfigsRequest):
+            request (Union[google.cloud.gaming_v1.types.ListGameServerConfigsRequest, dict]):
                 The request object. Request message for
                 GameServerConfigsService.ListGameServerConfigs.
             parent (str):
@@ -445,7 +445,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def get_game_server_config(
         self,
-        request: game_server_configs.GetGameServerConfigRequest = None,
+        request: Union[game_server_configs.GetGameServerConfigRequest, dict] = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -455,7 +455,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         r"""Gets details of a single game server config.
 
         Args:
-            request (google.cloud.gaming_v1.types.GetGameServerConfigRequest):
+            request (Union[google.cloud.gaming_v1.types.GetGameServerConfigRequest, dict]):
                 The request object. Request message for
                 GameServerConfigsService.GetGameServerConfig.
             name (str):
@@ -515,7 +515,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def create_game_server_config(
         self,
-        request: game_server_configs.CreateGameServerConfigRequest = None,
+        request: Union[game_server_configs.CreateGameServerConfigRequest, dict] = None,
         *,
         parent: str = None,
         game_server_config: game_server_configs.GameServerConfig = None,
@@ -530,7 +530,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         resource.
 
         Args:
-            request (google.cloud.gaming_v1.types.CreateGameServerConfigRequest):
+            request (Union[google.cloud.gaming_v1.types.CreateGameServerConfigRequest, dict]):
                 The request object. Request message for
                 GameServerConfigsService.CreateGameServerConfig.
             parent (str):
@@ -614,7 +614,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def delete_game_server_config(
         self,
-        request: game_server_configs.DeleteGameServerConfigRequest = None,
+        request: Union[game_server_configs.DeleteGameServerConfigRequest, dict] = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -626,7 +626,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         game server deployment rollout.
 
         Args:
-            request (google.cloud.gaming_v1.types.DeleteGameServerConfigRequest):
+            request (Union[google.cloud.gaming_v1.types.DeleteGameServerConfigRequest, dict]):
                 The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
             name (str):

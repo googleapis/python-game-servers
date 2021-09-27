@@ -17,7 +17,7 @@ from collections import OrderedDict
 from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
@@ -358,7 +358,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def list_realms(
         self,
-        request: realms.ListRealmsRequest = None,
+        request: Union[realms.ListRealmsRequest, dict] = None,
         *,
         parent: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -368,7 +368,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Lists realms in a given project and location.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.ListRealmsRequest):
+            request (Union[google.cloud.gaming_v1beta.types.ListRealmsRequest, dict]):
                 The request object. Request message for
                 RealmsService.ListRealms.
             parent (str):
@@ -438,7 +438,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def get_realm(
         self,
-        request: realms.GetRealmRequest = None,
+        request: Union[realms.GetRealmRequest, dict] = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -448,7 +448,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Gets details of a single realm.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.GetRealmRequest):
+            request (Union[google.cloud.gaming_v1beta.types.GetRealmRequest, dict]):
                 The request object. Request message for
                 RealmsService.GetRealm.
             name (str):
@@ -508,7 +508,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def create_realm(
         self,
-        request: realms.CreateRealmRequest = None,
+        request: Union[realms.CreateRealmRequest, dict] = None,
         *,
         parent: str = None,
         realm: realms.Realm = None,
@@ -520,7 +520,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Creates a new realm in a given project and location.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.CreateRealmRequest):
+            request (Union[google.cloud.gaming_v1beta.types.CreateRealmRequest, dict]):
                 The request object. Request message for
                 RealmsService.CreateRealm.
             parent (str):
@@ -610,7 +610,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def delete_realm(
         self,
-        request: realms.DeleteRealmRequest = None,
+        request: Union[realms.DeleteRealmRequest, dict] = None,
         *,
         name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
@@ -620,7 +620,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Deletes a single realm.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.DeleteRealmRequest):
+            request (Union[google.cloud.gaming_v1beta.types.DeleteRealmRequest, dict]):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
             name (str):
@@ -703,7 +703,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def update_realm(
         self,
-        request: realms.UpdateRealmRequest = None,
+        request: Union[realms.UpdateRealmRequest, dict] = None,
         *,
         realm: realms.Realm = None,
         update_mask: field_mask_pb2.FieldMask = None,
@@ -714,7 +714,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Patches a single realm.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.UpdateRealmRequest):
+            request (Union[google.cloud.gaming_v1beta.types.UpdateRealmRequest, dict]):
                 The request object. Request message for
                 RealmsService.UpdateRealm.
             realm (google.cloud.gaming_v1beta.types.Realm):
@@ -800,7 +800,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def preview_realm_update(
         self,
-        request: realms.PreviewRealmUpdateRequest = None,
+        request: Union[realms.PreviewRealmUpdateRequest, dict] = None,
         *,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
@@ -809,7 +809,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         r"""Previews patches to a single realm.
 
         Args:
-            request (google.cloud.gaming_v1beta.types.PreviewRealmUpdateRequest):
+            request (Union[google.cloud.gaming_v1beta.types.PreviewRealmUpdateRequest, dict]):
                 The request object. Request message for
                 RealmsService.PreviewRealmUpdate.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
