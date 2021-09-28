@@ -1,5 +1,17 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/python-game-servers/compare/v1.1.0...v1.1.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* add 'dict' annotation type to 'request' ([3a701f7](https://www.github.com/googleapis/python-game-servers/commit/3a701f73fe732425d38b67e9c007113d1adc7d4d))
+
+
+### Documentation
+
+* **samples:** show cluster installation state details for get and list methods ([#188](https://www.github.com/googleapis/python-game-servers/issues/188)) ([e324a29](https://www.github.com/googleapis/python-game-servers/commit/e324a29030b4906f2704a2bae4000f854bb8bdc9))
+
 ## [1.1.0](https://www.github.com/googleapis/python-game-servers/compare/v1.0.2...v1.1.0) (2021-08-28)
 
 
