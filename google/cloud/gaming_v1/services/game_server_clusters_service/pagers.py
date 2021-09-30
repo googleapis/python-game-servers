@@ -15,13 +15,13 @@
 #
 from typing import (
     Any,
-    AsyncIterable,
+    AsyncIterator,
     Awaitable,
     Callable,
-    Iterable,
     Sequence,
     Tuple,
     Optional,
+    Iterator,
 )
 
 from google.cloud.gaming_v1.types import game_server_clusters
@@ -74,14 +74,14 @@ class ListGameServerClustersPager:
         return getattr(self._response, name)
 
     @property
-    def pages(self) -> Iterable[game_server_clusters.ListGameServerClustersResponse]:
+    def pages(self) -> Iterator[game_server_clusters.ListGameServerClustersResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = self._method(self._request, metadata=self._metadata)
             yield self._response
 
-    def __iter__(self) -> Iterable[game_server_clusters.GameServerCluster]:
+    def __iter__(self) -> Iterator[game_server_clusters.GameServerCluster]:
         for page in self.pages:
             yield from page.game_server_clusters
 
@@ -140,14 +140,14 @@ class ListGameServerClustersAsyncPager:
     @property
     async def pages(
         self,
-    ) -> AsyncIterable[game_server_clusters.ListGameServerClustersResponse]:
+    ) -> AsyncIterator[game_server_clusters.ListGameServerClustersResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = await self._method(self._request, metadata=self._metadata)
             yield self._response
 
-    def __aiter__(self) -> AsyncIterable[game_server_clusters.GameServerCluster]:
+    def __aiter__(self) -> AsyncIterator[game_server_clusters.GameServerCluster]:
         async def async_generator():
             async for page in self.pages:
                 for response in page.game_server_clusters:
