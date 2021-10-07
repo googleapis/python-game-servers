@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/python-game-servers/compare/v1.1.1...v1.1.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* improper types in pagers generation ([5ea72d7](https://www.github.com/googleapis/python-game-servers/commit/5ea72d7efd2d84a1ed3454102ba6357111018489))
+
 ### [1.1.1](https://www.github.com/googleapis/python-game-servers/compare/v1.1.0...v1.1.1) (2021-09-27)
 
 
