@@ -152,6 +152,7 @@ class DeleteGameServerConfigRequest(proto.Message):
 
 class ScalingConfig(proto.Message):
     r"""Autoscaling config for an Agones fleet.
+
     Attributes:
         name (str):
             Required. The name of the Scaling Config
@@ -180,6 +181,7 @@ class ScalingConfig(proto.Message):
 
 class FleetConfig(proto.Message):
     r"""Fleet configs for Agones.
+
     Attributes:
         fleet_spec (str):
             Agones fleet spec. Example spec:
@@ -194,6 +196,7 @@ class FleetConfig(proto.Message):
 
 class GameServerConfig(proto.Message):
     r"""A game server config resource.
+
     Attributes:
         name (str):
             The resource name of the game server config. Uses the form:
