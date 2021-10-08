@@ -266,6 +266,7 @@ class FetchDeploymentStateResponse(proto.Message):
 
 class GameServerDeployment(proto.Message):
     r"""A game server deployment resource.
+
     Attributes:
         name (str):
             The resource name of the game server deployment, in the
@@ -297,6 +298,7 @@ class GameServerDeployment(proto.Message):
 
 class GameServerConfigOverride(proto.Message):
     r"""A game server config override.
+
     Attributes:
         realms_selector (google.cloud.gaming_v1.types.RealmSelector):
             Selector for choosing applicable realms.
@@ -350,6 +352,7 @@ class GameServerDeploymentRollout(proto.Message):
 
 class PreviewGameServerDeploymentRolloutRequest(proto.Message):
     r"""Request message for PreviewGameServerDeploymentRollout.
+
     Attributes:
         rollout (google.cloud.gaming_v1.types.GameServerDeploymentRollout):
             Required. The game server deployment rollout to be updated.

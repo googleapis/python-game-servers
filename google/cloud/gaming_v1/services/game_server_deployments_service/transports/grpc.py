@@ -531,5 +531,8 @@ class GameServerDeploymentsServiceGrpcTransport(GameServerDeploymentsServiceTran
             )
         return self._stubs["fetch_deployment_state"]
 
+    def close(self):
+        self.grpc_channel.close()
+
 
 __all__ = ("GameServerDeploymentsServiceGrpcTransport",)

@@ -341,6 +341,7 @@ class PreviewUpdateGameServerClusterResponse(proto.Message):
 
 class GameServerClusterConnectionInfo(proto.Message):
     r"""The game server cluster connection information.
+
     Attributes:
         gke_cluster_reference (google.cloud.gaming_v1.types.GkeClusterReference):
             Reference to the GKE cluster where the game
@@ -363,6 +364,7 @@ class GameServerClusterConnectionInfo(proto.Message):
 
 class GkeClusterReference(proto.Message):
     r"""A reference to a GKE cluster.
+
     Attributes:
         cluster (str):
             The full or partial name of a GKE cluster, using one of the
@@ -381,6 +383,7 @@ class GkeClusterReference(proto.Message):
 
 class GameServerCluster(proto.Message):
     r"""A game server cluster resource.
+
     Attributes:
         name (str):
             Required. The resource name of the game server cluster, in
@@ -425,6 +428,7 @@ class GameServerCluster(proto.Message):
 
 class KubernetesClusterState(proto.Message):
     r"""The state of the Kubernetes cluster.
+
     Attributes:
         agones_version_installed (str):
             Output only. The version of Agones currently

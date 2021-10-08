@@ -492,5 +492,8 @@ class GameServerClustersServiceGrpcAsyncIOTransport(GameServerClustersServiceTra
             )
         return self._stubs["preview_update_game_server_cluster"]
 
+    def close(self):
+        return self.grpc_channel.close()
+
 
 __all__ = ("GameServerClustersServiceGrpcAsyncIOTransport",)

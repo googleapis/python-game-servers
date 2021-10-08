@@ -371,5 +371,8 @@ class GameServerConfigsServiceGrpcAsyncIOTransport(GameServerConfigsServiceTrans
             )
         return self._stubs["delete_game_server_config"]
 
+    def close(self):
+        return self.grpc_channel.close()
+
 
 __all__ = ("GameServerConfigsServiceGrpcAsyncIOTransport",)
