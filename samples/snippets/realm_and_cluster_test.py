@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import datetime
+import os
 import time
 import uuid
 
@@ -30,7 +31,7 @@ import list_realms
 import update_cluster
 import update_realm
 
-PROJECT_ID = "python-docs-samples-tests"
+PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
 REALM_LOCATION = "global"
 CLUSTER_ID = "my-cluster"
 GKE_CLUSTER_NAME = "projects/gcgs-client-lib-samples/locations/us-central1/clusters/gke-shared-default"
