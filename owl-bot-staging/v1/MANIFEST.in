@@ -1,0 +1,2 @@
+recursive-include google/cloud/gaming *.py
+recursive-include google/cloud/gaming_v1 *.py
