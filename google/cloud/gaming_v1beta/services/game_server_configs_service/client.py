@@ -30,6 +30,8 @@ from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
+OptionalRetry = Union[retries.Retry, object]
+
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
 from google.cloud.gaming_v1beta.services.game_server_configs_service import pagers
@@ -363,7 +365,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         request: Union[game_server_configs.ListGameServerConfigsRequest, dict] = None,
         *,
         parent: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerConfigsPager:
@@ -445,7 +447,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         request: Union[game_server_configs.GetGameServerConfigRequest, dict] = None,
         *,
         name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_configs.GameServerConfig:
@@ -517,7 +519,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         *,
         parent: str = None,
         game_server_config: game_server_configs.GameServerConfig = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
@@ -615,7 +617,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         request: Union[game_server_configs.DeleteGameServerConfigRequest, dict] = None,
         *,
         name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
