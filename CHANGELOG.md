@@ -1,5 +1,18 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/python-game-servers/compare/v1.2.0...v1.2.1) (2021-11-01)
+
+
+### Bug Fixes
+
+* **deps:** drop packaging dependency ([c80d20e](https://www.github.com/googleapis/python-game-servers/commit/c80d20e0b3375be37533d29d9d708c694060a914))
+* **deps:** require google-api-core >= 1.28.0 ([c80d20e](https://www.github.com/googleapis/python-game-servers/commit/c80d20e0b3375be37533d29d9d708c694060a914))
+
+
+### Documentation
+
+* list oneofs in docstring ([c80d20e](https://www.github.com/googleapis/python-game-servers/commit/c80d20e0b3375be37533d29d9d708c694060a914))
+
 ## [1.2.0](https://www.github.com/googleapis/python-game-servers/compare/v1.1.1...v1.2.0) (2021-10-26)
 
 
