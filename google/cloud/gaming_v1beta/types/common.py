@@ -145,9 +145,8 @@ class Schedule(proto.Message):
 
     ::
 
-        start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
-        cron job: cron spec start time + duration
-
+         start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
+         cron job: cron spec start time + duration
 
     Attributes:
         start_time (google.protobuf.timestamp_pb2.Timestamp):
