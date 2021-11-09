@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/python-game-servers/compare/v1.2.1...v1.3.0) (2021-11-09)
+
+
+### Features
+
+* add python 3.9 and 3.10 support ([#218](https://www.github.com/googleapis/python-game-servers/issues/218)) ([19aa818](https://www.github.com/googleapis/python-game-servers/commit/19aa8187e716d41e769a0f2aa894cb4f4732d61b)), closes [#216](https://www.github.com/googleapis/python-game-servers/issues/216)
+
 ### [1.2.1](https://www.github.com/googleapis/python-game-servers/compare/v1.2.0...v1.2.1) (2021-11-01)
 
 
