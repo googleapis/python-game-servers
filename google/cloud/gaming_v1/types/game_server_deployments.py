@@ -304,9 +304,11 @@ class GameServerConfigOverride(proto.Message):
     Attributes:
         realms_selector (google.cloud.gaming_v1.types.RealmSelector):
             Selector for choosing applicable realms.
+
             This field is a member of `oneof`_ ``selector``.
         config_version (str):
             The game server config for this override.
+
             This field is a member of `oneof`_ ``change``.
     """
 
