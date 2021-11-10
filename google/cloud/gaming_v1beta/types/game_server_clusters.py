@@ -315,6 +315,7 @@ class GameServerClusterConnectionInfo(proto.Message):
         gke_cluster_reference (google.cloud.gaming_v1beta.types.GkeClusterReference):
             Reference to the GKE cluster where the game
             servers are installed.
+
             This field is a member of `oneof`_ ``cluster_reference``.
         namespace (str):
             Namespace designated on the game server
