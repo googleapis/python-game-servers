@@ -39,14 +39,16 @@ def get_realm(project_id, location, realm_id):
     response = client.get_realm(request)
     print(f"Get realm response:\n{response}")
     return response
+
+
 # [END cloud_game_servers_realm_get]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--location', help='Your realm location.', required=True)
-    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument("--location", help="Your realm location.", required=True)
+    parser.add_argument("--realm-id", help="Your realm ID.", required=True)
 
     args = parser.parse_args()
 

@@ -44,14 +44,16 @@ def update_realm(project_id, location, realm_id):
     operation = client.update_realm(request)
     print(f"Update realm operation: {operation.operation.name}")
     operation.result(timeout=120)
+
+
 # [END cloud_game_servers_realm_update]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--location', help='Your realm location.', required=True)
-    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument("--location", help="Your realm location.", required=True)
+    parser.add_argument("--realm-id", help="Your realm ID.", required=True)
 
     args = parser.parse_args()
 

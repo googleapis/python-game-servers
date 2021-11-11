@@ -42,13 +42,17 @@ def list_configs(project_id, deployment_id):
         print(f"Name: {config.name}")
 
     return response.game_server_configs
+
+
 # [END cloud_game_servers_config_list]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--deployment-id', help='Your game server deployment ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument(
+        "--deployment-id", help="Your game server deployment ID.", required=True
+    )
 
     args = parser.parse_args()
 
