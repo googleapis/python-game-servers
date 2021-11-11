@@ -32,21 +32,21 @@ def list_realms(project_id, location):
 
     client = gaming.RealmsServiceClient()
 
-    response = client.list_realms(
-        parent=f"projects/{project_id}/locations/{location}"
-    )
+    response = client.list_realms(parent=f"projects/{project_id}/locations/{location}")
 
     for realm in response.realms:
         print(f"Name: {realm.name}")
 
     return response.realms
+
+
 # [END cloud_game_servers_realm_list]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--location', help='Your realm location.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument("--location", help="Your realm location.", required=True)
 
     args = parser.parse_args()
 

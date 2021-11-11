@@ -42,14 +42,20 @@ def get_config(project_id, deployment_id, config_id):
     response = client.get_game_server_config(request)
     print(f"Get config response:\n{response}")
     return response
+
+
 # [END cloud_game_servers_config_get]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--deployment-id', help='Your game server deployment ID.', required=True)
-    parser.add_argument('--config-id', help='Your game server config ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument(
+        "--deployment-id", help="Your game server deployment ID.", required=True
+    )
+    parser.add_argument(
+        "--config-id", help="Your game server config ID.", required=True
+    )
 
     args = parser.parse_args()
 

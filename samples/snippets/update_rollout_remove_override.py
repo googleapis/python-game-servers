@@ -38,20 +38,26 @@ def update_rollout_remove_override(project_id, deployment_id):
     # only be created in global.  This is done for all operations on
     # game Server deployments, as well as for its child resource types.
     request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
-    request.rollout.name = f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}"
+    request.rollout.name = (
+        f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}"
+    )
     request.rollout.game_server_config_overrides = []
     request.update_mask = field_mask.FieldMask(paths=["game_server_config_overrides"])
 
     operation = client.update_game_server_deployment_rollout(request)
     print(f"Update deployment rollout operation: {operation.operation.name}")
     operation.result(timeout=120)
+
+
 # [END cloud_game_servers_deployment_rollout_remove_override]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--deployment-id', help='Your game server deployment ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument(
+        "--deployment-id", help="Your game server deployment ID.", required=True
+    )
 
     args = parser.parse_args()
 

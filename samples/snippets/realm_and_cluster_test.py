@@ -33,11 +33,13 @@ import update_realm
 PROJECT_ID = "python-docs-samples-tests"
 REALM_LOCATION = "global"
 CLUSTER_ID = "my-cluster"
-GKE_CLUSTER_NAME = "projects/gcgs-client-lib-samples/locations/us-central1/clusters/gke-shared-default"
+GKE_CLUSTER_NAME = (
+    "projects/gcgs-client-lib-samples/locations/us-central1/clusters/gke-shared-default"
+)
 
 
 # The format of realm ID. This is used in the unit tests and cleanup below.
-realm_id_format = 'test-realm-{}-{}'
+realm_id_format = "test-realm-{}-{}"
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -45,17 +47,19 @@ def clean_up_old_realms():
     all_realms = list_realms.list_realms(PROJECT_ID, REALM_LOCATION)
     for realm in all_realms:
         realm_name = realm.name
-        realm_id = realm_name[realm_name.rfind('/') + 1: len(realm_name)]
-        if realm_id.find('test-realm-') == 0:
-            time_str = realm_id[realm_id.rfind('-') + 1: len(realm_id)]
+        realm_id = realm_name[realm_name.rfind("/") + 1 : len(realm_name)]
+        if realm_id.find("test-realm-") == 0:
+            time_str = realm_id[realm_id.rfind("-") + 1 : len(realm_id)]
             test_date = datetime.datetime.utcfromtimestamp(int(time_str))
             now_date = datetime.datetime.utcfromtimestamp(int(time.time()))
             difftime = now_date - test_date
 
             # *NOTE* Restrict to realms used in the tests older than 2 days
             #        to prevent thrashing in the case of async tests
-            if (difftime.days > 2):
-                print(f"Cleaning up old realm {realm_id} and its clusters, difftime: {difftime}")
+            if difftime.days > 2:
+                print(
+                    f"Cleaning up old realm {realm_id} and its clusters, difftime: {difftime}"
+                )
                 clean_up_realm_and_clusters(realm_id)
 
 
@@ -63,7 +67,9 @@ def clean_up_old_realms():
 def test_realm():
     realm_id = realm_id_format.format(uuid.uuid4().hex, int(time.time()))
 
-    print(f"Creating realm {realm_id} in location {REALM_LOCATION} in project {PROJECT_ID}")
+    print(
+        f"Creating realm {realm_id} in location {REALM_LOCATION} in project {PROJECT_ID}"
+    )
     create_realm.create_realm(PROJECT_ID, REALM_LOCATION, realm_id)
 
     yield realm_id
@@ -85,11 +91,15 @@ def clean_up_realm(realm_id):
 def test_realm_with_cluster():
     realm_id = realm_id_format.format(uuid.uuid4().hex, int(time.time()))
 
-    print(f"Creating realm {realm_id} in location {REALM_LOCATION} in project {PROJECT_ID}")
+    print(
+        f"Creating realm {realm_id} in location {REALM_LOCATION} in project {PROJECT_ID}"
+    )
     create_realm.create_realm(PROJECT_ID, REALM_LOCATION, realm_id)
 
     print(f"Creating cluster {CLUSTER_ID} in realm {realm_id} in project {PROJECT_ID}")
-    create_cluster.create_cluster(PROJECT_ID, REALM_LOCATION, realm_id, CLUSTER_ID, GKE_CLUSTER_NAME)
+    create_cluster.create_cluster(
+        PROJECT_ID, REALM_LOCATION, realm_id, CLUSTER_ID, GKE_CLUSTER_NAME
+    )
 
     yield realm_id
 
@@ -106,10 +116,12 @@ def clean_up_realm_and_clusters(realm_id):
 
     clusters = list_clusters.list_clusters(PROJECT_ID, REALM_LOCATION, realm_id)
     for cluster in clusters:
-        cluster_id = cluster.name.rsplit('/', 1)[-1]
+        cluster_id = cluster.name.rsplit("/", 1)[-1]
         print(f"Deleting cluster {cluster_id} in realm {realm_id}")
         try:
-            delete_cluster.delete_cluster(PROJECT_ID, REALM_LOCATION, realm_id, cluster_id)
+            delete_cluster.delete_cluster(
+                PROJECT_ID, REALM_LOCATION, realm_id, cluster_id
+            )
         except exceptions.NotFound:  # Ignore the non-existent cluster
             return
 
@@ -126,7 +138,10 @@ def test_create_realm(test_realm):
 
 def test_get_realm(test_realm):
     realm = get_realm.get_realm(PROJECT_ID, REALM_LOCATION, test_realm)
-    assert realm.name == f"projects/{PROJECT_ID}/locations/{REALM_LOCATION}/realms/{test_realm}"
+    assert (
+        realm.name
+        == f"projects/{PROJECT_ID}/locations/{REALM_LOCATION}/realms/{test_realm}"
+    )
 
 
 def test_list_realms(test_realm):
@@ -143,7 +158,10 @@ def test_list_realms(test_realm):
 def test_update_realm(test_realm):
     update_realm.update_realm(PROJECT_ID, REALM_LOCATION, test_realm)
     realm = get_realm.get_realm(PROJECT_ID, REALM_LOCATION, test_realm)
-    assert realm.labels == {"label-key-1": "label-value-1", "label-key-2": "label-value-2"}
+    assert realm.labels == {
+        "label-key-1": "label-value-1",
+        "label-key-2": "label-value-2",
+    }
 
 
 def test_delete_realm(test_realm):
@@ -153,16 +171,25 @@ def test_delete_realm(test_realm):
 
 
 def test_create_cluster(test_realm_with_cluster):
-    print(f"Created cluster {CLUSTER_ID} in realm {test_realm_with_cluster} in project {PROJECT_ID}")
+    print(
+        f"Created cluster {CLUSTER_ID} in realm {test_realm_with_cluster} in project {PROJECT_ID}"
+    )
 
 
 def test_get_cluster(test_realm_with_cluster):
-    cluster = get_cluster.get_cluster(PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID)
-    assert cluster.name == f"projects/{PROJECT_ID}/locations/{REALM_LOCATION}/realms/{test_realm_with_cluster}/gameServerClusters/{CLUSTER_ID}"
+    cluster = get_cluster.get_cluster(
+        PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID
+    )
+    assert (
+        cluster.name
+        == f"projects/{PROJECT_ID}/locations/{REALM_LOCATION}/realms/{test_realm_with_cluster}/gameServerClusters/{CLUSTER_ID}"
+    )
 
 
 def test_list_clusters(test_realm_with_cluster):
-    clusters = list_clusters.list_clusters(PROJECT_ID, REALM_LOCATION, test_realm_with_cluster)
+    clusters = list_clusters.list_clusters(
+        PROJECT_ID, REALM_LOCATION, test_realm_with_cluster
+    )
 
     cluster_name_list = []
     for cluster in clusters:
@@ -173,12 +200,23 @@ def test_list_clusters(test_realm_with_cluster):
 
 
 def test_update_cluster(test_realm_with_cluster):
-    update_cluster.update_cluster(PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID)
-    cluster = get_cluster.get_cluster(PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID)
-    assert cluster.labels == {"label-key-1": "label-value-1", "label-key-2": "label-value-2"}
+    update_cluster.update_cluster(
+        PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID
+    )
+    cluster = get_cluster.get_cluster(
+        PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID
+    )
+    assert cluster.labels == {
+        "label-key-1": "label-value-1",
+        "label-key-2": "label-value-2",
+    }
 
 
 def test_delete_cluster(test_realm_with_cluster):
-    delete_cluster.delete_cluster(PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID)
+    delete_cluster.delete_cluster(
+        PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID
+    )
     with pytest.raises(exceptions.NotFound):
-        get_cluster.get_cluster(PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID)
+        get_cluster.get_cluster(
+            PROJECT_ID, REALM_LOCATION, test_realm_with_cluster, CLUSTER_ID
+        )

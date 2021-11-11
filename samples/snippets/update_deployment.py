@@ -47,13 +47,17 @@ def update_deployment(project_id, deployment_id):
     operation = client.update_game_server_deployment(request)
     print(f"Update deployment operation: {operation.operation.name}")
     operation.result(timeout=120)
+
+
 # [END cloud_game_servers_deployment_update]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--deployment-id', help='Your game server deployment ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument(
+        "--deployment-id", help="Your game server deployment ID.", required=True
+    )
 
     args = parser.parse_args()
 

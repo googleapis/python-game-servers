@@ -42,8 +42,7 @@ def create_cluster(project_id, location, realm_id, cluster_id, gke_cluster_name)
         game_server_cluster=game_server_clusters.GameServerCluster(
             description="My Game Server Cluster",
             connection_info=game_server_clusters.GameServerClusterConnectionInfo(
-                gke_cluster_reference=gke_cluster_reference,
-                namespace="default",
+                gke_cluster_reference=gke_cluster_reference, namespace="default",
             ),
         ),
     )
@@ -51,20 +50,31 @@ def create_cluster(project_id, location, realm_id, cluster_id, gke_cluster_name)
     operation = client.create_game_server_cluster(request)
     print(f"Create cluster operation: {operation.operation.name}")
     operation.result(timeout=120)
+
+
 # [END cloud_game_servers_cluster_create]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--location', help='Your realm location.', required=True)
-    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
-    parser.add_argument('--cluster-id', help='Your game server cluster ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument("--location", help="Your realm location.", required=True)
+    parser.add_argument("--realm-id", help="Your realm ID.", required=True)
     parser.add_argument(
-        '--gke-cluster-name',
-        help='The name of the GKE cluster which is managed by the game server cluster being created.',
-        required=True)
+        "--cluster-id", help="Your game server cluster ID.", required=True
+    )
+    parser.add_argument(
+        "--gke-cluster-name",
+        help="The name of the GKE cluster which is managed by the game server cluster being created.",
+        required=True,
+    )
 
     args = parser.parse_args()
 
-    create_cluster(args.project_id, args.location, args.realm_id, args.cluster_id, args.gke_cluster_name)
+    create_cluster(
+        args.project_id,
+        args.location,
+        args.realm_id,
+        args.cluster_id,
+        args.gke_cluster_name,
+    )

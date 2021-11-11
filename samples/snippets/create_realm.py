@@ -35,23 +35,22 @@ def create_realm(project_id, location, realm_id):
     request = realms.CreateRealmRequest(
         parent=f"projects/{project_id}/locations/{location}",
         realm_id=realm_id,
-        realm=realms.Realm(
-            description="My Realm",
-            time_zone="US/Pacific",
-        ),
+        realm=realms.Realm(description="My Realm", time_zone="US/Pacific",),
     )
 
     operation = client.create_realm(request)
     print(f"Create realm operation: {operation.operation.name}")
     operation.result(timeout=120)
+
+
 # [END cloud_game_servers_realm_create]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--location', help='Your realm location.', required=True)
-    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument("--location", help="Your realm location.", required=True)
+    parser.add_argument("--realm-id", help="Your realm ID.", required=True)
 
     args = parser.parse_args()
 

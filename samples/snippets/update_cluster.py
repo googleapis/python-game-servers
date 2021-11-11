@@ -44,15 +44,19 @@ def update_cluster(project_id, location, realm_id, cluster_id):
     operation = client.update_game_server_cluster(request)
     print(f"Update cluster operation: {operation.operation.name}")
     operation.result(timeout=120)
+
+
 # [END cloud_game_servers_cluster_update]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--location', help='Your realm location.', required=True)
-    parser.add_argument('--realm-id', help='Your realm ID.', required=True)
-    parser.add_argument('--cluster-id', help='Your game server cluster ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument("--location", help="Your realm location.", required=True)
+    parser.add_argument("--realm-id", help="Your realm ID.", required=True)
+    parser.add_argument(
+        "--cluster-id", help="Your game server cluster ID.", required=True
+    )
 
     args = parser.parse_args()
 

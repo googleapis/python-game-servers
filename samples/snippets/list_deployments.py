@@ -42,12 +42,14 @@ def list_deployments(project_id):
         print(f"Name: {deployment.name}")
 
     return response.game_server_deployments
+
+
 # [END cloud_game_servers_deployment_list]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
 
     args = parser.parse_args()
 

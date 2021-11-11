@@ -30,7 +30,9 @@ from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 
 
 # [START cloud_game_servers_deployment_rollout_override]
-def update_rollout_override(project_id, deployment_id, config_id, realm_location, realm_id):
+def update_rollout_override(
+    project_id, deployment_id, config_id, realm_location, realm_id
+):
     """Update the rollout of a game server deployment to set the override config."""
 
     client = gaming.GameServerDeploymentsServiceClient()
@@ -39,7 +41,9 @@ def update_rollout_override(project_id, deployment_id, config_id, realm_location
     # only be created in global.  This is done for all operations on
     # game Server deployments, as well as for its child resource types.
     request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
-    request.rollout.name = f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}"
+    request.rollout.name = (
+        f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}"
+    )
     realm_name = f"projects/{project_id}/locations/{realm_location}/realms/{realm_id}"
     config_override = game_server_deployments.GameServerConfigOverride(
         realms_selector=common.RealmSelector(realms=[realm_name]),
@@ -51,17 +55,31 @@ def update_rollout_override(project_id, deployment_id, config_id, realm_location
     operation = client.update_game_server_deployment_rollout(request)
     print(f"Update deployment rollout operation: {operation.operation.name}")
     operation.result(timeout=120)
+
+
 # [END cloud_game_servers_deployment_rollout_override]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project-id', help='Your cloud project ID.', required=True)
-    parser.add_argument('--deployment-id', help='Your game server deployment ID.', required=True)
-    parser.add_argument('--config-id', help='Your game server config ID.', required=True)
-    parser.add_argument('--realm-location', help='Your game server config ID.', required=True)
-    parser.add_argument('--realm-id', help='Your game server config ID.', required=True)
+    parser.add_argument("--project-id", help="Your cloud project ID.", required=True)
+    parser.add_argument(
+        "--deployment-id", help="Your game server deployment ID.", required=True
+    )
+    parser.add_argument(
+        "--config-id", help="Your game server config ID.", required=True
+    )
+    parser.add_argument(
+        "--realm-location", help="Your game server config ID.", required=True
+    )
+    parser.add_argument("--realm-id", help="Your game server config ID.", required=True)
 
     args = parser.parse_args()
 
-    update_rollout_override(args.project_id, args.deployment_id, args.config_id, args.realm_location, args.realm_id)
+    update_rollout_override(
+        args.project_id,
+        args.deployment_id,
+        args.config_id,
+        args.realm_location,
+        args.realm_id,
+    )
