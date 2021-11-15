@@ -15,7 +15,7 @@ Python Client for Cloud Game Servers
 .. |versions| image:: https://img.shields.io/pypi/pyversions/google-cloud-game-servers.svg
    :target: https://pypi.org/project/google-cloud-game-servers/
 .. _Cloud Game Servers: https://cloud.google.com/game-servers/
-.. _Client Library Documentation: https://googleapis.dev/python/gameservices/latest
+.. _Client Library Documentation: https://cloud.google.com/python/docs/reference/gameservices/latest
 .. _Product Documentation:  https://cloud.google.com/game-servers/
 
 Quick Start

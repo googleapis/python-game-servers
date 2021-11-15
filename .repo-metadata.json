@@ -2,7 +2,7 @@
     "name": "gameservices",
     "name_pretty": "Game Servers",
     "product_documentation": "https://cloud.google.com/game-servers/",
-    "client_documentation": "https://googleapis.dev/python/gameservices/latest",
+    "client_documentation": "https://cloud.google.com/python/docs/reference/gameservices/latest",
     "issue_tracker": "",
     "release_level": "ga",
     "language": "python",
