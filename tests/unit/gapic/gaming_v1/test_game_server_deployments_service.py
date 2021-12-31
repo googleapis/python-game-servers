@@ -270,20 +270,20 @@ def test_game_server_deployments_service_client_client_options(
     # unsupported value.
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "Unsupported"}):
         with pytest.raises(MutualTLSChannelError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case GOOGLE_API_USE_CLIENT_CERTIFICATE has unsupported value.
     with mock.patch.dict(
         os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "Unsupported"}
     ):
         with pytest.raises(ValueError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case quota_project_id is provided
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -352,7 +352,7 @@ def test_game_server_deployments_service_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(transport=transport_name, client_options=options)
+            client = client_class(client_options=options, transport=transport_name)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -451,7 +451,7 @@ def test_game_server_deployments_service_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -486,7 +486,7 @@ def test_game_server_deployments_service_client_client_options_credentials_file(
     options = client_options.ClientOptions(credentials_file="credentials.json")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -519,10 +519,10 @@ def test_game_server_deployments_service_client_client_options_from_dict():
         )
 
 
-def test_list_game_server_deployments(
-    transport: str = "grpc",
-    request_type=game_server_deployments.ListGameServerDeploymentsRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [game_server_deployments.ListGameServerDeploymentsRequest, dict,]
+)
+def test_list_game_server_deployments(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -550,10 +550,6 @@ def test_list_game_server_deployments(
     assert isinstance(response, pagers.ListGameServerDeploymentsPager)
     assert response.next_page_token == "next_page_token_value"
     assert response.unreachable == ["unreachable_value"]
-
-
-def test_list_game_server_deployments_from_dict():
-    test_list_game_server_deployments(request_type=dict)
 
 
 def test_list_game_server_deployments_empty_call():
@@ -756,9 +752,9 @@ async def test_list_game_server_deployments_flattened_error_async():
         )
 
 
-def test_list_game_server_deployments_pager():
+def test_list_game_server_deployments_pager(transport_name: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials,
+        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -808,9 +804,9 @@ def test_list_game_server_deployments_pager():
         )
 
 
-def test_list_game_server_deployments_pages():
+def test_list_game_server_deployments_pages(transport_name: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials,
+        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -949,10 +945,10 @@ async def test_list_game_server_deployments_async_pages():
             assert page_.raw_page.next_page_token == token
 
 
-def test_get_game_server_deployment(
-    transport: str = "grpc",
-    request_type=game_server_deployments.GetGameServerDeploymentRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [game_server_deployments.GetGameServerDeploymentRequest, dict,]
+)
+def test_get_game_server_deployment(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -981,10 +977,6 @@ def test_get_game_server_deployment(
     assert response.name == "name_value"
     assert response.etag == "etag_value"
     assert response.description == "description_value"
-
-
-def test_get_game_server_deployment_from_dict():
-    test_get_game_server_deployment(request_type=dict)
 
 
 def test_get_game_server_deployment_empty_call():
@@ -1185,10 +1177,10 @@ async def test_get_game_server_deployment_flattened_error_async():
         )
 
 
-def test_create_game_server_deployment(
-    transport: str = "grpc",
-    request_type=game_server_deployments.CreateGameServerDeploymentRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [game_server_deployments.CreateGameServerDeploymentRequest, dict,]
+)
+def test_create_game_server_deployment(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1212,10 +1204,6 @@ def test_create_game_server_deployment(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_create_game_server_deployment_from_dict():
-    test_create_game_server_deployment(request_type=dict)
 
 
 def test_create_game_server_deployment_empty_call():
@@ -1435,10 +1423,10 @@ async def test_create_game_server_deployment_flattened_error_async():
         )
 
 
-def test_delete_game_server_deployment(
-    transport: str = "grpc",
-    request_type=game_server_deployments.DeleteGameServerDeploymentRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [game_server_deployments.DeleteGameServerDeploymentRequest, dict,]
+)
+def test_delete_game_server_deployment(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1462,10 +1450,6 @@ def test_delete_game_server_deployment(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_delete_game_server_deployment_from_dict():
-    test_delete_game_server_deployment(request_type=dict)
 
 
 def test_delete_game_server_deployment_empty_call():
@@ -1663,10 +1647,10 @@ async def test_delete_game_server_deployment_flattened_error_async():
         )
 
 
-def test_update_game_server_deployment(
-    transport: str = "grpc",
-    request_type=game_server_deployments.UpdateGameServerDeploymentRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [game_server_deployments.UpdateGameServerDeploymentRequest, dict,]
+)
+def test_update_game_server_deployment(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1690,10 +1674,6 @@ def test_update_game_server_deployment(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_update_game_server_deployment_from_dict():
-    test_update_game_server_deployment(request_type=dict)
 
 
 def test_update_game_server_deployment_empty_call():
@@ -1919,10 +1899,11 @@ async def test_update_game_server_deployment_flattened_error_async():
         )
 
 
-def test_get_game_server_deployment_rollout(
-    transport: str = "grpc",
-    request_type=game_server_deployments.GetGameServerDeploymentRolloutRequest,
-):
+@pytest.mark.parametrize(
+    "request_type",
+    [game_server_deployments.GetGameServerDeploymentRolloutRequest, dict,],
+)
+def test_get_game_server_deployment_rollout(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1955,10 +1936,6 @@ def test_get_game_server_deployment_rollout(
     assert response.name == "name_value"
     assert response.default_game_server_config == "default_game_server_config_value"
     assert response.etag == "etag_value"
-
-
-def test_get_game_server_deployment_rollout_from_dict():
-    test_get_game_server_deployment_rollout(request_type=dict)
 
 
 def test_get_game_server_deployment_rollout_empty_call():
@@ -2167,10 +2144,11 @@ async def test_get_game_server_deployment_rollout_flattened_error_async():
         )
 
 
-def test_update_game_server_deployment_rollout(
-    transport: str = "grpc",
-    request_type=game_server_deployments.UpdateGameServerDeploymentRolloutRequest,
-):
+@pytest.mark.parametrize(
+    "request_type",
+    [game_server_deployments.UpdateGameServerDeploymentRolloutRequest, dict,],
+)
+def test_update_game_server_deployment_rollout(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2197,10 +2175,6 @@ def test_update_game_server_deployment_rollout(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_update_game_server_deployment_rollout_from_dict():
-    test_update_game_server_deployment_rollout(request_type=dict)
 
 
 def test_update_game_server_deployment_rollout_empty_call():
@@ -2434,10 +2408,11 @@ async def test_update_game_server_deployment_rollout_flattened_error_async():
         )
 
 
-def test_preview_game_server_deployment_rollout(
-    transport: str = "grpc",
-    request_type=game_server_deployments.PreviewGameServerDeploymentRolloutRequest,
-):
+@pytest.mark.parametrize(
+    "request_type",
+    [game_server_deployments.PreviewGameServerDeploymentRolloutRequest, dict,],
+)
+def test_preview_game_server_deployment_rollout(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2470,10 +2445,6 @@ def test_preview_game_server_deployment_rollout(
     )
     assert response.unavailable == ["unavailable_value"]
     assert response.etag == "etag_value"
-
-
-def test_preview_game_server_deployment_rollout_from_dict():
-    test_preview_game_server_deployment_rollout(request_type=dict)
 
 
 def test_preview_game_server_deployment_rollout_empty_call():
@@ -2607,10 +2578,10 @@ async def test_preview_game_server_deployment_rollout_field_headers_async():
     ]
 
 
-def test_fetch_deployment_state(
-    transport: str = "grpc",
-    request_type=game_server_deployments.FetchDeploymentStateRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [game_server_deployments.FetchDeploymentStateRequest, dict,]
+)
+def test_fetch_deployment_state(request_type, transport: str = "grpc"):
     client = GameServerDeploymentsServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2637,10 +2608,6 @@ def test_fetch_deployment_state(
     # Establish that the response is the type that we expect.
     assert isinstance(response, game_server_deployments.FetchDeploymentStateResponse)
     assert response.unavailable == ["unavailable_value"]
-
-
-def test_fetch_deployment_state_from_dict():
-    test_fetch_deployment_state(request_type=dict)
 
 
 def test_fetch_deployment_state_empty_call():
@@ -3359,7 +3326,7 @@ def test_parse_common_location_path():
     assert expected == actual
 
 
-def test_client_withDEFAULT_CLIENT_INFO():
+def test_client_with_default_client_info():
     client_info = gapic_v1.client_info.ClientInfo()
 
     with mock.patch.object(
