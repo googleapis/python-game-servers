@@ -461,8 +461,8 @@ class KubernetesClusterState(proto.Message):
 
     class InstallationState(proto.Enum):
         r"""The state of the installed versions of Agones/Kubernetes. See
-        also https://cloud.google.com/game-servers/docs/versions-and-
-        upgrades.
+        also
+        https://cloud.google.com/game-servers/docs/versions-and-upgrades.
         """
         INSTALLATION_STATE_UNSPECIFIED = 0
         AGONES_KUBERNETES_VERSION_SUPPORTED = 1
