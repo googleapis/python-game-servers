@@ -451,7 +451,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
@@ -530,7 +530,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
                 A game server cluster resource.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -623,7 +623,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [parent, game_server_cluster, game_server_cluster_id]
@@ -785,7 +785,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -941,7 +941,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([game_server_cluster, update_mask])
         if request is not None and has_flattened_params:
