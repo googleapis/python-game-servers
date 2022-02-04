@@ -422,6 +422,26 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         r"""Lists game server configs in a given project,
         location, and game server deployment.
 
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_list_game_server_configs():
+                # Create a client
+                client = gaming_v1.GameServerConfigsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.ListGameServerConfigsRequest(
+                    parent="parent_value",
+                )
+
+                # Make the request
+                page_result = client.list_game_server_configs(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.ListGameServerConfigsRequest, dict]):
                 The request object. Request message for
@@ -503,6 +523,26 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
     ) -> game_server_configs.GameServerConfig:
         r"""Gets details of a single game server config.
 
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_get_game_server_config():
+                # Create a client
+                client = gaming_v1.GameServerConfigsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.GetGameServerConfigRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.get_game_server_config(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.GetGameServerConfigRequest, dict]):
                 The request object. Request message for
@@ -577,6 +617,30 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         configs are immutable, and are not applied until
         referenced in the game server deployment rollout
         resource.
+
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_create_game_server_config():
+                # Create a client
+                client = gaming_v1.GameServerConfigsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.CreateGameServerConfigRequest(
+                    parent="parent_value",
+                    config_id="config_id_value",
+                )
+
+                # Make the request
+                operation = client.create_game_server_config(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.CreateGameServerConfigRequest, dict]):
@@ -673,6 +737,29 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         r"""Deletes a single game server config. The deletion
         will fail if the game server config is referenced in a
         game server deployment rollout.
+
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_delete_game_server_config():
+                # Create a client
+                client = gaming_v1.GameServerConfigsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.DeleteGameServerConfigRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                operation = client.delete_game_server_config(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.DeleteGameServerConfigRequest, dict]):

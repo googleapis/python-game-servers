@@ -241,6 +241,25 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Lists game server deployments in a given project and
         location.
 
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_list_game_server_deployments():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.ListGameServerDeploymentsRequest(
+                    parent="parent_value",
+                )
+
+                # Make the request
+                page_result = client.list_game_server_deployments(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.ListGameServerDeploymentsRequest, dict]):
                 The request object. Request message for
@@ -332,6 +351,25 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> game_server_deployments.GameServerDeployment:
         r"""Gets details of a single game server deployment.
 
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_get_game_server_deployment():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.GetGameServerDeploymentRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.get_game_server_deployment(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.GetGameServerDeploymentRequest, dict]):
                 The request object. Request message for
@@ -414,6 +452,29 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Creates a new game server deployment in a given
         project and location.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_create_game_server_deployment():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.CreateGameServerDeploymentRequest(
+                    parent="parent_value",
+                    deployment_id="deployment_id_value",
+                )
+
+                # Make the request
+                operation = client.create_game_server_deployment(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.CreateGameServerDeploymentRequest, dict]):
@@ -507,6 +568,27 @@ class GameServerDeploymentsServiceAsyncClient:
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Deletes a single game server deployment.
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_delete_game_server_deployment():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.DeleteGameServerDeploymentRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                operation = client.delete_game_server_deployment(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.DeleteGameServerDeploymentRequest, dict]):
@@ -603,6 +685,26 @@ class GameServerDeploymentsServiceAsyncClient:
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Patches a game server deployment.
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_update_game_server_deployment():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.UpdateGameServerDeploymentRequest(
+                )
+
+                # Make the request
+                operation = client.update_game_server_deployment(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.UpdateGameServerDeploymentRequest, dict]):
@@ -702,6 +804,25 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> game_server_deployments.GameServerDeploymentRollout:
         r"""Gets details a single game server deployment rollout.
 
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_get_game_server_deployment_rollout():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.GetGameServerDeploymentRolloutRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.get_game_server_deployment_rollout(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.GetGameServerDeploymentRolloutRequest, dict]):
                 The request object. Request message for
@@ -792,6 +913,27 @@ class GameServerDeploymentsServiceAsyncClient:
         Similarly, if a non existing realm is explicitly called out in
         game_server_config_overrides field, that will also not result in
         an error.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_update_game_server_deployment_rollout():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.UpdateGameServerDeploymentRolloutRequest(
+                )
+
+                # Make the request
+                operation = client.update_game_server_deployment_rollout(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.UpdateGameServerDeploymentRolloutRequest, dict]):
@@ -893,6 +1035,25 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Previews the game server deployment rollout. This API
         does not mutate the rollout resource.
 
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_preview_game_server_deployment_rollout():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.PreviewGameServerDeploymentRolloutRequest(
+                )
+
+                # Make the request
+                response = client.preview_game_server_deployment_rollout(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.PreviewGameServerDeploymentRolloutRequest, dict]):
                 The request object. Request message for
@@ -961,6 +1122,26 @@ class GameServerDeploymentsServiceAsyncClient:
         game server deployment. Gathers all the Agones fleets
         and Agones autoscalers, including fleets running an
         older version of the game server deployment.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_fetch_deployment_state():
+                # Create a client
+                client = gaming_v1.GameServerDeploymentsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.FetchDeploymentStateRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.fetch_deployment_state(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.FetchDeploymentStateRequest, dict]):

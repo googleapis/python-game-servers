@@ -423,6 +423,26 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         r"""Lists game server clusters in a given project and
         location.
 
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_list_game_server_clusters():
+                # Create a client
+                client = gaming_v1.GameServerClustersServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.ListGameServerClustersRequest(
+                    parent="parent_value",
+                )
+
+                # Make the request
+                page_result = client.list_game_server_clusters(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.ListGameServerClustersRequest, dict]):
                 The request object. Request message for
@@ -506,6 +526,26 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     ) -> game_server_clusters.GameServerCluster:
         r"""Gets details of a single game server cluster.
 
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_get_game_server_cluster():
+                # Create a client
+                client = gaming_v1.GameServerClustersServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.GetGameServerClusterRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.get_game_server_cluster(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.GetGameServerClusterRequest, dict]):
                 The request object. Request message for
@@ -580,6 +620,34 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     ) -> operation.Operation:
         r"""Creates a new game server cluster in a given project
         and location.
+
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_create_game_server_cluster():
+                # Create a client
+                client = gaming_v1.GameServerClustersServiceClient()
+
+                # Initialize request argument(s)
+                game_server_cluster = gaming_v1.GameServerCluster()
+                game_server_cluster.name = "name_value"
+
+                request = gaming_v1.CreateGameServerClusterRequest(
+                    parent="parent_value",
+                    game_server_cluster_id="game_server_cluster_id_value",
+                    game_server_cluster=game_server_cluster,
+                )
+
+                # Make the request
+                operation = client.create_game_server_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.CreateGameServerClusterRequest, dict]):
@@ -688,6 +756,32 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         r"""Previews creation of a new game server cluster in a
         given project and location.
 
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_preview_create_game_server_cluster():
+                # Create a client
+                client = gaming_v1.GameServerClustersServiceClient()
+
+                # Initialize request argument(s)
+                game_server_cluster = gaming_v1.GameServerCluster()
+                game_server_cluster.name = "name_value"
+
+                request = gaming_v1.PreviewCreateGameServerClusterRequest(
+                    parent="parent_value",
+                    game_server_cluster_id="game_server_cluster_id_value",
+                    game_server_cluster=game_server_cluster,
+                )
+
+                # Make the request
+                response = client.preview_create_game_server_cluster(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.PreviewCreateGameServerClusterRequest, dict]):
                 The request object. Request message for
@@ -746,6 +840,28 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a single game server cluster.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_delete_game_server_cluster():
+                # Create a client
+                client = gaming_v1.GameServerClustersServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.DeleteGameServerClusterRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                operation = client.delete_game_server_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.DeleteGameServerClusterRequest, dict]):
@@ -843,6 +959,26 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     ) -> game_server_clusters.PreviewDeleteGameServerClusterResponse:
         r"""Previews deletion of a single game server cluster.
 
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_preview_delete_game_server_cluster():
+                # Create a client
+                client = gaming_v1.GameServerClustersServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1.PreviewDeleteGameServerClusterRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.preview_delete_game_server_cluster(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterRequest, dict]):
                 The request object. Request message for
@@ -902,6 +1038,31 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Patches a single game server cluster.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_update_game_server_cluster():
+                # Create a client
+                client = gaming_v1.GameServerClustersServiceClient()
+
+                # Initialize request argument(s)
+                game_server_cluster = gaming_v1.GameServerCluster()
+                game_server_cluster.name = "name_value"
+
+                request = gaming_v1.UpdateGameServerClusterRequest(
+                    game_server_cluster=game_server_cluster,
+                )
+
+                # Make the request
+                operation = client.update_game_server_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.UpdateGameServerClusterRequest, dict]):
@@ -1000,6 +1161,29 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.PreviewUpdateGameServerClusterResponse:
         r"""Previews updating a GameServerCluster.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1
+
+            def sample_preview_update_game_server_cluster():
+                # Create a client
+                client = gaming_v1.GameServerClustersServiceClient()
+
+                # Initialize request argument(s)
+                game_server_cluster = gaming_v1.GameServerCluster()
+                game_server_cluster.name = "name_value"
+
+                request = gaming_v1.PreviewUpdateGameServerClusterRequest(
+                    game_server_cluster=game_server_cluster,
+                )
+
+                # Make the request
+                response = client.preview_update_game_server_cluster(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterRequest, dict]):
