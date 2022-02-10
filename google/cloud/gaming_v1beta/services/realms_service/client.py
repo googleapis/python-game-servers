@@ -416,6 +416,27 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> pagers.ListRealmsPager:
         r"""Lists realms in a given project and location.
 
+
+        .. code-block::
+
+            from google.cloud import gaming_v1beta
+
+            def sample_list_realms():
+                # Create a client
+                client = gaming_v1beta.RealmsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1beta.ListRealmsRequest(
+                    parent="parent_value",
+                )
+
+                # Make the request
+                page_result = client.list_realms(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1beta.types.ListRealmsRequest, dict]):
                 The request object. Request message for
@@ -496,6 +517,26 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> realms.Realm:
         r"""Gets details of a single realm.
 
+
+        .. code-block::
+
+            from google.cloud import gaming_v1beta
+
+            def sample_get_realm():
+                # Create a client
+                client = gaming_v1beta.RealmsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1beta.GetRealmRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.get_realm(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1beta.types.GetRealmRequest, dict]):
                 The request object. Request message for
@@ -567,6 +608,35 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a new realm in a given project and location.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1beta
+
+            def sample_create_realm():
+                # Create a client
+                client = gaming_v1beta.RealmsServiceClient()
+
+                # Initialize request argument(s)
+                realm = gaming_v1beta.Realm()
+                realm.time_zone = "time_zone_value"
+
+                request = gaming_v1beta.CreateRealmRequest(
+                    parent="parent_value",
+                    realm_id="realm_id_value",
+                    realm=realm,
+                )
+
+                # Make the request
+                operation = client.create_realm(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1beta.types.CreateRealmRequest, dict]):
@@ -668,6 +738,30 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> operation.Operation:
         r"""Deletes a single realm.
 
+
+        .. code-block::
+
+            from google.cloud import gaming_v1beta
+
+            def sample_delete_realm():
+                # Create a client
+                client = gaming_v1beta.RealmsServiceClient()
+
+                # Initialize request argument(s)
+                request = gaming_v1beta.DeleteRealmRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                operation = client.delete_realm(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.gaming_v1beta.types.DeleteRealmRequest, dict]):
                 The request object. Request message for
@@ -761,6 +855,33 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Patches a single realm.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1beta
+
+            def sample_update_realm():
+                # Create a client
+                client = gaming_v1beta.RealmsServiceClient()
+
+                # Initialize request argument(s)
+                realm = gaming_v1beta.Realm()
+                realm.time_zone = "time_zone_value"
+
+                request = gaming_v1beta.UpdateRealmRequest(
+                    realm=realm,
+                )
+
+                # Make the request
+                operation = client.update_realm(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1beta.types.UpdateRealmRequest, dict]):
@@ -856,6 +977,29 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.PreviewRealmUpdateResponse:
         r"""Previews patches to a single realm.
+
+
+        .. code-block::
+
+            from google.cloud import gaming_v1beta
+
+            def sample_preview_realm_update():
+                # Create a client
+                client = gaming_v1beta.RealmsServiceClient()
+
+                # Initialize request argument(s)
+                realm = gaming_v1beta.Realm()
+                realm.time_zone = "time_zone_value"
+
+                request = gaming_v1beta.PreviewRealmUpdateRequest(
+                    realm=realm,
+                )
+
+                # Make the request
+                response = client.preview_realm_update(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.gaming_v1beta.types.PreviewRealmUpdateRequest, dict]):
