@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/python-game-servers/compare/v1.3.0...v1.4.0) (2022-02-15)
+
+
+### Features
+
+* add api key support ([#238](https://github.com/googleapis/python-game-servers/issues/238)) ([9e22e6d](https://github.com/googleapis/python-game-servers/commit/9e22e6dd4e2543d694e33eb1ec2c4f9a05d8b940))
+
+
+### Bug Fixes
+
+* **deps:** remove libcst dependency ([#244](https://github.com/googleapis/python-game-servers/issues/244)) ([60659a4](https://github.com/googleapis/python-game-servers/commit/60659a404707156c3dd999ab5503cc0ddbcdacc5))
+* resolve DuplicateCredentialArgs error when using credentials_file ([746c116](https://github.com/googleapis/python-game-servers/commit/746c116ef4761141642a8399f5c749e391358c77))
+
 ## [1.3.0](https://www.github.com/googleapis/python-game-servers/compare/v1.2.1...v1.3.0) (2021-11-09)
 
 
