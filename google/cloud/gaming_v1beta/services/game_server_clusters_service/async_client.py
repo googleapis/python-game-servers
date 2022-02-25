@@ -234,7 +234,7 @@ class GameServerClustersServiceAsyncClient:
         location.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -344,7 +344,7 @@ class GameServerClustersServiceAsyncClient:
     ) -> game_server_clusters.GameServerCluster:
         r"""Gets details of a single game server cluster.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -449,7 +449,7 @@ class GameServerClustersServiceAsyncClient:
         and location.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -582,7 +582,7 @@ class GameServerClustersServiceAsyncClient:
         given project and location.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -667,7 +667,7 @@ class GameServerClustersServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Deletes a single game server cluster.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -784,7 +784,7 @@ class GameServerClustersServiceAsyncClient:
     ) -> game_server_clusters.PreviewDeleteGameServerClusterResponse:
         r"""Previews deletion of a single game server cluster.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -865,7 +865,7 @@ class GameServerClustersServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Patches a single game server cluster.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -989,7 +989,7 @@ class GameServerClustersServiceAsyncClient:
     ) -> game_server_clusters.PreviewUpdateGameServerClusterResponse:
         r"""Previews updating a GameServerCluster.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 

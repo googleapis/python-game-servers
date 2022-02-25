@@ -448,8 +448,7 @@ class GameServerDeploymentsServiceClient(
         location.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -555,8 +554,7 @@ class GameServerDeploymentsServiceClient(
     ) -> game_server_deployments.GameServerDeployment:
         r"""Gets details of a single game server deployment.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -655,8 +653,7 @@ class GameServerDeploymentsServiceClient(
         project and location.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -777,8 +774,7 @@ class GameServerDeploymentsServiceClient(
     ) -> operation.Operation:
         r"""Deletes a single game server deployment.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -902,8 +898,7 @@ class GameServerDeploymentsServiceClient(
     ) -> operation.Operation:
         r"""Patches a game server deployment.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -1029,8 +1024,7 @@ class GameServerDeploymentsServiceClient(
     ) -> game_server_deployments.GameServerDeploymentRollout:
         r"""Gets details a single game server deployment rollout.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -1139,8 +1133,7 @@ class GameServerDeploymentsServiceClient(
         an error.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -1269,8 +1262,7 @@ class GameServerDeploymentsServiceClient(
         does not mutate the rollout resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -1354,8 +1346,7 @@ class GameServerDeploymentsServiceClient(
         older version of the game server deployment.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 

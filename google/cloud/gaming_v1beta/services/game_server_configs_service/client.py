@@ -423,8 +423,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         location, and game server deployment.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -525,8 +524,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
     ) -> game_server_configs.GameServerConfig:
         r"""Gets details of a single game server config.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -622,8 +620,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -744,8 +741,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         game server deployment rollout.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
