@@ -242,7 +242,7 @@ class GameServerDeploymentsServiceAsyncClient:
         location.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -353,7 +353,7 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> game_server_deployments.GameServerDeployment:
         r"""Gets details of a single game server deployment.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -457,7 +457,7 @@ class GameServerDeploymentsServiceAsyncClient:
         project and location.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -574,7 +574,7 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Deletes a single game server deployment.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -694,7 +694,7 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Patches a game server deployment.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -816,7 +816,7 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> game_server_deployments.GameServerDeploymentRollout:
         r"""Gets details a single game server deployment rollout.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -928,7 +928,7 @@ class GameServerDeploymentsServiceAsyncClient:
         an error.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -1053,7 +1053,7 @@ class GameServerDeploymentsServiceAsyncClient:
         does not mutate the rollout resource.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -1141,7 +1141,7 @@ class GameServerDeploymentsServiceAsyncClient:
         older version of the game server deployment.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 

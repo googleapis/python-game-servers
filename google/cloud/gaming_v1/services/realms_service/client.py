@@ -416,8 +416,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> pagers.ListRealmsPager:
         r"""Lists realms in a given project and location.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -517,8 +516,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> realms.Realm:
         r"""Gets details of a single realm.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -609,8 +607,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> operation.Operation:
         r"""Creates a new realm in a given project and location.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -738,8 +735,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> operation.Operation:
         r"""Deletes a single realm.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -856,8 +852,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> operation.Operation:
         r"""Patches a single realm.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -976,8 +971,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
     ) -> realms.PreviewRealmUpdateResponse:
         r"""Previews patches to a single realm.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 

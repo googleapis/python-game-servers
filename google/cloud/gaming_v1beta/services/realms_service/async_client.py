@@ -221,7 +221,7 @@ class RealmsServiceAsyncClient:
     ) -> pagers.ListRealmsAsyncPager:
         r"""Lists realms in a given project and location.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -330,7 +330,7 @@ class RealmsServiceAsyncClient:
     ) -> realms.Realm:
         r"""Gets details of a single realm.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -430,7 +430,7 @@ class RealmsServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Creates a new realm in a given project and location.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -558,7 +558,7 @@ class RealmsServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Deletes a single realm.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -675,7 +675,7 @@ class RealmsServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Patches a single realm.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 
@@ -796,7 +796,7 @@ class RealmsServiceAsyncClient:
     ) -> realms.PreviewRealmUpdateResponse:
         r"""Previews patches to a single realm.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1beta
 

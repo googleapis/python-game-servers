@@ -424,8 +424,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         location.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -528,8 +527,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     ) -> game_server_clusters.GameServerCluster:
         r"""Gets details of a single game server cluster.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -624,8 +622,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         and location.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -761,8 +758,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         given project and location.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -845,8 +841,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     ) -> operation.Operation:
         r"""Deletes a single game server cluster.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -965,8 +960,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     ) -> game_server_clusters.PreviewDeleteGameServerClusterResponse:
         r"""Previews deletion of a single game server cluster.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -1045,8 +1039,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     ) -> operation.Operation:
         r"""Patches a single game server cluster.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -1170,8 +1163,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
     ) -> game_server_clusters.PreviewUpdateGameServerClusterResponse:
         r"""Previews updating a GameServerCluster.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
