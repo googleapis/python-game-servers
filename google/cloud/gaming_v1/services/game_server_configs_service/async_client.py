@@ -231,7 +231,7 @@ class GameServerConfigsServiceAsyncClient:
         location, and game server deployment.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -341,7 +341,7 @@ class GameServerConfigsServiceAsyncClient:
     ) -> game_server_configs.GameServerConfig:
         r"""Gets details of a single game server config.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -445,7 +445,7 @@ class GameServerConfigsServiceAsyncClient:
         resource.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 
@@ -564,7 +564,7 @@ class GameServerConfigsServiceAsyncClient:
         game server deployment rollout.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import gaming_v1
 

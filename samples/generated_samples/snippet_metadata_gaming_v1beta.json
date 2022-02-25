@@ -10,8 +10,8 @@
           "shortName": "CreateGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_create_game_server_cluster_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_CreateGameServerCluster_async",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_create_game_server_cluster_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_CreateGameServerCluster_async",
       "segments": [
         {
           "end": 53,
@@ -54,8 +54,8 @@
           "shortName": "CreateGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_create_game_server_cluster_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_CreateGameServerCluster_sync",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_create_game_server_cluster_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_CreateGameServerCluster_sync",
       "segments": [
         {
           "end": 53,
@@ -99,8 +99,8 @@
           "shortName": "DeleteGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_delete_game_server_cluster_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_DeleteGameServerCluster_async",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_delete_game_server_cluster_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_DeleteGameServerCluster_async",
       "segments": [
         {
           "end": 48,
@@ -143,8 +143,8 @@
           "shortName": "DeleteGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_delete_game_server_cluster_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_DeleteGameServerCluster_sync",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_delete_game_server_cluster_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_DeleteGameServerCluster_sync",
       "segments": [
         {
           "end": 48,
@@ -188,8 +188,8 @@
           "shortName": "GetGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_get_game_server_cluster_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_GetGameServerCluster_async",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_get_game_server_cluster_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_GetGameServerCluster_async",
       "segments": [
         {
           "end": 44,
@@ -232,8 +232,8 @@
           "shortName": "GetGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_get_game_server_cluster_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_GetGameServerCluster_sync",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_get_game_server_cluster_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_GetGameServerCluster_sync",
       "segments": [
         {
           "end": 44,
@@ -277,8 +277,8 @@
           "shortName": "ListGameServerClusters"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_list_game_server_clusters_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_ListGameServerClusters_async",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_list_game_server_clusters_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_ListGameServerClusters_async",
       "segments": [
         {
           "end": 45,
@@ -321,8 +321,8 @@
           "shortName": "ListGameServerClusters"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_list_game_server_clusters_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_ListGameServerClusters_sync",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_list_game_server_clusters_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_ListGameServerClusters_sync",
       "segments": [
         {
           "end": 45,
@@ -366,8 +366,8 @@
           "shortName": "PreviewCreateGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_preview_create_game_server_cluster_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_PreviewCreateGameServerCluster_async",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_create_game_server_cluster_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewCreateGameServerCluster_async",
       "segments": [
         {
           "end": 49,
@@ -410,8 +410,8 @@
           "shortName": "PreviewCreateGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_preview_create_game_server_cluster_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_PreviewCreateGameServerCluster_sync",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_create_game_server_cluster_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewCreateGameServerCluster_sync",
       "segments": [
         {
           "end": 49,
@@ -455,8 +455,8 @@
           "shortName": "PreviewDeleteGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_preview_delete_game_server_cluster_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_PreviewDeleteGameServerCluster_async",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_delete_game_server_cluster_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewDeleteGameServerCluster_async",
       "segments": [
         {
           "end": 44,
@@ -499,8 +499,8 @@
           "shortName": "PreviewDeleteGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_preview_delete_game_server_cluster_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_PreviewDeleteGameServerCluster_sync",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_delete_game_server_cluster_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewDeleteGameServerCluster_sync",
       "segments": [
         {
           "end": 44,
@@ -544,8 +544,8 @@
           "shortName": "PreviewUpdateGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_preview_update_game_server_cluster_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_PreviewUpdateGameServerCluster_async",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_update_game_server_cluster_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewUpdateGameServerCluster_async",
       "segments": [
         {
           "end": 47,
@@ -588,8 +588,8 @@
           "shortName": "PreviewUpdateGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_preview_update_game_server_cluster_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_PreviewUpdateGameServerCluster_sync",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_update_game_server_cluster_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewUpdateGameServerCluster_sync",
       "segments": [
         {
           "end": 47,
@@ -633,8 +633,8 @@
           "shortName": "UpdateGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_update_game_server_cluster_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_UpdateGameServerCluster_async",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_update_game_server_cluster_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_UpdateGameServerCluster_async",
       "segments": [
         {
           "end": 51,
@@ -677,8 +677,8 @@
           "shortName": "UpdateGameServerCluster"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_clusters_service_update_game_server_cluster_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerClustersService_UpdateGameServerCluster_sync",
+      "file": "gameservices_v1beta_generated_game_server_clusters_service_update_game_server_cluster_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_UpdateGameServerCluster_sync",
       "segments": [
         {
           "end": 51,
@@ -722,8 +722,8 @@
           "shortName": "CreateGameServerConfig"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_configs_service_create_game_server_config_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerConfigsService_CreateGameServerConfig_async",
+      "file": "gameservices_v1beta_generated_game_server_configs_service_create_game_server_config_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_CreateGameServerConfig_async",
       "segments": [
         {
           "end": 49,
@@ -766,8 +766,8 @@
           "shortName": "CreateGameServerConfig"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_configs_service_create_game_server_config_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerConfigsService_CreateGameServerConfig_sync",
+      "file": "gameservices_v1beta_generated_game_server_configs_service_create_game_server_config_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_CreateGameServerConfig_sync",
       "segments": [
         {
           "end": 49,
@@ -811,8 +811,8 @@
           "shortName": "DeleteGameServerConfig"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_configs_service_delete_game_server_config_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerConfigsService_DeleteGameServerConfig_async",
+      "file": "gameservices_v1beta_generated_game_server_configs_service_delete_game_server_config_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_DeleteGameServerConfig_async",
       "segments": [
         {
           "end": 48,
@@ -855,8 +855,8 @@
           "shortName": "DeleteGameServerConfig"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_configs_service_delete_game_server_config_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerConfigsService_DeleteGameServerConfig_sync",
+      "file": "gameservices_v1beta_generated_game_server_configs_service_delete_game_server_config_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_DeleteGameServerConfig_sync",
       "segments": [
         {
           "end": 48,
@@ -900,8 +900,8 @@
           "shortName": "GetGameServerConfig"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_configs_service_get_game_server_config_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerConfigsService_GetGameServerConfig_async",
+      "file": "gameservices_v1beta_generated_game_server_configs_service_get_game_server_config_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_GetGameServerConfig_async",
       "segments": [
         {
           "end": 44,
@@ -944,8 +944,8 @@
           "shortName": "GetGameServerConfig"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_configs_service_get_game_server_config_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerConfigsService_GetGameServerConfig_sync",
+      "file": "gameservices_v1beta_generated_game_server_configs_service_get_game_server_config_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_GetGameServerConfig_sync",
       "segments": [
         {
           "end": 44,
@@ -989,8 +989,8 @@
           "shortName": "ListGameServerConfigs"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_configs_service_list_game_server_configs_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerConfigsService_ListGameServerConfigs_async",
+      "file": "gameservices_v1beta_generated_game_server_configs_service_list_game_server_configs_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_ListGameServerConfigs_async",
       "segments": [
         {
           "end": 45,
@@ -1033,8 +1033,8 @@
           "shortName": "ListGameServerConfigs"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_configs_service_list_game_server_configs_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerConfigsService_ListGameServerConfigs_sync",
+      "file": "gameservices_v1beta_generated_game_server_configs_service_list_game_server_configs_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_ListGameServerConfigs_sync",
       "segments": [
         {
           "end": 45,
@@ -1078,8 +1078,8 @@
           "shortName": "CreateGameServerDeployment"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_create_game_server_deployment_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_CreateGameServerDeployment_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_create_game_server_deployment_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_CreateGameServerDeployment_async",
       "segments": [
         {
           "end": 49,
@@ -1122,8 +1122,8 @@
           "shortName": "CreateGameServerDeployment"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_create_game_server_deployment_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_CreateGameServerDeployment_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_create_game_server_deployment_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_CreateGameServerDeployment_sync",
       "segments": [
         {
           "end": 49,
@@ -1167,8 +1167,8 @@
           "shortName": "DeleteGameServerDeployment"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_delete_game_server_deployment_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_DeleteGameServerDeployment_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_delete_game_server_deployment_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_DeleteGameServerDeployment_async",
       "segments": [
         {
           "end": 48,
@@ -1211,8 +1211,8 @@
           "shortName": "DeleteGameServerDeployment"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_delete_game_server_deployment_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_DeleteGameServerDeployment_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_delete_game_server_deployment_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_DeleteGameServerDeployment_sync",
       "segments": [
         {
           "end": 48,
@@ -1256,8 +1256,8 @@
           "shortName": "FetchDeploymentState"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_fetch_deployment_state_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_FetchDeploymentState_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_fetch_deployment_state_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_FetchDeploymentState_async",
       "segments": [
         {
           "end": 44,
@@ -1300,8 +1300,8 @@
           "shortName": "FetchDeploymentState"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_fetch_deployment_state_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_FetchDeploymentState_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_fetch_deployment_state_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_FetchDeploymentState_sync",
       "segments": [
         {
           "end": 44,
@@ -1345,8 +1345,8 @@
           "shortName": "GetGameServerDeploymentRollout"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_get_game_server_deployment_rollout_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_GetGameServerDeploymentRollout_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_rollout_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_async",
       "segments": [
         {
           "end": 44,
@@ -1389,8 +1389,8 @@
           "shortName": "GetGameServerDeploymentRollout"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_get_game_server_deployment_rollout_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_GetGameServerDeploymentRollout_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_rollout_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_sync",
       "segments": [
         {
           "end": 44,
@@ -1434,8 +1434,8 @@
           "shortName": "GetGameServerDeployment"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_get_game_server_deployment_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_GetGameServerDeployment_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeployment_async",
       "segments": [
         {
           "end": 44,
@@ -1478,8 +1478,8 @@
           "shortName": "GetGameServerDeployment"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_get_game_server_deployment_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_GetGameServerDeployment_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeployment_sync",
       "segments": [
         {
           "end": 44,
@@ -1523,8 +1523,8 @@
           "shortName": "ListGameServerDeployments"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_list_game_server_deployments_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_ListGameServerDeployments_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_list_game_server_deployments_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_ListGameServerDeployments_async",
       "segments": [
         {
           "end": 45,
@@ -1567,8 +1567,8 @@
           "shortName": "ListGameServerDeployments"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_list_game_server_deployments_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_ListGameServerDeployments_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_list_game_server_deployments_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_ListGameServerDeployments_sync",
       "segments": [
         {
           "end": 45,
@@ -1612,8 +1612,8 @@
           "shortName": "PreviewGameServerDeploymentRollout"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_preview_game_server_deployment_rollout_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_preview_game_server_deployment_rollout_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_async",
       "segments": [
         {
           "end": 43,
@@ -1656,8 +1656,8 @@
           "shortName": "PreviewGameServerDeploymentRollout"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_preview_game_server_deployment_rollout_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_preview_game_server_deployment_rollout_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_sync",
       "segments": [
         {
           "end": 43,
@@ -1701,8 +1701,8 @@
           "shortName": "UpdateGameServerDeploymentRollout"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_update_game_server_deployment_rollout_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_rollout_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_async",
       "segments": [
         {
           "end": 47,
@@ -1745,8 +1745,8 @@
           "shortName": "UpdateGameServerDeploymentRollout"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_update_game_server_deployment_rollout_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_rollout_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_sync",
       "segments": [
         {
           "end": 47,
@@ -1790,8 +1790,8 @@
           "shortName": "UpdateGameServerDeployment"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_update_game_server_deployment_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_UpdateGameServerDeployment_async",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_async.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeployment_async",
       "segments": [
         {
           "end": 47,
@@ -1834,8 +1834,8 @@
           "shortName": "UpdateGameServerDeployment"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_game_server_deployments_service_update_game_server_deployment_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_GameServerDeploymentsService_UpdateGameServerDeployment_sync",
+      "file": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_sync.py",
+      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeployment_sync",
       "segments": [
         {
           "end": 47,
@@ -1879,8 +1879,8 @@
           "shortName": "CreateRealm"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_create_realm_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_CreateRealm_async",
+      "file": "gameservices_v1beta_generated_realms_service_create_realm_async.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_CreateRealm_async",
       "segments": [
         {
           "end": 53,
@@ -1923,8 +1923,8 @@
           "shortName": "CreateRealm"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_create_realm_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_CreateRealm_sync",
+      "file": "gameservices_v1beta_generated_realms_service_create_realm_sync.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_CreateRealm_sync",
       "segments": [
         {
           "end": 53,
@@ -1968,8 +1968,8 @@
           "shortName": "DeleteRealm"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_delete_realm_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_DeleteRealm_async",
+      "file": "gameservices_v1beta_generated_realms_service_delete_realm_async.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_DeleteRealm_async",
       "segments": [
         {
           "end": 48,
@@ -2012,8 +2012,8 @@
           "shortName": "DeleteRealm"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_delete_realm_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_DeleteRealm_sync",
+      "file": "gameservices_v1beta_generated_realms_service_delete_realm_sync.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_DeleteRealm_sync",
       "segments": [
         {
           "end": 48,
@@ -2057,8 +2057,8 @@
           "shortName": "GetRealm"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_get_realm_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_GetRealm_async",
+      "file": "gameservices_v1beta_generated_realms_service_get_realm_async.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_GetRealm_async",
       "segments": [
         {
           "end": 44,
@@ -2101,8 +2101,8 @@
           "shortName": "GetRealm"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_get_realm_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_GetRealm_sync",
+      "file": "gameservices_v1beta_generated_realms_service_get_realm_sync.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_GetRealm_sync",
       "segments": [
         {
           "end": 44,
@@ -2146,8 +2146,8 @@
           "shortName": "ListRealms"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_list_realms_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_ListRealms_async",
+      "file": "gameservices_v1beta_generated_realms_service_list_realms_async.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_ListRealms_async",
       "segments": [
         {
           "end": 45,
@@ -2190,8 +2190,8 @@
           "shortName": "ListRealms"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_list_realms_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_ListRealms_sync",
+      "file": "gameservices_v1beta_generated_realms_service_list_realms_sync.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_ListRealms_sync",
       "segments": [
         {
           "end": 45,
@@ -2235,8 +2235,8 @@
           "shortName": "PreviewRealmUpdate"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_preview_realm_update_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_PreviewRealmUpdate_async",
+      "file": "gameservices_v1beta_generated_realms_service_preview_realm_update_async.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_PreviewRealmUpdate_async",
       "segments": [
         {
           "end": 47,
@@ -2279,8 +2279,8 @@
           "shortName": "PreviewRealmUpdate"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_preview_realm_update_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_PreviewRealmUpdate_sync",
+      "file": "gameservices_v1beta_generated_realms_service_preview_realm_update_sync.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_PreviewRealmUpdate_sync",
       "segments": [
         {
           "end": 47,
@@ -2324,8 +2324,8 @@
           "shortName": "UpdateRealm"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_update_realm_async.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_UpdateRealm_async",
+      "file": "gameservices_v1beta_generated_realms_service_update_realm_async.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_UpdateRealm_async",
       "segments": [
         {
           "end": 51,
@@ -2368,8 +2368,8 @@
           "shortName": "UpdateRealm"
         }
       },
-      "file": "gameservices_generated_gaming_v1beta_realms_service_update_realm_sync.py",
-      "regionTag": "gameservices_generated_gaming_v1beta_RealmsService_UpdateRealm_sync",
+      "file": "gameservices_v1beta_generated_realms_service_update_realm_sync.py",
+      "regionTag": "gameservices_v1beta_generated_RealmsService_UpdateRealm_sync",
       "segments": [
         {
           "end": 51,
