@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.4.1](https://github.com/googleapis/python-game-servers/compare/v1.4.0...v1.4.1) (2022-03-07)
+
+
+### Bug Fixes
+
+* **deps:** require google-api-core>=1.31.5, >=2.3.2 ([#251](https://github.com/googleapis/python-game-servers/issues/251)) ([e8e96bc](https://github.com/googleapis/python-game-servers/commit/e8e96bca8a912a8643c7802e866aa41ea7cac5ed))
+* **deps:** require proto-plus>=1.15.0 ([e8e96bc](https://github.com/googleapis/python-game-servers/commit/e8e96bca8a912a8643c7802e866aa41ea7cac5ed))
+
 ## [1.4.0](https://github.com/googleapis/python-game-servers/compare/v1.3.0...v1.4.0) (2022-02-15)
 
 
