@@ -97,7 +97,8 @@ def create_config(project_id, deployment_id, config_id):
     client = gaming.GameServerConfigsServiceClient()
 
     fleet_config = game_server_configs.FleetConfig(
-        name="my-fleet-spec", fleet_spec=FLEET_SPEC,
+        name="my-fleet-spec",
+        fleet_spec=FLEET_SPEC,
     )
 
     # Location is hard coded as global, as game server configs can
@@ -107,7 +108,8 @@ def create_config(project_id, deployment_id, config_id):
         parent=f"projects/{project_id}/locations/global/gameServerDeployments/{deployment_id}",
         config_id=config_id,
         game_server_config=game_server_configs.GameServerConfig(
-            description="My Game Server Config", fleet_configs=[fleet_config],
+            description="My Game Server Config",
+            fleet_configs=[fleet_config],
         ),
     )
 

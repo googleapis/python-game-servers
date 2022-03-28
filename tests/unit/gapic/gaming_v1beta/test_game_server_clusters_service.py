@@ -101,7 +101,10 @@ def test__get_default_mtls_endpoint():
 
 @pytest.mark.parametrize(
     "client_class",
-    [GameServerClustersServiceClient, GameServerClustersServiceAsyncClient,],
+    [
+        GameServerClustersServiceClient,
+        GameServerClustersServiceAsyncClient,
+    ],
 )
 def test_game_server_clusters_service_client_from_service_account_info(client_class):
     creds = ga_credentials.AnonymousCredentials()
@@ -144,7 +147,10 @@ def test_game_server_clusters_service_client_service_account_always_use_jwt(
 
 @pytest.mark.parametrize(
     "client_class",
-    [GameServerClustersServiceClient, GameServerClustersServiceAsyncClient,],
+    [
+        GameServerClustersServiceClient,
+        GameServerClustersServiceAsyncClient,
+    ],
 )
 def test_game_server_clusters_service_client_from_service_account_file(client_class):
     creds = ga_credentials.AnonymousCredentials()
@@ -533,7 +539,9 @@ def test_game_server_clusters_service_client_client_options_scopes(
     client_class, transport_class, transport_name
 ):
     # Check the case scopes are provided.
-    options = client_options.ClientOptions(scopes=["1", "2"],)
+    options = client_options.ClientOptions(
+        scopes=["1", "2"],
+    )
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -674,11 +682,16 @@ def test_game_server_clusters_service_client_create_channel_credentials_file(
 
 
 @pytest.mark.parametrize(
-    "request_type", [game_server_clusters.ListGameServerClustersRequest, dict,]
+    "request_type",
+    [
+        game_server_clusters.ListGameServerClustersRequest,
+        dict,
+    ],
 )
 def test_list_game_server_clusters(request_type, transport: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -691,7 +704,8 @@ def test_list_game_server_clusters(request_type, transport: str = "grpc"):
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = game_server_clusters.ListGameServerClustersResponse(
-            next_page_token="next_page_token_value", unreachable=["unreachable_value"],
+            next_page_token="next_page_token_value",
+            unreachable=["unreachable_value"],
         )
         response = client.list_game_server_clusters(request)
 
@@ -710,7 +724,8 @@ def test_list_game_server_clusters_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -729,7 +744,8 @@ async def test_list_game_server_clusters_async(
     request_type=game_server_clusters.ListGameServerClustersRequest,
 ):
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -790,7 +806,10 @@ def test_list_game_server_clusters_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -821,7 +840,10 @@ async def test_list_game_server_clusters_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 def test_list_game_server_clusters_flattened():
@@ -837,7 +859,9 @@ def test_list_game_server_clusters_flattened():
         call.return_value = game_server_clusters.ListGameServerClustersResponse()
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        client.list_game_server_clusters(parent="parent_value",)
+        client.list_game_server_clusters(
+            parent="parent_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -857,7 +881,8 @@ def test_list_game_server_clusters_flattened_error():
     # fields is an error.
     with pytest.raises(ValueError):
         client.list_game_server_clusters(
-            game_server_clusters.ListGameServerClustersRequest(), parent="parent_value",
+            game_server_clusters.ListGameServerClustersRequest(),
+            parent="parent_value",
         )
 
 
@@ -879,7 +904,9 @@ async def test_list_game_server_clusters_flattened_async():
         )
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        response = await client.list_game_server_clusters(parent="parent_value",)
+        response = await client.list_game_server_clusters(
+            parent="parent_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -900,13 +927,15 @@ async def test_list_game_server_clusters_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.list_game_server_clusters(
-            game_server_clusters.ListGameServerClustersRequest(), parent="parent_value",
+            game_server_clusters.ListGameServerClustersRequest(),
+            parent="parent_value",
         )
 
 
 def test_list_game_server_clusters_pager(transport_name: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
+        credentials=ga_credentials.AnonymousCredentials,
+        transport=transport_name,
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -924,10 +953,13 @@ def test_list_game_server_clusters_pager(transport_name: str = "grpc"):
                 next_page_token="abc",
             ),
             game_server_clusters.ListGameServerClustersResponse(
-                game_server_clusters=[], next_page_token="def",
+                game_server_clusters=[],
+                next_page_token="def",
             ),
             game_server_clusters.ListGameServerClustersResponse(
-                game_server_clusters=[game_server_clusters.GameServerCluster(),],
+                game_server_clusters=[
+                    game_server_clusters.GameServerCluster(),
+                ],
                 next_page_token="ghi",
             ),
             game_server_clusters.ListGameServerClustersResponse(
@@ -956,7 +988,8 @@ def test_list_game_server_clusters_pager(transport_name: str = "grpc"):
 
 def test_list_game_server_clusters_pages(transport_name: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
+        credentials=ga_credentials.AnonymousCredentials,
+        transport=transport_name,
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -974,10 +1007,13 @@ def test_list_game_server_clusters_pages(transport_name: str = "grpc"):
                 next_page_token="abc",
             ),
             game_server_clusters.ListGameServerClustersResponse(
-                game_server_clusters=[], next_page_token="def",
+                game_server_clusters=[],
+                next_page_token="def",
             ),
             game_server_clusters.ListGameServerClustersResponse(
-                game_server_clusters=[game_server_clusters.GameServerCluster(),],
+                game_server_clusters=[
+                    game_server_clusters.GameServerCluster(),
+                ],
                 next_page_token="ghi",
             ),
             game_server_clusters.ListGameServerClustersResponse(
@@ -1016,10 +1052,13 @@ async def test_list_game_server_clusters_async_pager():
                 next_page_token="abc",
             ),
             game_server_clusters.ListGameServerClustersResponse(
-                game_server_clusters=[], next_page_token="def",
+                game_server_clusters=[],
+                next_page_token="def",
             ),
             game_server_clusters.ListGameServerClustersResponse(
-                game_server_clusters=[game_server_clusters.GameServerCluster(),],
+                game_server_clusters=[
+                    game_server_clusters.GameServerCluster(),
+                ],
                 next_page_token="ghi",
             ),
             game_server_clusters.ListGameServerClustersResponse(
@@ -1030,7 +1069,9 @@ async def test_list_game_server_clusters_async_pager():
             ),
             RuntimeError,
         )
-        async_pager = await client.list_game_server_clusters(request={},)
+        async_pager = await client.list_game_server_clusters(
+            request={},
+        )
         assert async_pager.next_page_token == "abc"
         responses = []
         async for response in async_pager:
@@ -1065,10 +1106,13 @@ async def test_list_game_server_clusters_async_pages():
                 next_page_token="abc",
             ),
             game_server_clusters.ListGameServerClustersResponse(
-                game_server_clusters=[], next_page_token="def",
+                game_server_clusters=[],
+                next_page_token="def",
             ),
             game_server_clusters.ListGameServerClustersResponse(
-                game_server_clusters=[game_server_clusters.GameServerCluster(),],
+                game_server_clusters=[
+                    game_server_clusters.GameServerCluster(),
+                ],
                 next_page_token="ghi",
             ),
             game_server_clusters.ListGameServerClustersResponse(
@@ -1087,11 +1131,16 @@ async def test_list_game_server_clusters_async_pages():
 
 
 @pytest.mark.parametrize(
-    "request_type", [game_server_clusters.GetGameServerClusterRequest, dict,]
+    "request_type",
+    [
+        game_server_clusters.GetGameServerClusterRequest,
+        dict,
+    ],
 )
 def test_get_game_server_cluster(request_type, transport: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1104,7 +1153,9 @@ def test_get_game_server_cluster(request_type, transport: str = "grpc"):
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = game_server_clusters.GameServerCluster(
-            name="name_value", etag="etag_value", description="description_value",
+            name="name_value",
+            etag="etag_value",
+            description="description_value",
         )
         response = client.get_game_server_cluster(request)
 
@@ -1124,7 +1175,8 @@ def test_get_game_server_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1143,7 +1195,8 @@ async def test_get_game_server_cluster_async(
     request_type=game_server_clusters.GetGameServerClusterRequest,
 ):
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1157,7 +1210,9 @@ async def test_get_game_server_cluster_async(
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             game_server_clusters.GameServerCluster(
-                name="name_value", etag="etag_value", description="description_value",
+                name="name_value",
+                etag="etag_value",
+                description="description_value",
             )
         )
         response = await client.get_game_server_cluster(request)
@@ -1204,7 +1259,10 @@ def test_get_game_server_cluster_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1235,7 +1293,10 @@ async def test_get_game_server_cluster_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 def test_get_game_server_cluster_flattened():
@@ -1251,7 +1312,9 @@ def test_get_game_server_cluster_flattened():
         call.return_value = game_server_clusters.GameServerCluster()
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        client.get_game_server_cluster(name="name_value",)
+        client.get_game_server_cluster(
+            name="name_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1271,7 +1334,8 @@ def test_get_game_server_cluster_flattened_error():
     # fields is an error.
     with pytest.raises(ValueError):
         client.get_game_server_cluster(
-            game_server_clusters.GetGameServerClusterRequest(), name="name_value",
+            game_server_clusters.GetGameServerClusterRequest(),
+            name="name_value",
         )
 
 
@@ -1293,7 +1357,9 @@ async def test_get_game_server_cluster_flattened_async():
         )
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        response = await client.get_game_server_cluster(name="name_value",)
+        response = await client.get_game_server_cluster(
+            name="name_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1314,16 +1380,22 @@ async def test_get_game_server_cluster_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.get_game_server_cluster(
-            game_server_clusters.GetGameServerClusterRequest(), name="name_value",
+            game_server_clusters.GetGameServerClusterRequest(),
+            name="name_value",
         )
 
 
 @pytest.mark.parametrize(
-    "request_type", [game_server_clusters.CreateGameServerClusterRequest, dict,]
+    "request_type",
+    [
+        game_server_clusters.CreateGameServerClusterRequest,
+        dict,
+    ],
 )
 def test_create_game_server_cluster(request_type, transport: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1351,7 +1423,8 @@ def test_create_game_server_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1370,7 +1443,8 @@ async def test_create_game_server_cluster_async(
     request_type=game_server_clusters.CreateGameServerClusterRequest,
 ):
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1426,7 +1500,10 @@ def test_create_game_server_cluster_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1457,7 +1534,10 @@ async def test_create_game_server_cluster_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 def test_create_game_server_cluster_flattened():
@@ -1575,11 +1655,16 @@ async def test_create_game_server_cluster_flattened_error_async():
 
 
 @pytest.mark.parametrize(
-    "request_type", [game_server_clusters.PreviewCreateGameServerClusterRequest, dict,]
+    "request_type",
+    [
+        game_server_clusters.PreviewCreateGameServerClusterRequest,
+        dict,
+    ],
 )
 def test_preview_create_game_server_cluster(request_type, transport: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1612,7 +1697,8 @@ def test_preview_create_game_server_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1631,7 +1717,8 @@ async def test_preview_create_game_server_cluster_async(
     request_type=game_server_clusters.PreviewCreateGameServerClusterRequest,
 ):
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1694,7 +1781,10 @@ def test_preview_create_game_server_cluster_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1725,15 +1815,23 @@ async def test_preview_create_game_server_cluster_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.parametrize(
-    "request_type", [game_server_clusters.DeleteGameServerClusterRequest, dict,]
+    "request_type",
+    [
+        game_server_clusters.DeleteGameServerClusterRequest,
+        dict,
+    ],
 )
 def test_delete_game_server_cluster(request_type, transport: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1761,7 +1859,8 @@ def test_delete_game_server_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1780,7 +1879,8 @@ async def test_delete_game_server_cluster_async(
     request_type=game_server_clusters.DeleteGameServerClusterRequest,
 ):
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1836,7 +1936,10 @@ def test_delete_game_server_cluster_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1867,7 +1970,10 @@ async def test_delete_game_server_cluster_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 def test_delete_game_server_cluster_flattened():
@@ -1883,7 +1989,9 @@ def test_delete_game_server_cluster_flattened():
         call.return_value = operations_pb2.Operation(name="operations/op")
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        client.delete_game_server_cluster(name="name_value",)
+        client.delete_game_server_cluster(
+            name="name_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1903,7 +2011,8 @@ def test_delete_game_server_cluster_flattened_error():
     # fields is an error.
     with pytest.raises(ValueError):
         client.delete_game_server_cluster(
-            game_server_clusters.DeleteGameServerClusterRequest(), name="name_value",
+            game_server_clusters.DeleteGameServerClusterRequest(),
+            name="name_value",
         )
 
 
@@ -1925,7 +2034,9 @@ async def test_delete_game_server_cluster_flattened_async():
         )
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        response = await client.delete_game_server_cluster(name="name_value",)
+        response = await client.delete_game_server_cluster(
+            name="name_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1946,16 +2057,22 @@ async def test_delete_game_server_cluster_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.delete_game_server_cluster(
-            game_server_clusters.DeleteGameServerClusterRequest(), name="name_value",
+            game_server_clusters.DeleteGameServerClusterRequest(),
+            name="name_value",
         )
 
 
 @pytest.mark.parametrize(
-    "request_type", [game_server_clusters.PreviewDeleteGameServerClusterRequest, dict,]
+    "request_type",
+    [
+        game_server_clusters.PreviewDeleteGameServerClusterRequest,
+        dict,
+    ],
 )
 def test_preview_delete_game_server_cluster(request_type, transport: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1988,7 +2105,8 @@ def test_preview_delete_game_server_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2007,7 +2125,8 @@ async def test_preview_delete_game_server_cluster_async(
     request_type=game_server_clusters.PreviewDeleteGameServerClusterRequest,
 ):
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -2070,7 +2189,10 @@ def test_preview_delete_game_server_cluster_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -2101,15 +2223,23 @@ async def test_preview_delete_game_server_cluster_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.parametrize(
-    "request_type", [game_server_clusters.UpdateGameServerClusterRequest, dict,]
+    "request_type",
+    [
+        game_server_clusters.UpdateGameServerClusterRequest,
+        dict,
+    ],
 )
 def test_update_game_server_cluster(request_type, transport: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -2137,7 +2267,8 @@ def test_update_game_server_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2156,7 +2287,8 @@ async def test_update_game_server_cluster_async(
     request_type=game_server_clusters.UpdateGameServerClusterRequest,
 ):
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -2357,11 +2489,16 @@ async def test_update_game_server_cluster_flattened_error_async():
 
 
 @pytest.mark.parametrize(
-    "request_type", [game_server_clusters.PreviewUpdateGameServerClusterRequest, dict,]
+    "request_type",
+    [
+        game_server_clusters.PreviewUpdateGameServerClusterRequest,
+        dict,
+    ],
 )
 def test_preview_update_game_server_cluster(request_type, transport: str = "grpc"):
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -2394,7 +2531,8 @@ def test_preview_update_game_server_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2413,7 +2551,8 @@ async def test_preview_update_game_server_cluster_async(
     request_type=game_server_clusters.PreviewUpdateGameServerClusterRequest,
 ):
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -2523,7 +2662,8 @@ def test_credentials_transport_error():
     )
     with pytest.raises(ValueError):
         client = GameServerClustersServiceClient(
-            credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+            credentials=ga_credentials.AnonymousCredentials(),
+            transport=transport,
         )
 
     # It is an error to provide a credentials file and a transport instance.
@@ -2544,7 +2684,8 @@ def test_credentials_transport_error():
     options.api_key = "api_key"
     with pytest.raises(ValueError):
         client = GameServerClustersServiceClient(
-            client_options=options, transport=transport,
+            client_options=options,
+            transport=transport,
         )
 
     # It is an error to provide an api_key and a credential.
@@ -2561,7 +2702,8 @@ def test_credentials_transport_error():
     )
     with pytest.raises(ValueError):
         client = GameServerClustersServiceClient(
-            client_options={"scopes": ["1", "2"]}, transport=transport,
+            client_options={"scopes": ["1", "2"]},
+            transport=transport,
         )
 
 
@@ -2610,7 +2752,8 @@ def test_transport_grpc_default():
         credentials=ga_credentials.AnonymousCredentials(),
     )
     assert isinstance(
-        client.transport, transports.GameServerClustersServiceGrpcTransport,
+        client.transport,
+        transports.GameServerClustersServiceGrpcTransport,
     )
 
 
@@ -2668,7 +2811,8 @@ def test_game_server_clusters_service_base_transport_with_credentials_file():
         Transport.return_value = None
         load_creds.return_value = (ga_credentials.AnonymousCredentials(), None)
         transport = transports.GameServerClustersServiceTransport(
-            credentials_file="credentials.json", quota_project_id="octopus",
+            credentials_file="credentials.json",
+            quota_project_id="octopus",
         )
         load_creds.assert_called_once_with(
             "credentials.json",
@@ -2830,7 +2974,8 @@ def test_game_server_clusters_service_grpc_transport_channel():
 
     # Check that channel is used if provided.
     transport = transports.GameServerClustersServiceGrpcTransport(
-        host="squid.clam.whelk", channel=channel,
+        host="squid.clam.whelk",
+        channel=channel,
     )
     assert transport.grpc_channel == channel
     assert transport._host == "squid.clam.whelk:443"
@@ -2842,7 +2987,8 @@ def test_game_server_clusters_service_grpc_asyncio_transport_channel():
 
     # Check that channel is used if provided.
     transport = transports.GameServerClustersServiceGrpcAsyncIOTransport(
-        host="squid.clam.whelk", channel=channel,
+        host="squid.clam.whelk",
+        channel=channel,
     )
     assert transport.grpc_channel == channel
     assert transport._host == "squid.clam.whelk:443"
@@ -2951,12 +3097,16 @@ def test_game_server_clusters_service_transport_channel_mtls_with_adc(transport_
 
 def test_game_server_clusters_service_grpc_lro_client():
     client = GameServerClustersServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
     transport = client.transport
 
     # Ensure that we have a api-core operations client.
-    assert isinstance(transport.operations_client, operations_v1.OperationsClient,)
+    assert isinstance(
+        transport.operations_client,
+        operations_v1.OperationsClient,
+    )
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
@@ -2964,12 +3114,16 @@ def test_game_server_clusters_service_grpc_lro_client():
 
 def test_game_server_clusters_service_grpc_lro_async_client():
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc_asyncio",
     )
     transport = client.transport
 
     # Ensure that we have a api-core operations client.
-    assert isinstance(transport.operations_client, operations_v1.OperationsAsyncClient,)
+    assert isinstance(
+        transport.operations_client,
+        operations_v1.OperationsAsyncClient,
+    )
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
@@ -2981,7 +3135,10 @@ def test_game_server_cluster_path():
     realm = "whelk"
     cluster = "octopus"
     expected = "projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}".format(
-        project=project, location=location, realm=realm, cluster=cluster,
+        project=project,
+        location=location,
+        realm=realm,
+        cluster=cluster,
     )
     actual = GameServerClustersServiceClient.game_server_cluster_path(
         project, location, realm, cluster
@@ -3027,7 +3184,9 @@ def test_parse_common_billing_account_path():
 
 def test_common_folder_path():
     folder = "scallop"
-    expected = "folders/{folder}".format(folder=folder,)
+    expected = "folders/{folder}".format(
+        folder=folder,
+    )
     actual = GameServerClustersServiceClient.common_folder_path(folder)
     assert expected == actual
 
@@ -3045,7 +3204,9 @@ def test_parse_common_folder_path():
 
 def test_common_organization_path():
     organization = "squid"
-    expected = "organizations/{organization}".format(organization=organization,)
+    expected = "organizations/{organization}".format(
+        organization=organization,
+    )
     actual = GameServerClustersServiceClient.common_organization_path(organization)
     assert expected == actual
 
@@ -3063,7 +3224,9 @@ def test_parse_common_organization_path():
 
 def test_common_project_path():
     project = "whelk"
-    expected = "projects/{project}".format(project=project,)
+    expected = "projects/{project}".format(
+        project=project,
+    )
     actual = GameServerClustersServiceClient.common_project_path(project)
     assert expected == actual
 
@@ -3083,7 +3246,8 @@ def test_common_location_path():
     project = "oyster"
     location = "nudibranch"
     expected = "projects/{project}/locations/{location}".format(
-        project=project, location=location,
+        project=project,
+        location=location,
     )
     actual = GameServerClustersServiceClient.common_location_path(project, location)
     assert expected == actual
@@ -3108,7 +3272,8 @@ def test_client_with_default_client_info():
         transports.GameServerClustersServiceTransport, "_prep_wrapped_messages"
     ) as prep:
         client = GameServerClustersServiceClient(
-            credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
+            credentials=ga_credentials.AnonymousCredentials(),
+            client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
 
@@ -3117,7 +3282,8 @@ def test_client_with_default_client_info():
     ) as prep:
         transport_class = GameServerClustersServiceClient.get_transport_class()
         transport = transport_class(
-            credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
+            credentials=ga_credentials.AnonymousCredentials(),
+            client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
 
@@ -3125,7 +3291,8 @@ def test_client_with_default_client_info():
 @pytest.mark.asyncio
 async def test_transport_close_async():
     client = GameServerClustersServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc_asyncio",
     )
     with mock.patch.object(
         type(getattr(client.transport, "grpc_channel")), "close"

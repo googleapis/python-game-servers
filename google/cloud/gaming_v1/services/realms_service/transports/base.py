@@ -151,13 +151,19 @@ class RealmsServiceTransport(abc.ABC):
                 client_info=client_info,
             ),
             self.create_realm: gapic_v1.method.wrap_method(
-                self.create_realm, default_timeout=60.0, client_info=client_info,
+                self.create_realm,
+                default_timeout=60.0,
+                client_info=client_info,
             ),
             self.delete_realm: gapic_v1.method.wrap_method(
-                self.delete_realm, default_timeout=60.0, client_info=client_info,
+                self.delete_realm,
+                default_timeout=60.0,
+                client_info=client_info,
             ),
             self.update_realm: gapic_v1.method.wrap_method(
-                self.update_realm, default_timeout=60.0, client_info=client_info,
+                self.update_realm,
+                default_timeout=60.0,
+                client_info=client_info,
             ),
             self.preview_realm_update: gapic_v1.method.wrap_method(
                 self.preview_realm_update,
@@ -178,9 +184,9 @@ class RealmsServiceTransport(abc.ABC):
     def close(self):
         """Closes resources associated with the transport.
 
-       .. warning::
-            Only call this method if the transport is NOT shared
-            with other clients - this may cause errors in other clients!
+        .. warning::
+             Only call this method if the transport is NOT shared
+             with other clients - this may cause errors in other clients!
         """
         raise NotImplementedError()
 

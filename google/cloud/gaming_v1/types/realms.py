@@ -62,11 +62,26 @@ class ListRealmsRequest(proto.Message):
             https://cloud.google.com/apis/design/design_patterns#sorting_order.
     """
 
-    parent = proto.Field(proto.STRING, number=1,)
-    page_size = proto.Field(proto.INT32, number=2,)
-    page_token = proto.Field(proto.STRING, number=3,)
-    filter = proto.Field(proto.STRING, number=4,)
-    order_by = proto.Field(proto.STRING, number=5,)
+    parent = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=2,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    filter = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    order_by = proto.Field(
+        proto.STRING,
+        number=5,
+    )
 
 
 class ListRealmsResponse(proto.Message):
@@ -87,9 +102,19 @@ class ListRealmsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    realms = proto.RepeatedField(proto.MESSAGE, number=1, message="Realm",)
-    next_page_token = proto.Field(proto.STRING, number=2,)
-    unreachable = proto.RepeatedField(proto.STRING, number=3,)
+    realms = proto.RepeatedField(
+        proto.MESSAGE,
+        number=1,
+        message="Realm",
+    )
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    unreachable = proto.RepeatedField(
+        proto.STRING,
+        number=3,
+    )
 
 
 class GetRealmRequest(proto.Message):
@@ -102,7 +127,10 @@ class GetRealmRequest(proto.Message):
             ``projects/{project}/locations/{location}/realms/{realm}``.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class CreateRealmRequest(proto.Message):
@@ -119,9 +147,19 @@ class CreateRealmRequest(proto.Message):
             Required. The realm resource to be created.
     """
 
-    parent = proto.Field(proto.STRING, number=1,)
-    realm_id = proto.Field(proto.STRING, number=2,)
-    realm = proto.Field(proto.MESSAGE, number=3, message="Realm",)
+    parent = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    realm_id = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    realm = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="Realm",
+    )
 
 
 class DeleteRealmRequest(proto.Message):
@@ -134,7 +172,10 @@ class DeleteRealmRequest(proto.Message):
             ``projects/{project}/locations/{location}/realms/{realm}``.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class UpdateRealmRequest(proto.Message):
@@ -150,9 +191,15 @@ class UpdateRealmRequest(proto.Message):
             https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
     """
 
-    realm = proto.Field(proto.MESSAGE, number=1, message="Realm",)
+    realm = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="Realm",
+    )
     update_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
 
 
@@ -172,12 +219,20 @@ class PreviewRealmUpdateRequest(proto.Message):
             preview.
     """
 
-    realm = proto.Field(proto.MESSAGE, number=1, message="Realm",)
+    realm = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="Realm",
+    )
     update_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     preview_time = proto.Field(
-        proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,
+        proto.MESSAGE,
+        number=3,
+        message=timestamp_pb2.Timestamp,
     )
 
 
@@ -191,8 +246,15 @@ class PreviewRealmUpdateResponse(proto.Message):
             The target state.
     """
 
-    etag = proto.Field(proto.STRING, number=2,)
-    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
+    etag = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    target_state = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=common.TargetState,
+    )
 
 
 class Realm(proto.Message):
@@ -222,13 +284,37 @@ class Realm(proto.Message):
             Human readable description of the realm.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp_pb2.Timestamp,)
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,)
-    labels = proto.MapField(proto.STRING, proto.STRING, number=4,)
-    time_zone = proto.Field(proto.STRING, number=6,)
-    etag = proto.Field(proto.STRING, number=7,)
-    description = proto.Field(proto.STRING, number=8,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    create_time = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=timestamp_pb2.Timestamp,
+    )
+    update_time = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=timestamp_pb2.Timestamp,
+    )
+    labels = proto.MapField(
+        proto.STRING,
+        proto.STRING,
+        number=4,
+    )
+    time_zone = proto.Field(
+        proto.STRING,
+        number=6,
+    )
+    etag = proto.Field(
+        proto.STRING,
+        number=7,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=8,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

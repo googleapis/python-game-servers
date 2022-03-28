@@ -42,7 +42,8 @@ def create_cluster(project_id, location, realm_id, cluster_id, gke_cluster_name)
         game_server_cluster=game_server_clusters.GameServerCluster(
             description="My Game Server Cluster",
             connection_info=game_server_clusters.GameServerClusterConnectionInfo(
-                gke_cluster_reference=gke_cluster_reference, namespace="default",
+                gke_cluster_reference=gke_cluster_reference,
+                namespace="default",
             ),
         ),
     )
