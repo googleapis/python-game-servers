@@ -93,7 +93,11 @@ def test__get_default_mtls_endpoint():
 
 
 @pytest.mark.parametrize(
-    "client_class", [RealmsServiceClient, RealmsServiceAsyncClient,]
+    "client_class",
+    [
+        RealmsServiceClient,
+        RealmsServiceAsyncClient,
+    ],
 )
 def test_realms_service_client_from_service_account_info(client_class):
     creds = ga_credentials.AnonymousCredentials()
@@ -135,7 +139,11 @@ def test_realms_service_client_service_account_always_use_jwt(
 
 
 @pytest.mark.parametrize(
-    "client_class", [RealmsServiceClient, RealmsServiceAsyncClient,]
+    "client_class",
+    [
+        RealmsServiceClient,
+        RealmsServiceAsyncClient,
+    ],
 )
 def test_realms_service_client_from_service_account_file(client_class):
     creds = ga_credentials.AnonymousCredentials()
@@ -499,7 +507,9 @@ def test_realms_service_client_client_options_scopes(
     client_class, transport_class, transport_name
 ):
     # Check the case scopes are provided.
-    options = client_options.ClientOptions(scopes=["1", "2"],)
+    options = client_options.ClientOptions(
+        scopes=["1", "2"],
+    )
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -639,10 +649,17 @@ def test_realms_service_client_create_channel_credentials_file(
         )
 
 
-@pytest.mark.parametrize("request_type", [realms.ListRealmsRequest, dict,])
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        realms.ListRealmsRequest,
+        dict,
+    ],
+)
 def test_list_realms(request_type, transport: str = "grpc"):
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -653,7 +670,8 @@ def test_list_realms(request_type, transport: str = "grpc"):
     with mock.patch.object(type(client.transport.list_realms), "__call__") as call:
         # Designate an appropriate return value for the call.
         call.return_value = realms.ListRealmsResponse(
-            next_page_token="next_page_token_value", unreachable=["unreachable_value"],
+            next_page_token="next_page_token_value",
+            unreachable=["unreachable_value"],
         )
         response = client.list_realms(request)
 
@@ -672,7 +690,8 @@ def test_list_realms_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -688,7 +707,8 @@ async def test_list_realms_async(
     transport: str = "grpc_asyncio", request_type=realms.ListRealmsRequest
 ):
     client = RealmsServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -723,7 +743,9 @@ async def test_list_realms_async_from_dict():
 
 
 def test_list_realms_field_headers():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
@@ -743,7 +765,10 @@ def test_list_realms_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -772,11 +797,16 @@ async def test_list_realms_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 def test_list_realms_flattened():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_realms), "__call__") as call:
@@ -784,7 +814,9 @@ def test_list_realms_flattened():
         call.return_value = realms.ListRealmsResponse()
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        client.list_realms(parent="parent_value",)
+        client.list_realms(
+            parent="parent_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -796,13 +828,16 @@ def test_list_realms_flattened():
 
 
 def test_list_realms_flattened_error():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
         client.list_realms(
-            realms.ListRealmsRequest(), parent="parent_value",
+            realms.ListRealmsRequest(),
+            parent="parent_value",
         )
 
 
@@ -822,7 +857,9 @@ async def test_list_realms_flattened_async():
         )
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        response = await client.list_realms(parent="parent_value",)
+        response = await client.list_realms(
+            parent="parent_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -843,13 +880,15 @@ async def test_list_realms_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.list_realms(
-            realms.ListRealmsRequest(), parent="parent_value",
+            realms.ListRealmsRequest(),
+            parent="parent_value",
         )
 
 
 def test_list_realms_pager(transport_name: str = "grpc"):
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
+        credentials=ga_credentials.AnonymousCredentials,
+        transport=transport_name,
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -857,12 +896,29 @@ def test_list_realms_pager(transport_name: str = "grpc"):
         # Set the response to a series of pages.
         call.side_effect = (
             realms.ListRealmsResponse(
-                realms=[realms.Realm(), realms.Realm(), realms.Realm(),],
+                realms=[
+                    realms.Realm(),
+                    realms.Realm(),
+                    realms.Realm(),
+                ],
                 next_page_token="abc",
             ),
-            realms.ListRealmsResponse(realms=[], next_page_token="def",),
-            realms.ListRealmsResponse(realms=[realms.Realm(),], next_page_token="ghi",),
-            realms.ListRealmsResponse(realms=[realms.Realm(), realms.Realm(),],),
+            realms.ListRealmsResponse(
+                realms=[],
+                next_page_token="def",
+            ),
+            realms.ListRealmsResponse(
+                realms=[
+                    realms.Realm(),
+                ],
+                next_page_token="ghi",
+            ),
+            realms.ListRealmsResponse(
+                realms=[
+                    realms.Realm(),
+                    realms.Realm(),
+                ],
+            ),
             RuntimeError,
         )
 
@@ -881,7 +937,8 @@ def test_list_realms_pager(transport_name: str = "grpc"):
 
 def test_list_realms_pages(transport_name: str = "grpc"):
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
+        credentials=ga_credentials.AnonymousCredentials,
+        transport=transport_name,
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -889,12 +946,29 @@ def test_list_realms_pages(transport_name: str = "grpc"):
         # Set the response to a series of pages.
         call.side_effect = (
             realms.ListRealmsResponse(
-                realms=[realms.Realm(), realms.Realm(), realms.Realm(),],
+                realms=[
+                    realms.Realm(),
+                    realms.Realm(),
+                    realms.Realm(),
+                ],
                 next_page_token="abc",
             ),
-            realms.ListRealmsResponse(realms=[], next_page_token="def",),
-            realms.ListRealmsResponse(realms=[realms.Realm(),], next_page_token="ghi",),
-            realms.ListRealmsResponse(realms=[realms.Realm(), realms.Realm(),],),
+            realms.ListRealmsResponse(
+                realms=[],
+                next_page_token="def",
+            ),
+            realms.ListRealmsResponse(
+                realms=[
+                    realms.Realm(),
+                ],
+                next_page_token="ghi",
+            ),
+            realms.ListRealmsResponse(
+                realms=[
+                    realms.Realm(),
+                    realms.Realm(),
+                ],
+            ),
             RuntimeError,
         )
         pages = list(client.list_realms(request={}).pages)
@@ -904,7 +978,9 @@ def test_list_realms_pages(transport_name: str = "grpc"):
 
 @pytest.mark.asyncio
 async def test_list_realms_async_pager():
-    client = RealmsServiceAsyncClient(credentials=ga_credentials.AnonymousCredentials,)
+    client = RealmsServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials,
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -913,15 +989,34 @@ async def test_list_realms_async_pager():
         # Set the response to a series of pages.
         call.side_effect = (
             realms.ListRealmsResponse(
-                realms=[realms.Realm(), realms.Realm(), realms.Realm(),],
+                realms=[
+                    realms.Realm(),
+                    realms.Realm(),
+                    realms.Realm(),
+                ],
                 next_page_token="abc",
             ),
-            realms.ListRealmsResponse(realms=[], next_page_token="def",),
-            realms.ListRealmsResponse(realms=[realms.Realm(),], next_page_token="ghi",),
-            realms.ListRealmsResponse(realms=[realms.Realm(), realms.Realm(),],),
+            realms.ListRealmsResponse(
+                realms=[],
+                next_page_token="def",
+            ),
+            realms.ListRealmsResponse(
+                realms=[
+                    realms.Realm(),
+                ],
+                next_page_token="ghi",
+            ),
+            realms.ListRealmsResponse(
+                realms=[
+                    realms.Realm(),
+                    realms.Realm(),
+                ],
+            ),
             RuntimeError,
         )
-        async_pager = await client.list_realms(request={},)
+        async_pager = await client.list_realms(
+            request={},
+        )
         assert async_pager.next_page_token == "abc"
         responses = []
         async for response in async_pager:
@@ -933,7 +1028,9 @@ async def test_list_realms_async_pager():
 
 @pytest.mark.asyncio
 async def test_list_realms_async_pages():
-    client = RealmsServiceAsyncClient(credentials=ga_credentials.AnonymousCredentials,)
+    client = RealmsServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials,
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -942,12 +1039,29 @@ async def test_list_realms_async_pages():
         # Set the response to a series of pages.
         call.side_effect = (
             realms.ListRealmsResponse(
-                realms=[realms.Realm(), realms.Realm(), realms.Realm(),],
+                realms=[
+                    realms.Realm(),
+                    realms.Realm(),
+                    realms.Realm(),
+                ],
                 next_page_token="abc",
             ),
-            realms.ListRealmsResponse(realms=[], next_page_token="def",),
-            realms.ListRealmsResponse(realms=[realms.Realm(),], next_page_token="ghi",),
-            realms.ListRealmsResponse(realms=[realms.Realm(), realms.Realm(),],),
+            realms.ListRealmsResponse(
+                realms=[],
+                next_page_token="def",
+            ),
+            realms.ListRealmsResponse(
+                realms=[
+                    realms.Realm(),
+                ],
+                next_page_token="ghi",
+            ),
+            realms.ListRealmsResponse(
+                realms=[
+                    realms.Realm(),
+                    realms.Realm(),
+                ],
+            ),
             RuntimeError,
         )
         pages = []
@@ -957,10 +1071,17 @@ async def test_list_realms_async_pages():
             assert page_.raw_page.next_page_token == token
 
 
-@pytest.mark.parametrize("request_type", [realms.GetRealmRequest, dict,])
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        realms.GetRealmRequest,
+        dict,
+    ],
+)
 def test_get_realm(request_type, transport: str = "grpc"):
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -995,7 +1116,8 @@ def test_get_realm_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1011,7 +1133,8 @@ async def test_get_realm_async(
     transport: str = "grpc_asyncio", request_type=realms.GetRealmRequest
 ):
     client = RealmsServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1050,7 +1173,9 @@ async def test_get_realm_async_from_dict():
 
 
 def test_get_realm_field_headers():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
@@ -1070,7 +1195,10 @@ def test_get_realm_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1097,11 +1225,16 @@ async def test_get_realm_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 def test_get_realm_flattened():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_realm), "__call__") as call:
@@ -1109,7 +1242,9 @@ def test_get_realm_flattened():
         call.return_value = realms.Realm()
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        client.get_realm(name="name_value",)
+        client.get_realm(
+            name="name_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1121,13 +1256,16 @@ def test_get_realm_flattened():
 
 
 def test_get_realm_flattened_error():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
         client.get_realm(
-            realms.GetRealmRequest(), name="name_value",
+            realms.GetRealmRequest(),
+            name="name_value",
         )
 
 
@@ -1145,7 +1283,9 @@ async def test_get_realm_flattened_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(realms.Realm())
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        response = await client.get_realm(name="name_value",)
+        response = await client.get_realm(
+            name="name_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1166,14 +1306,22 @@ async def test_get_realm_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.get_realm(
-            realms.GetRealmRequest(), name="name_value",
+            realms.GetRealmRequest(),
+            name="name_value",
         )
 
 
-@pytest.mark.parametrize("request_type", [realms.CreateRealmRequest, dict,])
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        realms.CreateRealmRequest,
+        dict,
+    ],
+)
 def test_create_realm(request_type, transport: str = "grpc"):
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1199,7 +1347,8 @@ def test_create_realm_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1215,7 +1364,8 @@ async def test_create_realm_async(
     transport: str = "grpc_asyncio", request_type=realms.CreateRealmRequest
 ):
     client = RealmsServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1245,7 +1395,9 @@ async def test_create_realm_async_from_dict():
 
 
 def test_create_realm_field_headers():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
@@ -1265,7 +1417,10 @@ def test_create_realm_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1294,11 +1449,16 @@ async def test_create_realm_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "parent=parent/value",
+    ) in kw["metadata"]
 
 
 def test_create_realm_flattened():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.create_realm), "__call__") as call:
@@ -1328,7 +1488,9 @@ def test_create_realm_flattened():
 
 
 def test_create_realm_flattened_error():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
@@ -1395,10 +1557,17 @@ async def test_create_realm_flattened_error_async():
         )
 
 
-@pytest.mark.parametrize("request_type", [realms.DeleteRealmRequest, dict,])
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        realms.DeleteRealmRequest,
+        dict,
+    ],
+)
 def test_delete_realm(request_type, transport: str = "grpc"):
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1424,7 +1593,8 @@ def test_delete_realm_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1440,7 +1610,8 @@ async def test_delete_realm_async(
     transport: str = "grpc_asyncio", request_type=realms.DeleteRealmRequest
 ):
     client = RealmsServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1470,7 +1641,9 @@ async def test_delete_realm_async_from_dict():
 
 
 def test_delete_realm_field_headers():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
@@ -1490,7 +1663,10 @@ def test_delete_realm_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1519,11 +1695,16 @@ async def test_delete_realm_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "name=name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "name=name/value",
+    ) in kw["metadata"]
 
 
 def test_delete_realm_flattened():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.delete_realm), "__call__") as call:
@@ -1531,7 +1712,9 @@ def test_delete_realm_flattened():
         call.return_value = operations_pb2.Operation(name="operations/op")
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        client.delete_realm(name="name_value",)
+        client.delete_realm(
+            name="name_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1543,13 +1726,16 @@ def test_delete_realm_flattened():
 
 
 def test_delete_realm_flattened_error():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
         client.delete_realm(
-            realms.DeleteRealmRequest(), name="name_value",
+            realms.DeleteRealmRequest(),
+            name="name_value",
         )
 
 
@@ -1569,7 +1755,9 @@ async def test_delete_realm_flattened_async():
         )
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        response = await client.delete_realm(name="name_value",)
+        response = await client.delete_realm(
+            name="name_value",
+        )
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1590,14 +1778,22 @@ async def test_delete_realm_flattened_error_async():
     # fields is an error.
     with pytest.raises(ValueError):
         await client.delete_realm(
-            realms.DeleteRealmRequest(), name="name_value",
+            realms.DeleteRealmRequest(),
+            name="name_value",
         )
 
 
-@pytest.mark.parametrize("request_type", [realms.UpdateRealmRequest, dict,])
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        realms.UpdateRealmRequest,
+        dict,
+    ],
+)
 def test_update_realm(request_type, transport: str = "grpc"):
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1623,7 +1819,8 @@ def test_update_realm_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1639,7 +1836,8 @@ async def test_update_realm_async(
     transport: str = "grpc_asyncio", request_type=realms.UpdateRealmRequest
 ):
     client = RealmsServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1669,7 +1867,9 @@ async def test_update_realm_async_from_dict():
 
 
 def test_update_realm_field_headers():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
@@ -1689,7 +1889,10 @@ def test_update_realm_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "realm.name=realm.name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "realm.name=realm.name/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1718,11 +1921,16 @@ async def test_update_realm_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "realm.name=realm.name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "realm.name=realm.name/value",
+    ) in kw["metadata"]
 
 
 def test_update_realm_flattened():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.update_realm), "__call__") as call:
@@ -1748,7 +1956,9 @@ def test_update_realm_flattened():
 
 
 def test_update_realm_flattened_error():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
@@ -1809,10 +2019,17 @@ async def test_update_realm_flattened_error_async():
         )
 
 
-@pytest.mark.parametrize("request_type", [realms.PreviewRealmUpdateRequest, dict,])
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        realms.PreviewRealmUpdateRequest,
+        dict,
+    ],
+)
 def test_preview_realm_update(request_type, transport: str = "grpc"):
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1824,7 +2041,9 @@ def test_preview_realm_update(request_type, transport: str = "grpc"):
         type(client.transport.preview_realm_update), "__call__"
     ) as call:
         # Designate an appropriate return value for the call.
-        call.return_value = realms.PreviewRealmUpdateResponse(etag="etag_value",)
+        call.return_value = realms.PreviewRealmUpdateResponse(
+            etag="etag_value",
+        )
         response = client.preview_realm_update(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1841,7 +2060,8 @@ def test_preview_realm_update_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1859,7 +2079,8 @@ async def test_preview_realm_update_async(
     transport: str = "grpc_asyncio", request_type=realms.PreviewRealmUpdateRequest
 ):
     client = RealmsServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1872,7 +2093,9 @@ async def test_preview_realm_update_async(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            realms.PreviewRealmUpdateResponse(etag="etag_value",)
+            realms.PreviewRealmUpdateResponse(
+                etag="etag_value",
+            )
         )
         response = await client.preview_realm_update(request)
 
@@ -1892,7 +2115,9 @@ async def test_preview_realm_update_async_from_dict():
 
 
 def test_preview_realm_update_field_headers():
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
@@ -1914,7 +2139,10 @@ def test_preview_realm_update_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "realm.name=realm.name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "realm.name=realm.name/value",
+    ) in kw["metadata"]
 
 
 @pytest.mark.asyncio
@@ -1945,7 +2173,10 @@ async def test_preview_realm_update_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "realm.name=realm.name/value",) in kw["metadata"]
+    assert (
+        "x-goog-request-params",
+        "realm.name=realm.name/value",
+    ) in kw["metadata"]
 
 
 def test_credentials_transport_error():
@@ -1955,7 +2186,8 @@ def test_credentials_transport_error():
     )
     with pytest.raises(ValueError):
         client = RealmsServiceClient(
-            credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+            credentials=ga_credentials.AnonymousCredentials(),
+            transport=transport,
         )
 
     # It is an error to provide a credentials file and a transport instance.
@@ -1975,7 +2207,10 @@ def test_credentials_transport_error():
     options = client_options.ClientOptions()
     options.api_key = "api_key"
     with pytest.raises(ValueError):
-        client = RealmsServiceClient(client_options=options, transport=transport,)
+        client = RealmsServiceClient(
+            client_options=options,
+            transport=transport,
+        )
 
     # It is an error to provide an api_key and a credential.
     options = mock.Mock()
@@ -1991,7 +2226,8 @@ def test_credentials_transport_error():
     )
     with pytest.raises(ValueError):
         client = RealmsServiceClient(
-            client_options={"scopes": ["1", "2"]}, transport=transport,
+            client_options={"scopes": ["1", "2"]},
+            transport=transport,
         )
 
 
@@ -2036,8 +2272,13 @@ def test_transport_adc(transport_class):
 
 def test_transport_grpc_default():
     # A client should use the gRPC transport by default.
-    client = RealmsServiceClient(credentials=ga_credentials.AnonymousCredentials(),)
-    assert isinstance(client.transport, transports.RealmsServiceGrpcTransport,)
+    client = RealmsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+    assert isinstance(
+        client.transport,
+        transports.RealmsServiceGrpcTransport,
+    )
 
 
 def test_realms_service_base_transport_error():
@@ -2092,7 +2333,8 @@ def test_realms_service_base_transport_with_credentials_file():
         Transport.return_value = None
         load_creds.return_value = (ga_credentials.AnonymousCredentials(), None)
         transport = transports.RealmsServiceTransport(
-            credentials_file="credentials.json", quota_project_id="octopus",
+            credentials_file="credentials.json",
+            quota_project_id="octopus",
         )
         load_creds.assert_called_once_with(
             "credentials.json",
@@ -2250,7 +2492,8 @@ def test_realms_service_grpc_transport_channel():
 
     # Check that channel is used if provided.
     transport = transports.RealmsServiceGrpcTransport(
-        host="squid.clam.whelk", channel=channel,
+        host="squid.clam.whelk",
+        channel=channel,
     )
     assert transport.grpc_channel == channel
     assert transport._host == "squid.clam.whelk:443"
@@ -2262,7 +2505,8 @@ def test_realms_service_grpc_asyncio_transport_channel():
 
     # Check that channel is used if provided.
     transport = transports.RealmsServiceGrpcAsyncIOTransport(
-        host="squid.clam.whelk", channel=channel,
+        host="squid.clam.whelk",
+        channel=channel,
     )
     assert transport.grpc_channel == channel
     assert transport._host == "squid.clam.whelk:443"
@@ -2369,12 +2613,16 @@ def test_realms_service_transport_channel_mtls_with_adc(transport_class):
 
 def test_realms_service_grpc_lro_client():
     client = RealmsServiceClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
     transport = client.transport
 
     # Ensure that we have a api-core operations client.
-    assert isinstance(transport.operations_client, operations_v1.OperationsClient,)
+    assert isinstance(
+        transport.operations_client,
+        operations_v1.OperationsClient,
+    )
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
@@ -2382,12 +2630,16 @@ def test_realms_service_grpc_lro_client():
 
 def test_realms_service_grpc_lro_async_client():
     client = RealmsServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc_asyncio",
     )
     transport = client.transport
 
     # Ensure that we have a api-core operations client.
-    assert isinstance(transport.operations_client, operations_v1.OperationsAsyncClient,)
+    assert isinstance(
+        transport.operations_client,
+        operations_v1.OperationsAsyncClient,
+    )
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
@@ -2398,7 +2650,9 @@ def test_realm_path():
     location = "clam"
     realm = "whelk"
     expected = "projects/{project}/locations/{location}/realms/{realm}".format(
-        project=project, location=location, realm=realm,
+        project=project,
+        location=location,
+        realm=realm,
     )
     actual = RealmsServiceClient.realm_path(project, location, realm)
     assert expected == actual
@@ -2439,7 +2693,9 @@ def test_parse_common_billing_account_path():
 
 def test_common_folder_path():
     folder = "winkle"
-    expected = "folders/{folder}".format(folder=folder,)
+    expected = "folders/{folder}".format(
+        folder=folder,
+    )
     actual = RealmsServiceClient.common_folder_path(folder)
     assert expected == actual
 
@@ -2457,7 +2713,9 @@ def test_parse_common_folder_path():
 
 def test_common_organization_path():
     organization = "scallop"
-    expected = "organizations/{organization}".format(organization=organization,)
+    expected = "organizations/{organization}".format(
+        organization=organization,
+    )
     actual = RealmsServiceClient.common_organization_path(organization)
     assert expected == actual
 
@@ -2475,7 +2733,9 @@ def test_parse_common_organization_path():
 
 def test_common_project_path():
     project = "squid"
-    expected = "projects/{project}".format(project=project,)
+    expected = "projects/{project}".format(
+        project=project,
+    )
     actual = RealmsServiceClient.common_project_path(project)
     assert expected == actual
 
@@ -2495,7 +2755,8 @@ def test_common_location_path():
     project = "whelk"
     location = "octopus"
     expected = "projects/{project}/locations/{location}".format(
-        project=project, location=location,
+        project=project,
+        location=location,
     )
     actual = RealmsServiceClient.common_location_path(project, location)
     assert expected == actual
@@ -2520,7 +2781,8 @@ def test_client_with_default_client_info():
         transports.RealmsServiceTransport, "_prep_wrapped_messages"
     ) as prep:
         client = RealmsServiceClient(
-            credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
+            credentials=ga_credentials.AnonymousCredentials(),
+            client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
 
@@ -2529,7 +2791,8 @@ def test_client_with_default_client_info():
     ) as prep:
         transport_class = RealmsServiceClient.get_transport_class()
         transport = transport_class(
-            credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
+            credentials=ga_credentials.AnonymousCredentials(),
+            client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
 
@@ -2537,7 +2800,8 @@ def test_client_with_default_client_info():
 @pytest.mark.asyncio
 async def test_transport_close_async():
     client = RealmsServiceAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc_asyncio",
     )
     with mock.patch.object(
         type(getattr(client.transport, "grpc_channel")), "close"

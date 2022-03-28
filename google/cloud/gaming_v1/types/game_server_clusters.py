@@ -88,12 +88,31 @@ class ListGameServerClustersRequest(proto.Message):
             does not return the ``cluster_state`` field.
     """
 
-    parent = proto.Field(proto.STRING, number=1,)
-    page_size = proto.Field(proto.INT32, number=2,)
-    page_token = proto.Field(proto.STRING, number=3,)
-    filter = proto.Field(proto.STRING, number=4,)
-    order_by = proto.Field(proto.STRING, number=5,)
-    view = proto.Field(proto.ENUM, number=6, enum="GameServerClusterView",)
+    parent = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=2,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    filter = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    order_by = proto.Field(
+        proto.STRING,
+        number=5,
+    )
+    view = proto.Field(
+        proto.ENUM,
+        number=6,
+        enum="GameServerClusterView",
+    )
 
 
 class ListGameServerClustersResponse(proto.Message):
@@ -116,10 +135,18 @@ class ListGameServerClustersResponse(proto.Message):
         return self
 
     game_server_clusters = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GameServerCluster",
+        proto.MESSAGE,
+        number=1,
+        message="GameServerCluster",
     )
-    next_page_token = proto.Field(proto.STRING, number=2,)
-    unreachable = proto.RepeatedField(proto.STRING, number=4,)
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    unreachable = proto.RepeatedField(
+        proto.STRING,
+        number=4,
+    )
 
 
 class GetGameServerClusterRequest(proto.Message):
@@ -141,8 +168,15 @@ class GetGameServerClusterRequest(proto.Message):
             does not return the ``cluster_state`` field.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
-    view = proto.Field(proto.ENUM, number=6, enum="GameServerClusterView",)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    view = proto.Field(
+        proto.ENUM,
+        number=6,
+        enum="GameServerClusterView",
+    )
 
 
 class CreateGameServerClusterRequest(proto.Message):
@@ -161,10 +195,18 @@ class CreateGameServerClusterRequest(proto.Message):
             be created.
     """
 
-    parent = proto.Field(proto.STRING, number=1,)
-    game_server_cluster_id = proto.Field(proto.STRING, number=2,)
+    parent = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    game_server_cluster_id = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     game_server_cluster = proto.Field(
-        proto.MESSAGE, number=3, message="GameServerCluster",
+        proto.MESSAGE,
+        number=3,
+        message="GameServerCluster",
     )
 
 
@@ -190,15 +232,29 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
             will always return KubernetesClusterState.
     """
 
-    parent = proto.Field(proto.STRING, number=1,)
-    game_server_cluster_id = proto.Field(proto.STRING, number=2,)
+    parent = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    game_server_cluster_id = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     game_server_cluster = proto.Field(
-        proto.MESSAGE, number=3, message="GameServerCluster",
+        proto.MESSAGE,
+        number=3,
+        message="GameServerCluster",
     )
     preview_time = proto.Field(
-        proto.MESSAGE, number=4, message=timestamp_pb2.Timestamp,
+        proto.MESSAGE,
+        number=4,
+        message=timestamp_pb2.Timestamp,
     )
-    view = proto.Field(proto.ENUM, number=6, enum="GameServerClusterView",)
+    view = proto.Field(
+        proto.ENUM,
+        number=6,
+        enum="GameServerClusterView",
+    )
 
 
 class PreviewCreateGameServerClusterResponse(proto.Message):
@@ -216,10 +272,19 @@ class PreviewCreateGameServerClusterResponse(proto.Message):
             relevant List/Get/Preview request.
     """
 
-    etag = proto.Field(proto.STRING, number=2,)
-    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
+    etag = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    target_state = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=common.TargetState,
+    )
     cluster_state = proto.Field(
-        proto.MESSAGE, number=4, message="KubernetesClusterState",
+        proto.MESSAGE,
+        number=4,
+        message="KubernetesClusterState",
     )
 
 
@@ -234,7 +299,10 @@ class DeleteGameServerClusterRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class PreviewDeleteGameServerClusterRequest(proto.Message):
@@ -251,9 +319,14 @@ class PreviewDeleteGameServerClusterRequest(proto.Message):
             preview.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     preview_time = proto.Field(
-        proto.MESSAGE, number=2, message=timestamp_pb2.Timestamp,
+        proto.MESSAGE,
+        number=2,
+        message=timestamp_pb2.Timestamp,
     )
 
 
@@ -268,8 +341,15 @@ class PreviewDeleteGameServerClusterResponse(proto.Message):
             The target state.
     """
 
-    etag = proto.Field(proto.STRING, number=2,)
-    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
+    etag = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    target_state = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=common.TargetState,
+    )
 
 
 class UpdateGameServerClusterRequest(proto.Message):
@@ -288,10 +368,14 @@ class UpdateGameServerClusterRequest(proto.Message):
     """
 
     game_server_cluster = proto.Field(
-        proto.MESSAGE, number=1, message="GameServerCluster",
+        proto.MESSAGE,
+        number=1,
+        message="GameServerCluster",
     )
     update_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
 
 
@@ -314,13 +398,19 @@ class PreviewUpdateGameServerClusterRequest(proto.Message):
     """
 
     game_server_cluster = proto.Field(
-        proto.MESSAGE, number=1, message="GameServerCluster",
+        proto.MESSAGE,
+        number=1,
+        message="GameServerCluster",
     )
     update_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     preview_time = proto.Field(
-        proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,
+        proto.MESSAGE,
+        number=3,
+        message=timestamp_pb2.Timestamp,
     )
 
 
@@ -335,8 +425,15 @@ class PreviewUpdateGameServerClusterResponse(proto.Message):
             The target state.
     """
 
-    etag = proto.Field(proto.STRING, number=2,)
-    target_state = proto.Field(proto.MESSAGE, number=3, message=common.TargetState,)
+    etag = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    target_state = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=common.TargetState,
+    )
 
 
 class GameServerClusterConnectionInfo(proto.Message):
@@ -363,7 +460,10 @@ class GameServerClusterConnectionInfo(proto.Message):
         oneof="cluster_reference",
         message="GkeClusterReference",
     )
-    namespace = proto.Field(proto.STRING, number=5,)
+    namespace = proto.Field(
+        proto.STRING,
+        number=5,
+    )
 
 
 class GkeClusterReference(proto.Message):
@@ -382,7 +482,10 @@ class GkeClusterReference(proto.Message):
                cluster.
     """
 
-    cluster = proto.Field(proto.STRING, number=1,)
+    cluster = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class GameServerCluster(proto.Message):
@@ -416,17 +519,42 @@ class GameServerCluster(proto.Message):
             List/Get/Preview request.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
-    create_time = proto.Field(proto.MESSAGE, number=2, message=timestamp_pb2.Timestamp,)
-    update_time = proto.Field(proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,)
-    labels = proto.MapField(proto.STRING, proto.STRING, number=4,)
-    connection_info = proto.Field(
-        proto.MESSAGE, number=5, message="GameServerClusterConnectionInfo",
+    name = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    etag = proto.Field(proto.STRING, number=6,)
-    description = proto.Field(proto.STRING, number=7,)
+    create_time = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=timestamp_pb2.Timestamp,
+    )
+    update_time = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=timestamp_pb2.Timestamp,
+    )
+    labels = proto.MapField(
+        proto.STRING,
+        proto.STRING,
+        number=4,
+    )
+    connection_info = proto.Field(
+        proto.MESSAGE,
+        number=5,
+        message="GameServerClusterConnectionInfo",
+    )
+    etag = proto.Field(
+        proto.STRING,
+        number=6,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=7,
+    )
     cluster_state = proto.Field(
-        proto.MESSAGE, number=11, message="KubernetesClusterState",
+        proto.MESSAGE,
+        number=11,
+        message="KubernetesClusterState",
     )
 
 
@@ -473,12 +601,31 @@ class KubernetesClusterState(proto.Message):
         VERSION_VERIFICATION_FAILED = 6
         AGONES_NOT_INSTALLED = 7
 
-    agones_version_installed = proto.Field(proto.STRING, number=1,)
-    kubernetes_version_installed = proto.Field(proto.STRING, number=2,)
-    installation_state = proto.Field(proto.ENUM, number=3, enum=InstallationState,)
-    version_installed_error_message = proto.Field(proto.STRING, number=4,)
-    provider = proto.Field(proto.STRING, number=5,)
-    agones_version_targeted = proto.Field(proto.STRING, number=6,)
+    agones_version_installed = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    kubernetes_version_installed = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    installation_state = proto.Field(
+        proto.ENUM,
+        number=3,
+        enum=InstallationState,
+    )
+    version_installed_error_message = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    provider = proto.Field(
+        proto.STRING,
+        number=5,
+    )
+    agones_version_targeted = proto.Field(
+        proto.STRING,
+        number=6,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))
