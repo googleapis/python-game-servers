@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.5.1](https://github.com/googleapis/python-game-servers/compare/v0.5.0...v0.5.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* **deps:** require google-api-core >= 1.31.5, >= 2.3.2 on v0 release ([#261](https://github.com/googleapis/python-game-servers/issues/261)) ([c721ea7](https://github.com/googleapis/python-game-servers/commit/c721ea7b5b2adbb553790f2f52c1954c75c582e0))
+
 ## [0.5.0](https://www.github.com/googleapis/python-game-servers/compare/v0.4.2...v0.5.0) (2021-06-30)
 
 
