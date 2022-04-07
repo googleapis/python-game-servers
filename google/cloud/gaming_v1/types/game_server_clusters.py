@@ -502,7 +502,7 @@ class GameServerCluster(proto.Message):
             Output only. The creation time.
         update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[google.cloud.gaming_v1.types.GameServerCluster.LabelsEntry]):
+        labels (Mapping[str, str]):
             The labels associated with this game server
             cluster. Each label is a key-value pair.
         connection_info (google.cloud.gaming_v1.types.GameServerClusterConnectionInfo):
