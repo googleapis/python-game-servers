@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -477,7 +477,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_list_game_server_deployments():
                 # Create a client
@@ -591,7 +591,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_get_game_server_deployment():
                 # Create a client
@@ -695,7 +695,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_create_game_server_deployment():
                 # Create a client
@@ -821,7 +821,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_delete_game_server_deployment():
                 # Create a client
@@ -950,7 +950,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_update_game_server_deployment():
                 # Create a client
@@ -1081,7 +1081,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_get_game_server_deployment_rollout():
                 # Create a client
@@ -1195,7 +1195,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_update_game_server_deployment_rollout():
                 # Create a client
@@ -1329,7 +1329,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_preview_game_server_deployment_rollout():
                 # Create a client
@@ -1418,7 +1418,7 @@ class GameServerDeploymentsServiceClient(
 
         .. code-block:: python
 
-            from google.cloud import gaming_v1beta
+                    from google.cloud import gaming_v1beta
 
             def sample_fetch_deployment_state():
                 # Create a client
