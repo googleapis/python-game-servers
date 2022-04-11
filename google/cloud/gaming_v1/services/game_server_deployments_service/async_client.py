@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -241,7 +241,6 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Lists game server deployments in a given project and
         location.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1
@@ -314,7 +313,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -428,7 +427,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -467,7 +466,6 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Creates a new game server deployment in a given
         project and location.
-
 
         .. code-block:: python
 
@@ -910,7 +908,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -954,7 +952,6 @@ class GameServerDeploymentsServiceAsyncClient:
         Similarly, if a non existing realm is explicitly called out in
         game_server_config_overrides field, that will also not result in
         an error.
-
 
         .. code-block:: python
 
@@ -1083,7 +1080,6 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Previews the game server deployment rollout. This API
         does not mutate the rollout resource.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1
@@ -1134,7 +1130,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -1175,7 +1171,6 @@ class GameServerDeploymentsServiceAsyncClient:
         game server deployment. Gathers all the Agones fleets
         and Agones autoscalers, including fleets running an
         older version of the game server deployment.
-
 
         .. code-block:: python
 
@@ -1224,7 +1219,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),

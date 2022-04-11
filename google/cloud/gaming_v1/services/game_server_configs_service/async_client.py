@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -230,7 +230,6 @@ class GameServerConfigsServiceAsyncClient:
         r"""Lists game server configs in a given project,
         location, and game server deployment.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1
@@ -304,7 +303,7 @@ class GameServerConfigsServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -416,7 +415,7 @@ class GameServerConfigsServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -456,7 +455,6 @@ class GameServerConfigsServiceAsyncClient:
         configs are immutable, and are not applied until
         referenced in the game server deployment rollout
         resource.
-
 
         .. code-block:: python
 
@@ -580,7 +578,6 @@ class GameServerConfigsServiceAsyncClient:
         r"""Deletes a single game server config. The deletion
         will fail if the game server config is referenced in a
         game server deployment rollout.
-
 
         .. code-block:: python
 

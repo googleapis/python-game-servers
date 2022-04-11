@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -233,7 +233,6 @@ class GameServerClustersServiceAsyncClient:
         r"""Lists game server clusters in a given project and
         location.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1beta
@@ -307,7 +306,7 @@ class GameServerClustersServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -420,7 +419,7 @@ class GameServerClustersServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -460,7 +459,6 @@ class GameServerClustersServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Creates a new game server cluster in a given project
         and location.
-
 
         .. code-block:: python
 
@@ -599,7 +597,6 @@ class GameServerClustersServiceAsyncClient:
         r"""Previews creation of a new game server cluster in a
         given project and location.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1beta
@@ -652,7 +649,7 @@ class GameServerClustersServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -859,7 +856,7 @@ class GameServerClustersServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
@@ -1077,7 +1074,7 @@ class GameServerClustersServiceAsyncClient:
                 maximum=10.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=60.0,
             ),
