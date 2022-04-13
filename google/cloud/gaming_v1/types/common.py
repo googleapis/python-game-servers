@@ -66,7 +66,7 @@ class OperationMetadata(proto.Message):
         unreachable (Sequence[str]):
             Output only. List of Locations that could not
             be reached.
-        operation_status (Sequence[google.cloud.gaming_v1.types.OperationMetadata.OperationStatusEntry]):
+        operation_status (Mapping[str, google.cloud.gaming_v1.types.OperationStatus]):
             Output only. Operation status for Game
             Services API operations. Operation status is in
             the form of key-value pairs where keys are
@@ -156,7 +156,7 @@ class LabelSelector(proto.Message):
     r"""The label selector, used to group labels on the resources.
 
     Attributes:
-        labels (Sequence[google.cloud.gaming_v1.types.LabelSelector.LabelsEntry]):
+        labels (Mapping[str, str]):
             Resource labels for this selector.
     """
 
