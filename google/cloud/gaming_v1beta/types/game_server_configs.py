@@ -264,7 +264,7 @@ class GameServerConfig(proto.Message):
             Output only. The creation time.
         update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The last-modified time.
-        labels (Sequence[google.cloud.gaming_v1beta.types.GameServerConfig.LabelsEntry]):
+        labels (Mapping[str, str]):
             The labels associated with this game server
             config. Each label is a key-value pair.
         fleet_configs (Sequence[google.cloud.gaming_v1beta.types.FleetConfig]):

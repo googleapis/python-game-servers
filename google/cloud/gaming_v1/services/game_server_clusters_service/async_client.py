@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -232,7 +232,6 @@ class GameServerClustersServiceAsyncClient:
     ) -> pagers.ListGameServerClustersAsyncPager:
         r"""Lists game server clusters in a given project and
         location.
-
 
         .. code-block:: python
 
@@ -460,7 +459,6 @@ class GameServerClustersServiceAsyncClient:
         r"""Creates a new game server cluster in a given project
         and location.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1
@@ -598,7 +596,6 @@ class GameServerClustersServiceAsyncClient:
     ) -> game_server_clusters.PreviewCreateGameServerClusterResponse:
         r"""Previews creation of a new game server cluster in a
         given project and location.
-
 
         .. code-block:: python
 

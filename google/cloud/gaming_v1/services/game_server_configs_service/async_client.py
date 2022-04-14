@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -229,7 +229,6 @@ class GameServerConfigsServiceAsyncClient:
     ) -> pagers.ListGameServerConfigsAsyncPager:
         r"""Lists game server configs in a given project,
         location, and game server deployment.
-
 
         .. code-block:: python
 
@@ -457,7 +456,6 @@ class GameServerConfigsServiceAsyncClient:
         referenced in the game server deployment rollout
         resource.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1
@@ -580,7 +578,6 @@ class GameServerConfigsServiceAsyncClient:
         r"""Deletes a single game server config. The deletion
         will fail if the game server config is referenced in a
         game server deployment rollout.
-
 
         .. code-block:: python
 

@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -447,7 +447,6 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         r"""Lists game server configs in a given project,
         location, and game server deployment.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1
@@ -656,7 +655,6 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         referenced in the game server deployment rollout
         resource.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1
@@ -781,7 +779,6 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         r"""Deletes a single game server config. The deletion
         will fail if the game server config is referenced in a
         game server deployment rollout.
-
 
         .. code-block:: python
 

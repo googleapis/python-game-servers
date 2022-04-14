@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -240,7 +240,6 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> pagers.ListGameServerDeploymentsAsyncPager:
         r"""Lists game server deployments in a given project and
         location.
-
 
         .. code-block:: python
 
@@ -468,7 +467,6 @@ class GameServerDeploymentsServiceAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Creates a new game server deployment in a given
         project and location.
-
 
         .. code-block:: python
 
@@ -960,7 +958,6 @@ class GameServerDeploymentsServiceAsyncClient:
         game_server_config_overrides field, that will also not result in
         an error.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1beta
@@ -1090,7 +1087,6 @@ class GameServerDeploymentsServiceAsyncClient:
         r"""Previews the game server deployment rollout. This API
         does not mutate the rollout resource.
 
-
         .. code-block:: python
 
             from google.cloud import gaming_v1beta
@@ -1182,7 +1178,6 @@ class GameServerDeploymentsServiceAsyncClient:
         game server deployment. Gathers all the Agones fleets
         and Agones autoscalers, including fleets running an
         older version of the game server deployment.
-
 
         .. code-block:: python
 
