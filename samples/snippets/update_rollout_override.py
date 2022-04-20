@@ -24,8 +24,7 @@ Example usage:
 import argparse
 
 from google.cloud import gaming
-from google.cloud.gaming_v1.types import common
-from google.cloud.gaming_v1.types import game_server_deployments
+from google.cloud.gaming_v1.types import common, game_server_deployments
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 
 

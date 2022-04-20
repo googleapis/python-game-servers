@@ -20,7 +20,6 @@ from .base import RealmsServiceTransport
 from .grpc import RealmsServiceGrpcTransport
 from .grpc_asyncio import RealmsServiceGrpcAsyncIOTransport
 
-
 # Compile a registry of transports.
 _transport_registry = OrderedDict()  # type: Dict[str, Type[RealmsServiceTransport]]
 _transport_registry["grpc"] = RealmsServiceGrpcTransport

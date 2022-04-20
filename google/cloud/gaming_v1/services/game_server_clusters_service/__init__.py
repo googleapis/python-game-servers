@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from .client import GameServerClustersServiceClient
 from .async_client import GameServerClustersServiceAsyncClient
+from .client import GameServerClustersServiceClient
 
 __all__ = (
     "GameServerClustersServiceClient",

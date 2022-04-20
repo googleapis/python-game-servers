@@ -20,7 +20,6 @@ from .base import GameServerDeploymentsServiceTransport
 from .grpc import GameServerDeploymentsServiceGrpcTransport
 from .grpc_asyncio import GameServerDeploymentsServiceGrpcAsyncIOTransport
 
-
 # Compile a registry of transports.
 _transport_registry = (
     OrderedDict()

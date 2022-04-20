@@ -16,7 +16,6 @@ import time
 import uuid
 
 from google.api_core import exceptions
-
 import pytest
 
 import create_cluster

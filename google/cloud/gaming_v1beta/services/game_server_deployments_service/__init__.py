@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from .client import GameServerDeploymentsServiceClient
 from .async_client import GameServerDeploymentsServiceAsyncClient
+from .client import GameServerDeploymentsServiceClient
 
 __all__ = (
     "GameServerDeploymentsServiceClient",
