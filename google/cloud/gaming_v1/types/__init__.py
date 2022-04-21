@@ -29,6 +29,7 @@ from .game_server_clusters import (
     DeleteGameServerClusterRequest,
     GameServerCluster,
     GameServerClusterConnectionInfo,
+    GameServerClusterView,
     GetGameServerClusterRequest,
     GkeClusterReference,
     KubernetesClusterState,
@@ -41,7 +42,6 @@ from .game_server_clusters import (
     PreviewUpdateGameServerClusterRequest,
     PreviewUpdateGameServerClusterResponse,
     UpdateGameServerClusterRequest,
-    GameServerClusterView,
 )
 from .game_server_configs import (
     CreateGameServerConfigRequest,
