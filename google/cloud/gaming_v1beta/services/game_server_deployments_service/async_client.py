@@ -246,9 +246,9 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_list_game_server_deployments():
+            async def sample_list_game_server_deployments():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.ListGameServerDeploymentsRequest(
@@ -259,7 +259,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 page_result = client.list_game_server_deployments(request=request)
 
                 # Handle the response
-                for response in page_result:
+                async for response in page_result:
                     print(response)
 
         Args:
@@ -365,9 +365,9 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_get_game_server_deployment():
+            async def sample_get_game_server_deployment():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.GetGameServerDeploymentRequest(
@@ -375,7 +375,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.get_game_server_deployment(request=request)
+                response = await client.get_game_server_deployment(request=request)
 
                 # Handle the response
                 print(response)
@@ -473,9 +473,9 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_create_game_server_deployment():
+            async def sample_create_game_server_deployment():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.CreateGameServerDeploymentRequest(
@@ -488,7 +488,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -595,9 +595,9 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_delete_game_server_deployment():
+            async def sample_delete_game_server_deployment():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.DeleteGameServerDeploymentRequest(
@@ -609,7 +609,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -720,9 +720,9 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_update_game_server_deployment():
+            async def sample_update_game_server_deployment():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.UpdateGameServerDeploymentRequest(
@@ -733,7 +733,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -847,9 +847,9 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_get_game_server_deployment_rollout():
+            async def sample_get_game_server_deployment_rollout():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.GetGameServerDeploymentRolloutRequest(
@@ -857,7 +857,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.get_game_server_deployment_rollout(request=request)
+                response = await client.get_game_server_deployment_rollout(request=request)
 
                 # Handle the response
                 print(response)
@@ -963,9 +963,9 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_update_game_server_deployment_rollout():
+            async def sample_update_game_server_deployment_rollout():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.UpdateGameServerDeploymentRolloutRequest(
@@ -976,7 +976,7 @@ class GameServerDeploymentsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -1092,16 +1092,16 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_preview_game_server_deployment_rollout():
+            async def sample_preview_game_server_deployment_rollout():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.PreviewGameServerDeploymentRolloutRequest(
                 )
 
                 # Make the request
-                response = client.preview_game_server_deployment_rollout(request=request)
+                response = await client.preview_game_server_deployment_rollout(request=request)
 
                 # Handle the response
                 print(response)
@@ -1184,9 +1184,9 @@ class GameServerDeploymentsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_fetch_deployment_state():
+            async def sample_fetch_deployment_state():
                 # Create a client
-                client = gaming_v1beta.GameServerDeploymentsServiceClient()
+                client = gaming_v1beta.GameServerDeploymentsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.FetchDeploymentStateRequest(
@@ -1194,7 +1194,7 @@ class GameServerDeploymentsServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.fetch_deployment_state(request=request)
+                response = await client.fetch_deployment_state(request=request)
 
                 # Handle the response
                 print(response)

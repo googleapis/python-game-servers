@@ -796,7 +796,7 @@ def test_list_game_server_clusters_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.ListGameServerClustersRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -814,7 +814,7 @@ def test_list_game_server_clusters_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -828,7 +828,7 @@ async def test_list_game_server_clusters_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.ListGameServerClustersRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -848,7 +848,7 @@ async def test_list_game_server_clusters_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -985,7 +985,7 @@ def test_list_game_server_clusters_pager(transport_name: str = "grpc"):
 
         assert pager._metadata == metadata
 
-        results = [i for i in pager]
+        results = list(pager)
         assert len(results) == 6
         assert all(
             isinstance(i, game_server_clusters.GameServerCluster) for i in results
@@ -1251,7 +1251,7 @@ def test_get_game_server_cluster_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.GetGameServerClusterRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1269,7 +1269,7 @@ def test_get_game_server_cluster_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1283,7 +1283,7 @@ async def test_get_game_server_cluster_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.GetGameServerClusterRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1303,7 +1303,7 @@ async def test_get_game_server_cluster_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1492,7 +1492,7 @@ def test_create_game_server_cluster_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.CreateGameServerClusterRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1510,7 +1510,7 @@ def test_create_game_server_cluster_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -1524,7 +1524,7 @@ async def test_create_game_server_cluster_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.CreateGameServerClusterRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1544,7 +1544,7 @@ async def test_create_game_server_cluster_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -1771,7 +1771,7 @@ def test_preview_create_game_server_cluster_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.PreviewCreateGameServerClusterRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1791,7 +1791,7 @@ def test_preview_create_game_server_cluster_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -1805,7 +1805,7 @@ async def test_preview_create_game_server_cluster_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.PreviewCreateGameServerClusterRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1825,7 +1825,7 @@ async def test_preview_create_game_server_cluster_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -1928,7 +1928,7 @@ def test_delete_game_server_cluster_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.DeleteGameServerClusterRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1946,7 +1946,7 @@ def test_delete_game_server_cluster_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1960,7 +1960,7 @@ async def test_delete_game_server_cluster_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.DeleteGameServerClusterRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1980,7 +1980,7 @@ async def test_delete_game_server_cluster_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -2179,7 +2179,7 @@ def test_preview_delete_game_server_cluster_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.PreviewDeleteGameServerClusterRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2199,7 +2199,7 @@ def test_preview_delete_game_server_cluster_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -2213,7 +2213,7 @@ async def test_preview_delete_game_server_cluster_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.PreviewDeleteGameServerClusterRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2233,7 +2233,7 @@ async def test_preview_delete_game_server_cluster_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -2336,7 +2336,7 @@ def test_update_game_server_cluster_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.UpdateGameServerClusterRequest()
 
-    request.game_server_cluster.name = "game_server_cluster.name/value"
+    request.game_server_cluster.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2354,7 +2354,7 @@ def test_update_game_server_cluster_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "game_server_cluster.name=game_server_cluster.name/value",
+        "game_server_cluster.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2368,7 +2368,7 @@ async def test_update_game_server_cluster_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.UpdateGameServerClusterRequest()
 
-    request.game_server_cluster.name = "game_server_cluster.name/value"
+    request.game_server_cluster.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2388,7 +2388,7 @@ async def test_update_game_server_cluster_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "game_server_cluster.name=game_server_cluster.name/value",
+        "game_server_cluster.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2605,7 +2605,7 @@ def test_preview_update_game_server_cluster_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.PreviewUpdateGameServerClusterRequest()
 
-    request.game_server_cluster.name = "game_server_cluster.name/value"
+    request.game_server_cluster.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2625,7 +2625,7 @@ def test_preview_update_game_server_cluster_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "game_server_cluster.name=game_server_cluster.name/value",
+        "game_server_cluster.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2639,7 +2639,7 @@ async def test_preview_update_game_server_cluster_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_clusters.PreviewUpdateGameServerClusterRequest()
 
-    request.game_server_cluster.name = "game_server_cluster.name/value"
+    request.game_server_cluster.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2659,7 +2659,7 @@ async def test_preview_update_game_server_cluster_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "game_server_cluster.name=game_server_cluster.name/value",
+        "game_server_cluster.name=name_value",
     ) in kw["metadata"]
 
 

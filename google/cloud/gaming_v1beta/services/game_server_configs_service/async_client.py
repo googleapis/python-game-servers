@@ -235,9 +235,9 @@ class GameServerConfigsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_list_game_server_configs():
+            async def sample_list_game_server_configs():
                 # Create a client
-                client = gaming_v1beta.GameServerConfigsServiceClient()
+                client = gaming_v1beta.GameServerConfigsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.ListGameServerConfigsRequest(
@@ -248,7 +248,7 @@ class GameServerConfigsServiceAsyncClient:
                 page_result = client.list_game_server_configs(request=request)
 
                 # Handle the response
-                for response in page_result:
+                async for response in page_result:
                     print(response)
 
         Args:
@@ -353,9 +353,9 @@ class GameServerConfigsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_get_game_server_config():
+            async def sample_get_game_server_config():
                 # Create a client
-                client = gaming_v1beta.GameServerConfigsServiceClient()
+                client = gaming_v1beta.GameServerConfigsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.GetGameServerConfigRequest(
@@ -363,7 +363,7 @@ class GameServerConfigsServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.get_game_server_config(request=request)
+                response = await client.get_game_server_config(request=request)
 
                 # Handle the response
                 print(response)
@@ -462,9 +462,9 @@ class GameServerConfigsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_create_game_server_config():
+            async def sample_create_game_server_config():
                 # Create a client
-                client = gaming_v1beta.GameServerConfigsServiceClient()
+                client = gaming_v1beta.GameServerConfigsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.CreateGameServerConfigRequest(
@@ -477,7 +477,7 @@ class GameServerConfigsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -585,9 +585,9 @@ class GameServerConfigsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_delete_game_server_config():
+            async def sample_delete_game_server_config():
                 # Create a client
-                client = gaming_v1beta.GameServerConfigsServiceClient()
+                client = gaming_v1beta.GameServerConfigsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.DeleteGameServerConfigRequest(
@@ -599,7 +599,7 @@ class GameServerConfigsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
