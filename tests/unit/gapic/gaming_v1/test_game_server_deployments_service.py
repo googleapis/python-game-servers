@@ -796,7 +796,7 @@ def test_list_game_server_deployments_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.ListGameServerDeploymentsRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -814,7 +814,7 @@ def test_list_game_server_deployments_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -828,7 +828,7 @@ async def test_list_game_server_deployments_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.ListGameServerDeploymentsRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -848,7 +848,7 @@ async def test_list_game_server_deployments_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -985,7 +985,7 @@ def test_list_game_server_deployments_pager(transport_name: str = "grpc"):
 
         assert pager._metadata == metadata
 
-        results = [i for i in pager]
+        results = list(pager)
         assert len(results) == 6
         assert all(
             isinstance(i, game_server_deployments.GameServerDeployment) for i in results
@@ -1252,7 +1252,7 @@ def test_get_game_server_deployment_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.GetGameServerDeploymentRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1270,7 +1270,7 @@ def test_get_game_server_deployment_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1284,7 +1284,7 @@ async def test_get_game_server_deployment_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.GetGameServerDeploymentRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1304,7 +1304,7 @@ async def test_get_game_server_deployment_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1493,7 +1493,7 @@ def test_create_game_server_deployment_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.CreateGameServerDeploymentRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1511,7 +1511,7 @@ def test_create_game_server_deployment_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -1525,7 +1525,7 @@ async def test_create_game_server_deployment_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.CreateGameServerDeploymentRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1545,7 +1545,7 @@ async def test_create_game_server_deployment_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -1752,7 +1752,7 @@ def test_delete_game_server_deployment_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.DeleteGameServerDeploymentRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1770,7 +1770,7 @@ def test_delete_game_server_deployment_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1784,7 +1784,7 @@ async def test_delete_game_server_deployment_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.DeleteGameServerDeploymentRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1804,7 +1804,7 @@ async def test_delete_game_server_deployment_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1993,7 +1993,7 @@ def test_update_game_server_deployment_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.UpdateGameServerDeploymentRequest()
 
-    request.game_server_deployment.name = "game_server_deployment.name/value"
+    request.game_server_deployment.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2011,7 +2011,7 @@ def test_update_game_server_deployment_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "game_server_deployment.name=game_server_deployment.name/value",
+        "game_server_deployment.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2025,7 +2025,7 @@ async def test_update_game_server_deployment_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.UpdateGameServerDeploymentRequest()
 
-    request.game_server_deployment.name = "game_server_deployment.name/value"
+    request.game_server_deployment.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2045,7 +2045,7 @@ async def test_update_game_server_deployment_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "game_server_deployment.name=game_server_deployment.name/value",
+        "game_server_deployment.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2272,7 +2272,7 @@ def test_get_game_server_deployment_rollout_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.GetGameServerDeploymentRolloutRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2290,7 +2290,7 @@ def test_get_game_server_deployment_rollout_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -2304,7 +2304,7 @@ async def test_get_game_server_deployment_rollout_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.GetGameServerDeploymentRolloutRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2324,7 +2324,7 @@ async def test_get_game_server_deployment_rollout_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -2522,7 +2522,7 @@ def test_update_game_server_deployment_rollout_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
 
-    request.rollout.name = "rollout.name/value"
+    request.rollout.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2540,7 +2540,7 @@ def test_update_game_server_deployment_rollout_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "rollout.name=rollout.name/value",
+        "rollout.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2554,7 +2554,7 @@ async def test_update_game_server_deployment_rollout_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.UpdateGameServerDeploymentRolloutRequest()
 
-    request.rollout.name = "rollout.name/value"
+    request.rollout.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2574,7 +2574,7 @@ async def test_update_game_server_deployment_rollout_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "rollout.name=rollout.name/value",
+        "rollout.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2810,7 +2810,7 @@ def test_preview_game_server_deployment_rollout_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest()
 
-    request.rollout.name = "rollout.name/value"
+    request.rollout.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2830,7 +2830,7 @@ def test_preview_game_server_deployment_rollout_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "rollout.name=rollout.name/value",
+        "rollout.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2844,7 +2844,7 @@ async def test_preview_game_server_deployment_rollout_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.PreviewGameServerDeploymentRolloutRequest()
 
-    request.rollout.name = "rollout.name/value"
+    request.rollout.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2864,7 +2864,7 @@ async def test_preview_game_server_deployment_rollout_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "rollout.name=rollout.name/value",
+        "rollout.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2973,7 +2973,7 @@ def test_fetch_deployment_state_field_headers():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.FetchDeploymentStateRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2991,7 +2991,7 @@ def test_fetch_deployment_state_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -3005,7 +3005,7 @@ async def test_fetch_deployment_state_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = game_server_deployments.FetchDeploymentStateRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -3025,7 +3025,7 @@ async def test_fetch_deployment_state_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 

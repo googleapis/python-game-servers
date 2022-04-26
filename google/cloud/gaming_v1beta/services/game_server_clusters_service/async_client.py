@@ -238,9 +238,9 @@ class GameServerClustersServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_list_game_server_clusters():
+            async def sample_list_game_server_clusters():
                 # Create a client
-                client = gaming_v1beta.GameServerClustersServiceClient()
+                client = gaming_v1beta.GameServerClustersServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.ListGameServerClustersRequest(
@@ -251,7 +251,7 @@ class GameServerClustersServiceAsyncClient:
                 page_result = client.list_game_server_clusters(request=request)
 
                 # Handle the response
-                for response in page_result:
+                async for response in page_result:
                     print(response)
 
         Args:
@@ -356,9 +356,9 @@ class GameServerClustersServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_get_game_server_cluster():
+            async def sample_get_game_server_cluster():
                 # Create a client
-                client = gaming_v1beta.GameServerClustersServiceClient()
+                client = gaming_v1beta.GameServerClustersServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.GetGameServerClusterRequest(
@@ -366,7 +366,7 @@ class GameServerClustersServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.get_game_server_cluster(request=request)
+                response = await client.get_game_server_cluster(request=request)
 
                 # Handle the response
                 print(response)
@@ -465,9 +465,9 @@ class GameServerClustersServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_create_game_server_cluster():
+            async def sample_create_game_server_cluster():
                 # Create a client
-                client = gaming_v1beta.GameServerClustersServiceClient()
+                client = gaming_v1beta.GameServerClustersServiceAsyncClient()
 
                 # Initialize request argument(s)
                 game_server_cluster = gaming_v1beta.GameServerCluster()
@@ -484,7 +484,7 @@ class GameServerClustersServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -602,9 +602,9 @@ class GameServerClustersServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_preview_create_game_server_cluster():
+            async def sample_preview_create_game_server_cluster():
                 # Create a client
-                client = gaming_v1beta.GameServerClustersServiceClient()
+                client = gaming_v1beta.GameServerClustersServiceAsyncClient()
 
                 # Initialize request argument(s)
                 game_server_cluster = gaming_v1beta.GameServerCluster()
@@ -617,7 +617,7 @@ class GameServerClustersServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.preview_create_game_server_cluster(request=request)
+                response = await client.preview_create_game_server_cluster(request=request)
 
                 # Handle the response
                 print(response)
@@ -692,9 +692,9 @@ class GameServerClustersServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_delete_game_server_cluster():
+            async def sample_delete_game_server_cluster():
                 # Create a client
-                client = gaming_v1beta.GameServerClustersServiceClient()
+                client = gaming_v1beta.GameServerClustersServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.DeleteGameServerClusterRequest(
@@ -706,7 +706,7 @@ class GameServerClustersServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -814,9 +814,9 @@ class GameServerClustersServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_preview_delete_game_server_cluster():
+            async def sample_preview_delete_game_server_cluster():
                 # Create a client
-                client = gaming_v1beta.GameServerClustersServiceClient()
+                client = gaming_v1beta.GameServerClustersServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.PreviewDeleteGameServerClusterRequest(
@@ -824,7 +824,7 @@ class GameServerClustersServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.preview_delete_game_server_cluster(request=request)
+                response = await client.preview_delete_game_server_cluster(request=request)
 
                 # Handle the response
                 print(response)
@@ -900,9 +900,9 @@ class GameServerClustersServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_update_game_server_cluster():
+            async def sample_update_game_server_cluster():
                 # Create a client
-                client = gaming_v1beta.GameServerClustersServiceClient()
+                client = gaming_v1beta.GameServerClustersServiceAsyncClient()
 
                 # Initialize request argument(s)
                 game_server_cluster = gaming_v1beta.GameServerCluster()
@@ -917,7 +917,7 @@ class GameServerClustersServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -1029,9 +1029,9 @@ class GameServerClustersServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_preview_update_game_server_cluster():
+            async def sample_preview_update_game_server_cluster():
                 # Create a client
-                client = gaming_v1beta.GameServerClustersServiceClient()
+                client = gaming_v1beta.GameServerClustersServiceAsyncClient()
 
                 # Initialize request argument(s)
                 game_server_cluster = gaming_v1beta.GameServerCluster()
@@ -1042,7 +1042,7 @@ class GameServerClustersServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.preview_update_game_server_cluster(request=request)
+                response = await client.preview_update_game_server_cluster(request=request)
 
                 # Handle the response
                 print(response)

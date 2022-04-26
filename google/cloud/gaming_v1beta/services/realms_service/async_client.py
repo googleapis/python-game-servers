@@ -226,9 +226,9 @@ class RealmsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_list_realms():
+            async def sample_list_realms():
                 # Create a client
-                client = gaming_v1beta.RealmsServiceClient()
+                client = gaming_v1beta.RealmsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.ListRealmsRequest(
@@ -239,7 +239,7 @@ class RealmsServiceAsyncClient:
                 page_result = client.list_realms(request=request)
 
                 # Handle the response
-                for response in page_result:
+                async for response in page_result:
                     print(response)
 
         Args:
@@ -343,9 +343,9 @@ class RealmsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_get_realm():
+            async def sample_get_realm():
                 # Create a client
-                client = gaming_v1beta.RealmsServiceClient()
+                client = gaming_v1beta.RealmsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.GetRealmRequest(
@@ -353,7 +353,7 @@ class RealmsServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.get_realm(request=request)
+                response = await client.get_realm(request=request)
 
                 # Handle the response
                 print(response)
@@ -448,9 +448,9 @@ class RealmsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_create_realm():
+            async def sample_create_realm():
                 # Create a client
-                client = gaming_v1beta.RealmsServiceClient()
+                client = gaming_v1beta.RealmsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 realm = gaming_v1beta.Realm()
@@ -467,7 +467,7 @@ class RealmsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -581,9 +581,9 @@ class RealmsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_delete_realm():
+            async def sample_delete_realm():
                 # Create a client
-                client = gaming_v1beta.RealmsServiceClient()
+                client = gaming_v1beta.RealmsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = gaming_v1beta.DeleteRealmRequest(
@@ -595,7 +595,7 @@ class RealmsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -703,9 +703,9 @@ class RealmsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_update_realm():
+            async def sample_update_realm():
                 # Create a client
-                client = gaming_v1beta.RealmsServiceClient()
+                client = gaming_v1beta.RealmsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 realm = gaming_v1beta.Realm()
@@ -720,7 +720,7 @@ class RealmsServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -829,9 +829,9 @@ class RealmsServiceAsyncClient:
 
             from google.cloud import gaming_v1beta
 
-            def sample_preview_realm_update():
+            async def sample_preview_realm_update():
                 # Create a client
-                client = gaming_v1beta.RealmsServiceClient()
+                client = gaming_v1beta.RealmsServiceAsyncClient()
 
                 # Initialize request argument(s)
                 realm = gaming_v1beta.Realm()
@@ -842,7 +842,7 @@ class RealmsServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.preview_realm_update(request=request)
+                response = await client.preview_realm_update(request=request)
 
                 # Handle the response
                 print(response)
