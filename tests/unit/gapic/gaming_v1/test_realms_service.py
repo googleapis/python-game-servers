@@ -757,7 +757,7 @@ def test_list_realms_field_headers():
     # a field header. Set these to a non-empty value.
     request = realms.ListRealmsRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_realms), "__call__") as call:
@@ -773,7 +773,7 @@ def test_list_realms_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -787,7 +787,7 @@ async def test_list_realms_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = realms.ListRealmsRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_realms), "__call__") as call:
@@ -805,7 +805,7 @@ async def test_list_realms_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -936,7 +936,7 @@ def test_list_realms_pager(transport_name: str = "grpc"):
 
         assert pager._metadata == metadata
 
-        results = [i for i in pager]
+        results = list(pager)
         assert len(results) == 6
         assert all(isinstance(i, realms.Realm) for i in results)
 
@@ -1189,7 +1189,7 @@ def test_get_realm_field_headers():
     # a field header. Set these to a non-empty value.
     request = realms.GetRealmRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_realm), "__call__") as call:
@@ -1205,7 +1205,7 @@ def test_get_realm_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1219,7 +1219,7 @@ async def test_get_realm_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = realms.GetRealmRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_realm), "__call__") as call:
@@ -1235,7 +1235,7 @@ async def test_get_realm_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1411,7 +1411,7 @@ def test_create_realm_field_headers():
     # a field header. Set these to a non-empty value.
     request = realms.CreateRealmRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.create_realm), "__call__") as call:
@@ -1427,7 +1427,7 @@ def test_create_realm_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -1441,7 +1441,7 @@ async def test_create_realm_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = realms.CreateRealmRequest()
 
-    request.parent = "parent/value"
+    request.parent = "parent_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.create_realm), "__call__") as call:
@@ -1459,7 +1459,7 @@ async def test_create_realm_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "parent=parent/value",
+        "parent=parent_value",
     ) in kw["metadata"]
 
 
@@ -1657,7 +1657,7 @@ def test_delete_realm_field_headers():
     # a field header. Set these to a non-empty value.
     request = realms.DeleteRealmRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.delete_realm), "__call__") as call:
@@ -1673,7 +1673,7 @@ def test_delete_realm_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1687,7 +1687,7 @@ async def test_delete_realm_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = realms.DeleteRealmRequest()
 
-    request.name = "name/value"
+    request.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.delete_realm), "__call__") as call:
@@ -1705,7 +1705,7 @@ async def test_delete_realm_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "name=name/value",
+        "name=name_value",
     ) in kw["metadata"]
 
 
@@ -1883,7 +1883,7 @@ def test_update_realm_field_headers():
     # a field header. Set these to a non-empty value.
     request = realms.UpdateRealmRequest()
 
-    request.realm.name = "realm.name/value"
+    request.realm.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.update_realm), "__call__") as call:
@@ -1899,7 +1899,7 @@ def test_update_realm_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "realm.name=realm.name/value",
+        "realm.name=name_value",
     ) in kw["metadata"]
 
 
@@ -1913,7 +1913,7 @@ async def test_update_realm_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = realms.UpdateRealmRequest()
 
-    request.realm.name = "realm.name/value"
+    request.realm.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.update_realm), "__call__") as call:
@@ -1931,7 +1931,7 @@ async def test_update_realm_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "realm.name=realm.name/value",
+        "realm.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2131,7 +2131,7 @@ def test_preview_realm_update_field_headers():
     # a field header. Set these to a non-empty value.
     request = realms.PreviewRealmUpdateRequest()
 
-    request.realm.name = "realm.name/value"
+    request.realm.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2149,7 +2149,7 @@ def test_preview_realm_update_field_headers():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "realm.name=realm.name/value",
+        "realm.name=name_value",
     ) in kw["metadata"]
 
 
@@ -2163,7 +2163,7 @@ async def test_preview_realm_update_field_headers_async():
     # a field header. Set these to a non-empty value.
     request = realms.PreviewRealmUpdateRequest()
 
-    request.realm.name = "realm.name/value"
+    request.realm.name = "name_value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -2183,7 +2183,7 @@ async def test_preview_realm_update_field_headers_async():
     _, _, kw = call.mock_calls[0]
     assert (
         "x-goog-request-params",
-        "realm.name=realm.name/value",
+        "realm.name=name_value",
     ) in kw["metadata"]
 
 
