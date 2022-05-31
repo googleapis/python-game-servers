@@ -1,6 +1,6 @@
 # Changelog
 
-### [1.4.1](https://github.com/googleapis/python-game-servers/compare/v1.4.0...v1.4.1) (2022-03-07)
+## [1.4.1](https://github.com/googleapis/python-game-servers/compare/v1.4.0...v1.4.1) (2022-03-07)
 
 
 ### Bug Fixes
@@ -28,7 +28,7 @@
 
 * add python 3.9 and 3.10 support ([#218](https://www.github.com/googleapis/python-game-servers/issues/218)) ([19aa818](https://www.github.com/googleapis/python-game-servers/commit/19aa8187e716d41e769a0f2aa894cb4f4732d61b)), closes [#216](https://www.github.com/googleapis/python-game-servers/issues/216)
 
-### [1.2.1](https://www.github.com/googleapis/python-game-servers/compare/v1.2.0...v1.2.1) (2021-11-01)
+## [1.2.1](https://www.github.com/googleapis/python-game-servers/compare/v1.2.0...v1.2.1) (2021-11-01)
 
 
 ### Bug Fixes
@@ -53,7 +53,7 @@
 
 * improper types in pagers generation ([5ea72d7](https://www.github.com/googleapis/python-game-servers/commit/5ea72d7efd2d84a1ed3454102ba6357111018489))
 
-### [1.1.1](https://www.github.com/googleapis/python-game-servers/compare/v1.1.0...v1.1.1) (2021-09-27)
+## [1.1.1](https://www.github.com/googleapis/python-game-servers/compare/v1.1.0...v1.1.1) (2021-09-27)
 
 
 ### Bug Fixes
@@ -73,7 +73,7 @@
 * add cluster_state to show the state of the Kubernetes cluster ([a149bb7](https://www.github.com/googleapis/python-game-servers/commit/a149bb788248bd12dc905ff0d50becd557af0fb3))
 * support version reporting API ([#180](https://www.github.com/googleapis/python-game-servers/issues/180)) ([a149bb7](https://www.github.com/googleapis/python-game-servers/commit/a149bb788248bd12dc905ff0d50becd557af0fb3))
 
-### [1.0.2](https://www.github.com/googleapis/python-game-servers/compare/v1.0.1...v1.0.2) (2021-07-28)
+## [1.0.2](https://www.github.com/googleapis/python-game-servers/compare/v1.0.1...v1.0.2) (2021-07-28)
 
 
 ### Bug Fixes
@@ -90,7 +90,7 @@
 
 * release as 1.0.2 ([#169](https://www.github.com/googleapis/python-game-servers/issues/169)) ([00c3a82](https://www.github.com/googleapis/python-game-servers/commit/00c3a824eee4a46f8b54172541c90afc542ee9f5))
 
-### [1.0.1](https://www.github.com/googleapis/python-game-servers/compare/v1.0.0...v1.0.1) (2021-07-20)
+## [1.0.1](https://www.github.com/googleapis/python-game-servers/compare/v1.0.0...v1.0.1) (2021-07-20)
 
 
 ### Bug Fixes
@@ -121,14 +121,14 @@
 
 * omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-game-servers/issues/1127)) ([#132](https://www.github.com/googleapis/python-game-servers/issues/132)) ([46c7313](https://www.github.com/googleapis/python-game-servers/commit/46c7313ab392d08b956793fbb9babc2e2e13091a)), closes [#1126](https://www.github.com/googleapis/python-game-servers/issues/1126)
 
-### [0.4.2](https://www.github.com/googleapis/python-game-servers/compare/v0.4.1...v0.4.2) (2021-06-16)
+## [0.4.2](https://www.github.com/googleapis/python-game-servers/compare/v0.4.1...v0.4.2) (2021-06-16)
 
 
 ### Bug Fixes
 
 * exclude docs and tests from package ([#128](https://www.github.com/googleapis/python-game-servers/issues/128)) ([624542d](https://www.github.com/googleapis/python-game-servers/commit/624542d4251575629172b473ff1e9215e6c982c0))
 
-### [0.4.1](https://www.github.com/googleapis/python-game-servers/compare/v0.4.0...v0.4.1) (2021-05-28)
+## [0.4.1](https://www.github.com/googleapis/python-game-servers/compare/v0.4.0...v0.4.1) (2021-05-28)
 
 
 ### Bug Fixes
@@ -176,7 +176,7 @@
 
 * add multiprocessing ([#11](https://www.github.com/googleapis/python-game-servers/issues/11)) ([3528a72](https://www.github.com/googleapis/python-game-servers/commit/3528a72c887b51b2dd0484869d028ed8f98c8c79))
 
-### [0.1.1](https://www.github.com/googleapis/python-game-servers/compare/v0.1.0...v0.1.1) (2020-03-23)
+## [0.1.1](https://www.github.com/googleapis/python-game-servers/compare/v0.1.0...v0.1.1) (2020-03-23)
 
 
 ### Bug Fixes
