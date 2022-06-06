@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.2](https://github.com/googleapis/python-game-servers/compare/v1.4.1...v1.4.2) (2022-06-06)
+
+
+### Bug Fixes
+
+* **deps:** require protobuf <4.0.0dev ([#325](https://github.com/googleapis/python-game-servers/issues/325)) ([e50bc8e](https://github.com/googleapis/python-game-servers/commit/e50bc8e670e33c3574830130b79413332c43314c))
+
+
+### Documentation
+
+* fix changelog header to consistent size ([#324](https://github.com/googleapis/python-game-servers/issues/324)) ([13b3053](https://github.com/googleapis/python-game-servers/commit/13b30537b429ac26dbe2e774cafc867d0fc82b68))
+
 ## [1.4.1](https://github.com/googleapis/python-game-servers/compare/v1.4.0...v1.4.1) (2022-03-07)
 
 
