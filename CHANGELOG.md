@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/googleapis/python-game-servers/compare/v0.5.1...v0.5.2) (2022-06-08)
+
+
+### Bug Fixes
+
+* **deps:** require protobuf<4.0.0 on v0 branch ([#330](https://github.com/googleapis/python-game-servers/issues/330)) ([a74c8ec](https://github.com/googleapis/python-game-servers/commit/a74c8ec3ebd31df1783af6c847cad9692fbd025a))
+
 ### [0.5.1](https://github.com/googleapis/python-game-servers/compare/v0.5.0...v0.5.1) (2022-04-04)
 
 
