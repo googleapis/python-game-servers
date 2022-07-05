@@ -2145,7 +2145,6 @@ def test_game_server_configs_service_transport_auth_adc(transport_class):
     [
         transports.GameServerConfigsServiceGrpcTransport,
         transports.GameServerConfigsServiceGrpcAsyncIOTransport,
-        transports.GameServerConfigsServiceRestTransport,
     ],
 )
 def test_game_server_configs_service_transport_auth_gdch_credentials(transport_class):

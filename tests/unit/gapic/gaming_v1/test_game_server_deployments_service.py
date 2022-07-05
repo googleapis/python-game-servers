@@ -3302,7 +3302,6 @@ def test_game_server_deployments_service_transport_auth_adc(transport_class):
     [
         transports.GameServerDeploymentsServiceGrpcTransport,
         transports.GameServerDeploymentsServiceGrpcAsyncIOTransport,
-        transports.GameServerDeploymentsServiceRestTransport,
     ],
 )
 def test_game_server_deployments_service_transport_auth_gdch_credentials(

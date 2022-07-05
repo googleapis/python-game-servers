@@ -2935,7 +2935,6 @@ def test_game_server_clusters_service_transport_auth_adc(transport_class):
     [
         transports.GameServerClustersServiceGrpcTransport,
         transports.GameServerClustersServiceGrpcAsyncIOTransport,
-        transports.GameServerClustersServiceRestTransport,
     ],
 )
 def test_game_server_clusters_service_transport_auth_gdch_credentials(transport_class):

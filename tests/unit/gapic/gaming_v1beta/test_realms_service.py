@@ -2457,7 +2457,6 @@ def test_realms_service_transport_auth_adc(transport_class):
     [
         transports.RealmsServiceGrpcTransport,
         transports.RealmsServiceGrpcAsyncIOTransport,
-        transports.RealmsServiceRestTransport,
     ],
 )
 def test_realms_service_transport_auth_gdch_credentials(transport_class):
