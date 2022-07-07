@@ -3,7 +3,7 @@ Python Client for Game Servers API
 
 |stable| |pypi| |versions|
 
-`Game Servers API`_: 
+`Game Servers API`_: provides access to the Game Services API.
 
 - `Client Library Documentation`_
 - `Product Documentation`_
