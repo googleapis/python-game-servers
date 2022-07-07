@@ -12,5 +12,6 @@
     "api_id": "gameservices.googleapis.com",
     "default_version": "v1",
     "codeowner_team": "",
-    "api_shortname": "gameservices"
+    "api_shortname": "gameservices",
+    "api_description": "provides access to the Game Services API."
 }
