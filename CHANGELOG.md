@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/googleapis/python-game-servers/compare/v1.4.2...v1.5.0) (2022-07-14)
+
+
+### Features
+
+* add audience parameter ([7495784](https://github.com/googleapis/python-game-servers/commit/7495784cc56f317485514bf098598a0b8892a91b))
+
+
+### Bug Fixes
+
+* **deps:** require google-api-core>=1.32.0,>=2.8.0 ([#334](https://github.com/googleapis/python-game-servers/issues/334)) ([7495784](https://github.com/googleapis/python-game-servers/commit/7495784cc56f317485514bf098598a0b8892a91b))
+* require python 3.7+ ([#336](https://github.com/googleapis/python-game-servers/issues/336)) ([730b1ab](https://github.com/googleapis/python-game-servers/commit/730b1ab9dafebb1f80cfa00288ad74ca0c821b08))
+
 ## [1.4.2](https://github.com/googleapis/python-game-servers/compare/v1.4.1...v1.4.2) (2022-06-06)
 
 
