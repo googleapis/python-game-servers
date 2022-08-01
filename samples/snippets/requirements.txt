@@ -1,1 +1,1 @@
-google-cloud-game-servers==1.4.2
+google-cloud-game-servers==1.5.0
