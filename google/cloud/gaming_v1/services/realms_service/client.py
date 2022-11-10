@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -62,7 +73,7 @@ class RealmsServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RealmsServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -339,7 +350,7 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RealmsServiceTransport, None] = None,
+        transport: Optional[Union[str, RealmsServiceTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -437,11 +448,11 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def list_realms(
         self,
-        request: Union[realms.ListRealmsRequest, dict] = None,
+        request: Optional[Union[realms.ListRealmsRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListRealmsPager:
         r"""Lists realms in a given project and location.
@@ -552,11 +563,11 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def get_realm(
         self,
-        request: Union[realms.GetRealmRequest, dict] = None,
+        request: Optional[Union[realms.GetRealmRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.Realm:
         r"""Gets details of a single realm.
@@ -653,13 +664,13 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def create_realm(
         self,
-        request: Union[realms.CreateRealmRequest, dict] = None,
+        request: Optional[Union[realms.CreateRealmRequest, dict]] = None,
         *,
-        parent: str = None,
-        realm: realms.Realm = None,
-        realm_id: str = None,
+        parent: Optional[str] = None,
+        realm: Optional[realms.Realm] = None,
+        realm_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a new realm in a given project and location.
@@ -795,11 +806,11 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def delete_realm(
         self,
-        request: Union[realms.DeleteRealmRequest, dict] = None,
+        request: Optional[Union[realms.DeleteRealmRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a single realm.
@@ -920,12 +931,12 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def update_realm(
         self,
-        request: Union[realms.UpdateRealmRequest, dict] = None,
+        request: Optional[Union[realms.UpdateRealmRequest, dict]] = None,
         *,
-        realm: realms.Realm = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        realm: Optional[realms.Realm] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Patches a single realm.
@@ -1053,10 +1064,10 @@ class RealmsServiceClient(metaclass=RealmsServiceClientMeta):
 
     def preview_realm_update(
         self,
-        request: Union[realms.PreviewRealmUpdateRequest, dict] = None,
+        request: Optional[Union[realms.PreviewRealmUpdateRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.PreviewRealmUpdateResponse:
         r"""Previews patches to a single realm.

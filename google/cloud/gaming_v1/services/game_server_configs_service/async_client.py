@@ -16,7 +16,17 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+)
 
 from google.api_core import exceptions as core_exceptions
 from google.api_core import gapic_v1
@@ -175,9 +185,9 @@ class GameServerConfigsServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: ga_credentials.Credentials = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, GameServerConfigsServiceTransport] = "grpc_asyncio",
-        client_options: ClientOptions = None,
+        client_options: Optional[ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the game server configs service client.
@@ -221,11 +231,13 @@ class GameServerConfigsServiceAsyncClient:
 
     async def list_game_server_configs(
         self,
-        request: Union[game_server_configs.ListGameServerConfigsRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.ListGameServerConfigsRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerConfigsAsyncPager:
         r"""Lists game server configs in a given project,
@@ -259,7 +271,7 @@ class GameServerConfigsServiceAsyncClient:
                     print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.ListGameServerConfigsRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.ListGameServerConfigsRequest, dict]]):
                 The request object. Request message for
                 GameServerConfigsService.ListGameServerConfigs.
             parent (:class:`str`):
@@ -347,11 +359,13 @@ class GameServerConfigsServiceAsyncClient:
 
     async def get_game_server_config(
         self,
-        request: Union[game_server_configs.GetGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.GetGameServerConfigRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_configs.GameServerConfig:
         r"""Gets details of a single game server config.
@@ -383,7 +397,7 @@ class GameServerConfigsServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.GetGameServerConfigRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.GetGameServerConfigRequest, dict]]):
                 The request object. Request message for
                 GameServerConfigsService.GetGameServerConfig.
             name (:class:`str`):
@@ -457,12 +471,14 @@ class GameServerConfigsServiceAsyncClient:
 
     async def create_game_server_config(
         self,
-        request: Union[game_server_configs.CreateGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.CreateGameServerConfigRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        game_server_config: game_server_configs.GameServerConfig = None,
+        parent: Optional[str] = None,
+        game_server_config: Optional[game_server_configs.GameServerConfig] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Creates a new game server config in a given project,
@@ -503,7 +519,7 @@ class GameServerConfigsServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.CreateGameServerConfigRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.CreateGameServerConfigRequest, dict]]):
                 The request object. Request message for
                 GameServerConfigsService.CreateGameServerConfig.
             parent (:class:`str`):
@@ -590,11 +606,13 @@ class GameServerConfigsServiceAsyncClient:
 
     async def delete_game_server_config(
         self,
-        request: Union[game_server_configs.DeleteGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.DeleteGameServerConfigRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Deletes a single game server config. The deletion
@@ -632,7 +650,7 @@ class GameServerConfigsServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.DeleteGameServerConfigRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.DeleteGameServerConfigRequest, dict]]):
                 The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
             name (:class:`str`):

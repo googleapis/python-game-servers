@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -66,7 +77,7 @@ class GameServerDeploymentsServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[GameServerDeploymentsServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -367,7 +378,7 @@ class GameServerDeploymentsServiceClient(
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, GameServerDeploymentsServiceTransport, None] = None,
+        transport: Optional[Union[str, GameServerDeploymentsServiceTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -465,13 +476,13 @@ class GameServerDeploymentsServiceClient(
 
     def list_game_server_deployments(
         self,
-        request: Union[
-            game_server_deployments.ListGameServerDeploymentsRequest, dict
+        request: Optional[
+            Union[game_server_deployments.ListGameServerDeploymentsRequest, dict]
         ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerDeploymentsPager:
         r"""Lists game server deployments in a given project and
@@ -587,13 +598,13 @@ class GameServerDeploymentsServiceClient(
 
     def get_game_server_deployment(
         self,
-        request: Union[
-            game_server_deployments.GetGameServerDeploymentRequest, dict
+        request: Optional[
+            Union[game_server_deployments.GetGameServerDeploymentRequest, dict]
         ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.GameServerDeployment:
         r"""Gets details of a single game server deployment.
@@ -695,14 +706,16 @@ class GameServerDeploymentsServiceClient(
 
     def create_game_server_deployment(
         self,
-        request: Union[
-            game_server_deployments.CreateGameServerDeploymentRequest, dict
+        request: Optional[
+            Union[game_server_deployments.CreateGameServerDeploymentRequest, dict]
         ] = None,
         *,
-        parent: str = None,
-        game_server_deployment: game_server_deployments.GameServerDeployment = None,
+        parent: Optional[str] = None,
+        game_server_deployment: Optional[
+            game_server_deployments.GameServerDeployment
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a new game server deployment in a given
@@ -830,13 +843,13 @@ class GameServerDeploymentsServiceClient(
 
     def delete_game_server_deployment(
         self,
-        request: Union[
-            game_server_deployments.DeleteGameServerDeploymentRequest, dict
+        request: Optional[
+            Union[game_server_deployments.DeleteGameServerDeploymentRequest, dict]
         ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a single game server deployment.
@@ -962,14 +975,16 @@ class GameServerDeploymentsServiceClient(
 
     def update_game_server_deployment(
         self,
-        request: Union[
-            game_server_deployments.UpdateGameServerDeploymentRequest, dict
+        request: Optional[
+            Union[game_server_deployments.UpdateGameServerDeploymentRequest, dict]
         ] = None,
         *,
-        game_server_deployment: game_server_deployments.GameServerDeployment = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        game_server_deployment: Optional[
+            game_server_deployments.GameServerDeployment
+        ] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Patches a game server deployment.
@@ -1101,13 +1116,13 @@ class GameServerDeploymentsServiceClient(
 
     def get_game_server_deployment_rollout(
         self,
-        request: Union[
-            game_server_deployments.GetGameServerDeploymentRolloutRequest, dict
+        request: Optional[
+            Union[game_server_deployments.GetGameServerDeploymentRolloutRequest, dict]
         ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.GameServerDeploymentRollout:
         r"""Gets details a single game server deployment rollout.
@@ -1214,14 +1229,16 @@ class GameServerDeploymentsServiceClient(
 
     def update_game_server_deployment_rollout(
         self,
-        request: Union[
-            game_server_deployments.UpdateGameServerDeploymentRolloutRequest, dict
+        request: Optional[
+            Union[
+                game_server_deployments.UpdateGameServerDeploymentRolloutRequest, dict
+            ]
         ] = None,
         *,
-        rollout: game_server_deployments.GameServerDeploymentRollout = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        rollout: Optional[game_server_deployments.GameServerDeploymentRollout] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Patches a single game server deployment rollout. The method will
@@ -1361,12 +1378,14 @@ class GameServerDeploymentsServiceClient(
 
     def preview_game_server_deployment_rollout(
         self,
-        request: Union[
-            game_server_deployments.PreviewGameServerDeploymentRolloutRequest, dict
+        request: Optional[
+            Union[
+                game_server_deployments.PreviewGameServerDeploymentRolloutRequest, dict
+            ]
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.PreviewGameServerDeploymentRolloutResponse:
         r"""Previews the game server deployment rollout. This API
@@ -1454,12 +1473,12 @@ class GameServerDeploymentsServiceClient(
 
     def fetch_deployment_state(
         self,
-        request: Union[
-            game_server_deployments.FetchDeploymentStateRequest, dict
+        request: Optional[
+            Union[game_server_deployments.FetchDeploymentStateRequest, dict]
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_deployments.FetchDeploymentStateResponse:
         r"""Retrieves information about the current state of the

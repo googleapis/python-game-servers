@@ -16,7 +16,17 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+)
 
 from google.api_core import exceptions as core_exceptions
 from google.api_core import gapic_v1
@@ -167,9 +177,9 @@ class RealmsServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: ga_credentials.Credentials = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, RealmsServiceTransport] = "grpc_asyncio",
-        client_options: ClientOptions = None,
+        client_options: Optional[ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the realms service client.
@@ -213,11 +223,11 @@ class RealmsServiceAsyncClient:
 
     async def list_realms(
         self,
-        request: Union[realms.ListRealmsRequest, dict] = None,
+        request: Optional[Union[realms.ListRealmsRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListRealmsAsyncPager:
         r"""Lists realms in a given project and location.
@@ -250,7 +260,7 @@ class RealmsServiceAsyncClient:
                     print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1beta.types.ListRealmsRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1beta.types.ListRealmsRequest, dict]]):
                 The request object. Request message for
                 RealmsService.ListRealms.
             parent (:class:`str`):
@@ -337,11 +347,11 @@ class RealmsServiceAsyncClient:
 
     async def get_realm(
         self,
-        request: Union[realms.GetRealmRequest, dict] = None,
+        request: Optional[Union[realms.GetRealmRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.Realm:
         r"""Gets details of a single realm.
@@ -373,7 +383,7 @@ class RealmsServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1beta.types.GetRealmRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1beta.types.GetRealmRequest, dict]]):
                 The request object. Request message for
                 RealmsService.GetRealm.
             name (:class:`str`):
@@ -447,13 +457,13 @@ class RealmsServiceAsyncClient:
 
     async def create_realm(
         self,
-        request: Union[realms.CreateRealmRequest, dict] = None,
+        request: Optional[Union[realms.CreateRealmRequest, dict]] = None,
         *,
-        parent: str = None,
-        realm: realms.Realm = None,
-        realm_id: str = None,
+        parent: Optional[str] = None,
+        realm: Optional[realms.Realm] = None,
+        realm_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Creates a new realm in a given project and location.
@@ -494,7 +504,7 @@ class RealmsServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1beta.types.CreateRealmRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1beta.types.CreateRealmRequest, dict]]):
                 The request object. Request message for
                 RealmsService.CreateRealm.
             parent (:class:`str`):
@@ -589,11 +599,11 @@ class RealmsServiceAsyncClient:
 
     async def delete_realm(
         self,
-        request: Union[realms.DeleteRealmRequest, dict] = None,
+        request: Optional[Union[realms.DeleteRealmRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Deletes a single realm.
@@ -629,7 +639,7 @@ class RealmsServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1beta.types.DeleteRealmRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1beta.types.DeleteRealmRequest, dict]]):
                 The request object. Request message for
                 RealmsService.DeleteRealm.
             name (:class:`str`):
@@ -714,12 +724,12 @@ class RealmsServiceAsyncClient:
 
     async def update_realm(
         self,
-        request: Union[realms.UpdateRealmRequest, dict] = None,
+        request: Optional[Union[realms.UpdateRealmRequest, dict]] = None,
         *,
-        realm: realms.Realm = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        realm: Optional[realms.Realm] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Patches a single realm.
@@ -758,7 +768,7 @@ class RealmsServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1beta.types.UpdateRealmRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1beta.types.UpdateRealmRequest, dict]]):
                 The request object. Request message for
                 RealmsService.UpdateRealm.
             realm (:class:`google.cloud.gaming_v1beta.types.Realm`):
@@ -849,10 +859,10 @@ class RealmsServiceAsyncClient:
 
     async def preview_realm_update(
         self,
-        request: Union[realms.PreviewRealmUpdateRequest, dict] = None,
+        request: Optional[Union[realms.PreviewRealmUpdateRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> realms.PreviewRealmUpdateResponse:
         r"""Previews patches to a single realm.
@@ -887,7 +897,7 @@ class RealmsServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1beta.types.PreviewRealmUpdateRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1beta.types.PreviewRealmUpdateRequest, dict]]):
                 The request object. Request message for
                 RealmsService.PreviewRealmUpdate.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,

@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from typing import MutableMapping, MutableSequence
+
 from google.protobuf import field_mask_pb2  # type: ignore
 from google.protobuf import timestamp_pb2  # type: ignore
 import proto  # type: ignore
@@ -61,23 +63,23 @@ class ListRealmsRequest(proto.Message):
             https://cloud.google.com/apis/design/design_patterns#sorting_order.
     """
 
-    parent = proto.Field(
+    parent: str = proto.Field(
         proto.STRING,
         number=1,
     )
-    page_size = proto.Field(
+    page_size: int = proto.Field(
         proto.INT32,
         number=2,
     )
-    page_token = proto.Field(
+    page_token: str = proto.Field(
         proto.STRING,
         number=3,
     )
-    filter = proto.Field(
+    filter: str = proto.Field(
         proto.STRING,
         number=4,
     )
-    order_by = proto.Field(
+    order_by: str = proto.Field(
         proto.STRING,
         number=5,
     )
@@ -87,13 +89,13 @@ class ListRealmsResponse(proto.Message):
     r"""Response message for RealmsService.ListRealms.
 
     Attributes:
-        realms (Sequence[google.cloud.gaming_v1beta.types.Realm]):
+        realms (MutableSequence[google.cloud.gaming_v1beta.types.Realm]):
             The list of realms.
         next_page_token (str):
             Token to retrieve the next page of results,
             or empty if there are no more results in the
             list.
-        unreachable (Sequence[str]):
+        unreachable (MutableSequence[str]):
             List of locations that could not be reached.
     """
 
@@ -101,16 +103,16 @@ class ListRealmsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    realms = proto.RepeatedField(
+    realms: MutableSequence["Realm"] = proto.RepeatedField(
         proto.MESSAGE,
         number=1,
         message="Realm",
     )
-    next_page_token = proto.Field(
+    next_page_token: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    unreachable = proto.RepeatedField(
+    unreachable: MutableSequence[str] = proto.RepeatedField(
         proto.STRING,
         number=3,
     )
@@ -125,7 +127,7 @@ class GetRealmRequest(proto.Message):
             ``projects/{project}/locations/{location}/realms/{realm}``.
     """
 
-    name = proto.Field(
+    name: str = proto.Field(
         proto.STRING,
         number=1,
     )
@@ -145,15 +147,15 @@ class CreateRealmRequest(proto.Message):
             Required. The realm resource to be created.
     """
 
-    parent = proto.Field(
+    parent: str = proto.Field(
         proto.STRING,
         number=1,
     )
-    realm_id = proto.Field(
+    realm_id: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    realm = proto.Field(
+    realm: "Realm" = proto.Field(
         proto.MESSAGE,
         number=3,
         message="Realm",
@@ -169,7 +171,7 @@ class DeleteRealmRequest(proto.Message):
             ``projects/{project}/locations/{location}/realms/{realm}``.
     """
 
-    name = proto.Field(
+    name: str = proto.Field(
         proto.STRING,
         number=1,
     )
@@ -190,12 +192,12 @@ class UpdateRealmRequest(proto.Message):
             /docs/reference/google.protobuf#fieldmask
     """
 
-    realm = proto.Field(
+    realm: "Realm" = proto.Field(
         proto.MESSAGE,
         number=1,
         message="Realm",
     )
-    update_mask = proto.Field(
+    update_mask: field_mask_pb2.FieldMask = proto.Field(
         proto.MESSAGE,
         number=2,
         message=field_mask_pb2.FieldMask,
@@ -220,17 +222,17 @@ class PreviewRealmUpdateRequest(proto.Message):
             preview.
     """
 
-    realm = proto.Field(
+    realm: "Realm" = proto.Field(
         proto.MESSAGE,
         number=1,
         message="Realm",
     )
-    update_mask = proto.Field(
+    update_mask: field_mask_pb2.FieldMask = proto.Field(
         proto.MESSAGE,
         number=2,
         message=field_mask_pb2.FieldMask,
     )
-    preview_time = proto.Field(
+    preview_time: timestamp_pb2.Timestamp = proto.Field(
         proto.MESSAGE,
         number=3,
         message=timestamp_pb2.Timestamp,
@@ -247,11 +249,11 @@ class PreviewRealmUpdateResponse(proto.Message):
             The target state.
     """
 
-    etag = proto.Field(
+    etag: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    target_state = proto.Field(
+    target_state: common.TargetState = proto.Field(
         proto.MESSAGE,
         number=3,
         message=common.TargetState,
@@ -271,7 +273,7 @@ class Realm(proto.Message):
             Output only. The creation time.
         update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The last-modified time.
-        labels (Mapping[str, str]):
+        labels (MutableMapping[str, str]):
             The labels associated with this realm. Each
             label is a key-value pair.
         time_zone (str):
@@ -285,34 +287,34 @@ class Realm(proto.Message):
             Human readable description of the realm.
     """
 
-    name = proto.Field(
+    name: str = proto.Field(
         proto.STRING,
         number=1,
     )
-    create_time = proto.Field(
+    create_time: timestamp_pb2.Timestamp = proto.Field(
         proto.MESSAGE,
         number=2,
         message=timestamp_pb2.Timestamp,
     )
-    update_time = proto.Field(
+    update_time: timestamp_pb2.Timestamp = proto.Field(
         proto.MESSAGE,
         number=3,
         message=timestamp_pb2.Timestamp,
     )
-    labels = proto.MapField(
+    labels: MutableMapping[str, str] = proto.MapField(
         proto.STRING,
         proto.STRING,
         number=4,
     )
-    time_zone = proto.Field(
+    time_zone: str = proto.Field(
         proto.STRING,
         number=6,
     )
-    etag = proto.Field(
+    etag: str = proto.Field(
         proto.STRING,
         number=7,
     )
-    description = proto.Field(
+    description: str = proto.Field(
         proto.STRING,
         number=8,
     )

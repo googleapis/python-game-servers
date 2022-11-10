@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -63,7 +74,7 @@ class GameServerConfigsServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[GameServerConfigsServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -342,7 +353,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, GameServerConfigsServiceTransport, None] = None,
+        transport: Optional[Union[str, GameServerConfigsServiceTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -440,11 +451,13 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def list_game_server_configs(
         self,
-        request: Union[game_server_configs.ListGameServerConfigsRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.ListGameServerConfigsRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerConfigsPager:
         r"""Lists game server configs in a given project,
@@ -557,11 +570,13 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def get_game_server_config(
         self,
-        request: Union[game_server_configs.GetGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.GetGameServerConfigRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_configs.GameServerConfig:
         r"""Gets details of a single game server config.
@@ -659,12 +674,14 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def create_game_server_config(
         self,
-        request: Union[game_server_configs.CreateGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.CreateGameServerConfigRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        game_server_config: game_server_configs.GameServerConfig = None,
+        parent: Optional[str] = None,
+        game_server_config: Optional[game_server_configs.GameServerConfig] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a new game server config in a given project,
@@ -794,11 +811,13 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def delete_game_server_config(
         self,
-        request: Union[game_server_configs.DeleteGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.DeleteGameServerConfigRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a single game server config. The deletion
