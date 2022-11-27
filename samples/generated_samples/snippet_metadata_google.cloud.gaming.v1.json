@@ -2,12 +2,13 @@
   "clientLibrary": {
     "apis": [
       {
-        "id": "google.cloud.gaming.v1beta",
-        "version": "v1beta"
+        "id": "google.cloud.gaming.v1",
+        "version": "v1"
       }
     ],
     "language": "PYTHON",
-    "name": "google-cloud-game-servers"
+    "name": "google-cloud-game-servers",
+    "version": "0.1.0"
   },
   "snippets": [
     {
@@ -15,14 +16,14 @@
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient",
           "shortName": "GameServerClustersServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient.create_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient.create_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.CreateGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.CreateGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "CreateGameServerCluster"
@@ -30,7 +31,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.CreateGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.CreateGameServerClusterRequest"
           },
           {
             "name": "parent",
@@ -38,7 +39,7 @@
           },
           {
             "name": "game_server_cluster",
-            "type": "google.cloud.gaming_v1beta.types.GameServerCluster"
+            "type": "google.cloud.gaming_v1.types.GameServerCluster"
           },
           {
             "name": "game_server_cluster_id",
@@ -61,10 +62,10 @@
         "shortName": "create_game_server_cluster"
       },
       "description": "Sample for CreateGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_create_game_server_cluster_async.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_create_game_server_cluster_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_CreateGameServerCluster_async",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_CreateGameServerCluster_async",
       "segments": [
         {
           "end": 60,
@@ -97,20 +98,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_create_game_server_cluster_async.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_create_game_server_cluster_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient",
           "shortName": "GameServerClustersServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient.create_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient.create_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.CreateGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.CreateGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "CreateGameServerCluster"
@@ -118,7 +119,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.CreateGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.CreateGameServerClusterRequest"
           },
           {
             "name": "parent",
@@ -126,7 +127,7 @@
           },
           {
             "name": "game_server_cluster",
-            "type": "google.cloud.gaming_v1beta.types.GameServerCluster"
+            "type": "google.cloud.gaming_v1.types.GameServerCluster"
           },
           {
             "name": "game_server_cluster_id",
@@ -149,10 +150,10 @@
         "shortName": "create_game_server_cluster"
       },
       "description": "Sample for CreateGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_create_game_server_cluster_sync.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_create_game_server_cluster_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_CreateGameServerCluster_sync",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_CreateGameServerCluster_sync",
       "segments": [
         {
           "end": 60,
@@ -185,21 +186,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_create_game_server_cluster_sync.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_create_game_server_cluster_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient",
           "shortName": "GameServerClustersServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient.delete_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient.delete_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.DeleteGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.DeleteGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "DeleteGameServerCluster"
@@ -207,7 +208,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.DeleteGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.DeleteGameServerClusterRequest"
           },
           {
             "name": "name",
@@ -230,10 +231,10 @@
         "shortName": "delete_game_server_cluster"
       },
       "description": "Sample for DeleteGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_delete_game_server_cluster_async.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_delete_game_server_cluster_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_DeleteGameServerCluster_async",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_DeleteGameServerCluster_async",
       "segments": [
         {
           "end": 55,
@@ -266,20 +267,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_delete_game_server_cluster_async.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_delete_game_server_cluster_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient",
           "shortName": "GameServerClustersServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient.delete_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient.delete_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.DeleteGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.DeleteGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "DeleteGameServerCluster"
@@ -287,7 +288,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.DeleteGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.DeleteGameServerClusterRequest"
           },
           {
             "name": "name",
@@ -310,10 +311,10 @@
         "shortName": "delete_game_server_cluster"
       },
       "description": "Sample for DeleteGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_delete_game_server_cluster_sync.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_delete_game_server_cluster_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_DeleteGameServerCluster_sync",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_DeleteGameServerCluster_sync",
       "segments": [
         {
           "end": 55,
@@ -346,21 +347,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_delete_game_server_cluster_sync.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_delete_game_server_cluster_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient",
           "shortName": "GameServerClustersServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient.get_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient.get_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.GetGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.GetGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "GetGameServerCluster"
@@ -368,7 +369,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.GetGameServerClusterRequest"
           },
           {
             "name": "name",
@@ -387,14 +388,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.GameServerCluster",
+        "resultType": "google.cloud.gaming_v1.types.GameServerCluster",
         "shortName": "get_game_server_cluster"
       },
       "description": "Sample for GetGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_get_game_server_cluster_async.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_get_game_server_cluster_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_GetGameServerCluster_async",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_GetGameServerCluster_async",
       "segments": [
         {
           "end": 51,
@@ -427,20 +428,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_get_game_server_cluster_async.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_get_game_server_cluster_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient",
           "shortName": "GameServerClustersServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient.get_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient.get_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.GetGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.GetGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "GetGameServerCluster"
@@ -448,7 +449,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.GetGameServerClusterRequest"
           },
           {
             "name": "name",
@@ -467,14 +468,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.GameServerCluster",
+        "resultType": "google.cloud.gaming_v1.types.GameServerCluster",
         "shortName": "get_game_server_cluster"
       },
       "description": "Sample for GetGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_get_game_server_cluster_sync.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_get_game_server_cluster_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_GetGameServerCluster_sync",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_GetGameServerCluster_sync",
       "segments": [
         {
           "end": 51,
@@ -507,21 +508,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_get_game_server_cluster_sync.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_get_game_server_cluster_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient",
           "shortName": "GameServerClustersServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient.list_game_server_clusters",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient.list_game_server_clusters",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.ListGameServerClusters",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.ListGameServerClusters",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "ListGameServerClusters"
@@ -529,7 +530,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.ListGameServerClustersRequest"
+            "type": "google.cloud.gaming_v1.types.ListGameServerClustersRequest"
           },
           {
             "name": "parent",
@@ -548,14 +549,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.services.game_server_clusters_service.pagers.ListGameServerClustersAsyncPager",
+        "resultType": "google.cloud.gaming_v1.services.game_server_clusters_service.pagers.ListGameServerClustersAsyncPager",
         "shortName": "list_game_server_clusters"
       },
       "description": "Sample for ListGameServerClusters",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_list_game_server_clusters_async.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_list_game_server_clusters_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_ListGameServerClusters_async",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_ListGameServerClusters_async",
       "segments": [
         {
           "end": 52,
@@ -588,20 +589,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_list_game_server_clusters_async.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_list_game_server_clusters_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient",
           "shortName": "GameServerClustersServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient.list_game_server_clusters",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient.list_game_server_clusters",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.ListGameServerClusters",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.ListGameServerClusters",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "ListGameServerClusters"
@@ -609,7 +610,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.ListGameServerClustersRequest"
+            "type": "google.cloud.gaming_v1.types.ListGameServerClustersRequest"
           },
           {
             "name": "parent",
@@ -628,14 +629,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.services.game_server_clusters_service.pagers.ListGameServerClustersPager",
+        "resultType": "google.cloud.gaming_v1.services.game_server_clusters_service.pagers.ListGameServerClustersPager",
         "shortName": "list_game_server_clusters"
       },
       "description": "Sample for ListGameServerClusters",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_list_game_server_clusters_sync.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_list_game_server_clusters_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_ListGameServerClusters_sync",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_ListGameServerClusters_sync",
       "segments": [
         {
           "end": 52,
@@ -668,21 +669,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_list_game_server_clusters_sync.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_list_game_server_clusters_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient",
           "shortName": "GameServerClustersServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient.preview_create_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient.preview_create_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.PreviewCreateGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.PreviewCreateGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "PreviewCreateGameServerCluster"
@@ -690,7 +691,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewCreateGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewCreateGameServerClusterRequest"
           },
           {
             "name": "retry",
@@ -705,14 +706,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewCreateGameServerClusterResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewCreateGameServerClusterResponse",
         "shortName": "preview_create_game_server_cluster"
       },
       "description": "Sample for PreviewCreateGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_create_game_server_cluster_async.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_preview_create_game_server_cluster_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewCreateGameServerCluster_async",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_PreviewCreateGameServerCluster_async",
       "segments": [
         {
           "end": 56,
@@ -745,20 +746,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_preview_create_game_server_cluster_async.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_preview_create_game_server_cluster_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient",
           "shortName": "GameServerClustersServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient.preview_create_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient.preview_create_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.PreviewCreateGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.PreviewCreateGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "PreviewCreateGameServerCluster"
@@ -766,7 +767,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewCreateGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewCreateGameServerClusterRequest"
           },
           {
             "name": "retry",
@@ -781,14 +782,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewCreateGameServerClusterResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewCreateGameServerClusterResponse",
         "shortName": "preview_create_game_server_cluster"
       },
       "description": "Sample for PreviewCreateGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_create_game_server_cluster_sync.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_preview_create_game_server_cluster_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewCreateGameServerCluster_sync",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_PreviewCreateGameServerCluster_sync",
       "segments": [
         {
           "end": 56,
@@ -821,21 +822,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_preview_create_game_server_cluster_sync.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_preview_create_game_server_cluster_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient",
           "shortName": "GameServerClustersServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient.preview_delete_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient.preview_delete_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.PreviewDeleteGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.PreviewDeleteGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "PreviewDeleteGameServerCluster"
@@ -843,7 +844,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewDeleteGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterRequest"
           },
           {
             "name": "retry",
@@ -858,14 +859,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewDeleteGameServerClusterResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterResponse",
         "shortName": "preview_delete_game_server_cluster"
       },
       "description": "Sample for PreviewDeleteGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_delete_game_server_cluster_async.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_preview_delete_game_server_cluster_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewDeleteGameServerCluster_async",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_PreviewDeleteGameServerCluster_async",
       "segments": [
         {
           "end": 51,
@@ -898,20 +899,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_preview_delete_game_server_cluster_async.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_preview_delete_game_server_cluster_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient",
           "shortName": "GameServerClustersServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient.preview_delete_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient.preview_delete_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.PreviewDeleteGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.PreviewDeleteGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "PreviewDeleteGameServerCluster"
@@ -919,7 +920,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewDeleteGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterRequest"
           },
           {
             "name": "retry",
@@ -934,14 +935,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewDeleteGameServerClusterResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterResponse",
         "shortName": "preview_delete_game_server_cluster"
       },
       "description": "Sample for PreviewDeleteGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_delete_game_server_cluster_sync.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_preview_delete_game_server_cluster_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewDeleteGameServerCluster_sync",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_PreviewDeleteGameServerCluster_sync",
       "segments": [
         {
           "end": 51,
@@ -974,21 +975,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_preview_delete_game_server_cluster_sync.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_preview_delete_game_server_cluster_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient",
           "shortName": "GameServerClustersServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient.preview_update_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient.preview_update_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.PreviewUpdateGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.PreviewUpdateGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "PreviewUpdateGameServerCluster"
@@ -996,7 +997,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewUpdateGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterRequest"
           },
           {
             "name": "retry",
@@ -1011,14 +1012,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewUpdateGameServerClusterResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterResponse",
         "shortName": "preview_update_game_server_cluster"
       },
       "description": "Sample for PreviewUpdateGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_update_game_server_cluster_async.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_preview_update_game_server_cluster_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewUpdateGameServerCluster_async",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_PreviewUpdateGameServerCluster_async",
       "segments": [
         {
           "end": 54,
@@ -1051,20 +1052,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_preview_update_game_server_cluster_async.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_preview_update_game_server_cluster_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient",
           "shortName": "GameServerClustersServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient.preview_update_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient.preview_update_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.PreviewUpdateGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.PreviewUpdateGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "PreviewUpdateGameServerCluster"
@@ -1072,7 +1073,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewUpdateGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterRequest"
           },
           {
             "name": "retry",
@@ -1087,14 +1088,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewUpdateGameServerClusterResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterResponse",
         "shortName": "preview_update_game_server_cluster"
       },
       "description": "Sample for PreviewUpdateGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_preview_update_game_server_cluster_sync.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_preview_update_game_server_cluster_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_PreviewUpdateGameServerCluster_sync",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_PreviewUpdateGameServerCluster_sync",
       "segments": [
         {
           "end": 54,
@@ -1127,21 +1128,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_preview_update_game_server_cluster_sync.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_preview_update_game_server_cluster_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient",
           "shortName": "GameServerClustersServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceAsyncClient.update_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceAsyncClient.update_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.UpdateGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.UpdateGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "UpdateGameServerCluster"
@@ -1149,11 +1150,11 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.UpdateGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.UpdateGameServerClusterRequest"
           },
           {
             "name": "game_server_cluster",
-            "type": "google.cloud.gaming_v1beta.types.GameServerCluster"
+            "type": "google.cloud.gaming_v1.types.GameServerCluster"
           },
           {
             "name": "update_mask",
@@ -1176,10 +1177,10 @@
         "shortName": "update_game_server_cluster"
       },
       "description": "Sample for UpdateGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_update_game_server_cluster_async.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_update_game_server_cluster_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_UpdateGameServerCluster_async",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_UpdateGameServerCluster_async",
       "segments": [
         {
           "end": 58,
@@ -1212,20 +1213,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_update_game_server_cluster_async.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_update_game_server_cluster_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient",
           "shortName": "GameServerClustersServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerClustersServiceClient.update_game_server_cluster",
+        "fullName": "google.cloud.gaming_v1.GameServerClustersServiceClient.update_game_server_cluster",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerClustersService.UpdateGameServerCluster",
+          "fullName": "google.cloud.gaming.v1.GameServerClustersService.UpdateGameServerCluster",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerClustersService",
+            "fullName": "google.cloud.gaming.v1.GameServerClustersService",
             "shortName": "GameServerClustersService"
           },
           "shortName": "UpdateGameServerCluster"
@@ -1233,11 +1234,11 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.UpdateGameServerClusterRequest"
+            "type": "google.cloud.gaming_v1.types.UpdateGameServerClusterRequest"
           },
           {
             "name": "game_server_cluster",
-            "type": "google.cloud.gaming_v1beta.types.GameServerCluster"
+            "type": "google.cloud.gaming_v1.types.GameServerCluster"
           },
           {
             "name": "update_mask",
@@ -1260,10 +1261,10 @@
         "shortName": "update_game_server_cluster"
       },
       "description": "Sample for UpdateGameServerCluster",
-      "file": "gameservices_v1beta_generated_game_server_clusters_service_update_game_server_cluster_sync.py",
+      "file": "gameservices_v1_generated_game_server_clusters_service_update_game_server_cluster_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerClustersService_UpdateGameServerCluster_sync",
+      "regionTag": "gameservices_v1_generated_GameServerClustersService_UpdateGameServerCluster_sync",
       "segments": [
         {
           "end": 58,
@@ -1296,21 +1297,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_clusters_service_update_game_server_cluster_sync.py"
+      "title": "gameservices_v1_generated_game_server_clusters_service_update_game_server_cluster_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceAsyncClient",
           "shortName": "GameServerConfigsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceAsyncClient.create_game_server_config",
+        "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceAsyncClient.create_game_server_config",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService.CreateGameServerConfig",
+          "fullName": "google.cloud.gaming.v1.GameServerConfigsService.CreateGameServerConfig",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService",
+            "fullName": "google.cloud.gaming.v1.GameServerConfigsService",
             "shortName": "GameServerConfigsService"
           },
           "shortName": "CreateGameServerConfig"
@@ -1318,7 +1319,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.CreateGameServerConfigRequest"
+            "type": "google.cloud.gaming_v1.types.CreateGameServerConfigRequest"
           },
           {
             "name": "parent",
@@ -1326,7 +1327,7 @@
           },
           {
             "name": "game_server_config",
-            "type": "google.cloud.gaming_v1beta.types.GameServerConfig"
+            "type": "google.cloud.gaming_v1.types.GameServerConfig"
           },
           {
             "name": "retry",
@@ -1345,10 +1346,10 @@
         "shortName": "create_game_server_config"
       },
       "description": "Sample for CreateGameServerConfig",
-      "file": "gameservices_v1beta_generated_game_server_configs_service_create_game_server_config_async.py",
+      "file": "gameservices_v1_generated_game_server_configs_service_create_game_server_config_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_CreateGameServerConfig_async",
+      "regionTag": "gameservices_v1_generated_GameServerConfigsService_CreateGameServerConfig_async",
       "segments": [
         {
           "end": 56,
@@ -1381,20 +1382,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_configs_service_create_game_server_config_async.py"
+      "title": "gameservices_v1_generated_game_server_configs_service_create_game_server_config_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceClient",
           "shortName": "GameServerConfigsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceClient.create_game_server_config",
+        "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceClient.create_game_server_config",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService.CreateGameServerConfig",
+          "fullName": "google.cloud.gaming.v1.GameServerConfigsService.CreateGameServerConfig",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService",
+            "fullName": "google.cloud.gaming.v1.GameServerConfigsService",
             "shortName": "GameServerConfigsService"
           },
           "shortName": "CreateGameServerConfig"
@@ -1402,7 +1403,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.CreateGameServerConfigRequest"
+            "type": "google.cloud.gaming_v1.types.CreateGameServerConfigRequest"
           },
           {
             "name": "parent",
@@ -1410,7 +1411,7 @@
           },
           {
             "name": "game_server_config",
-            "type": "google.cloud.gaming_v1beta.types.GameServerConfig"
+            "type": "google.cloud.gaming_v1.types.GameServerConfig"
           },
           {
             "name": "retry",
@@ -1429,10 +1430,10 @@
         "shortName": "create_game_server_config"
       },
       "description": "Sample for CreateGameServerConfig",
-      "file": "gameservices_v1beta_generated_game_server_configs_service_create_game_server_config_sync.py",
+      "file": "gameservices_v1_generated_game_server_configs_service_create_game_server_config_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_CreateGameServerConfig_sync",
+      "regionTag": "gameservices_v1_generated_GameServerConfigsService_CreateGameServerConfig_sync",
       "segments": [
         {
           "end": 56,
@@ -1465,21 +1466,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_configs_service_create_game_server_config_sync.py"
+      "title": "gameservices_v1_generated_game_server_configs_service_create_game_server_config_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceAsyncClient",
           "shortName": "GameServerConfigsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceAsyncClient.delete_game_server_config",
+        "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceAsyncClient.delete_game_server_config",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService.DeleteGameServerConfig",
+          "fullName": "google.cloud.gaming.v1.GameServerConfigsService.DeleteGameServerConfig",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService",
+            "fullName": "google.cloud.gaming.v1.GameServerConfigsService",
             "shortName": "GameServerConfigsService"
           },
           "shortName": "DeleteGameServerConfig"
@@ -1487,7 +1488,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.DeleteGameServerConfigRequest"
+            "type": "google.cloud.gaming_v1.types.DeleteGameServerConfigRequest"
           },
           {
             "name": "name",
@@ -1510,10 +1511,10 @@
         "shortName": "delete_game_server_config"
       },
       "description": "Sample for DeleteGameServerConfig",
-      "file": "gameservices_v1beta_generated_game_server_configs_service_delete_game_server_config_async.py",
+      "file": "gameservices_v1_generated_game_server_configs_service_delete_game_server_config_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_DeleteGameServerConfig_async",
+      "regionTag": "gameservices_v1_generated_GameServerConfigsService_DeleteGameServerConfig_async",
       "segments": [
         {
           "end": 55,
@@ -1546,20 +1547,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_configs_service_delete_game_server_config_async.py"
+      "title": "gameservices_v1_generated_game_server_configs_service_delete_game_server_config_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceClient",
           "shortName": "GameServerConfigsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceClient.delete_game_server_config",
+        "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceClient.delete_game_server_config",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService.DeleteGameServerConfig",
+          "fullName": "google.cloud.gaming.v1.GameServerConfigsService.DeleteGameServerConfig",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService",
+            "fullName": "google.cloud.gaming.v1.GameServerConfigsService",
             "shortName": "GameServerConfigsService"
           },
           "shortName": "DeleteGameServerConfig"
@@ -1567,7 +1568,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.DeleteGameServerConfigRequest"
+            "type": "google.cloud.gaming_v1.types.DeleteGameServerConfigRequest"
           },
           {
             "name": "name",
@@ -1590,10 +1591,10 @@
         "shortName": "delete_game_server_config"
       },
       "description": "Sample for DeleteGameServerConfig",
-      "file": "gameservices_v1beta_generated_game_server_configs_service_delete_game_server_config_sync.py",
+      "file": "gameservices_v1_generated_game_server_configs_service_delete_game_server_config_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_DeleteGameServerConfig_sync",
+      "regionTag": "gameservices_v1_generated_GameServerConfigsService_DeleteGameServerConfig_sync",
       "segments": [
         {
           "end": 55,
@@ -1626,21 +1627,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_configs_service_delete_game_server_config_sync.py"
+      "title": "gameservices_v1_generated_game_server_configs_service_delete_game_server_config_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceAsyncClient",
           "shortName": "GameServerConfigsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceAsyncClient.get_game_server_config",
+        "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceAsyncClient.get_game_server_config",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService.GetGameServerConfig",
+          "fullName": "google.cloud.gaming.v1.GameServerConfigsService.GetGameServerConfig",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService",
+            "fullName": "google.cloud.gaming.v1.GameServerConfigsService",
             "shortName": "GameServerConfigsService"
           },
           "shortName": "GetGameServerConfig"
@@ -1648,7 +1649,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetGameServerConfigRequest"
+            "type": "google.cloud.gaming_v1.types.GetGameServerConfigRequest"
           },
           {
             "name": "name",
@@ -1667,14 +1668,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.GameServerConfig",
+        "resultType": "google.cloud.gaming_v1.types.GameServerConfig",
         "shortName": "get_game_server_config"
       },
       "description": "Sample for GetGameServerConfig",
-      "file": "gameservices_v1beta_generated_game_server_configs_service_get_game_server_config_async.py",
+      "file": "gameservices_v1_generated_game_server_configs_service_get_game_server_config_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_GetGameServerConfig_async",
+      "regionTag": "gameservices_v1_generated_GameServerConfigsService_GetGameServerConfig_async",
       "segments": [
         {
           "end": 51,
@@ -1707,20 +1708,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_configs_service_get_game_server_config_async.py"
+      "title": "gameservices_v1_generated_game_server_configs_service_get_game_server_config_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceClient",
           "shortName": "GameServerConfigsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceClient.get_game_server_config",
+        "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceClient.get_game_server_config",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService.GetGameServerConfig",
+          "fullName": "google.cloud.gaming.v1.GameServerConfigsService.GetGameServerConfig",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService",
+            "fullName": "google.cloud.gaming.v1.GameServerConfigsService",
             "shortName": "GameServerConfigsService"
           },
           "shortName": "GetGameServerConfig"
@@ -1728,7 +1729,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetGameServerConfigRequest"
+            "type": "google.cloud.gaming_v1.types.GetGameServerConfigRequest"
           },
           {
             "name": "name",
@@ -1747,14 +1748,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.GameServerConfig",
+        "resultType": "google.cloud.gaming_v1.types.GameServerConfig",
         "shortName": "get_game_server_config"
       },
       "description": "Sample for GetGameServerConfig",
-      "file": "gameservices_v1beta_generated_game_server_configs_service_get_game_server_config_sync.py",
+      "file": "gameservices_v1_generated_game_server_configs_service_get_game_server_config_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_GetGameServerConfig_sync",
+      "regionTag": "gameservices_v1_generated_GameServerConfigsService_GetGameServerConfig_sync",
       "segments": [
         {
           "end": 51,
@@ -1787,21 +1788,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_configs_service_get_game_server_config_sync.py"
+      "title": "gameservices_v1_generated_game_server_configs_service_get_game_server_config_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceAsyncClient",
           "shortName": "GameServerConfigsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceAsyncClient.list_game_server_configs",
+        "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceAsyncClient.list_game_server_configs",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService.ListGameServerConfigs",
+          "fullName": "google.cloud.gaming.v1.GameServerConfigsService.ListGameServerConfigs",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService",
+            "fullName": "google.cloud.gaming.v1.GameServerConfigsService",
             "shortName": "GameServerConfigsService"
           },
           "shortName": "ListGameServerConfigs"
@@ -1809,7 +1810,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.ListGameServerConfigsRequest"
+            "type": "google.cloud.gaming_v1.types.ListGameServerConfigsRequest"
           },
           {
             "name": "parent",
@@ -1828,14 +1829,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.services.game_server_configs_service.pagers.ListGameServerConfigsAsyncPager",
+        "resultType": "google.cloud.gaming_v1.services.game_server_configs_service.pagers.ListGameServerConfigsAsyncPager",
         "shortName": "list_game_server_configs"
       },
       "description": "Sample for ListGameServerConfigs",
-      "file": "gameservices_v1beta_generated_game_server_configs_service_list_game_server_configs_async.py",
+      "file": "gameservices_v1_generated_game_server_configs_service_list_game_server_configs_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_ListGameServerConfigs_async",
+      "regionTag": "gameservices_v1_generated_GameServerConfigsService_ListGameServerConfigs_async",
       "segments": [
         {
           "end": 52,
@@ -1868,20 +1869,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_configs_service_list_game_server_configs_async.py"
+      "title": "gameservices_v1_generated_game_server_configs_service_list_game_server_configs_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceClient",
           "shortName": "GameServerConfigsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerConfigsServiceClient.list_game_server_configs",
+        "fullName": "google.cloud.gaming_v1.GameServerConfigsServiceClient.list_game_server_configs",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService.ListGameServerConfigs",
+          "fullName": "google.cloud.gaming.v1.GameServerConfigsService.ListGameServerConfigs",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerConfigsService",
+            "fullName": "google.cloud.gaming.v1.GameServerConfigsService",
             "shortName": "GameServerConfigsService"
           },
           "shortName": "ListGameServerConfigs"
@@ -1889,7 +1890,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.ListGameServerConfigsRequest"
+            "type": "google.cloud.gaming_v1.types.ListGameServerConfigsRequest"
           },
           {
             "name": "parent",
@@ -1908,14 +1909,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.services.game_server_configs_service.pagers.ListGameServerConfigsPager",
+        "resultType": "google.cloud.gaming_v1.services.game_server_configs_service.pagers.ListGameServerConfigsPager",
         "shortName": "list_game_server_configs"
       },
       "description": "Sample for ListGameServerConfigs",
-      "file": "gameservices_v1beta_generated_game_server_configs_service_list_game_server_configs_sync.py",
+      "file": "gameservices_v1_generated_game_server_configs_service_list_game_server_configs_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerConfigsService_ListGameServerConfigs_sync",
+      "regionTag": "gameservices_v1_generated_GameServerConfigsService_ListGameServerConfigs_sync",
       "segments": [
         {
           "end": 52,
@@ -1948,21 +1949,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_configs_service_list_game_server_configs_sync.py"
+      "title": "gameservices_v1_generated_game_server_configs_service_list_game_server_configs_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.create_game_server_deployment",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.create_game_server_deployment",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.CreateGameServerDeployment",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.CreateGameServerDeployment",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "CreateGameServerDeployment"
@@ -1970,7 +1971,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.CreateGameServerDeploymentRequest"
+            "type": "google.cloud.gaming_v1.types.CreateGameServerDeploymentRequest"
           },
           {
             "name": "parent",
@@ -1978,7 +1979,7 @@
           },
           {
             "name": "game_server_deployment",
-            "type": "google.cloud.gaming_v1beta.types.GameServerDeployment"
+            "type": "google.cloud.gaming_v1.types.GameServerDeployment"
           },
           {
             "name": "retry",
@@ -1997,10 +1998,10 @@
         "shortName": "create_game_server_deployment"
       },
       "description": "Sample for CreateGameServerDeployment",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_create_game_server_deployment_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_create_game_server_deployment_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_CreateGameServerDeployment_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_CreateGameServerDeployment_async",
       "segments": [
         {
           "end": 56,
@@ -2033,20 +2034,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_create_game_server_deployment_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_create_game_server_deployment_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.create_game_server_deployment",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.create_game_server_deployment",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.CreateGameServerDeployment",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.CreateGameServerDeployment",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "CreateGameServerDeployment"
@@ -2054,7 +2055,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.CreateGameServerDeploymentRequest"
+            "type": "google.cloud.gaming_v1.types.CreateGameServerDeploymentRequest"
           },
           {
             "name": "parent",
@@ -2062,7 +2063,7 @@
           },
           {
             "name": "game_server_deployment",
-            "type": "google.cloud.gaming_v1beta.types.GameServerDeployment"
+            "type": "google.cloud.gaming_v1.types.GameServerDeployment"
           },
           {
             "name": "retry",
@@ -2081,10 +2082,10 @@
         "shortName": "create_game_server_deployment"
       },
       "description": "Sample for CreateGameServerDeployment",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_create_game_server_deployment_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_create_game_server_deployment_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_CreateGameServerDeployment_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_CreateGameServerDeployment_sync",
       "segments": [
         {
           "end": 56,
@@ -2117,21 +2118,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_create_game_server_deployment_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_create_game_server_deployment_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.delete_game_server_deployment",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.delete_game_server_deployment",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.DeleteGameServerDeployment",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.DeleteGameServerDeployment",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "DeleteGameServerDeployment"
@@ -2139,7 +2140,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.DeleteGameServerDeploymentRequest"
+            "type": "google.cloud.gaming_v1.types.DeleteGameServerDeploymentRequest"
           },
           {
             "name": "name",
@@ -2162,10 +2163,10 @@
         "shortName": "delete_game_server_deployment"
       },
       "description": "Sample for DeleteGameServerDeployment",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_delete_game_server_deployment_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_delete_game_server_deployment_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_DeleteGameServerDeployment_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_DeleteGameServerDeployment_async",
       "segments": [
         {
           "end": 55,
@@ -2198,20 +2199,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_delete_game_server_deployment_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_delete_game_server_deployment_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.delete_game_server_deployment",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.delete_game_server_deployment",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.DeleteGameServerDeployment",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.DeleteGameServerDeployment",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "DeleteGameServerDeployment"
@@ -2219,7 +2220,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.DeleteGameServerDeploymentRequest"
+            "type": "google.cloud.gaming_v1.types.DeleteGameServerDeploymentRequest"
           },
           {
             "name": "name",
@@ -2242,10 +2243,10 @@
         "shortName": "delete_game_server_deployment"
       },
       "description": "Sample for DeleteGameServerDeployment",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_delete_game_server_deployment_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_delete_game_server_deployment_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_DeleteGameServerDeployment_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_DeleteGameServerDeployment_sync",
       "segments": [
         {
           "end": 55,
@@ -2278,21 +2279,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_delete_game_server_deployment_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_delete_game_server_deployment_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.fetch_deployment_state",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.fetch_deployment_state",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.FetchDeploymentState",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.FetchDeploymentState",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "FetchDeploymentState"
@@ -2300,7 +2301,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.FetchDeploymentStateRequest"
+            "type": "google.cloud.gaming_v1.types.FetchDeploymentStateRequest"
           },
           {
             "name": "retry",
@@ -2315,14 +2316,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.FetchDeploymentStateResponse",
+        "resultType": "google.cloud.gaming_v1.types.FetchDeploymentStateResponse",
         "shortName": "fetch_deployment_state"
       },
       "description": "Sample for FetchDeploymentState",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_fetch_deployment_state_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_fetch_deployment_state_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_FetchDeploymentState_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_FetchDeploymentState_async",
       "segments": [
         {
           "end": 51,
@@ -2355,20 +2356,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_fetch_deployment_state_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_fetch_deployment_state_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.fetch_deployment_state",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.fetch_deployment_state",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.FetchDeploymentState",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.FetchDeploymentState",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "FetchDeploymentState"
@@ -2376,7 +2377,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.FetchDeploymentStateRequest"
+            "type": "google.cloud.gaming_v1.types.FetchDeploymentStateRequest"
           },
           {
             "name": "retry",
@@ -2391,14 +2392,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.FetchDeploymentStateResponse",
+        "resultType": "google.cloud.gaming_v1.types.FetchDeploymentStateResponse",
         "shortName": "fetch_deployment_state"
       },
       "description": "Sample for FetchDeploymentState",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_fetch_deployment_state_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_fetch_deployment_state_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_FetchDeploymentState_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_FetchDeploymentState_sync",
       "segments": [
         {
           "end": 51,
@@ -2431,21 +2432,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_fetch_deployment_state_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_fetch_deployment_state_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.get_game_server_deployment_rollout",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.get_game_server_deployment_rollout",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.GetGameServerDeploymentRollout",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.GetGameServerDeploymentRollout",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "GetGameServerDeploymentRollout"
@@ -2453,7 +2454,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetGameServerDeploymentRolloutRequest"
+            "type": "google.cloud.gaming_v1.types.GetGameServerDeploymentRolloutRequest"
           },
           {
             "name": "name",
@@ -2472,14 +2473,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.GameServerDeploymentRollout",
+        "resultType": "google.cloud.gaming_v1.types.GameServerDeploymentRollout",
         "shortName": "get_game_server_deployment_rollout"
       },
       "description": "Sample for GetGameServerDeploymentRollout",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_rollout_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_get_game_server_deployment_rollout_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_async",
       "segments": [
         {
           "end": 51,
@@ -2512,20 +2513,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_rollout_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_get_game_server_deployment_rollout_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.get_game_server_deployment_rollout",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.get_game_server_deployment_rollout",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.GetGameServerDeploymentRollout",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.GetGameServerDeploymentRollout",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "GetGameServerDeploymentRollout"
@@ -2533,7 +2534,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetGameServerDeploymentRolloutRequest"
+            "type": "google.cloud.gaming_v1.types.GetGameServerDeploymentRolloutRequest"
           },
           {
             "name": "name",
@@ -2552,14 +2553,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.GameServerDeploymentRollout",
+        "resultType": "google.cloud.gaming_v1.types.GameServerDeploymentRollout",
         "shortName": "get_game_server_deployment_rollout"
       },
       "description": "Sample for GetGameServerDeploymentRollout",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_rollout_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_get_game_server_deployment_rollout_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_sync",
       "segments": [
         {
           "end": 51,
@@ -2592,21 +2593,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_rollout_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_get_game_server_deployment_rollout_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.get_game_server_deployment",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.get_game_server_deployment",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.GetGameServerDeployment",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.GetGameServerDeployment",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "GetGameServerDeployment"
@@ -2614,7 +2615,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetGameServerDeploymentRequest"
+            "type": "google.cloud.gaming_v1.types.GetGameServerDeploymentRequest"
           },
           {
             "name": "name",
@@ -2633,14 +2634,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.GameServerDeployment",
+        "resultType": "google.cloud.gaming_v1.types.GameServerDeployment",
         "shortName": "get_game_server_deployment"
       },
       "description": "Sample for GetGameServerDeployment",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_get_game_server_deployment_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeployment_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeployment_async",
       "segments": [
         {
           "end": 51,
@@ -2673,20 +2674,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_get_game_server_deployment_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.get_game_server_deployment",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.get_game_server_deployment",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.GetGameServerDeployment",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.GetGameServerDeployment",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "GetGameServerDeployment"
@@ -2694,7 +2695,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetGameServerDeploymentRequest"
+            "type": "google.cloud.gaming_v1.types.GetGameServerDeploymentRequest"
           },
           {
             "name": "name",
@@ -2713,14 +2714,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.GameServerDeployment",
+        "resultType": "google.cloud.gaming_v1.types.GameServerDeployment",
         "shortName": "get_game_server_deployment"
       },
       "description": "Sample for GetGameServerDeployment",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_get_game_server_deployment_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeployment_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeployment_sync",
       "segments": [
         {
           "end": 51,
@@ -2753,21 +2754,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_get_game_server_deployment_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_get_game_server_deployment_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.list_game_server_deployments",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.list_game_server_deployments",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.ListGameServerDeployments",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.ListGameServerDeployments",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "ListGameServerDeployments"
@@ -2775,7 +2776,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.ListGameServerDeploymentsRequest"
+            "type": "google.cloud.gaming_v1.types.ListGameServerDeploymentsRequest"
           },
           {
             "name": "parent",
@@ -2794,14 +2795,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.services.game_server_deployments_service.pagers.ListGameServerDeploymentsAsyncPager",
+        "resultType": "google.cloud.gaming_v1.services.game_server_deployments_service.pagers.ListGameServerDeploymentsAsyncPager",
         "shortName": "list_game_server_deployments"
       },
       "description": "Sample for ListGameServerDeployments",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_list_game_server_deployments_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_list_game_server_deployments_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_ListGameServerDeployments_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_ListGameServerDeployments_async",
       "segments": [
         {
           "end": 52,
@@ -2834,20 +2835,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_list_game_server_deployments_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_list_game_server_deployments_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.list_game_server_deployments",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.list_game_server_deployments",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.ListGameServerDeployments",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.ListGameServerDeployments",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "ListGameServerDeployments"
@@ -2855,7 +2856,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.ListGameServerDeploymentsRequest"
+            "type": "google.cloud.gaming_v1.types.ListGameServerDeploymentsRequest"
           },
           {
             "name": "parent",
@@ -2874,14 +2875,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.services.game_server_deployments_service.pagers.ListGameServerDeploymentsPager",
+        "resultType": "google.cloud.gaming_v1.services.game_server_deployments_service.pagers.ListGameServerDeploymentsPager",
         "shortName": "list_game_server_deployments"
       },
       "description": "Sample for ListGameServerDeployments",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_list_game_server_deployments_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_list_game_server_deployments_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_ListGameServerDeployments_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_ListGameServerDeployments_sync",
       "segments": [
         {
           "end": 52,
@@ -2914,21 +2915,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_list_game_server_deployments_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_list_game_server_deployments_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.preview_game_server_deployment_rollout",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.preview_game_server_deployment_rollout",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.PreviewGameServerDeploymentRollout",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.PreviewGameServerDeploymentRollout",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "PreviewGameServerDeploymentRollout"
@@ -2936,7 +2937,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewGameServerDeploymentRolloutRequest"
           },
           {
             "name": "retry",
@@ -2951,14 +2952,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewGameServerDeploymentRolloutResponse",
         "shortName": "preview_game_server_deployment_rollout"
       },
       "description": "Sample for PreviewGameServerDeploymentRollout",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_preview_game_server_deployment_rollout_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_preview_game_server_deployment_rollout_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_async",
       "segments": [
         {
           "end": 50,
@@ -2991,20 +2992,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_preview_game_server_deployment_rollout_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_preview_game_server_deployment_rollout_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.preview_game_server_deployment_rollout",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.preview_game_server_deployment_rollout",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.PreviewGameServerDeploymentRollout",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.PreviewGameServerDeploymentRollout",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "PreviewGameServerDeploymentRollout"
@@ -3012,7 +3013,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewGameServerDeploymentRolloutRequest"
           },
           {
             "name": "retry",
@@ -3027,14 +3028,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewGameServerDeploymentRolloutResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewGameServerDeploymentRolloutResponse",
         "shortName": "preview_game_server_deployment_rollout"
       },
       "description": "Sample for PreviewGameServerDeploymentRollout",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_preview_game_server_deployment_rollout_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_preview_game_server_deployment_rollout_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_sync",
       "segments": [
         {
           "end": 50,
@@ -3067,21 +3068,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_preview_game_server_deployment_rollout_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_preview_game_server_deployment_rollout_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.update_game_server_deployment_rollout",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.update_game_server_deployment_rollout",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.UpdateGameServerDeploymentRollout",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.UpdateGameServerDeploymentRollout",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "UpdateGameServerDeploymentRollout"
@@ -3089,11 +3090,11 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRolloutRequest"
+            "type": "google.cloud.gaming_v1.types.UpdateGameServerDeploymentRolloutRequest"
           },
           {
             "name": "rollout",
-            "type": "google.cloud.gaming_v1beta.types.GameServerDeploymentRollout"
+            "type": "google.cloud.gaming_v1.types.GameServerDeploymentRollout"
           },
           {
             "name": "update_mask",
@@ -3116,10 +3117,10 @@
         "shortName": "update_game_server_deployment_rollout"
       },
       "description": "Sample for UpdateGameServerDeploymentRollout",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_rollout_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_update_game_server_deployment_rollout_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_async",
       "segments": [
         {
           "end": 54,
@@ -3152,20 +3153,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_rollout_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_update_game_server_deployment_rollout_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.update_game_server_deployment_rollout",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.update_game_server_deployment_rollout",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.UpdateGameServerDeploymentRollout",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.UpdateGameServerDeploymentRollout",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "UpdateGameServerDeploymentRollout"
@@ -3173,11 +3174,11 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRolloutRequest"
+            "type": "google.cloud.gaming_v1.types.UpdateGameServerDeploymentRolloutRequest"
           },
           {
             "name": "rollout",
-            "type": "google.cloud.gaming_v1beta.types.GameServerDeploymentRollout"
+            "type": "google.cloud.gaming_v1.types.GameServerDeploymentRollout"
           },
           {
             "name": "update_mask",
@@ -3200,10 +3201,10 @@
         "shortName": "update_game_server_deployment_rollout"
       },
       "description": "Sample for UpdateGameServerDeploymentRollout",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_rollout_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_update_game_server_deployment_rollout_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_sync",
       "segments": [
         {
           "end": 54,
@@ -3236,21 +3237,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_rollout_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_update_game_server_deployment_rollout_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient",
           "shortName": "GameServerDeploymentsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceAsyncClient.update_game_server_deployment",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceAsyncClient.update_game_server_deployment",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.UpdateGameServerDeployment",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.UpdateGameServerDeployment",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "UpdateGameServerDeployment"
@@ -3258,11 +3259,11 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRequest"
+            "type": "google.cloud.gaming_v1.types.UpdateGameServerDeploymentRequest"
           },
           {
             "name": "game_server_deployment",
-            "type": "google.cloud.gaming_v1beta.types.GameServerDeployment"
+            "type": "google.cloud.gaming_v1.types.GameServerDeployment"
           },
           {
             "name": "update_mask",
@@ -3285,10 +3286,10 @@
         "shortName": "update_game_server_deployment"
       },
       "description": "Sample for UpdateGameServerDeployment",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_async.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_update_game_server_deployment_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeployment_async",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_UpdateGameServerDeployment_async",
       "segments": [
         {
           "end": 54,
@@ -3321,20 +3322,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_async.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_update_game_server_deployment_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient",
+          "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient",
           "shortName": "GameServerDeploymentsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.GameServerDeploymentsServiceClient.update_game_server_deployment",
+        "fullName": "google.cloud.gaming_v1.GameServerDeploymentsServiceClient.update_game_server_deployment",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService.UpdateGameServerDeployment",
+          "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService.UpdateGameServerDeployment",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.GameServerDeploymentsService",
+            "fullName": "google.cloud.gaming.v1.GameServerDeploymentsService",
             "shortName": "GameServerDeploymentsService"
           },
           "shortName": "UpdateGameServerDeployment"
@@ -3342,11 +3343,11 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.UpdateGameServerDeploymentRequest"
+            "type": "google.cloud.gaming_v1.types.UpdateGameServerDeploymentRequest"
           },
           {
             "name": "game_server_deployment",
-            "type": "google.cloud.gaming_v1beta.types.GameServerDeployment"
+            "type": "google.cloud.gaming_v1.types.GameServerDeployment"
           },
           {
             "name": "update_mask",
@@ -3369,10 +3370,10 @@
         "shortName": "update_game_server_deployment"
       },
       "description": "Sample for UpdateGameServerDeployment",
-      "file": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_sync.py",
+      "file": "gameservices_v1_generated_game_server_deployments_service_update_game_server_deployment_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeployment_sync",
+      "regionTag": "gameservices_v1_generated_GameServerDeploymentsService_UpdateGameServerDeployment_sync",
       "segments": [
         {
           "end": 54,
@@ -3405,21 +3406,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_game_server_deployments_service_update_game_server_deployment_sync.py"
+      "title": "gameservices_v1_generated_game_server_deployments_service_update_game_server_deployment_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient",
           "shortName": "RealmsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient.create_realm",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient.create_realm",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.CreateRealm",
+          "fullName": "google.cloud.gaming.v1.RealmsService.CreateRealm",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "CreateRealm"
@@ -3427,7 +3428,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.CreateRealmRequest"
+            "type": "google.cloud.gaming_v1.types.CreateRealmRequest"
           },
           {
             "name": "parent",
@@ -3435,7 +3436,7 @@
           },
           {
             "name": "realm",
-            "type": "google.cloud.gaming_v1beta.types.Realm"
+            "type": "google.cloud.gaming_v1.types.Realm"
           },
           {
             "name": "realm_id",
@@ -3458,10 +3459,10 @@
         "shortName": "create_realm"
       },
       "description": "Sample for CreateRealm",
-      "file": "gameservices_v1beta_generated_realms_service_create_realm_async.py",
+      "file": "gameservices_v1_generated_realms_service_create_realm_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_CreateRealm_async",
+      "regionTag": "gameservices_v1_generated_RealmsService_CreateRealm_async",
       "segments": [
         {
           "end": 60,
@@ -3494,20 +3495,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_create_realm_async.py"
+      "title": "gameservices_v1_generated_realms_service_create_realm_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceClient",
           "shortName": "RealmsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient.create_realm",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceClient.create_realm",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.CreateRealm",
+          "fullName": "google.cloud.gaming.v1.RealmsService.CreateRealm",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "CreateRealm"
@@ -3515,7 +3516,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.CreateRealmRequest"
+            "type": "google.cloud.gaming_v1.types.CreateRealmRequest"
           },
           {
             "name": "parent",
@@ -3523,7 +3524,7 @@
           },
           {
             "name": "realm",
-            "type": "google.cloud.gaming_v1beta.types.Realm"
+            "type": "google.cloud.gaming_v1.types.Realm"
           },
           {
             "name": "realm_id",
@@ -3546,10 +3547,10 @@
         "shortName": "create_realm"
       },
       "description": "Sample for CreateRealm",
-      "file": "gameservices_v1beta_generated_realms_service_create_realm_sync.py",
+      "file": "gameservices_v1_generated_realms_service_create_realm_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_CreateRealm_sync",
+      "regionTag": "gameservices_v1_generated_RealmsService_CreateRealm_sync",
       "segments": [
         {
           "end": 60,
@@ -3582,21 +3583,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_create_realm_sync.py"
+      "title": "gameservices_v1_generated_realms_service_create_realm_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient",
           "shortName": "RealmsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient.delete_realm",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient.delete_realm",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.DeleteRealm",
+          "fullName": "google.cloud.gaming.v1.RealmsService.DeleteRealm",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "DeleteRealm"
@@ -3604,7 +3605,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.DeleteRealmRequest"
+            "type": "google.cloud.gaming_v1.types.DeleteRealmRequest"
           },
           {
             "name": "name",
@@ -3627,10 +3628,10 @@
         "shortName": "delete_realm"
       },
       "description": "Sample for DeleteRealm",
-      "file": "gameservices_v1beta_generated_realms_service_delete_realm_async.py",
+      "file": "gameservices_v1_generated_realms_service_delete_realm_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_DeleteRealm_async",
+      "regionTag": "gameservices_v1_generated_RealmsService_DeleteRealm_async",
       "segments": [
         {
           "end": 55,
@@ -3663,20 +3664,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_delete_realm_async.py"
+      "title": "gameservices_v1_generated_realms_service_delete_realm_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceClient",
           "shortName": "RealmsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient.delete_realm",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceClient.delete_realm",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.DeleteRealm",
+          "fullName": "google.cloud.gaming.v1.RealmsService.DeleteRealm",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "DeleteRealm"
@@ -3684,7 +3685,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.DeleteRealmRequest"
+            "type": "google.cloud.gaming_v1.types.DeleteRealmRequest"
           },
           {
             "name": "name",
@@ -3707,10 +3708,10 @@
         "shortName": "delete_realm"
       },
       "description": "Sample for DeleteRealm",
-      "file": "gameservices_v1beta_generated_realms_service_delete_realm_sync.py",
+      "file": "gameservices_v1_generated_realms_service_delete_realm_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_DeleteRealm_sync",
+      "regionTag": "gameservices_v1_generated_RealmsService_DeleteRealm_sync",
       "segments": [
         {
           "end": 55,
@@ -3743,21 +3744,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_delete_realm_sync.py"
+      "title": "gameservices_v1_generated_realms_service_delete_realm_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient",
           "shortName": "RealmsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient.get_realm",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient.get_realm",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.GetRealm",
+          "fullName": "google.cloud.gaming.v1.RealmsService.GetRealm",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "GetRealm"
@@ -3765,7 +3766,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetRealmRequest"
+            "type": "google.cloud.gaming_v1.types.GetRealmRequest"
           },
           {
             "name": "name",
@@ -3784,14 +3785,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.Realm",
+        "resultType": "google.cloud.gaming_v1.types.Realm",
         "shortName": "get_realm"
       },
       "description": "Sample for GetRealm",
-      "file": "gameservices_v1beta_generated_realms_service_get_realm_async.py",
+      "file": "gameservices_v1_generated_realms_service_get_realm_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_GetRealm_async",
+      "regionTag": "gameservices_v1_generated_RealmsService_GetRealm_async",
       "segments": [
         {
           "end": 51,
@@ -3824,20 +3825,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_get_realm_async.py"
+      "title": "gameservices_v1_generated_realms_service_get_realm_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceClient",
           "shortName": "RealmsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient.get_realm",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceClient.get_realm",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.GetRealm",
+          "fullName": "google.cloud.gaming.v1.RealmsService.GetRealm",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "GetRealm"
@@ -3845,7 +3846,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.GetRealmRequest"
+            "type": "google.cloud.gaming_v1.types.GetRealmRequest"
           },
           {
             "name": "name",
@@ -3864,14 +3865,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.Realm",
+        "resultType": "google.cloud.gaming_v1.types.Realm",
         "shortName": "get_realm"
       },
       "description": "Sample for GetRealm",
-      "file": "gameservices_v1beta_generated_realms_service_get_realm_sync.py",
+      "file": "gameservices_v1_generated_realms_service_get_realm_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_GetRealm_sync",
+      "regionTag": "gameservices_v1_generated_RealmsService_GetRealm_sync",
       "segments": [
         {
           "end": 51,
@@ -3904,21 +3905,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_get_realm_sync.py"
+      "title": "gameservices_v1_generated_realms_service_get_realm_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient",
           "shortName": "RealmsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient.list_realms",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient.list_realms",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.ListRealms",
+          "fullName": "google.cloud.gaming.v1.RealmsService.ListRealms",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "ListRealms"
@@ -3926,7 +3927,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.ListRealmsRequest"
+            "type": "google.cloud.gaming_v1.types.ListRealmsRequest"
           },
           {
             "name": "parent",
@@ -3945,14 +3946,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.services.realms_service.pagers.ListRealmsAsyncPager",
+        "resultType": "google.cloud.gaming_v1.services.realms_service.pagers.ListRealmsAsyncPager",
         "shortName": "list_realms"
       },
       "description": "Sample for ListRealms",
-      "file": "gameservices_v1beta_generated_realms_service_list_realms_async.py",
+      "file": "gameservices_v1_generated_realms_service_list_realms_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_ListRealms_async",
+      "regionTag": "gameservices_v1_generated_RealmsService_ListRealms_async",
       "segments": [
         {
           "end": 52,
@@ -3985,20 +3986,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_list_realms_async.py"
+      "title": "gameservices_v1_generated_realms_service_list_realms_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceClient",
           "shortName": "RealmsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient.list_realms",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceClient.list_realms",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.ListRealms",
+          "fullName": "google.cloud.gaming.v1.RealmsService.ListRealms",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "ListRealms"
@@ -4006,7 +4007,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.ListRealmsRequest"
+            "type": "google.cloud.gaming_v1.types.ListRealmsRequest"
           },
           {
             "name": "parent",
@@ -4025,14 +4026,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.services.realms_service.pagers.ListRealmsPager",
+        "resultType": "google.cloud.gaming_v1.services.realms_service.pagers.ListRealmsPager",
         "shortName": "list_realms"
       },
       "description": "Sample for ListRealms",
-      "file": "gameservices_v1beta_generated_realms_service_list_realms_sync.py",
+      "file": "gameservices_v1_generated_realms_service_list_realms_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_ListRealms_sync",
+      "regionTag": "gameservices_v1_generated_RealmsService_ListRealms_sync",
       "segments": [
         {
           "end": 52,
@@ -4065,21 +4066,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_list_realms_sync.py"
+      "title": "gameservices_v1_generated_realms_service_list_realms_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient",
           "shortName": "RealmsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient.preview_realm_update",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient.preview_realm_update",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.PreviewRealmUpdate",
+          "fullName": "google.cloud.gaming.v1.RealmsService.PreviewRealmUpdate",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "PreviewRealmUpdate"
@@ -4087,7 +4088,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewRealmUpdateRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewRealmUpdateRequest"
           },
           {
             "name": "retry",
@@ -4102,14 +4103,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewRealmUpdateResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewRealmUpdateResponse",
         "shortName": "preview_realm_update"
       },
       "description": "Sample for PreviewRealmUpdate",
-      "file": "gameservices_v1beta_generated_realms_service_preview_realm_update_async.py",
+      "file": "gameservices_v1_generated_realms_service_preview_realm_update_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_PreviewRealmUpdate_async",
+      "regionTag": "gameservices_v1_generated_RealmsService_PreviewRealmUpdate_async",
       "segments": [
         {
           "end": 54,
@@ -4142,20 +4143,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_preview_realm_update_async.py"
+      "title": "gameservices_v1_generated_realms_service_preview_realm_update_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceClient",
           "shortName": "RealmsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient.preview_realm_update",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceClient.preview_realm_update",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.PreviewRealmUpdate",
+          "fullName": "google.cloud.gaming.v1.RealmsService.PreviewRealmUpdate",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "PreviewRealmUpdate"
@@ -4163,7 +4164,7 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.PreviewRealmUpdateRequest"
+            "type": "google.cloud.gaming_v1.types.PreviewRealmUpdateRequest"
           },
           {
             "name": "retry",
@@ -4178,14 +4179,14 @@
             "type": "Sequence[Tuple[str, str]"
           }
         ],
-        "resultType": "google.cloud.gaming_v1beta.types.PreviewRealmUpdateResponse",
+        "resultType": "google.cloud.gaming_v1.types.PreviewRealmUpdateResponse",
         "shortName": "preview_realm_update"
       },
       "description": "Sample for PreviewRealmUpdate",
-      "file": "gameservices_v1beta_generated_realms_service_preview_realm_update_sync.py",
+      "file": "gameservices_v1_generated_realms_service_preview_realm_update_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_PreviewRealmUpdate_sync",
+      "regionTag": "gameservices_v1_generated_RealmsService_PreviewRealmUpdate_sync",
       "segments": [
         {
           "end": 54,
@@ -4218,21 +4219,21 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_preview_realm_update_sync.py"
+      "title": "gameservices_v1_generated_realms_service_preview_realm_update_sync.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "async": true,
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient",
           "shortName": "RealmsServiceAsyncClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceAsyncClient.update_realm",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceAsyncClient.update_realm",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.UpdateRealm",
+          "fullName": "google.cloud.gaming.v1.RealmsService.UpdateRealm",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "UpdateRealm"
@@ -4240,11 +4241,11 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.UpdateRealmRequest"
+            "type": "google.cloud.gaming_v1.types.UpdateRealmRequest"
           },
           {
             "name": "realm",
-            "type": "google.cloud.gaming_v1beta.types.Realm"
+            "type": "google.cloud.gaming_v1.types.Realm"
           },
           {
             "name": "update_mask",
@@ -4267,10 +4268,10 @@
         "shortName": "update_realm"
       },
       "description": "Sample for UpdateRealm",
-      "file": "gameservices_v1beta_generated_realms_service_update_realm_async.py",
+      "file": "gameservices_v1_generated_realms_service_update_realm_async.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_UpdateRealm_async",
+      "regionTag": "gameservices_v1_generated_RealmsService_UpdateRealm_async",
       "segments": [
         {
           "end": 58,
@@ -4303,20 +4304,20 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_update_realm_async.py"
+      "title": "gameservices_v1_generated_realms_service_update_realm_async.py"
     },
     {
       "canonical": true,
       "clientMethod": {
         "client": {
-          "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient",
+          "fullName": "google.cloud.gaming_v1.RealmsServiceClient",
           "shortName": "RealmsServiceClient"
         },
-        "fullName": "google.cloud.gaming_v1beta.RealmsServiceClient.update_realm",
+        "fullName": "google.cloud.gaming_v1.RealmsServiceClient.update_realm",
         "method": {
-          "fullName": "google.cloud.gaming.v1beta.RealmsService.UpdateRealm",
+          "fullName": "google.cloud.gaming.v1.RealmsService.UpdateRealm",
           "service": {
-            "fullName": "google.cloud.gaming.v1beta.RealmsService",
+            "fullName": "google.cloud.gaming.v1.RealmsService",
             "shortName": "RealmsService"
           },
           "shortName": "UpdateRealm"
@@ -4324,11 +4325,11 @@
         "parameters": [
           {
             "name": "request",
-            "type": "google.cloud.gaming_v1beta.types.UpdateRealmRequest"
+            "type": "google.cloud.gaming_v1.types.UpdateRealmRequest"
           },
           {
             "name": "realm",
-            "type": "google.cloud.gaming_v1beta.types.Realm"
+            "type": "google.cloud.gaming_v1.types.Realm"
           },
           {
             "name": "update_mask",
@@ -4351,10 +4352,10 @@
         "shortName": "update_realm"
       },
       "description": "Sample for UpdateRealm",
-      "file": "gameservices_v1beta_generated_realms_service_update_realm_sync.py",
+      "file": "gameservices_v1_generated_realms_service_update_realm_sync.py",
       "language": "PYTHON",
       "origin": "API_DEFINITION",
-      "regionTag": "gameservices_v1beta_generated_RealmsService_UpdateRealm_sync",
+      "regionTag": "gameservices_v1_generated_RealmsService_UpdateRealm_sync",
       "segments": [
         {
           "end": 58,
@@ -4387,7 +4388,7 @@
           "type": "RESPONSE_HANDLING"
         }
       ],
-      "title": "gameservices_v1beta_generated_realms_service_update_realm_sync.py"
+      "title": "gameservices_v1_generated_realms_service_update_realm_sync.py"
     }
   ]
 }

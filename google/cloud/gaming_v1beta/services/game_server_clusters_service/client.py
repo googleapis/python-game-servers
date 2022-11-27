@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -64,7 +75,7 @@ class GameServerClustersServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[GameServerClustersServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -343,8 +354,8 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, GameServerClustersServiceTransport, None] = None,
-        client_options: Optional[client_options_lib.ClientOptions] = None,
+        transport: Optional[Union[str, GameServerClustersServiceTransport]] = None,
+        client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the game server clusters service client.
@@ -358,7 +369,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
             transport (Union[str, GameServerClustersServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (google.api_core.client_options.ClientOptions): Custom options for the
+            client_options (Optional[Union[google.api_core.client_options.ClientOptions, dict]]): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -388,6 +399,7 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
             client_options = client_options_lib.from_dict(client_options)
         if client_options is None:
             client_options = client_options_lib.ClientOptions()
+        client_options = cast(client_options_lib.ClientOptions, client_options)
 
         api_endpoint, client_cert_source_func = self.get_mtls_endpoint_and_cert_source(
             client_options
@@ -440,11 +452,13 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
     def list_game_server_clusters(
         self,
-        request: Union[game_server_clusters.ListGameServerClustersRequest, dict] = None,
+        request: Optional[
+            Union[game_server_clusters.ListGameServerClustersRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerClustersPager:
         r"""Lists game server clusters in a given project and
@@ -559,11 +573,13 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
     def get_game_server_cluster(
         self,
-        request: Union[game_server_clusters.GetGameServerClusterRequest, dict] = None,
+        request: Optional[
+            Union[game_server_clusters.GetGameServerClusterRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.GameServerCluster:
         r"""Gets details of a single game server cluster.
@@ -661,15 +677,15 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
     def create_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.CreateGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.CreateGameServerClusterRequest, dict]
         ] = None,
         *,
-        parent: str = None,
-        game_server_cluster: game_server_clusters.GameServerCluster = None,
-        game_server_cluster_id: str = None,
+        parent: Optional[str] = None,
+        game_server_cluster: Optional[game_server_clusters.GameServerCluster] = None,
+        game_server_cluster_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a new game server cluster in a given project
@@ -810,12 +826,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
     def preview_create_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.PreviewCreateGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.PreviewCreateGameServerClusterRequest, dict]
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.PreviewCreateGameServerClusterResponse:
         r"""Previews creation of a new game server cluster in a
@@ -905,13 +921,13 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
     def delete_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.DeleteGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.DeleteGameServerClusterRequest, dict]
         ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a single game server cluster.
@@ -1034,12 +1050,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
     def preview_delete_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.PreviewDeleteGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.PreviewDeleteGameServerClusterRequest, dict]
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.PreviewDeleteGameServerClusterResponse:
         r"""Previews deletion of a single game server cluster.
@@ -1123,14 +1139,14 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
     def update_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.UpdateGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.UpdateGameServerClusterRequest, dict]
         ] = None,
         *,
-        game_server_cluster: game_server_clusters.GameServerCluster = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        game_server_cluster: Optional[game_server_clusters.GameServerCluster] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Patches a single game server cluster.
@@ -1263,12 +1279,12 @@ class GameServerClustersServiceClient(metaclass=GameServerClustersServiceClientM
 
     def preview_update_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.PreviewUpdateGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.PreviewUpdateGameServerClusterRequest, dict]
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.PreviewUpdateGameServerClusterResponse:
         r"""Previews updating a GameServerCluster.

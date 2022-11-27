@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -63,7 +74,7 @@ class GameServerConfigsServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[GameServerConfigsServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -342,8 +353,8 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, GameServerConfigsServiceTransport, None] = None,
-        client_options: Optional[client_options_lib.ClientOptions] = None,
+        transport: Optional[Union[str, GameServerConfigsServiceTransport]] = None,
+        client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the game server configs service client.
@@ -357,7 +368,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
             transport (Union[str, GameServerConfigsServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (google.api_core.client_options.ClientOptions): Custom options for the
+            client_options (Optional[Union[google.api_core.client_options.ClientOptions, dict]]): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -387,6 +398,7 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
             client_options = client_options_lib.from_dict(client_options)
         if client_options is None:
             client_options = client_options_lib.ClientOptions()
+        client_options = cast(client_options_lib.ClientOptions, client_options)
 
         api_endpoint, client_cert_source_func = self.get_mtls_endpoint_and_cert_source(
             client_options
@@ -439,11 +451,13 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def list_game_server_configs(
         self,
-        request: Union[game_server_configs.ListGameServerConfigsRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.ListGameServerConfigsRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerConfigsPager:
         r"""Lists game server configs in a given project,
@@ -556,11 +570,13 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def get_game_server_config(
         self,
-        request: Union[game_server_configs.GetGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.GetGameServerConfigRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_configs.GameServerConfig:
         r"""Gets details of a single game server config.
@@ -657,12 +673,14 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def create_game_server_config(
         self,
-        request: Union[game_server_configs.CreateGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.CreateGameServerConfigRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        game_server_config: game_server_configs.GameServerConfig = None,
+        parent: Optional[str] = None,
+        game_server_config: Optional[game_server_configs.GameServerConfig] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a new game server config in a given project,
@@ -792,11 +810,13 @@ class GameServerConfigsServiceClient(metaclass=GameServerConfigsServiceClientMet
 
     def delete_game_server_config(
         self,
-        request: Union[game_server_configs.DeleteGameServerConfigRequest, dict] = None,
+        request: Optional[
+            Union[game_server_configs.DeleteGameServerConfigRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a single game server config. The deletion

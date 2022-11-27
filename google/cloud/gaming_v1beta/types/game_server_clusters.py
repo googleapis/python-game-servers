@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from typing import MutableMapping, MutableSequence
+
 from google.protobuf import field_mask_pb2  # type: ignore
 from google.protobuf import timestamp_pb2  # type: ignore
 import proto  # type: ignore
@@ -70,23 +72,23 @@ class ListGameServerClustersRequest(proto.Message):
             https://cloud.google.com/apis/design/design_patterns#sorting_order.
     """
 
-    parent = proto.Field(
+    parent: str = proto.Field(
         proto.STRING,
         number=1,
     )
-    page_size = proto.Field(
+    page_size: int = proto.Field(
         proto.INT32,
         number=2,
     )
-    page_token = proto.Field(
+    page_token: str = proto.Field(
         proto.STRING,
         number=3,
     )
-    filter = proto.Field(
+    filter: str = proto.Field(
         proto.STRING,
         number=4,
     )
-    order_by = proto.Field(
+    order_by: str = proto.Field(
         proto.STRING,
         number=5,
     )
@@ -97,13 +99,13 @@ class ListGameServerClustersResponse(proto.Message):
     GameServerClustersService.ListGameServerClusters.
 
     Attributes:
-        game_server_clusters (Sequence[google.cloud.gaming_v1beta.types.GameServerCluster]):
+        game_server_clusters (MutableSequence[google.cloud.gaming_v1beta.types.GameServerCluster]):
             The list of game server clusters.
         next_page_token (str):
             Token to retrieve the next page of results,
             or empty if there are no more results in the
             list.
-        unreachable (Sequence[str]):
+        unreachable (MutableSequence[str]):
             List of locations that could not be reached.
     """
 
@@ -111,16 +113,16 @@ class ListGameServerClustersResponse(proto.Message):
     def raw_page(self):
         return self
 
-    game_server_clusters = proto.RepeatedField(
+    game_server_clusters: MutableSequence["GameServerCluster"] = proto.RepeatedField(
         proto.MESSAGE,
         number=1,
         message="GameServerCluster",
     )
-    next_page_token = proto.Field(
+    next_page_token: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    unreachable = proto.RepeatedField(
+    unreachable: MutableSequence[str] = proto.RepeatedField(
         proto.STRING,
         number=4,
     )
@@ -138,7 +140,7 @@ class GetGameServerClusterRequest(proto.Message):
             ``projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}``.
     """
 
-    name = proto.Field(
+    name: str = proto.Field(
         proto.STRING,
         number=1,
     )
@@ -160,15 +162,15 @@ class CreateGameServerClusterRequest(proto.Message):
             be created.
     """
 
-    parent = proto.Field(
+    parent: str = proto.Field(
         proto.STRING,
         number=1,
     )
-    game_server_cluster_id = proto.Field(
+    game_server_cluster_id: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    game_server_cluster = proto.Field(
+    game_server_cluster: "GameServerCluster" = proto.Field(
         proto.MESSAGE,
         number=3,
         message="GameServerCluster",
@@ -194,20 +196,20 @@ class PreviewCreateGameServerClusterRequest(proto.Message):
             preview.
     """
 
-    parent = proto.Field(
+    parent: str = proto.Field(
         proto.STRING,
         number=1,
     )
-    game_server_cluster_id = proto.Field(
+    game_server_cluster_id: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    game_server_cluster = proto.Field(
+    game_server_cluster: "GameServerCluster" = proto.Field(
         proto.MESSAGE,
         number=3,
         message="GameServerCluster",
     )
-    preview_time = proto.Field(
+    preview_time: timestamp_pb2.Timestamp = proto.Field(
         proto.MESSAGE,
         number=4,
         message=timestamp_pb2.Timestamp,
@@ -225,11 +227,11 @@ class PreviewCreateGameServerClusterResponse(proto.Message):
             The target state.
     """
 
-    etag = proto.Field(
+    etag: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    target_state = proto.Field(
+    target_state: common.TargetState = proto.Field(
         proto.MESSAGE,
         number=3,
         message=common.TargetState,
@@ -247,7 +249,7 @@ class DeleteGameServerClusterRequest(proto.Message):
             ``projects/{project}/locations/{location}/gameServerClusters/{cluster}``.
     """
 
-    name = proto.Field(
+    name: str = proto.Field(
         proto.STRING,
         number=1,
     )
@@ -267,11 +269,11 @@ class PreviewDeleteGameServerClusterRequest(proto.Message):
             preview.
     """
 
-    name = proto.Field(
+    name: str = proto.Field(
         proto.STRING,
         number=1,
     )
-    preview_time = proto.Field(
+    preview_time: timestamp_pb2.Timestamp = proto.Field(
         proto.MESSAGE,
         number=2,
         message=timestamp_pb2.Timestamp,
@@ -289,11 +291,11 @@ class PreviewDeleteGameServerClusterResponse(proto.Message):
             The target state.
     """
 
-    etag = proto.Field(
+    etag: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    target_state = proto.Field(
+    target_state: common.TargetState = proto.Field(
         proto.MESSAGE,
         number=3,
         message=common.TargetState,
@@ -317,12 +319,12 @@ class UpdateGameServerClusterRequest(proto.Message):
             /docs/reference/google.protobuf#fieldmask
     """
 
-    game_server_cluster = proto.Field(
+    game_server_cluster: "GameServerCluster" = proto.Field(
         proto.MESSAGE,
         number=1,
         message="GameServerCluster",
     )
-    update_mask = proto.Field(
+    update_mask: field_mask_pb2.FieldMask = proto.Field(
         proto.MESSAGE,
         number=2,
         message=field_mask_pb2.FieldMask,
@@ -349,17 +351,17 @@ class PreviewUpdateGameServerClusterRequest(proto.Message):
             preview.
     """
 
-    game_server_cluster = proto.Field(
+    game_server_cluster: "GameServerCluster" = proto.Field(
         proto.MESSAGE,
         number=1,
         message="GameServerCluster",
     )
-    update_mask = proto.Field(
+    update_mask: field_mask_pb2.FieldMask = proto.Field(
         proto.MESSAGE,
         number=2,
         message=field_mask_pb2.FieldMask,
     )
-    preview_time = proto.Field(
+    preview_time: timestamp_pb2.Timestamp = proto.Field(
         proto.MESSAGE,
         number=3,
         message=timestamp_pb2.Timestamp,
@@ -377,11 +379,11 @@ class PreviewUpdateGameServerClusterResponse(proto.Message):
             The target state.
     """
 
-    etag = proto.Field(
+    etag: str = proto.Field(
         proto.STRING,
         number=2,
     )
-    target_state = proto.Field(
+    target_state: common.TargetState = proto.Field(
         proto.MESSAGE,
         number=3,
         message=common.TargetState,
@@ -406,13 +408,13 @@ class GameServerClusterConnectionInfo(proto.Message):
             be validated during creation.
     """
 
-    gke_cluster_reference = proto.Field(
+    gke_cluster_reference: "GkeClusterReference" = proto.Field(
         proto.MESSAGE,
         number=7,
         oneof="cluster_reference",
         message="GkeClusterReference",
     )
-    namespace = proto.Field(
+    namespace: str = proto.Field(
         proto.STRING,
         number=5,
     )
@@ -434,7 +436,7 @@ class GkeClusterReference(proto.Message):
                cluster.
     """
 
-    cluster = proto.Field(
+    cluster: str = proto.Field(
         proto.STRING,
         number=1,
     )
@@ -456,7 +458,7 @@ class GameServerCluster(proto.Message):
             Output only. The creation time.
         update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. The last-modified time.
-        labels (Mapping[str, str]):
+        labels (MutableMapping[str, str]):
             The labels associated with this game server
             cluster. Each label is a key-value pair.
         connection_info (google.cloud.gaming_v1beta.types.GameServerClusterConnectionInfo):
@@ -469,35 +471,35 @@ class GameServerCluster(proto.Message):
             Human readable description of the cluster.
     """
 
-    name = proto.Field(
+    name: str = proto.Field(
         proto.STRING,
         number=1,
     )
-    create_time = proto.Field(
+    create_time: timestamp_pb2.Timestamp = proto.Field(
         proto.MESSAGE,
         number=2,
         message=timestamp_pb2.Timestamp,
     )
-    update_time = proto.Field(
+    update_time: timestamp_pb2.Timestamp = proto.Field(
         proto.MESSAGE,
         number=3,
         message=timestamp_pb2.Timestamp,
     )
-    labels = proto.MapField(
+    labels: MutableMapping[str, str] = proto.MapField(
         proto.STRING,
         proto.STRING,
         number=4,
     )
-    connection_info = proto.Field(
+    connection_info: "GameServerClusterConnectionInfo" = proto.Field(
         proto.MESSAGE,
         number=5,
         message="GameServerClusterConnectionInfo",
     )
-    etag = proto.Field(
+    etag: str = proto.Field(
         proto.STRING,
         number=6,
     )
-    description = proto.Field(
+    description: str = proto.Field(
         proto.STRING,
         number=7,
     )

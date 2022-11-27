@@ -16,7 +16,17 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+)
 
 from google.api_core import exceptions as core_exceptions
 from google.api_core import gapic_v1
@@ -178,9 +188,9 @@ class GameServerClustersServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: ga_credentials.Credentials = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, GameServerClustersServiceTransport] = "grpc_asyncio",
-        client_options: ClientOptions = None,
+        client_options: Optional[ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the game server clusters service client.
@@ -224,11 +234,13 @@ class GameServerClustersServiceAsyncClient:
 
     async def list_game_server_clusters(
         self,
-        request: Union[game_server_clusters.ListGameServerClustersRequest, dict] = None,
+        request: Optional[
+            Union[game_server_clusters.ListGameServerClustersRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGameServerClustersAsyncPager:
         r"""Lists game server clusters in a given project and
@@ -262,7 +274,7 @@ class GameServerClustersServiceAsyncClient:
                     print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.ListGameServerClustersRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.ListGameServerClustersRequest, dict]]):
                 The request object. Request message for
                 GameServerClustersService.ListGameServerClusters.
             parent (:class:`str`):
@@ -350,11 +362,13 @@ class GameServerClustersServiceAsyncClient:
 
     async def get_game_server_cluster(
         self,
-        request: Union[game_server_clusters.GetGameServerClusterRequest, dict] = None,
+        request: Optional[
+            Union[game_server_clusters.GetGameServerClusterRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.GameServerCluster:
         r"""Gets details of a single game server cluster.
@@ -386,7 +400,7 @@ class GameServerClustersServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.GetGameServerClusterRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.GetGameServerClusterRequest, dict]]):
                 The request object. Request message for
                 GameServerClustersService.GetGameServerCluster.
             name (:class:`str`):
@@ -460,15 +474,15 @@ class GameServerClustersServiceAsyncClient:
 
     async def create_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.CreateGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.CreateGameServerClusterRequest, dict]
         ] = None,
         *,
-        parent: str = None,
-        game_server_cluster: game_server_clusters.GameServerCluster = None,
-        game_server_cluster_id: str = None,
+        parent: Optional[str] = None,
+        game_server_cluster: Optional[game_server_clusters.GameServerCluster] = None,
+        game_server_cluster_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Creates a new game server cluster in a given project
@@ -510,7 +524,7 @@ class GameServerClustersServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.CreateGameServerClusterRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.CreateGameServerClusterRequest, dict]]):
                 The request object. Request message for
                 GameServerClustersService.CreateGameServerCluster.
             parent (:class:`str`):
@@ -608,12 +622,12 @@ class GameServerClustersServiceAsyncClient:
 
     async def preview_create_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.PreviewCreateGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.PreviewCreateGameServerClusterRequest, dict]
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.PreviewCreateGameServerClusterResponse:
         r"""Previews creation of a new game server cluster in a
@@ -651,7 +665,7 @@ class GameServerClustersServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.PreviewCreateGameServerClusterRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.PreviewCreateGameServerClusterRequest, dict]]):
                 The request object. Request message for
                 GameServerClustersService.PreviewCreateGameServerCluster.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
@@ -705,13 +719,13 @@ class GameServerClustersServiceAsyncClient:
 
     async def delete_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.DeleteGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.DeleteGameServerClusterRequest, dict]
         ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Deletes a single game server cluster.
@@ -747,7 +761,7 @@ class GameServerClustersServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.DeleteGameServerClusterRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.DeleteGameServerClusterRequest, dict]]):
                 The request object. Request message for
                 GameServerClustersService.DeleteGameServerCluster.
             name (:class:`str`):
@@ -832,12 +846,12 @@ class GameServerClustersServiceAsyncClient:
 
     async def preview_delete_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.PreviewDeleteGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.PreviewDeleteGameServerClusterRequest, dict]
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.PreviewDeleteGameServerClusterResponse:
         r"""Previews deletion of a single game server cluster.
@@ -869,7 +883,7 @@ class GameServerClustersServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.PreviewDeleteGameServerClusterRequest, dict]]):
                 The request object. Request message for
                 GameServerClustersService.PreviewDeleteGameServerCluster.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
@@ -923,14 +937,14 @@ class GameServerClustersServiceAsyncClient:
 
     async def update_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.UpdateGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.UpdateGameServerClusterRequest, dict]
         ] = None,
         *,
-        game_server_cluster: game_server_clusters.GameServerCluster = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        game_server_cluster: Optional[game_server_clusters.GameServerCluster] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Patches a single game server cluster.
@@ -969,7 +983,7 @@ class GameServerClustersServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.UpdateGameServerClusterRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.UpdateGameServerClusterRequest, dict]]):
                 The request object. Request message for
                 GameServerClustersService.UpdateGameServerCluster.
             game_server_cluster (:class:`google.cloud.gaming_v1.types.GameServerCluster`):
@@ -1059,12 +1073,12 @@ class GameServerClustersServiceAsyncClient:
 
     async def preview_update_game_server_cluster(
         self,
-        request: Union[
-            game_server_clusters.PreviewUpdateGameServerClusterRequest, dict
+        request: Optional[
+            Union[game_server_clusters.PreviewUpdateGameServerClusterRequest, dict]
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> game_server_clusters.PreviewUpdateGameServerClusterResponse:
         r"""Previews updating a GameServerCluster.
@@ -1099,7 +1113,7 @@ class GameServerClustersServiceAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterRequest, dict]):
+            request (Optional[Union[google.cloud.gaming_v1.types.PreviewUpdateGameServerClusterRequest, dict]]):
                 The request object. Request message for
                 GameServerClustersService.UpdateGameServerCluster.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
