@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/python-game-servers/compare/v1.5.3...v1.6.0) (2022-12-14)
+
+
+### Features
+
+* Add support for `google.cloud.gaming.__version__` ([2e2319f](https://github.com/googleapis/python-game-servers/commit/2e2319f997101757496d719d620d4e59469aede4))
+* Add typing to proto.Message based class attributes ([2e2319f](https://github.com/googleapis/python-game-servers/commit/2e2319f997101757496d719d620d4e59469aede4))
+
+
+### Bug Fixes
+
+* Add dict typing for client_options ([2e2319f](https://github.com/googleapis/python-game-servers/commit/2e2319f997101757496d719d620d4e59469aede4))
+* **deps:** Require google-api-core &gt;=1.34.0, >=2.11.0  ([575dc06](https://github.com/googleapis/python-game-servers/commit/575dc06672c3108580e899561059a19c7203a5c0))
+* Drop usage of pkg_resources ([575dc06](https://github.com/googleapis/python-game-servers/commit/575dc06672c3108580e899561059a19c7203a5c0))
+* Fix timeout default values ([575dc06](https://github.com/googleapis/python-game-servers/commit/575dc06672c3108580e899561059a19c7203a5c0))
+
+
+### Documentation
+
+* **samples:** Snippetgen handling of repeated enum field ([2e2319f](https://github.com/googleapis/python-game-servers/commit/2e2319f997101757496d719d620d4e59469aede4))
+* **samples:** Snippetgen should call await on the operation coroutine before calling result ([575dc06](https://github.com/googleapis/python-game-servers/commit/575dc06672c3108580e899561059a19c7203a5c0))
+
 ## [1.5.3](https://github.com/googleapis/python-game-servers/compare/v1.5.2...v1.5.3) (2022-10-07)
 
 
