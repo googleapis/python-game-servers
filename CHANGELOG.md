@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/googleapis/python-game-servers/compare/v1.6.0...v1.7.0) (2023-01-10)
+
+
+### Features
+
+* Add support for python 3.11 ([#381](https://github.com/googleapis/python-game-servers/issues/381)) ([b7dae00](https://github.com/googleapis/python-game-servers/commit/b7dae00425fa279d1634b7564d95e842cec385f6))
+
 ## [1.6.0](https://github.com/googleapis/python-game-servers/compare/v1.5.3...v1.6.0) (2022-12-14)
 
 
