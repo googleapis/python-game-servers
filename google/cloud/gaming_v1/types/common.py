@@ -131,7 +131,18 @@ class OperationStatus(proto.Message):
     """
 
     class ErrorCode(proto.Enum):
-        r""""""
+        r"""
+
+        Values:
+            ERROR_CODE_UNSPECIFIED (0):
+
+            INTERNAL_ERROR (1):
+
+            PERMISSION_DENIED (2):
+
+            CLUSTER_CONNECTION (3):
+
+        """
         ERROR_CODE_UNSPECIFIED = 0
         INTERNAL_ERROR = 1
         PERMISSION_DENIED = 2
