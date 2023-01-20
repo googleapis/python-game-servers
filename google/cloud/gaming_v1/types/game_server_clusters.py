@@ -46,7 +46,20 @@ __protobuf__ = proto.module(
 
 
 class GameServerClusterView(proto.Enum):
-    r"""A view for GameServerCluster objects."""
+    r"""A view for GameServerCluster objects.
+
+    Values:
+        GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED (0):
+            The default / unset value.
+            The API will default to the BASIC view.
+        BASIC (1):
+            Include basic information of a GameServerCluster resource
+            and omit ``cluster_state``. This is the default value (for
+            ListGameServerClusters, GetGameServerCluster and
+            PreviewCreateGameServerCluster).
+        FULL (2):
+            Include everything.
+    """
     GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED = 0
     BASIC = 1
     FULL = 2
@@ -592,6 +605,37 @@ class KubernetesClusterState(proto.Message):
         r"""The state of the installed versions of Agones/Kubernetes. See
         also
         https://cloud.google.com/game-servers/docs/versions-and-upgrades.
+
+        Values:
+            INSTALLATION_STATE_UNSPECIFIED (0):
+                The default value. This value is used if the
+                state is omitted.
+            AGONES_KUBERNETES_VERSION_SUPPORTED (1):
+                The combination of Agones and Kubernetes
+                versions is supported by Google Cloud Game
+                Servers.
+            AGONES_VERSION_UNSUPPORTED (2):
+                The installed version of Agones is not
+                supported by Google Cloud Game Servers.
+            AGONES_KUBERNETES_VERSION_UNSUPPORTED (3):
+                The installed version of Agones is supported
+                by Google Cloud Game Servers, but the installed
+                version of Kubernetes is not recommended or
+                supported by the version of Agones.
+            AGONES_VERSION_UNRECOGNIZED (4):
+                The installed version of Agones is not
+                recognized because the Agones controller's image
+                name does not have a version string reported as
+                {major}.{minor}(.{patch}).
+            KUBERNETES_VERSION_UNRECOGNIZED (5):
+                The server version of Kubernetes cluster is
+                not recognized because the API server didn't
+                return parsable version info on path/version.
+            VERSION_VERIFICATION_FAILED (6):
+                Failed to read or verify the version of Agones or
+                Kubernetes. See version_installed_error_message for details.
+            AGONES_NOT_INSTALLED (7):
+                Agones is not installed.
         """
         INSTALLATION_STATE_UNSPECIFIED = 0
         AGONES_KUBERNETES_VERSION_SUPPORTED = 1
