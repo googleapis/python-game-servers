@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.1](https://github.com/googleapis/python-game-servers/compare/v1.7.0...v1.7.1) (2023-01-20)
+
+
+### Bug Fixes
+
+* Add context manager return types ([7d5b75a](https://github.com/googleapis/python-game-servers/commit/7d5b75a3a05f306e9bf115bfd5f30bda6307006d))
+
+
+### Documentation
+
+* Add documentation for enums ([7d5b75a](https://github.com/googleapis/python-game-servers/commit/7d5b75a3a05f306e9bf115bfd5f30bda6307006d))
+
 ## [1.7.0](https://github.com/googleapis/python-game-servers/compare/v1.6.0...v1.7.0) (2023-01-10)
 
 
