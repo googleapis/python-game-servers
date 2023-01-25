@@ -5,6 +5,7 @@ branch = True
 show_missing = True
 omit =
     google/cloud/gaming/__init__.py
+    google/cloud/gaming/gapic_version.py
 exclude_lines =
     # Re-enable the standard pragma
     pragma: NO COVER

@@ -135,13 +135,13 @@ class OperationStatus(proto.Message):
 
         Values:
             ERROR_CODE_UNSPECIFIED (0):
-
+                No description available.
             INTERNAL_ERROR (1):
-
+                No description available.
             PERMISSION_DENIED (2):
-
+                No description available.
             CLUSTER_CONNECTION (3):
-
+                No description available.
         """
         ERROR_CODE_UNSPECIFIED = 0
         INTERNAL_ERROR = 1
