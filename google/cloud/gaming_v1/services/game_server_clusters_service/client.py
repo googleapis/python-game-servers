@@ -58,6 +58,7 @@ from google.cloud.gaming_v1.types import common, game_server_clusters
 from .transports.base import DEFAULT_CLIENT_INFO, GameServerClustersServiceTransport
 from .transports.grpc import GameServerClustersServiceGrpcTransport
 from .transports.grpc_asyncio import GameServerClustersServiceGrpcAsyncIOTransport
+from .transports.rest import GameServerClustersServiceRestTransport
 
 
 class GameServerClustersServiceClientMeta(type):
@@ -73,6 +74,7 @@ class GameServerClustersServiceClientMeta(type):
     )  # type: Dict[str, Type[GameServerClustersServiceTransport]]
     _transport_registry["grpc"] = GameServerClustersServiceGrpcTransport
     _transport_registry["grpc_asyncio"] = GameServerClustersServiceGrpcAsyncIOTransport
+    _transport_registry["rest"] = GameServerClustersServiceRestTransport
 
     def get_transport_class(
         cls,

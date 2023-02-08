@@ -22,6 +22,8 @@ try:
 except ImportError:  # pragma: NO COVER
     import mock
 
+from collections.abc import Iterable
+import json
 import math
 
 from google.api_core import (
@@ -43,12 +45,15 @@ from google.longrunning import operations_pb2
 from google.oauth2 import service_account
 from google.protobuf import empty_pb2  # type: ignore
 from google.protobuf import field_mask_pb2  # type: ignore
+from google.protobuf import json_format
 from google.protobuf import timestamp_pb2  # type: ignore
 import grpc
 from grpc.experimental import aio
 from proto.marshal.rules import wrappers
 from proto.marshal.rules.dates import DurationRule, TimestampRule
 import pytest
+from requests import PreparedRequest, Request, Response
+from requests.sessions import Session
 
 from google.cloud.gaming_v1.services.game_server_clusters_service import (
     GameServerClustersServiceAsyncClient,
@@ -111,6 +116,7 @@ def test__get_default_mtls_endpoint():
     [
         (GameServerClustersServiceClient, "grpc"),
         (GameServerClustersServiceAsyncClient, "grpc_asyncio"),
+        (GameServerClustersServiceClient, "rest"),
     ],
 )
 def test_game_server_clusters_service_client_from_service_account_info(
@@ -126,7 +132,11 @@ def test_game_server_clusters_service_client_from_service_account_info(
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        assert client.transport._host == ("gameservices.googleapis.com:443")
+        assert client.transport._host == (
+            "gameservices.googleapis.com:443"
+            if transport_name in ["grpc", "grpc_asyncio"]
+            else "https://gameservices.googleapis.com"
+        )
 
 
 @pytest.mark.parametrize(
@@ -134,6 +144,7 @@ def test_game_server_clusters_service_client_from_service_account_info(
     [
         (transports.GameServerClustersServiceGrpcTransport, "grpc"),
         (transports.GameServerClustersServiceGrpcAsyncIOTransport, "grpc_asyncio"),
+        (transports.GameServerClustersServiceRestTransport, "rest"),
     ],
 )
 def test_game_server_clusters_service_client_service_account_always_use_jwt(
@@ -159,6 +170,7 @@ def test_game_server_clusters_service_client_service_account_always_use_jwt(
     [
         (GameServerClustersServiceClient, "grpc"),
         (GameServerClustersServiceAsyncClient, "grpc_asyncio"),
+        (GameServerClustersServiceClient, "rest"),
     ],
 )
 def test_game_server_clusters_service_client_from_service_account_file(
@@ -181,13 +193,18 @@ def test_game_server_clusters_service_client_from_service_account_file(
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        assert client.transport._host == ("gameservices.googleapis.com:443")
+        assert client.transport._host == (
+            "gameservices.googleapis.com:443"
+            if transport_name in ["grpc", "grpc_asyncio"]
+            else "https://gameservices.googleapis.com"
+        )
 
 
 def test_game_server_clusters_service_client_get_transport_class():
     transport = GameServerClustersServiceClient.get_transport_class()
     available_transports = [
         transports.GameServerClustersServiceGrpcTransport,
+        transports.GameServerClustersServiceRestTransport,
     ]
     assert transport in available_transports
 
@@ -207,6 +224,11 @@ def test_game_server_clusters_service_client_get_transport_class():
             GameServerClustersServiceAsyncClient,
             transports.GameServerClustersServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
+        ),
+        (
+            GameServerClustersServiceClient,
+            transports.GameServerClustersServiceRestTransport,
+            "rest",
         ),
     ],
 )
@@ -365,6 +387,18 @@ def test_game_server_clusters_service_client_client_options(
             GameServerClustersServiceAsyncClient,
             transports.GameServerClustersServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
+            "false",
+        ),
+        (
+            GameServerClustersServiceClient,
+            transports.GameServerClustersServiceRestTransport,
+            "rest",
+            "true",
+        ),
+        (
+            GameServerClustersServiceClient,
+            transports.GameServerClustersServiceRestTransport,
+            "rest",
             "false",
         ),
     ],
@@ -573,6 +607,11 @@ def test_game_server_clusters_service_client_get_mtls_endpoint_and_cert_source(
             transports.GameServerClustersServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
         ),
+        (
+            GameServerClustersServiceClient,
+            transports.GameServerClustersServiceRestTransport,
+            "rest",
+        ),
     ],
 )
 def test_game_server_clusters_service_client_client_options_scopes(
@@ -612,6 +651,12 @@ def test_game_server_clusters_service_client_client_options_scopes(
             transports.GameServerClustersServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
             grpc_helpers_async,
+        ),
+        (
+            GameServerClustersServiceClient,
+            transports.GameServerClustersServiceRestTransport,
+            "rest",
+            None,
         ),
     ],
 )
@@ -2701,6 +2746,2432 @@ async def test_preview_update_game_server_cluster_field_headers_async():
     ) in kw["metadata"]
 
 
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_clusters.ListGameServerClustersRequest,
+        dict,
+    ],
+)
+def test_list_game_server_clusters_rest(request_type):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_clusters.ListGameServerClustersResponse(
+            next_page_token="next_page_token_value",
+            unreachable=["unreachable_value"],
+        )
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = game_server_clusters.ListGameServerClustersResponse.pb(
+            return_value
+        )
+        json_return_value = json_format.MessageToJson(pb_return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.list_game_server_clusters(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, pagers.ListGameServerClustersPager)
+    assert response.next_page_token == "next_page_token_value"
+    assert response.unreachable == ["unreachable_value"]
+
+
+def test_list_game_server_clusters_rest_required_fields(
+    request_type=game_server_clusters.ListGameServerClustersRequest,
+):
+    transport_class = transports.GameServerClustersServiceRestTransport
+
+    request_init = {}
+    request_init["parent"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list_game_server_clusters._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    jsonified_request["parent"] = "parent_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list_game_server_clusters._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(
+        (
+            "filter",
+            "order_by",
+            "page_size",
+            "page_token",
+            "view",
+        )
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "parent" in jsonified_request
+    assert jsonified_request["parent"] == "parent_value"
+
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = game_server_clusters.ListGameServerClustersResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": pb_request,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+
+            pb_return_value = game_server_clusters.ListGameServerClustersResponse.pb(
+                return_value
+            )
+            json_return_value = json_format.MessageToJson(pb_return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list_game_server_clusters(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_list_game_server_clusters_rest_unset_required_fields():
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.list_game_server_clusters._get_unset_required_fields({})
+    assert set(unset_fields) == (
+        set(
+            (
+                "filter",
+                "orderBy",
+                "pageSize",
+                "pageToken",
+                "view",
+            )
+        )
+        & set(("parent",))
+    )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_game_server_clusters_rest_interceptors(null_interceptor):
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerClustersServiceRestInterceptor(),
+    )
+    client = GameServerClustersServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "post_list_game_server_clusters",
+    ) as post, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "pre_list_game_server_clusters",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_clusters.ListGameServerClustersRequest.pb(
+            game_server_clusters.ListGameServerClustersRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = (
+            game_server_clusters.ListGameServerClustersResponse.to_json(
+                game_server_clusters.ListGameServerClustersResponse()
+            )
+        )
+
+        request = game_server_clusters.ListGameServerClustersRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = game_server_clusters.ListGameServerClustersResponse()
+
+        client.list_game_server_clusters(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_list_game_server_clusters_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_clusters.ListGameServerClustersRequest,
+):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.list_game_server_clusters(request)
+
+
+def test_list_game_server_clusters_rest_flattened():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_clusters.ListGameServerClustersResponse()
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            parent="parent_value",
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = game_server_clusters.ListGameServerClustersResponse.pb(
+            return_value
+        )
+        json_return_value = json_format.MessageToJson(pb_return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.list_game_server_clusters(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_list_game_server_clusters_rest_flattened_error(transport: str = "rest"):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.list_game_server_clusters(
+            game_server_clusters.ListGameServerClustersRequest(),
+            parent="parent_value",
+        )
+
+
+def test_list_game_server_clusters_rest_pager(transport: str = "rest"):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # TODO(kbandes): remove this mock unless there's a good reason for it.
+        # with mock.patch.object(path_template, 'transcode') as transcode:
+        # Set the response as a series of pages
+        response = (
+            game_server_clusters.ListGameServerClustersResponse(
+                game_server_clusters=[
+                    game_server_clusters.GameServerCluster(),
+                    game_server_clusters.GameServerCluster(),
+                    game_server_clusters.GameServerCluster(),
+                ],
+                next_page_token="abc",
+            ),
+            game_server_clusters.ListGameServerClustersResponse(
+                game_server_clusters=[],
+                next_page_token="def",
+            ),
+            game_server_clusters.ListGameServerClustersResponse(
+                game_server_clusters=[
+                    game_server_clusters.GameServerCluster(),
+                ],
+                next_page_token="ghi",
+            ),
+            game_server_clusters.ListGameServerClustersResponse(
+                game_server_clusters=[
+                    game_server_clusters.GameServerCluster(),
+                    game_server_clusters.GameServerCluster(),
+                ],
+            ),
+        )
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            game_server_clusters.ListGameServerClustersResponse.to_json(x)
+            for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        sample_request = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+
+        pager = client.list_game_server_clusters(request=sample_request)
+
+        results = list(pager)
+        assert len(results) == 6
+        assert all(
+            isinstance(i, game_server_clusters.GameServerCluster) for i in results
+        )
+
+        pages = list(client.list_game_server_clusters(request=sample_request).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_clusters.GetGameServerClusterRequest,
+        dict,
+    ],
+)
+def test_get_game_server_cluster_rest(request_type):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_clusters.GameServerCluster(
+            name="name_value",
+            etag="etag_value",
+            description="description_value",
+        )
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = game_server_clusters.GameServerCluster.pb(return_value)
+        json_return_value = json_format.MessageToJson(pb_return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.get_game_server_cluster(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, game_server_clusters.GameServerCluster)
+    assert response.name == "name_value"
+    assert response.etag == "etag_value"
+    assert response.description == "description_value"
+
+
+def test_get_game_server_cluster_rest_required_fields(
+    request_type=game_server_clusters.GetGameServerClusterRequest,
+):
+    transport_class = transports.GameServerClustersServiceRestTransport
+
+    request_init = {}
+    request_init["name"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_game_server_cluster._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    jsonified_request["name"] = "name_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_game_server_cluster._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(("view",))
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "name" in jsonified_request
+    assert jsonified_request["name"] == "name_value"
+
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = game_server_clusters.GameServerCluster()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": pb_request,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+
+            pb_return_value = game_server_clusters.GameServerCluster.pb(return_value)
+            json_return_value = json_format.MessageToJson(pb_return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_game_server_cluster(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_get_game_server_cluster_rest_unset_required_fields():
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.get_game_server_cluster._get_unset_required_fields({})
+    assert set(unset_fields) == (set(("view",)) & set(("name",)))
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_game_server_cluster_rest_interceptors(null_interceptor):
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerClustersServiceRestInterceptor(),
+    )
+    client = GameServerClustersServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "post_get_game_server_cluster",
+    ) as post, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "pre_get_game_server_cluster",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_clusters.GetGameServerClusterRequest.pb(
+            game_server_clusters.GetGameServerClusterRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = game_server_clusters.GameServerCluster.to_json(
+            game_server_clusters.GameServerCluster()
+        )
+
+        request = game_server_clusters.GetGameServerClusterRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = game_server_clusters.GameServerCluster()
+
+        client.get_game_server_cluster(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_get_game_server_cluster_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_clusters.GetGameServerClusterRequest,
+):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.get_game_server_cluster(request)
+
+
+def test_get_game_server_cluster_rest_flattened():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_clusters.GameServerCluster()
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {
+            "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+        }
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            name="name_value",
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = game_server_clusters.GameServerCluster.pb(return_value)
+        json_return_value = json_format.MessageToJson(pb_return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.get_game_server_cluster(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_get_game_server_cluster_rest_flattened_error(transport: str = "rest"):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.get_game_server_cluster(
+            game_server_clusters.GetGameServerClusterRequest(),
+            name="name_value",
+        )
+
+
+def test_get_game_server_cluster_rest_error():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_clusters.CreateGameServerClusterRequest,
+        dict,
+    ],
+)
+def test_create_game_server_cluster_rest(request_type):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+    request_init["game_server_cluster"] = {
+        "name": "name_value",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "connection_info": {
+            "gke_cluster_reference": {"cluster": "cluster_value"},
+            "namespace": "namespace_value",
+        },
+        "etag": "etag_value",
+        "description": "description_value",
+        "cluster_state": {
+            "agones_version_installed": "agones_version_installed_value",
+            "kubernetes_version_installed": "kubernetes_version_installed_value",
+            "installation_state": 1,
+            "version_installed_error_message": "version_installed_error_message_value",
+            "provider": "provider_value",
+            "agones_version_targeted": "agones_version_targeted_value",
+        },
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.create_game_server_cluster(request)
+
+    # Establish that the response is the type that we expect.
+    assert response.operation.name == "operations/spam"
+
+
+def test_create_game_server_cluster_rest_required_fields(
+    request_type=game_server_clusters.CreateGameServerClusterRequest,
+):
+    transport_class = transports.GameServerClustersServiceRestTransport
+
+    request_init = {}
+    request_init["parent"] = ""
+    request_init["game_server_cluster_id"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "gameServerClusterId" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).create_game_server_cluster._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "gameServerClusterId" in jsonified_request
+    assert (
+        jsonified_request["gameServerClusterId"]
+        == request_init["game_server_cluster_id"]
+    )
+
+    jsonified_request["parent"] = "parent_value"
+    jsonified_request["gameServerClusterId"] = "game_server_cluster_id_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).create_game_server_cluster._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(("game_server_cluster_id",))
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "parent" in jsonified_request
+    assert jsonified_request["parent"] == "parent_value"
+    assert "gameServerClusterId" in jsonified_request
+    assert jsonified_request["gameServerClusterId"] == "game_server_cluster_id_value"
+
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = operations_pb2.Operation(name="operations/spam")
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": pb_request,
+            }
+            transcode_result["body"] = pb_request
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = json_format.MessageToJson(return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.create_game_server_cluster(request)
+
+            expected_params = [
+                (
+                    "gameServerClusterId",
+                    "",
+                ),
+                ("$alt", "json;enum-encoding=int"),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_create_game_server_cluster_rest_unset_required_fields():
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.create_game_server_cluster._get_unset_required_fields({})
+    assert set(unset_fields) == (
+        set(("gameServerClusterId",))
+        & set(
+            (
+                "parent",
+                "gameServerClusterId",
+                "gameServerCluster",
+            )
+        )
+    )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_create_game_server_cluster_rest_interceptors(null_interceptor):
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerClustersServiceRestInterceptor(),
+    )
+    client = GameServerClustersServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        operation.Operation, "_set_result_from_operation"
+    ), mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "post_create_game_server_cluster",
+    ) as post, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "pre_create_game_server_cluster",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_clusters.CreateGameServerClusterRequest.pb(
+            game_server_clusters.CreateGameServerClusterRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = json_format.MessageToJson(
+            operations_pb2.Operation()
+        )
+
+        request = game_server_clusters.CreateGameServerClusterRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = operations_pb2.Operation()
+
+        client.create_game_server_cluster(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_create_game_server_cluster_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_clusters.CreateGameServerClusterRequest,
+):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+    request_init["game_server_cluster"] = {
+        "name": "name_value",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "connection_info": {
+            "gke_cluster_reference": {"cluster": "cluster_value"},
+            "namespace": "namespace_value",
+        },
+        "etag": "etag_value",
+        "description": "description_value",
+        "cluster_state": {
+            "agones_version_installed": "agones_version_installed_value",
+            "kubernetes_version_installed": "kubernetes_version_installed_value",
+            "installation_state": 1,
+            "version_installed_error_message": "version_installed_error_message_value",
+            "provider": "provider_value",
+            "agones_version_targeted": "agones_version_targeted_value",
+        },
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.create_game_server_cluster(request)
+
+
+def test_create_game_server_cluster_rest_flattened():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            parent="parent_value",
+            game_server_cluster=game_server_clusters.GameServerCluster(
+                name="name_value"
+            ),
+            game_server_cluster_id="game_server_cluster_id_value",
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.create_game_server_cluster(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_create_game_server_cluster_rest_flattened_error(transport: str = "rest"):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.create_game_server_cluster(
+            game_server_clusters.CreateGameServerClusterRequest(),
+            parent="parent_value",
+            game_server_cluster=game_server_clusters.GameServerCluster(
+                name="name_value"
+            ),
+            game_server_cluster_id="game_server_cluster_id_value",
+        )
+
+
+def test_create_game_server_cluster_rest_error():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_clusters.PreviewCreateGameServerClusterRequest,
+        dict,
+    ],
+)
+def test_preview_create_game_server_cluster_rest(request_type):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+    request_init["game_server_cluster"] = {
+        "name": "name_value",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "connection_info": {
+            "gke_cluster_reference": {"cluster": "cluster_value"},
+            "namespace": "namespace_value",
+        },
+        "etag": "etag_value",
+        "description": "description_value",
+        "cluster_state": {
+            "agones_version_installed": "agones_version_installed_value",
+            "kubernetes_version_installed": "kubernetes_version_installed_value",
+            "installation_state": 1,
+            "version_installed_error_message": "version_installed_error_message_value",
+            "provider": "provider_value",
+            "agones_version_targeted": "agones_version_targeted_value",
+        },
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_clusters.PreviewCreateGameServerClusterResponse(
+            etag="etag_value",
+        )
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = (
+            game_server_clusters.PreviewCreateGameServerClusterResponse.pb(return_value)
+        )
+        json_return_value = json_format.MessageToJson(pb_return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.preview_create_game_server_cluster(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(
+        response, game_server_clusters.PreviewCreateGameServerClusterResponse
+    )
+    assert response.etag == "etag_value"
+
+
+def test_preview_create_game_server_cluster_rest_required_fields(
+    request_type=game_server_clusters.PreviewCreateGameServerClusterRequest,
+):
+    transport_class = transports.GameServerClustersServiceRestTransport
+
+    request_init = {}
+    request_init["parent"] = ""
+    request_init["game_server_cluster_id"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "gameServerClusterId" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).preview_create_game_server_cluster._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "gameServerClusterId" in jsonified_request
+    assert (
+        jsonified_request["gameServerClusterId"]
+        == request_init["game_server_cluster_id"]
+    )
+
+    jsonified_request["parent"] = "parent_value"
+    jsonified_request["gameServerClusterId"] = "game_server_cluster_id_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).preview_create_game_server_cluster._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(
+        (
+            "game_server_cluster_id",
+            "preview_time",
+            "view",
+        )
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "parent" in jsonified_request
+    assert jsonified_request["parent"] == "parent_value"
+    assert "gameServerClusterId" in jsonified_request
+    assert jsonified_request["gameServerClusterId"] == "game_server_cluster_id_value"
+
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = game_server_clusters.PreviewCreateGameServerClusterResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": pb_request,
+            }
+            transcode_result["body"] = pb_request
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+
+            pb_return_value = (
+                game_server_clusters.PreviewCreateGameServerClusterResponse.pb(
+                    return_value
+                )
+            )
+            json_return_value = json_format.MessageToJson(pb_return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.preview_create_game_server_cluster(request)
+
+            expected_params = [
+                (
+                    "gameServerClusterId",
+                    "",
+                ),
+                ("$alt", "json;enum-encoding=int"),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_preview_create_game_server_cluster_rest_unset_required_fields():
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = (
+        transport.preview_create_game_server_cluster._get_unset_required_fields({})
+    )
+    assert set(unset_fields) == (
+        set(
+            (
+                "gameServerClusterId",
+                "previewTime",
+                "view",
+            )
+        )
+        & set(
+            (
+                "parent",
+                "gameServerClusterId",
+                "gameServerCluster",
+            )
+        )
+    )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_preview_create_game_server_cluster_rest_interceptors(null_interceptor):
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerClustersServiceRestInterceptor(),
+    )
+    client = GameServerClustersServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "post_preview_create_game_server_cluster",
+    ) as post, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "pre_preview_create_game_server_cluster",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_clusters.PreviewCreateGameServerClusterRequest.pb(
+            game_server_clusters.PreviewCreateGameServerClusterRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = (
+            game_server_clusters.PreviewCreateGameServerClusterResponse.to_json(
+                game_server_clusters.PreviewCreateGameServerClusterResponse()
+            )
+        )
+
+        request = game_server_clusters.PreviewCreateGameServerClusterRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = (
+            game_server_clusters.PreviewCreateGameServerClusterResponse()
+        )
+
+        client.preview_create_game_server_cluster(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_preview_create_game_server_cluster_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_clusters.PreviewCreateGameServerClusterRequest,
+):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {"parent": "projects/sample1/locations/sample2/realms/sample3"}
+    request_init["game_server_cluster"] = {
+        "name": "name_value",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "connection_info": {
+            "gke_cluster_reference": {"cluster": "cluster_value"},
+            "namespace": "namespace_value",
+        },
+        "etag": "etag_value",
+        "description": "description_value",
+        "cluster_state": {
+            "agones_version_installed": "agones_version_installed_value",
+            "kubernetes_version_installed": "kubernetes_version_installed_value",
+            "installation_state": 1,
+            "version_installed_error_message": "version_installed_error_message_value",
+            "provider": "provider_value",
+            "agones_version_targeted": "agones_version_targeted_value",
+        },
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.preview_create_game_server_cluster(request)
+
+
+def test_preview_create_game_server_cluster_rest_error():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_clusters.DeleteGameServerClusterRequest,
+        dict,
+    ],
+)
+def test_delete_game_server_cluster_rest(request_type):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.delete_game_server_cluster(request)
+
+    # Establish that the response is the type that we expect.
+    assert response.operation.name == "operations/spam"
+
+
+def test_delete_game_server_cluster_rest_required_fields(
+    request_type=game_server_clusters.DeleteGameServerClusterRequest,
+):
+    transport_class = transports.GameServerClustersServiceRestTransport
+
+    request_init = {}
+    request_init["name"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete_game_server_cluster._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    jsonified_request["name"] = "name_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete_game_server_cluster._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "name" in jsonified_request
+    assert jsonified_request["name"] == "name_value"
+
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = operations_pb2.Operation(name="operations/spam")
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "delete",
+                "query_params": pb_request,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = json_format.MessageToJson(return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.delete_game_server_cluster(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_delete_game_server_cluster_rest_unset_required_fields():
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.delete_game_server_cluster._get_unset_required_fields({})
+    assert set(unset_fields) == (set(()) & set(("name",)))
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_game_server_cluster_rest_interceptors(null_interceptor):
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerClustersServiceRestInterceptor(),
+    )
+    client = GameServerClustersServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        operation.Operation, "_set_result_from_operation"
+    ), mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "post_delete_game_server_cluster",
+    ) as post, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "pre_delete_game_server_cluster",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_clusters.DeleteGameServerClusterRequest.pb(
+            game_server_clusters.DeleteGameServerClusterRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = json_format.MessageToJson(
+            operations_pb2.Operation()
+        )
+
+        request = game_server_clusters.DeleteGameServerClusterRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = operations_pb2.Operation()
+
+        client.delete_game_server_cluster(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_delete_game_server_cluster_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_clusters.DeleteGameServerClusterRequest,
+):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.delete_game_server_cluster(request)
+
+
+def test_delete_game_server_cluster_rest_flattened():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {
+            "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+        }
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            name="name_value",
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.delete_game_server_cluster(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_delete_game_server_cluster_rest_flattened_error(transport: str = "rest"):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.delete_game_server_cluster(
+            game_server_clusters.DeleteGameServerClusterRequest(),
+            name="name_value",
+        )
+
+
+def test_delete_game_server_cluster_rest_error():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_clusters.PreviewDeleteGameServerClusterRequest,
+        dict,
+    ],
+)
+def test_preview_delete_game_server_cluster_rest(request_type):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_clusters.PreviewDeleteGameServerClusterResponse(
+            etag="etag_value",
+        )
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = (
+            game_server_clusters.PreviewDeleteGameServerClusterResponse.pb(return_value)
+        )
+        json_return_value = json_format.MessageToJson(pb_return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.preview_delete_game_server_cluster(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(
+        response, game_server_clusters.PreviewDeleteGameServerClusterResponse
+    )
+    assert response.etag == "etag_value"
+
+
+def test_preview_delete_game_server_cluster_rest_required_fields(
+    request_type=game_server_clusters.PreviewDeleteGameServerClusterRequest,
+):
+    transport_class = transports.GameServerClustersServiceRestTransport
+
+    request_init = {}
+    request_init["name"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).preview_delete_game_server_cluster._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    jsonified_request["name"] = "name_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).preview_delete_game_server_cluster._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(("preview_time",))
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "name" in jsonified_request
+    assert jsonified_request["name"] == "name_value"
+
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = game_server_clusters.PreviewDeleteGameServerClusterResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "delete",
+                "query_params": pb_request,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+
+            pb_return_value = (
+                game_server_clusters.PreviewDeleteGameServerClusterResponse.pb(
+                    return_value
+                )
+            )
+            json_return_value = json_format.MessageToJson(pb_return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.preview_delete_game_server_cluster(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_preview_delete_game_server_cluster_rest_unset_required_fields():
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = (
+        transport.preview_delete_game_server_cluster._get_unset_required_fields({})
+    )
+    assert set(unset_fields) == (set(("previewTime",)) & set(("name",)))
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_preview_delete_game_server_cluster_rest_interceptors(null_interceptor):
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerClustersServiceRestInterceptor(),
+    )
+    client = GameServerClustersServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "post_preview_delete_game_server_cluster",
+    ) as post, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "pre_preview_delete_game_server_cluster",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_clusters.PreviewDeleteGameServerClusterRequest.pb(
+            game_server_clusters.PreviewDeleteGameServerClusterRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = (
+            game_server_clusters.PreviewDeleteGameServerClusterResponse.to_json(
+                game_server_clusters.PreviewDeleteGameServerClusterResponse()
+            )
+        )
+
+        request = game_server_clusters.PreviewDeleteGameServerClusterRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = (
+            game_server_clusters.PreviewDeleteGameServerClusterResponse()
+        )
+
+        client.preview_delete_game_server_cluster(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_preview_delete_game_server_cluster_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_clusters.PreviewDeleteGameServerClusterRequest,
+):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.preview_delete_game_server_cluster(request)
+
+
+def test_preview_delete_game_server_cluster_rest_error():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_clusters.UpdateGameServerClusterRequest,
+        dict,
+    ],
+)
+def test_update_game_server_cluster_rest(request_type):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "game_server_cluster": {
+            "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+        }
+    }
+    request_init["game_server_cluster"] = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "connection_info": {
+            "gke_cluster_reference": {"cluster": "cluster_value"},
+            "namespace": "namespace_value",
+        },
+        "etag": "etag_value",
+        "description": "description_value",
+        "cluster_state": {
+            "agones_version_installed": "agones_version_installed_value",
+            "kubernetes_version_installed": "kubernetes_version_installed_value",
+            "installation_state": 1,
+            "version_installed_error_message": "version_installed_error_message_value",
+            "provider": "provider_value",
+            "agones_version_targeted": "agones_version_targeted_value",
+        },
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.update_game_server_cluster(request)
+
+    # Establish that the response is the type that we expect.
+    assert response.operation.name == "operations/spam"
+
+
+def test_update_game_server_cluster_rest_required_fields(
+    request_type=game_server_clusters.UpdateGameServerClusterRequest,
+):
+    transport_class = transports.GameServerClustersServiceRestTransport
+
+    request_init = {}
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).update_game_server_cluster._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).update_game_server_cluster._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(("update_mask",))
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = operations_pb2.Operation(name="operations/spam")
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": pb_request,
+            }
+            transcode_result["body"] = pb_request
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = json_format.MessageToJson(return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.update_game_server_cluster(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_update_game_server_cluster_rest_unset_required_fields():
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.update_game_server_cluster._get_unset_required_fields({})
+    assert set(unset_fields) == (
+        set(("updateMask",))
+        & set(
+            (
+                "gameServerCluster",
+                "updateMask",
+            )
+        )
+    )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_game_server_cluster_rest_interceptors(null_interceptor):
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerClustersServiceRestInterceptor(),
+    )
+    client = GameServerClustersServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        operation.Operation, "_set_result_from_operation"
+    ), mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "post_update_game_server_cluster",
+    ) as post, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "pre_update_game_server_cluster",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_clusters.UpdateGameServerClusterRequest.pb(
+            game_server_clusters.UpdateGameServerClusterRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = json_format.MessageToJson(
+            operations_pb2.Operation()
+        )
+
+        request = game_server_clusters.UpdateGameServerClusterRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = operations_pb2.Operation()
+
+        client.update_game_server_cluster(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_update_game_server_cluster_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_clusters.UpdateGameServerClusterRequest,
+):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "game_server_cluster": {
+            "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+        }
+    }
+    request_init["game_server_cluster"] = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "connection_info": {
+            "gke_cluster_reference": {"cluster": "cluster_value"},
+            "namespace": "namespace_value",
+        },
+        "etag": "etag_value",
+        "description": "description_value",
+        "cluster_state": {
+            "agones_version_installed": "agones_version_installed_value",
+            "kubernetes_version_installed": "kubernetes_version_installed_value",
+            "installation_state": 1,
+            "version_installed_error_message": "version_installed_error_message_value",
+            "provider": "provider_value",
+            "agones_version_targeted": "agones_version_targeted_value",
+        },
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.update_game_server_cluster(request)
+
+
+def test_update_game_server_cluster_rest_flattened():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {
+            "game_server_cluster": {
+                "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+            }
+        }
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            game_server_cluster=game_server_clusters.GameServerCluster(
+                name="name_value"
+            ),
+            update_mask=field_mask_pb2.FieldMask(paths=["paths_value"]),
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.update_game_server_cluster(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_update_game_server_cluster_rest_flattened_error(transport: str = "rest"):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.update_game_server_cluster(
+            game_server_clusters.UpdateGameServerClusterRequest(),
+            game_server_cluster=game_server_clusters.GameServerCluster(
+                name="name_value"
+            ),
+            update_mask=field_mask_pb2.FieldMask(paths=["paths_value"]),
+        )
+
+
+def test_update_game_server_cluster_rest_error():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_clusters.PreviewUpdateGameServerClusterRequest,
+        dict,
+    ],
+)
+def test_preview_update_game_server_cluster_rest(request_type):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "game_server_cluster": {
+            "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+        }
+    }
+    request_init["game_server_cluster"] = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "connection_info": {
+            "gke_cluster_reference": {"cluster": "cluster_value"},
+            "namespace": "namespace_value",
+        },
+        "etag": "etag_value",
+        "description": "description_value",
+        "cluster_state": {
+            "agones_version_installed": "agones_version_installed_value",
+            "kubernetes_version_installed": "kubernetes_version_installed_value",
+            "installation_state": 1,
+            "version_installed_error_message": "version_installed_error_message_value",
+            "provider": "provider_value",
+            "agones_version_targeted": "agones_version_targeted_value",
+        },
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_clusters.PreviewUpdateGameServerClusterResponse(
+            etag="etag_value",
+        )
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = (
+            game_server_clusters.PreviewUpdateGameServerClusterResponse.pb(return_value)
+        )
+        json_return_value = json_format.MessageToJson(pb_return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.preview_update_game_server_cluster(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(
+        response, game_server_clusters.PreviewUpdateGameServerClusterResponse
+    )
+    assert response.etag == "etag_value"
+
+
+def test_preview_update_game_server_cluster_rest_required_fields(
+    request_type=game_server_clusters.PreviewUpdateGameServerClusterRequest,
+):
+    transport_class = transports.GameServerClustersServiceRestTransport
+
+    request_init = {}
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).preview_update_game_server_cluster._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).preview_update_game_server_cluster._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(
+        (
+            "preview_time",
+            "update_mask",
+        )
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = game_server_clusters.PreviewUpdateGameServerClusterResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": pb_request,
+            }
+            transcode_result["body"] = pb_request
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+
+            pb_return_value = (
+                game_server_clusters.PreviewUpdateGameServerClusterResponse.pb(
+                    return_value
+                )
+            )
+            json_return_value = json_format.MessageToJson(pb_return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.preview_update_game_server_cluster(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_preview_update_game_server_cluster_rest_unset_required_fields():
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = (
+        transport.preview_update_game_server_cluster._get_unset_required_fields({})
+    )
+    assert set(unset_fields) == (
+        set(
+            (
+                "previewTime",
+                "updateMask",
+            )
+        )
+        & set(
+            (
+                "gameServerCluster",
+                "updateMask",
+            )
+        )
+    )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_preview_update_game_server_cluster_rest_interceptors(null_interceptor):
+    transport = transports.GameServerClustersServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerClustersServiceRestInterceptor(),
+    )
+    client = GameServerClustersServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "post_preview_update_game_server_cluster",
+    ) as post, mock.patch.object(
+        transports.GameServerClustersServiceRestInterceptor,
+        "pre_preview_update_game_server_cluster",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_clusters.PreviewUpdateGameServerClusterRequest.pb(
+            game_server_clusters.PreviewUpdateGameServerClusterRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = (
+            game_server_clusters.PreviewUpdateGameServerClusterResponse.to_json(
+                game_server_clusters.PreviewUpdateGameServerClusterResponse()
+            )
+        )
+
+        request = game_server_clusters.PreviewUpdateGameServerClusterRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = (
+            game_server_clusters.PreviewUpdateGameServerClusterResponse()
+        )
+
+        client.preview_update_game_server_cluster(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_preview_update_game_server_cluster_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_clusters.PreviewUpdateGameServerClusterRequest,
+):
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "game_server_cluster": {
+            "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4"
+        }
+    }
+    request_init["game_server_cluster"] = {
+        "name": "projects/sample1/locations/sample2/realms/sample3/gameServerClusters/sample4",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "connection_info": {
+            "gke_cluster_reference": {"cluster": "cluster_value"},
+            "namespace": "namespace_value",
+        },
+        "etag": "etag_value",
+        "description": "description_value",
+        "cluster_state": {
+            "agones_version_installed": "agones_version_installed_value",
+            "kubernetes_version_installed": "kubernetes_version_installed_value",
+            "installation_state": 1,
+            "version_installed_error_message": "version_installed_error_message_value",
+            "provider": "provider_value",
+            "agones_version_targeted": "agones_version_targeted_value",
+        },
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.preview_update_game_server_cluster(request)
+
+
+def test_preview_update_game_server_cluster_rest_error():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
 def test_credentials_transport_error():
     # It is an error to provide credentials and a transport instance.
     transport = transports.GameServerClustersServiceGrpcTransport(
@@ -2782,6 +5253,7 @@ def test_transport_get_channel():
     [
         transports.GameServerClustersServiceGrpcTransport,
         transports.GameServerClustersServiceGrpcAsyncIOTransport,
+        transports.GameServerClustersServiceRestTransport,
     ],
 )
 def test_transport_adc(transport_class):
@@ -2796,6 +5268,7 @@ def test_transport_adc(transport_class):
     "transport_name",
     [
         "grpc",
+        "rest",
     ],
 )
 def test_transport_kind(transport_name):
@@ -2937,6 +5410,7 @@ def test_game_server_clusters_service_transport_auth_adc(transport_class):
     [
         transports.GameServerClustersServiceGrpcTransport,
         transports.GameServerClustersServiceGrpcAsyncIOTransport,
+        transports.GameServerClustersServiceRestTransport,
     ],
 )
 def test_game_server_clusters_service_transport_auth_gdch_credentials(transport_class):
@@ -3038,11 +5512,40 @@ def test_game_server_clusters_service_grpc_transport_client_cert_source_for_mtls
             )
 
 
+def test_game_server_clusters_service_http_transport_client_cert_source_for_mtls():
+    cred = ga_credentials.AnonymousCredentials()
+    with mock.patch(
+        "google.auth.transport.requests.AuthorizedSession.configure_mtls_channel"
+    ) as mock_configure_mtls_channel:
+        transports.GameServerClustersServiceRestTransport(
+            credentials=cred, client_cert_source_for_mtls=client_cert_source_callback
+        )
+        mock_configure_mtls_channel.assert_called_once_with(client_cert_source_callback)
+
+
+def test_game_server_clusters_service_rest_lro_client():
+    client = GameServerClustersServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    transport = client.transport
+
+    # Ensure that we have a api-core operations client.
+    assert isinstance(
+        transport.operations_client,
+        operations_v1.AbstractOperationsClient,
+    )
+
+    # Ensure that subsequent calls to the property send the exact same object.
+    assert transport.operations_client is transport.operations_client
+
+
 @pytest.mark.parametrize(
     "transport_name",
     [
         "grpc",
         "grpc_asyncio",
+        "rest",
     ],
 )
 def test_game_server_clusters_service_host_no_port(transport_name):
@@ -3053,7 +5556,11 @@ def test_game_server_clusters_service_host_no_port(transport_name):
         ),
         transport=transport_name,
     )
-    assert client.transport._host == ("gameservices.googleapis.com:443")
+    assert client.transport._host == (
+        "gameservices.googleapis.com:443"
+        if transport_name in ["grpc", "grpc_asyncio"]
+        else "https://gameservices.googleapis.com"
+    )
 
 
 @pytest.mark.parametrize(
@@ -3061,6 +5568,7 @@ def test_game_server_clusters_service_host_no_port(transport_name):
     [
         "grpc",
         "grpc_asyncio",
+        "rest",
     ],
 )
 def test_game_server_clusters_service_host_with_port(transport_name):
@@ -3071,7 +5579,56 @@ def test_game_server_clusters_service_host_with_port(transport_name):
         ),
         transport=transport_name,
     )
-    assert client.transport._host == ("gameservices.googleapis.com:8000")
+    assert client.transport._host == (
+        "gameservices.googleapis.com:8000"
+        if transport_name in ["grpc", "grpc_asyncio"]
+        else "https://gameservices.googleapis.com:8000"
+    )
+
+
+@pytest.mark.parametrize(
+    "transport_name",
+    [
+        "rest",
+    ],
+)
+def test_game_server_clusters_service_client_transport_session_collision(
+    transport_name,
+):
+    creds1 = ga_credentials.AnonymousCredentials()
+    creds2 = ga_credentials.AnonymousCredentials()
+    client1 = GameServerClustersServiceClient(
+        credentials=creds1,
+        transport=transport_name,
+    )
+    client2 = GameServerClustersServiceClient(
+        credentials=creds2,
+        transport=transport_name,
+    )
+    session1 = client1.transport.list_game_server_clusters._session
+    session2 = client2.transport.list_game_server_clusters._session
+    assert session1 != session2
+    session1 = client1.transport.get_game_server_cluster._session
+    session2 = client2.transport.get_game_server_cluster._session
+    assert session1 != session2
+    session1 = client1.transport.create_game_server_cluster._session
+    session2 = client2.transport.create_game_server_cluster._session
+    assert session1 != session2
+    session1 = client1.transport.preview_create_game_server_cluster._session
+    session2 = client2.transport.preview_create_game_server_cluster._session
+    assert session1 != session2
+    session1 = client1.transport.delete_game_server_cluster._session
+    session2 = client2.transport.delete_game_server_cluster._session
+    assert session1 != session2
+    session1 = client1.transport.preview_delete_game_server_cluster._session
+    session2 = client2.transport.preview_delete_game_server_cluster._session
+    assert session1 != session2
+    session1 = client1.transport.update_game_server_cluster._session
+    session2 = client2.transport.update_game_server_cluster._session
+    assert session1 != session2
+    session1 = client1.transport.preview_update_game_server_cluster._session
+    session2 = client2.transport.preview_update_game_server_cluster._session
+    assert session1 != session2
 
 
 def test_game_server_clusters_service_grpc_transport_channel():
@@ -3409,6 +5966,7 @@ async def test_transport_close_async():
 
 def test_transport_close():
     transports = {
+        "rest": "_session",
         "grpc": "_grpc_channel",
     }
 
@@ -3426,6 +5984,7 @@ def test_transport_close():
 
 def test_client_ctx():
     transports = [
+        "rest",
         "grpc",
     ]
     for transport in transports:

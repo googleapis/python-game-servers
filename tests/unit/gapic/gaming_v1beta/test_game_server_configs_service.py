@@ -22,6 +22,8 @@ try:
 except ImportError:  # pragma: NO COVER
     import mock
 
+from collections.abc import Iterable
+import json
 import math
 
 from google.api_core import (
@@ -43,12 +45,15 @@ from google.longrunning import operations_pb2
 from google.oauth2 import service_account
 from google.protobuf import duration_pb2  # type: ignore
 from google.protobuf import empty_pb2  # type: ignore
+from google.protobuf import json_format
 from google.protobuf import timestamp_pb2  # type: ignore
 import grpc
 from grpc.experimental import aio
 from proto.marshal.rules import wrappers
 from proto.marshal.rules.dates import DurationRule, TimestampRule
 import pytest
+from requests import PreparedRequest, Request, Response
+from requests.sessions import Session
 
 from google.cloud.gaming_v1beta.services.game_server_configs_service import (
     GameServerConfigsServiceAsyncClient,
@@ -109,6 +114,7 @@ def test__get_default_mtls_endpoint():
     [
         (GameServerConfigsServiceClient, "grpc"),
         (GameServerConfigsServiceAsyncClient, "grpc_asyncio"),
+        (GameServerConfigsServiceClient, "rest"),
     ],
 )
 def test_game_server_configs_service_client_from_service_account_info(
@@ -124,7 +130,11 @@ def test_game_server_configs_service_client_from_service_account_info(
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        assert client.transport._host == ("gameservices.googleapis.com:443")
+        assert client.transport._host == (
+            "gameservices.googleapis.com:443"
+            if transport_name in ["grpc", "grpc_asyncio"]
+            else "https://gameservices.googleapis.com"
+        )
 
 
 @pytest.mark.parametrize(
@@ -132,6 +142,7 @@ def test_game_server_configs_service_client_from_service_account_info(
     [
         (transports.GameServerConfigsServiceGrpcTransport, "grpc"),
         (transports.GameServerConfigsServiceGrpcAsyncIOTransport, "grpc_asyncio"),
+        (transports.GameServerConfigsServiceRestTransport, "rest"),
     ],
 )
 def test_game_server_configs_service_client_service_account_always_use_jwt(
@@ -157,6 +168,7 @@ def test_game_server_configs_service_client_service_account_always_use_jwt(
     [
         (GameServerConfigsServiceClient, "grpc"),
         (GameServerConfigsServiceAsyncClient, "grpc_asyncio"),
+        (GameServerConfigsServiceClient, "rest"),
     ],
 )
 def test_game_server_configs_service_client_from_service_account_file(
@@ -179,13 +191,18 @@ def test_game_server_configs_service_client_from_service_account_file(
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        assert client.transport._host == ("gameservices.googleapis.com:443")
+        assert client.transport._host == (
+            "gameservices.googleapis.com:443"
+            if transport_name in ["grpc", "grpc_asyncio"]
+            else "https://gameservices.googleapis.com"
+        )
 
 
 def test_game_server_configs_service_client_get_transport_class():
     transport = GameServerConfigsServiceClient.get_transport_class()
     available_transports = [
         transports.GameServerConfigsServiceGrpcTransport,
+        transports.GameServerConfigsServiceRestTransport,
     ]
     assert transport in available_transports
 
@@ -205,6 +222,11 @@ def test_game_server_configs_service_client_get_transport_class():
             GameServerConfigsServiceAsyncClient,
             transports.GameServerConfigsServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
+        ),
+        (
+            GameServerConfigsServiceClient,
+            transports.GameServerConfigsServiceRestTransport,
+            "rest",
         ),
     ],
 )
@@ -363,6 +385,18 @@ def test_game_server_configs_service_client_client_options(
             GameServerConfigsServiceAsyncClient,
             transports.GameServerConfigsServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
+            "false",
+        ),
+        (
+            GameServerConfigsServiceClient,
+            transports.GameServerConfigsServiceRestTransport,
+            "rest",
+            "true",
+        ),
+        (
+            GameServerConfigsServiceClient,
+            transports.GameServerConfigsServiceRestTransport,
+            "rest",
             "false",
         ),
     ],
@@ -571,6 +605,11 @@ def test_game_server_configs_service_client_get_mtls_endpoint_and_cert_source(
             transports.GameServerConfigsServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
         ),
+        (
+            GameServerConfigsServiceClient,
+            transports.GameServerConfigsServiceRestTransport,
+            "rest",
+        ),
     ],
 )
 def test_game_server_configs_service_client_client_options_scopes(
@@ -610,6 +649,12 @@ def test_game_server_configs_service_client_client_options_scopes(
             transports.GameServerConfigsServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
             grpc_helpers_async,
+        ),
+        (
+            GameServerConfigsServiceClient,
+            transports.GameServerConfigsServiceRestTransport,
+            "rest",
+            None,
         ),
     ],
 )
@@ -1915,6 +1960,1266 @@ async def test_delete_game_server_config_flattened_error_async():
         )
 
 
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_configs.ListGameServerConfigsRequest,
+        dict,
+    ],
+)
+def test_list_game_server_configs_rest(request_type):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "parent": "projects/sample1/locations/sample2/gameServerDeployments/sample3"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_configs.ListGameServerConfigsResponse(
+            next_page_token="next_page_token_value",
+            unreachable=["unreachable_value"],
+        )
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = game_server_configs.ListGameServerConfigsResponse.pb(
+            return_value
+        )
+        json_return_value = json_format.MessageToJson(pb_return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.list_game_server_configs(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, pagers.ListGameServerConfigsPager)
+    assert response.next_page_token == "next_page_token_value"
+    assert response.unreachable == ["unreachable_value"]
+
+
+def test_list_game_server_configs_rest_required_fields(
+    request_type=game_server_configs.ListGameServerConfigsRequest,
+):
+    transport_class = transports.GameServerConfigsServiceRestTransport
+
+    request_init = {}
+    request_init["parent"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list_game_server_configs._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    jsonified_request["parent"] = "parent_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list_game_server_configs._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(
+        (
+            "filter",
+            "order_by",
+            "page_size",
+            "page_token",
+        )
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "parent" in jsonified_request
+    assert jsonified_request["parent"] == "parent_value"
+
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = game_server_configs.ListGameServerConfigsResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": pb_request,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+
+            pb_return_value = game_server_configs.ListGameServerConfigsResponse.pb(
+                return_value
+            )
+            json_return_value = json_format.MessageToJson(pb_return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list_game_server_configs(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_list_game_server_configs_rest_unset_required_fields():
+    transport = transports.GameServerConfigsServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.list_game_server_configs._get_unset_required_fields({})
+    assert set(unset_fields) == (
+        set(
+            (
+                "filter",
+                "orderBy",
+                "pageSize",
+                "pageToken",
+            )
+        )
+        & set(("parent",))
+    )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_game_server_configs_rest_interceptors(null_interceptor):
+    transport = transports.GameServerConfigsServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerConfigsServiceRestInterceptor(),
+    )
+    client = GameServerConfigsServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GameServerConfigsServiceRestInterceptor,
+        "post_list_game_server_configs",
+    ) as post, mock.patch.object(
+        transports.GameServerConfigsServiceRestInterceptor,
+        "pre_list_game_server_configs",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_configs.ListGameServerConfigsRequest.pb(
+            game_server_configs.ListGameServerConfigsRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = (
+            game_server_configs.ListGameServerConfigsResponse.to_json(
+                game_server_configs.ListGameServerConfigsResponse()
+            )
+        )
+
+        request = game_server_configs.ListGameServerConfigsRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = game_server_configs.ListGameServerConfigsResponse()
+
+        client.list_game_server_configs(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_list_game_server_configs_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_configs.ListGameServerConfigsRequest,
+):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "parent": "projects/sample1/locations/sample2/gameServerDeployments/sample3"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.list_game_server_configs(request)
+
+
+def test_list_game_server_configs_rest_flattened():
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_configs.ListGameServerConfigsResponse()
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {
+            "parent": "projects/sample1/locations/sample2/gameServerDeployments/sample3"
+        }
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            parent="parent_value",
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = game_server_configs.ListGameServerConfigsResponse.pb(
+            return_value
+        )
+        json_return_value = json_format.MessageToJson(pb_return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.list_game_server_configs(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1beta/{parent=projects/*/locations/*/gameServerDeployments/*}/configs"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_list_game_server_configs_rest_flattened_error(transport: str = "rest"):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.list_game_server_configs(
+            game_server_configs.ListGameServerConfigsRequest(),
+            parent="parent_value",
+        )
+
+
+def test_list_game_server_configs_rest_pager(transport: str = "rest"):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # TODO(kbandes): remove this mock unless there's a good reason for it.
+        # with mock.patch.object(path_template, 'transcode') as transcode:
+        # Set the response as a series of pages
+        response = (
+            game_server_configs.ListGameServerConfigsResponse(
+                game_server_configs=[
+                    game_server_configs.GameServerConfig(),
+                    game_server_configs.GameServerConfig(),
+                    game_server_configs.GameServerConfig(),
+                ],
+                next_page_token="abc",
+            ),
+            game_server_configs.ListGameServerConfigsResponse(
+                game_server_configs=[],
+                next_page_token="def",
+            ),
+            game_server_configs.ListGameServerConfigsResponse(
+                game_server_configs=[
+                    game_server_configs.GameServerConfig(),
+                ],
+                next_page_token="ghi",
+            ),
+            game_server_configs.ListGameServerConfigsResponse(
+                game_server_configs=[
+                    game_server_configs.GameServerConfig(),
+                    game_server_configs.GameServerConfig(),
+                ],
+            ),
+        )
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            game_server_configs.ListGameServerConfigsResponse.to_json(x)
+            for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        sample_request = {
+            "parent": "projects/sample1/locations/sample2/gameServerDeployments/sample3"
+        }
+
+        pager = client.list_game_server_configs(request=sample_request)
+
+        results = list(pager)
+        assert len(results) == 6
+        assert all(isinstance(i, game_server_configs.GameServerConfig) for i in results)
+
+        pages = list(client.list_game_server_configs(request=sample_request).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_configs.GetGameServerConfigRequest,
+        dict,
+    ],
+)
+def test_get_game_server_config_rest(request_type):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/gameServerDeployments/sample3/configs/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_configs.GameServerConfig(
+            name="name_value",
+            description="description_value",
+        )
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = game_server_configs.GameServerConfig.pb(return_value)
+        json_return_value = json_format.MessageToJson(pb_return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.get_game_server_config(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, game_server_configs.GameServerConfig)
+    assert response.name == "name_value"
+    assert response.description == "description_value"
+
+
+def test_get_game_server_config_rest_required_fields(
+    request_type=game_server_configs.GetGameServerConfigRequest,
+):
+    transport_class = transports.GameServerConfigsServiceRestTransport
+
+    request_init = {}
+    request_init["name"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_game_server_config._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    jsonified_request["name"] = "name_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_game_server_config._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "name" in jsonified_request
+    assert jsonified_request["name"] == "name_value"
+
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = game_server_configs.GameServerConfig()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": pb_request,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+
+            pb_return_value = game_server_configs.GameServerConfig.pb(return_value)
+            json_return_value = json_format.MessageToJson(pb_return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_game_server_config(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_get_game_server_config_rest_unset_required_fields():
+    transport = transports.GameServerConfigsServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.get_game_server_config._get_unset_required_fields({})
+    assert set(unset_fields) == (set(()) & set(("name",)))
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_game_server_config_rest_interceptors(null_interceptor):
+    transport = transports.GameServerConfigsServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerConfigsServiceRestInterceptor(),
+    )
+    client = GameServerConfigsServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GameServerConfigsServiceRestInterceptor,
+        "post_get_game_server_config",
+    ) as post, mock.patch.object(
+        transports.GameServerConfigsServiceRestInterceptor, "pre_get_game_server_config"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_configs.GetGameServerConfigRequest.pb(
+            game_server_configs.GetGameServerConfigRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = game_server_configs.GameServerConfig.to_json(
+            game_server_configs.GameServerConfig()
+        )
+
+        request = game_server_configs.GetGameServerConfigRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = game_server_configs.GameServerConfig()
+
+        client.get_game_server_config(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_get_game_server_config_rest_bad_request(
+    transport: str = "rest", request_type=game_server_configs.GetGameServerConfigRequest
+):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/gameServerDeployments/sample3/configs/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.get_game_server_config(request)
+
+
+def test_get_game_server_config_rest_flattened():
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = game_server_configs.GameServerConfig()
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {
+            "name": "projects/sample1/locations/sample2/gameServerDeployments/sample3/configs/sample4"
+        }
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            name="name_value",
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        pb_return_value = game_server_configs.GameServerConfig.pb(return_value)
+        json_return_value = json_format.MessageToJson(pb_return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.get_game_server_config(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1beta/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_get_game_server_config_rest_flattened_error(transport: str = "rest"):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.get_game_server_config(
+            game_server_configs.GetGameServerConfigRequest(),
+            name="name_value",
+        )
+
+
+def test_get_game_server_config_rest_error():
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_configs.CreateGameServerConfigRequest,
+        dict,
+    ],
+)
+def test_create_game_server_config_rest(request_type):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "parent": "projects/sample1/locations/sample2/gameServerDeployments/sample3"
+    }
+    request_init["game_server_config"] = {
+        "name": "name_value",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "fleet_configs": [{"fleet_spec": "fleet_spec_value", "name": "name_value"}],
+        "scaling_configs": [
+            {
+                "name": "name_value",
+                "fleet_autoscaler_spec": "fleet_autoscaler_spec_value",
+                "selectors": [{"labels": {}}],
+                "schedules": [
+                    {
+                        "start_time": {},
+                        "end_time": {},
+                        "cron_job_duration": {"seconds": 751, "nanos": 543},
+                        "cron_spec": "cron_spec_value",
+                    }
+                ],
+            }
+        ],
+        "description": "description_value",
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.create_game_server_config(request)
+
+    # Establish that the response is the type that we expect.
+    assert response.operation.name == "operations/spam"
+
+
+def test_create_game_server_config_rest_required_fields(
+    request_type=game_server_configs.CreateGameServerConfigRequest,
+):
+    transport_class = transports.GameServerConfigsServiceRestTransport
+
+    request_init = {}
+    request_init["parent"] = ""
+    request_init["config_id"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "configId" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).create_game_server_config._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "configId" in jsonified_request
+    assert jsonified_request["configId"] == request_init["config_id"]
+
+    jsonified_request["parent"] = "parent_value"
+    jsonified_request["configId"] = "config_id_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).create_game_server_config._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(("config_id",))
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "parent" in jsonified_request
+    assert jsonified_request["parent"] == "parent_value"
+    assert "configId" in jsonified_request
+    assert jsonified_request["configId"] == "config_id_value"
+
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = operations_pb2.Operation(name="operations/spam")
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": pb_request,
+            }
+            transcode_result["body"] = pb_request
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = json_format.MessageToJson(return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.create_game_server_config(request)
+
+            expected_params = [
+                (
+                    "configId",
+                    "",
+                ),
+                ("$alt", "json;enum-encoding=int"),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_create_game_server_config_rest_unset_required_fields():
+    transport = transports.GameServerConfigsServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.create_game_server_config._get_unset_required_fields({})
+    assert set(unset_fields) == (
+        set(("configId",))
+        & set(
+            (
+                "parent",
+                "configId",
+                "gameServerConfig",
+            )
+        )
+    )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_create_game_server_config_rest_interceptors(null_interceptor):
+    transport = transports.GameServerConfigsServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerConfigsServiceRestInterceptor(),
+    )
+    client = GameServerConfigsServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        operation.Operation, "_set_result_from_operation"
+    ), mock.patch.object(
+        transports.GameServerConfigsServiceRestInterceptor,
+        "post_create_game_server_config",
+    ) as post, mock.patch.object(
+        transports.GameServerConfigsServiceRestInterceptor,
+        "pre_create_game_server_config",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_configs.CreateGameServerConfigRequest.pb(
+            game_server_configs.CreateGameServerConfigRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = json_format.MessageToJson(
+            operations_pb2.Operation()
+        )
+
+        request = game_server_configs.CreateGameServerConfigRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = operations_pb2.Operation()
+
+        client.create_game_server_config(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_create_game_server_config_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_configs.CreateGameServerConfigRequest,
+):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "parent": "projects/sample1/locations/sample2/gameServerDeployments/sample3"
+    }
+    request_init["game_server_config"] = {
+        "name": "name_value",
+        "create_time": {"seconds": 751, "nanos": 543},
+        "update_time": {},
+        "labels": {},
+        "fleet_configs": [{"fleet_spec": "fleet_spec_value", "name": "name_value"}],
+        "scaling_configs": [
+            {
+                "name": "name_value",
+                "fleet_autoscaler_spec": "fleet_autoscaler_spec_value",
+                "selectors": [{"labels": {}}],
+                "schedules": [
+                    {
+                        "start_time": {},
+                        "end_time": {},
+                        "cron_job_duration": {"seconds": 751, "nanos": 543},
+                        "cron_spec": "cron_spec_value",
+                    }
+                ],
+            }
+        ],
+        "description": "description_value",
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.create_game_server_config(request)
+
+
+def test_create_game_server_config_rest_flattened():
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {
+            "parent": "projects/sample1/locations/sample2/gameServerDeployments/sample3"
+        }
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            parent="parent_value",
+            game_server_config=game_server_configs.GameServerConfig(name="name_value"),
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.create_game_server_config(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1beta/{parent=projects/*/locations/*/gameServerDeployments/*}/configs"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_create_game_server_config_rest_flattened_error(transport: str = "rest"):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.create_game_server_config(
+            game_server_configs.CreateGameServerConfigRequest(),
+            parent="parent_value",
+            game_server_config=game_server_configs.GameServerConfig(name="name_value"),
+        )
+
+
+def test_create_game_server_config_rest_error():
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        game_server_configs.DeleteGameServerConfigRequest,
+        dict,
+    ],
+)
+def test_delete_game_server_config_rest(request_type):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/gameServerDeployments/sample3/configs/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.delete_game_server_config(request)
+
+    # Establish that the response is the type that we expect.
+    assert response.operation.name == "operations/spam"
+
+
+def test_delete_game_server_config_rest_required_fields(
+    request_type=game_server_configs.DeleteGameServerConfigRequest,
+):
+    transport_class = transports.GameServerConfigsServiceRestTransport
+
+    request_init = {}
+    request_init["name"] = ""
+    request = request_type(**request_init)
+    pb_request = request_type.pb(request)
+    jsonified_request = json.loads(
+        json_format.MessageToJson(
+            pb_request,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete_game_server_config._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    jsonified_request["name"] = "name_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete_game_server_config._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "name" in jsonified_request
+    assert jsonified_request["name"] == "name_value"
+
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    request = request_type(**request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = operations_pb2.Operation(name="operations/spam")
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            pb_request = request_type.pb(request)
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "delete",
+                "query_params": pb_request,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = json_format.MessageToJson(return_value)
+
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.delete_game_server_config(request)
+
+            expected_params = [("$alt", "json;enum-encoding=int")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_delete_game_server_config_rest_unset_required_fields():
+    transport = transports.GameServerConfigsServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.delete_game_server_config._get_unset_required_fields({})
+    assert set(unset_fields) == (set(()) & set(("name",)))
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_game_server_config_rest_interceptors(null_interceptor):
+    transport = transports.GameServerConfigsServiceRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GameServerConfigsServiceRestInterceptor(),
+    )
+    client = GameServerConfigsServiceClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        operation.Operation, "_set_result_from_operation"
+    ), mock.patch.object(
+        transports.GameServerConfigsServiceRestInterceptor,
+        "post_delete_game_server_config",
+    ) as post, mock.patch.object(
+        transports.GameServerConfigsServiceRestInterceptor,
+        "pre_delete_game_server_config",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+        pb_message = game_server_configs.DeleteGameServerConfigRequest.pb(
+            game_server_configs.DeleteGameServerConfigRequest()
+        )
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": pb_message,
+            "query_params": pb_message,
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = json_format.MessageToJson(
+            operations_pb2.Operation()
+        )
+
+        request = game_server_configs.DeleteGameServerConfigRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = operations_pb2.Operation()
+
+        client.delete_game_server_config(
+            request,
+            metadata=[
+                ("key", "val"),
+                ("cephalopod", "squid"),
+            ],
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_delete_game_server_config_rest_bad_request(
+    transport: str = "rest",
+    request_type=game_server_configs.DeleteGameServerConfigRequest,
+):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {
+        "name": "projects/sample1/locations/sample2/gameServerDeployments/sample3/configs/sample4"
+    }
+    request = request_type(**request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.delete_game_server_config(request)
+
+
+def test_delete_game_server_config_rest_flattened():
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = operations_pb2.Operation(name="operations/spam")
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {
+            "name": "projects/sample1/locations/sample2/gameServerDeployments/sample3/configs/sample4"
+        }
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            name="name_value",
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = json_format.MessageToJson(return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.delete_game_server_config(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/v1beta/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_delete_game_server_config_rest_flattened_error(transport: str = "rest"):
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.delete_game_server_config(
+            game_server_configs.DeleteGameServerConfigRequest(),
+            name="name_value",
+        )
+
+
+def test_delete_game_server_config_rest_error():
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
 def test_credentials_transport_error():
     # It is an error to provide credentials and a transport instance.
     transport = transports.GameServerConfigsServiceGrpcTransport(
@@ -1996,6 +3301,7 @@ def test_transport_get_channel():
     [
         transports.GameServerConfigsServiceGrpcTransport,
         transports.GameServerConfigsServiceGrpcAsyncIOTransport,
+        transports.GameServerConfigsServiceRestTransport,
     ],
 )
 def test_transport_adc(transport_class):
@@ -2010,6 +3316,7 @@ def test_transport_adc(transport_class):
     "transport_name",
     [
         "grpc",
+        "rest",
     ],
 )
 def test_transport_kind(transport_name):
@@ -2147,6 +3454,7 @@ def test_game_server_configs_service_transport_auth_adc(transport_class):
     [
         transports.GameServerConfigsServiceGrpcTransport,
         transports.GameServerConfigsServiceGrpcAsyncIOTransport,
+        transports.GameServerConfigsServiceRestTransport,
     ],
 )
 def test_game_server_configs_service_transport_auth_gdch_credentials(transport_class):
@@ -2248,11 +3556,40 @@ def test_game_server_configs_service_grpc_transport_client_cert_source_for_mtls(
             )
 
 
+def test_game_server_configs_service_http_transport_client_cert_source_for_mtls():
+    cred = ga_credentials.AnonymousCredentials()
+    with mock.patch(
+        "google.auth.transport.requests.AuthorizedSession.configure_mtls_channel"
+    ) as mock_configure_mtls_channel:
+        transports.GameServerConfigsServiceRestTransport(
+            credentials=cred, client_cert_source_for_mtls=client_cert_source_callback
+        )
+        mock_configure_mtls_channel.assert_called_once_with(client_cert_source_callback)
+
+
+def test_game_server_configs_service_rest_lro_client():
+    client = GameServerConfigsServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="rest",
+    )
+    transport = client.transport
+
+    # Ensure that we have a api-core operations client.
+    assert isinstance(
+        transport.operations_client,
+        operations_v1.AbstractOperationsClient,
+    )
+
+    # Ensure that subsequent calls to the property send the exact same object.
+    assert transport.operations_client is transport.operations_client
+
+
 @pytest.mark.parametrize(
     "transport_name",
     [
         "grpc",
         "grpc_asyncio",
+        "rest",
     ],
 )
 def test_game_server_configs_service_host_no_port(transport_name):
@@ -2263,7 +3600,11 @@ def test_game_server_configs_service_host_no_port(transport_name):
         ),
         transport=transport_name,
     )
-    assert client.transport._host == ("gameservices.googleapis.com:443")
+    assert client.transport._host == (
+        "gameservices.googleapis.com:443"
+        if transport_name in ["grpc", "grpc_asyncio"]
+        else "https://gameservices.googleapis.com"
+    )
 
 
 @pytest.mark.parametrize(
@@ -2271,6 +3612,7 @@ def test_game_server_configs_service_host_no_port(transport_name):
     [
         "grpc",
         "grpc_asyncio",
+        "rest",
     ],
 )
 def test_game_server_configs_service_host_with_port(transport_name):
@@ -2281,7 +3623,42 @@ def test_game_server_configs_service_host_with_port(transport_name):
         ),
         transport=transport_name,
     )
-    assert client.transport._host == ("gameservices.googleapis.com:8000")
+    assert client.transport._host == (
+        "gameservices.googleapis.com:8000"
+        if transport_name in ["grpc", "grpc_asyncio"]
+        else "https://gameservices.googleapis.com:8000"
+    )
+
+
+@pytest.mark.parametrize(
+    "transport_name",
+    [
+        "rest",
+    ],
+)
+def test_game_server_configs_service_client_transport_session_collision(transport_name):
+    creds1 = ga_credentials.AnonymousCredentials()
+    creds2 = ga_credentials.AnonymousCredentials()
+    client1 = GameServerConfigsServiceClient(
+        credentials=creds1,
+        transport=transport_name,
+    )
+    client2 = GameServerConfigsServiceClient(
+        credentials=creds2,
+        transport=transport_name,
+    )
+    session1 = client1.transport.list_game_server_configs._session
+    session2 = client2.transport.list_game_server_configs._session
+    assert session1 != session2
+    session1 = client1.transport.get_game_server_config._session
+    session2 = client2.transport.get_game_server_config._session
+    assert session1 != session2
+    session1 = client1.transport.create_game_server_config._session
+    session2 = client2.transport.create_game_server_config._session
+    assert session1 != session2
+    session1 = client1.transport.delete_game_server_config._session
+    session2 = client2.transport.delete_game_server_config._session
+    assert session1 != session2
 
 
 def test_game_server_configs_service_grpc_transport_channel():
@@ -2617,6 +3994,7 @@ async def test_transport_close_async():
 
 def test_transport_close():
     transports = {
+        "rest": "_session",
         "grpc": "_grpc_channel",
     }
 
@@ -2634,6 +4012,7 @@ def test_transport_close():
 
 def test_client_ctx():
     transports = [
+        "rest",
         "grpc",
     ]
     for transport in transports:

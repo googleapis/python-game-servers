@@ -58,6 +58,7 @@ from google.cloud.gaming_v1.types import common, realms
 from .transports.base import DEFAULT_CLIENT_INFO, RealmsServiceTransport
 from .transports.grpc import RealmsServiceGrpcTransport
 from .transports.grpc_asyncio import RealmsServiceGrpcAsyncIOTransport
+from .transports.rest import RealmsServiceRestTransport
 
 
 class RealmsServiceClientMeta(type):
@@ -71,6 +72,7 @@ class RealmsServiceClientMeta(type):
     _transport_registry = OrderedDict()  # type: Dict[str, Type[RealmsServiceTransport]]
     _transport_registry["grpc"] = RealmsServiceGrpcTransport
     _transport_registry["grpc_asyncio"] = RealmsServiceGrpcAsyncIOTransport
+    _transport_registry["rest"] = RealmsServiceRestTransport
 
     def get_transport_class(
         cls,
