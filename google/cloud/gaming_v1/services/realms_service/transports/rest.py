@@ -17,7 +17,7 @@
 import dataclasses
 import json  # type: ignore
 import re
-from typing import Callable, Dict, List, Optional, Sequence, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import warnings
 
 from google.api_core import (
@@ -407,7 +407,7 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
         def __hash__(self):
             return hash("CreateRealm")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "realmId": "",
         }
 
@@ -507,7 +507,7 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
         def __hash__(self):
             return hash("DeleteRealm")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -596,7 +596,7 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
         def __hash__(self):
             return hash("GetRealm")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -684,7 +684,7 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
         def __hash__(self):
             return hash("ListRealms")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -774,7 +774,7 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
         def __hash__(self):
             return hash("PreviewRealmUpdate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "updateMask": {},
         }
 
@@ -877,7 +877,7 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
         def __hash__(self):
             return hash("UpdateRealm")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "updateMask": {},
         }
 

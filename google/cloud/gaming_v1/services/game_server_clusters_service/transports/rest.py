@@ -17,7 +17,7 @@
 import dataclasses
 import json  # type: ignore
 import re
-from typing import Callable, Dict, List, Optional, Sequence, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import warnings
 
 from google.api_core import (
@@ -500,7 +500,7 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
         def __hash__(self):
             return hash("CreateGameServerCluster")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "gameServerClusterId": "",
         }
 
@@ -603,7 +603,7 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
         def __hash__(self):
             return hash("DeleteGameServerCluster")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -695,7 +695,7 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
         def __hash__(self):
             return hash("GetGameServerCluster")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -785,7 +785,7 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
         def __hash__(self):
             return hash("ListGameServerClusters")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -877,7 +877,7 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
         def __hash__(self):
             return hash("PreviewCreateGameServerCluster")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "gameServerClusterId": "",
         }
 
@@ -988,7 +988,7 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
         def __hash__(self):
             return hash("PreviewDeleteGameServerCluster")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1088,7 +1088,7 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
         def __hash__(self):
             return hash("PreviewUpdateGameServerCluster")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "updateMask": {},
         }
 
@@ -1199,7 +1199,7 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
         def __hash__(self):
             return hash("UpdateGameServerCluster")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "updateMask": {},
         }
 

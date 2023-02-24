@@ -17,7 +17,7 @@
 import dataclasses
 import json  # type: ignore
 import re
-from typing import Callable, Dict, List, Optional, Sequence, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import warnings
 
 from google.api_core import (
@@ -539,7 +539,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("CreateGameServerDeployment")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "deploymentId": "",
         }
 
@@ -644,7 +644,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("DeleteGameServerDeployment")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -738,7 +738,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("FetchDeploymentState")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -839,7 +839,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("GetGameServerDeployment")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -932,7 +932,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("GetGameServerDeploymentRollout")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1033,7 +1033,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("ListGameServerDeployments")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1128,7 +1128,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("PreviewGameServerDeploymentRollout")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1243,7 +1243,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("UpdateGameServerDeployment")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "updateMask": {},
         }
 
@@ -1349,7 +1349,7 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
         def __hash__(self):
             return hash("UpdateGameServerDeploymentRollout")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
             "updateMask": {},
         }
 
