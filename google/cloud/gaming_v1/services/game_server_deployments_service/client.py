@@ -58,6 +58,7 @@ from google.cloud.gaming_v1.types import common, game_server_deployments
 from .transports.base import DEFAULT_CLIENT_INFO, GameServerDeploymentsServiceTransport
 from .transports.grpc import GameServerDeploymentsServiceGrpcTransport
 from .transports.grpc_asyncio import GameServerDeploymentsServiceGrpcAsyncIOTransport
+from .transports.rest import GameServerDeploymentsServiceRestTransport
 
 
 class GameServerDeploymentsServiceClientMeta(type):
@@ -75,6 +76,7 @@ class GameServerDeploymentsServiceClientMeta(type):
     _transport_registry[
         "grpc_asyncio"
     ] = GameServerDeploymentsServiceGrpcAsyncIOTransport
+    _transport_registry["rest"] = GameServerDeploymentsServiceRestTransport
 
     def get_transport_class(
         cls,
