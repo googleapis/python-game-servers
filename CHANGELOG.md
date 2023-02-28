@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/python-game-servers/compare/v1.7.1...v1.8.0) (2023-02-28)
+
+
+### Features
+
+* Enable "rest" transport in Python for services supporting numeric enums ([cc15c8a](https://github.com/googleapis/python-game-servers/commit/cc15c8a4c15f9c408ce1b497999c4616ee1da6bc))
+
 ## [1.7.1](https://github.com/googleapis/python-game-servers/compare/v1.7.0...v1.7.1) (2023-01-20)
 
 
