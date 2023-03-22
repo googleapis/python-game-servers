@@ -391,7 +391,6 @@ class GameServerConfigsServiceRestTransport(GameServerConfigsServiceTransport):
                 request (~.game_server_configs.CreateGameServerConfigRequest):
                     The request object. Request message for
                 GameServerConfigsService.CreateGameServerConfig.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -491,7 +490,6 @@ class GameServerConfigsServiceRestTransport(GameServerConfigsServiceTransport):
                 request (~.game_server_configs.DeleteGameServerConfigRequest):
                     The request object. Request message for
                 GameServerConfigsService.DeleteGameServerConfig.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -582,7 +580,6 @@ class GameServerConfigsServiceRestTransport(GameServerConfigsServiceTransport):
                 request (~.game_server_configs.GetGameServerConfigRequest):
                     The request object. Request message for
                 GameServerConfigsService.GetGameServerConfig.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -672,7 +669,6 @@ class GameServerConfigsServiceRestTransport(GameServerConfigsServiceTransport):
                 request (~.game_server_configs.ListGameServerConfigsRequest):
                     The request object. Request message for
                 GameServerConfigsService.ListGameServerConfigs.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.

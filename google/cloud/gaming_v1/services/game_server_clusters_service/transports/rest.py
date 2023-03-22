@@ -527,7 +527,6 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
                     request (~.game_server_clusters.CreateGameServerClusterRequest):
                         The request object. Request message for
                     GameServerClustersService.CreateGameServerCluster.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -628,7 +627,6 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
                     request (~.game_server_clusters.DeleteGameServerClusterRequest):
                         The request object. Request message for
                     GameServerClustersService.DeleteGameServerCluster.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -719,7 +717,6 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
                 request (~.game_server_clusters.GetGameServerClusterRequest):
                     The request object. Request message for
                 GameServerClustersService.GetGameServerCluster.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -809,7 +806,6 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
                 request (~.game_server_clusters.ListGameServerClustersRequest):
                     The request object. Request message for
                 GameServerClustersService.ListGameServerClusters.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -904,7 +900,6 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
                     request (~.game_server_clusters.PreviewCreateGameServerClusterRequest):
                         The request object. Request message for
                     GameServerClustersService.PreviewCreateGameServerCluster.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -1013,7 +1008,6 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
                     request (~.game_server_clusters.PreviewDeleteGameServerClusterRequest):
                         The request object. Request message for
                     GameServerClustersService.PreviewDeleteGameServerCluster.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -1115,7 +1109,6 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
                     request (~.game_server_clusters.PreviewUpdateGameServerClusterRequest):
                         The request object. Request message for
                     GameServerClustersService.UpdateGameServerCluster.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -1226,7 +1219,6 @@ class GameServerClustersServiceRestTransport(GameServerClustersServiceTransport)
                     request (~.game_server_clusters.UpdateGameServerClusterRequest):
                         The request object. Request message for
                     GameServerClustersService.UpdateGameServerCluster.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.

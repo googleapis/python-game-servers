@@ -433,7 +433,6 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
                 request (~.realms.CreateRealmRequest):
                     The request object. Request message for
                 RealmsService.CreateRealm.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -531,7 +530,6 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
                 request (~.realms.DeleteRealmRequest):
                     The request object. Request message for
                 RealmsService.DeleteRealm.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -620,7 +618,6 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
                 request (~.realms.GetRealmRequest):
                     The request object. Request message for
                 RealmsService.GetRealm.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -708,7 +705,6 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
                 request (~.realms.ListRealmsRequest):
                     The request object. Request message for
                 RealmsService.ListRealms.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -800,7 +796,6 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
                 request (~.realms.PreviewRealmUpdateRequest):
                     The request object. Request message for
                 RealmsService.PreviewRealmUpdate.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -903,7 +898,6 @@ class RealmsServiceRestTransport(RealmsServiceTransport):
                 request (~.realms.UpdateRealmRequest):
                     The request object. Request message for
                 RealmsService.UpdateRealm.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
