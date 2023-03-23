@@ -566,7 +566,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                     request (~.game_server_deployments.CreateGameServerDeploymentRequest):
                         The request object. Request message for
                     GameServerDeploymentsService.CreateGameServerDeployment.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -669,7 +668,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                     request (~.game_server_deployments.DeleteGameServerDeploymentRequest):
                         The request object. Request message for
                     GameServerDeploymentsService.DeleteGameServerDeployment.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -762,7 +760,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                 request (~.game_server_deployments.FetchDeploymentStateRequest):
                     The request object. Request message for
                 GameServerDeploymentsService.FetchDeploymentState.
-
                 retry (google.api_core.retry.Retry): Designation of what errors, if any,
                     should be retried.
                 timeout (float): The timeout for this request.
@@ -864,7 +861,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                     request (~.game_server_deployments.GetGameServerDeploymentRequest):
                         The request object. Request message for
                     GameServerDeploymentsService.GetGameServerDeployment.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -957,7 +953,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                     request (~.game_server_deployments.GetGameServerDeploymentRolloutRequest):
                         The request object. Request message for
                     GameServerDeploymentsService.GetGameServerDeploymentRollout.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -1058,7 +1053,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                     request (~.game_server_deployments.ListGameServerDeploymentsRequest):
                         The request object. Request message for
                     GameServerDeploymentsService.ListGameServerDeployments.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -1153,7 +1147,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                     request (~.game_server_deployments.PreviewGameServerDeploymentRolloutRequest):
                         The request object. Request message for
                     PreviewGameServerDeploymentRollout.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -1271,7 +1264,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                         The request object. Request message for
                     GameServerDeploymentsService.UpdateGameServerDeployment.
                     Only allows updates for labels.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
@@ -1376,7 +1368,6 @@ class GameServerDeploymentsServiceRestTransport(GameServerDeploymentsServiceTran
                     request (~.game_server_deployments.UpdateGameServerDeploymentRolloutRequest):
                         The request object. Request message for
                     GameServerDeploymentsService.UpdateGameServerRolloutDeployment.
-
                     retry (google.api_core.retry.Retry): Designation of what errors, if any,
                         should be retried.
                     timeout (float): The timeout for this request.
