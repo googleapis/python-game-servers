@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/googleapis/python-game-servers/compare/v1.8.0...v1.8.1) (2023-03-23)
+
+
+### Documentation
+
+* Fix formatting of request arg in docstring ([#399](https://github.com/googleapis/python-game-servers/issues/399)) ([ce33446](https://github.com/googleapis/python-game-servers/commit/ce3344633d1c76ee5c7fe4af59a390943fbf480e))
+
 ## [1.8.0](https://github.com/googleapis/python-game-servers/compare/v1.7.1...v1.8.0) (2023-02-28)
 
 
