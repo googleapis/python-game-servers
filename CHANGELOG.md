@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.2](https://github.com/googleapis/python-game-servers/compare/v1.8.1...v1.8.2) (2023-04-04)
+
+
+### Documentation
+
+* Delete samples/snippets directory ([#402](https://github.com/googleapis/python-game-servers/issues/402)) ([f17f680](https://github.com/googleapis/python-game-servers/commit/f17f680aa2f933815bf84b7510517fd4d02576b3))
+
 ## [1.8.1](https://github.com/googleapis/python-game-servers/compare/v1.8.0...v1.8.1) (2023-03-23)
 
 
