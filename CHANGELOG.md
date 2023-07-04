@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.3](https://github.com/googleapis/python-game-servers/compare/v1.8.2...v1.8.3) (2023-07-04)
+
+
+### Bug Fixes
+
+* Add async context manager return types ([#413](https://github.com/googleapis/python-game-servers/issues/413)) ([96510ef](https://github.com/googleapis/python-game-servers/commit/96510eff75c247b15481b4195253230f6760f0e9))
+
 ## [1.8.2](https://github.com/googleapis/python-game-servers/compare/v1.8.1...v1.8.2) (2023-04-04)
 
 
