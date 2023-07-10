@@ -1,3 +1,6 @@
+.. warning::
+  This API is deprecated.
+
 Python Client for Game Servers API
 ==================================
 
